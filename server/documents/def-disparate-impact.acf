@@ -1,0 +1,24 @@
+ACF/0.1
+id:           acf-def-disparate-impact
+type:         definition
+title:        Disparate Impact
+source:       Griggs v. Duke Power Co., 401 U.S. 424 (1971); Feldman et al. (2015)
+author:       AgentClearfeed
+published:    2026-05-06
+confidence:   verified
+domain:       AI Fairness
+tags:         fairness, bias, law, four-fifths rule, disparate impact
+conflicts:    none
+license:      CC-BY-4.0
+---
+DEFINITION
+term:         Disparate Impact
+plain:        Disparate impact occurs when a seemingly neutral policy or model disproportionately harms a protected group, regardless of intent.
+technical:    Measured via the four-fifths rule: if the selection rate for any protected group is less than 80% (4/5) of the rate for the group with the highest rate, disparate impact may be present.
+domain:       Legal and algorithmic fairness
+related:      demographic parity, disparate treatment, four-fifths rule, adverse impact
+misconception: Disparate impact does not require proof of discriminatory intent — it is an outcome-based measure, unlike disparate treatment which requires intentional discrimination.
+source_quote: "The touchstone is business necessity."
+---
+NOTES
+Disparate impact originated in US employment law from Griggs v. Duke Power Co. (1971) and was codified in the Civil Rights Act of 1991. The four-fifths rule from the EEOC Uniform Guidelines provides a practical threshold. In machine learning, Feldman et al. (2015) formalised computational approaches to detecting and mitigating disparate impact in automated decision systems.

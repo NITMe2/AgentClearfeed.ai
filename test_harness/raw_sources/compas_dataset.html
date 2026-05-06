@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMPAS Recidivism Dataset - Open Data Portal | DataFairness.org</title>
+    <meta name="description" content="Access the COMPAS recidivism prediction dataset. Explore bias in criminal justice algorithms with this landmark dataset from the ProPublica investigation.">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/dataset-page.css">
+    <script src="/js/analytics.js" async></script>
+    <script src="/js/tracking.js" async></script>
+</head>
+<body>
+    <div id="gdpr-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Your Privacy Matters</h2>
+            <p>We use cookies and similar technologies to provide you with the best experience on our platform. This includes essential cookies for site functionality, analytics cookies to understand usage patterns, and marketing cookies to deliver relevant advertisements.</p>
+            <p>By clicking "Accept All", you consent to all cookies. You can manage your preferences by clicking "Cookie Settings".</p>
+            <div class="cookie-categories">
+                <label><input type="checkbox" checked disabled> Essential (Required)</label>
+                <label><input type="checkbox" checked> Analytics</label>
+                <label><input type="checkbox" checked> Marketing</label>
+                <label><input type="checkbox"> Third-party</label>
+            </div>
+            <button class="btn-accept">Accept All</button>
+            <button class="btn-settings">Cookie Settings</button>
+            <a href="/privacy-policy">Read our full Privacy Policy</a>
+        </div>
+    </div>
+
+    <header>
+        <div class="top-bar">
+            <div class="announcement">🎉 New: AI Fairness Benchmark Suite 2026 now available! <a href="/benchmarks">Explore →</a></div>
+        </div>
+        <nav>
+            <a href="/" class="logo">DataFairness.org</a>
+            <ul>
+                <li><a href="/datasets">Datasets</a></li>
+                <li><a href="/benchmarks">Benchmarks</a></li>
+                <li><a href="/papers">Papers</a></li>
+                <li><a href="/leaderboard">Leaderboard</a></li>
+                <li><a href="/community">Community</a></li>
+                <li><a href="/blog">Blog</a></li>
+            </ul>
+            <div class="nav-actions">
+                <input type="search" placeholder="Search datasets...">
+                <a href="/login" class="btn-login">Sign In</a>
+                <a href="/register" class="btn-register">Create Account</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="breadcrumbs">
+        <a href="/">Home</a> / <a href="/datasets">Datasets</a> / <a href="/datasets/criminal-justice">Criminal Justice</a> / <span>COMPAS Recidivism</span>
+    </div>
+
+    <main class="dataset-page">
+        <div class="dataset-header">
+            <div class="dataset-badge">Verified Dataset</div>
+            <h1>COMPAS Recidivism Dataset</h1>
+            <div class="dataset-stats">
+                <span>📥 124,567 downloads</span>
+                <span>⭐ 4.8/5 (892 ratings)</span>
+                <span>🔄 Last verified: April 2026</span>
+                <span>📄 License: CC-BY-4.0</span>
+            </div>
+            <div class="dataset-actions">
+                <button class="btn-download">Download Dataset (2.3 MB)</button>
+                <button class="btn-api">API Access</button>
+                <button class="btn-bookmark">Bookmark</button>
+                <button class="btn-cite">Cite This Dataset</button>
+            </div>
+        </div>
+
+        <div class="tab-navigation">
+            <button class="tab active">Overview</button>
+            <button class="tab">Data Dictionary</button>
+            <button class="tab">Explore</button>
+            <button class="tab">Notebooks (47)</button>
+            <button class="tab">Discussion (156)</button>
+            <button class="tab">Version History</button>
+        </div>
+
+        <div class="content-grid">
+            <div class="main-content">
+                <section class="dataset-description">
+                    <h2>About This Dataset</h2>
+                    <p>The COMPAS (Correctional Offender Management Profiling for Alternative Sanctions) dataset became one of the most important datasets in algorithmic fairness research following ProPublica's groundbreaking 2016 investigation, "Machine Bias."</p>
+
+                    <p>ProPublica obtained risk scores for over 7,000 defendants arrested in Broward County, Florida during 2013-2014 through a public records request. They then tracked which defendants were charged with new crimes over the next two years to evaluate the accuracy and fairness of the COMPAS algorithm.</p>
+
+                    <h3>Key Findings from ProPublica's Analysis</h3>
+                    <p>The investigation revealed significant racial disparities in the algorithm's error rates:</p>
+                    <ul>
+                        <li>Black defendants were almost twice as likely as white defendants to be labeled a higher risk but not actually re-offend</li>
+                        <li>White defendants who did re-offend were much more likely than Black defendants to have been labeled lower risk</li>
+                        <li>The algorithm's overall accuracy was only about 60%, roughly equivalent to predictions made by people with no criminal justice expertise</li>
+                    </ul>
+
+                    <h3>Dataset Details</h3>
+                    <table class="data-table">
+                        <tr><th>Total Records</th><td>7,214</td></tr>
+                        <tr><th>Time Period</th><td>2013-2014 (arrests), with 2-year follow-up</td></tr>
+                        <tr><th>Location</th><td>Broward County, Florida, USA</td></tr>
+                        <tr><th>Source</th><td>ProPublica / Broward County public records</td></tr>
+                    </table>
+
+                    <h3>Features</h3>
+                    <table class="data-table">
+                        <tr><th>Column</th><th>Type</th><th>Description</th></tr>
+                        <tr><td>age</td><td>integer</td><td>Defendant's age at screening</td></tr>
+                        <tr><td>sex</td><td>categorical</td><td>Male/Female</td></tr>
+                        <tr><td>race</td><td>categorical</td><td>African-American, Caucasian, Hispanic, Other, Asian, Native American</td></tr>
+                        <tr><td>prior_counts</td><td>integer</td><td>Number of prior arrests</td></tr>
+                        <tr><td>charge_degree</td><td>categorical</td><td>Felony (F) or Misdemeanor (M)</td></tr>
+                        <tr><td>compas_score</td><td>integer</td><td>COMPAS risk score (1-10)</td></tr>
+                        <tr><td>two_year_recid</td><td>binary</td><td>1 if rearrested within 2 years, 0 otherwise</td></tr>
+                    </table>
+
+                    <h3>Known Biases and Limitations</h3>
+                    <div class="warning-box">
+                        <h4>⚠️ Important Considerations</h4>
+                        <ul>
+                            <li><strong>Single Jurisdiction:</strong> Data is from Broward County, Florida only and may not generalize to other jurisdictions</li>
+                            <li><strong>Limited Follow-up:</strong> Two-year recidivism window may undercount actual reoffending</li>
+                            <li><strong>Proxy Measures:</strong> Uses re-arrest as a proxy for re-offending, which conflates criminal behavior with policing patterns</li>
+                            <li><strong>Proprietary Algorithm:</strong> The COMPAS scoring methodology is proprietary and not fully disclosed by Northpointe (now Equivant)</li>
+                            <li><strong>Racial Disparities in Error Rates:</strong> Black defendants had significantly higher false positive rates</li>
+                        </ul>
+                    </div>
+
+                    <h3>Recommended Uses</h3>
+                    <p>This dataset is appropriate for:</p>
+                    <ul>
+                        <li>Fairness metric benchmarking and comparison</li>
+                        <li>Bias auditing methodology development</li>
+                        <li>Educational purposes in algorithmic fairness courses</li>
+                        <li>Evaluating debiasing algorithms</li>
+                    </ul>
+
+                    <h3>Not Recommended For</h3>
+                    <div class="danger-box">
+                        <ul>
+                            <li>Production recidivism prediction systems</li>
+                            <li>Generalizing to jurisdictions outside the original study</li>
+                            <li>Drawing conclusions about current criminal justice practices</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="citation-section">
+                    <h2>How to Cite</h2>
+                    <div class="citation-box">
+                        <pre>@article{angwin2016machine,
+  title={Machine bias},
+  author={Angwin, Julia and Larson, Jeff and Mattu, Surya and Kirchner, Lauren},
+  journal={ProPublica},
+  year={2016}
+}</pre>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="dataset-sidebar">
+                <div class="sidebar-card">
+                    <h3>Quick Stats</h3>
+                    <ul>
+                        <li>Format: CSV</li>
+                        <li>Size: 2.3 MB</li>
+                        <li>Records: 7,214</li>
+                        <li>Features: 7</li>
+                        <li>Target: two_year_recid</li>
+                    </ul>
+                </div>
+                <div class="sidebar-card">
+                    <h3>Related Datasets</h3>
+                    <ul>
+                        <li><a href="/datasets/adult-income">Adult Income (Census)</a></li>
+                        <li><a href="/datasets/german-credit">German Credit</a></li>
+                        <li><a href="/datasets/law-school">Law School Admissions</a></li>
+                        <li><a href="/datasets/credit-default">Credit Default</a></li>
+                    </ul>
+                </div>
+                <div class="ad-sidebar">
+                    <p>SPONSORED</p>
+                    <p>FairAudit Pro — Automated bias detection for your datasets. <a href="#">Try free for 30 days</a></p>
+                </div>
+                <div class="sidebar-card">
+                    <h3>Maintainer</h3>
+                    <p>DataFairness.org Team</p>
+                    <a href="/contact">Report an issue</a>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h4>DataFairness.org</h4>
+                <p>Open datasets for responsible AI development.</p>
+            </div>
+            <div>
+                <h4>Platform</h4>
+                <ul><li><a href="/datasets">Datasets</a></li><li><a href="/benchmarks">Benchmarks</a></li><li><a href="/api">API</a></li><li><a href="/pricing">Pricing</a></li></ul>
+            </div>
+            <div>
+                <h4>Company</h4>
+                <ul><li><a href="/about">About</a></li><li><a href="/blog">Blog</a></li><li><a href="/careers">Careers</a></li><li><a href="/press">Press</a></li></ul>
+            </div>
+            <div>
+                <h4>Legal</h4>
+                <ul><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li><li><a href="/dmca">DMCA</a></li></ul>
+            </div>
+        </div>
+        <p class="copyright">&copy; 2026 DataFairness.org. All rights reserved.</p>
+    </footer>
+    <script src="/js/main.js"></script>
+    <script src="/js/dataset-explore.js"></script>
+</body>
+</html>

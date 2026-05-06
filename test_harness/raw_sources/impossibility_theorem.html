@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Impossibility Theorem of Fairness: Why You Can't Have It All | AI Ethics Review</title>
+    <meta name="description" content="An accessible explanation of why fairness metrics like calibration and equalised odds can't all be satisfied at the same time, and what this means for AI practitioners.">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/article.css">
+    <script src="/js/analytics.js" async></script>
+    <script src="/js/ads.js" async></script>
+    <script>!function(e,t,n){/* tracking pixel */}(window,document,"script");</script>
+</head>
+<body>
+    <div class="cookie-consent-bar">
+        <p>This site uses cookies for analytics and personalized content. <a href="/cookies">Learn more</a></p>
+        <button onclick="acceptAll()">Got it</button>
+    </div>
+
+    <header>
+        <div class="promo-bar">Limited time: Subscribe to AI Ethics Review Pro for just $9.99/month — <a href="/subscribe">Start Trial</a></div>
+        <nav>
+            <a href="/" class="brand">AI Ethics Review</a>
+            <ul>
+                <li><a href="/latest">Latest</a></li>
+                <li><a href="/research">Research</a></li>
+                <li><a href="/policy">Policy</a></li>
+                <li><a href="/tutorials">Tutorials</a></li>
+                <li><a href="/podcast">Podcast</a></li>
+                <li><a href="/events">Events</a></li>
+            </ul>
+            <div><a href="/subscribe" class="btn">Subscribe</a></div>
+        </nav>
+    </header>
+
+    <div class="breadcrumbs">
+        <a href="/">Home</a> → <a href="/research">Research</a> → <a href="/research/fairness">Fairness</a> → <span>Impossibility Theorem</span>
+    </div>
+
+    <article class="main-article">
+        <div class="article-header">
+            <span class="label">Research Explainer</span>
+            <h1>The Impossibility Theorem of Fairness: Why You Can't Have It All</h1>
+            <p class="subtitle">Two landmark papers proved that the most popular fairness metrics are mathematically incompatible. Here's what that means for practitioners.</p>
+            <div class="meta">
+                <img src="/images/authors/james-wright.jpg" alt="Dr. James Wright" class="author-avatar">
+                <div>
+                    <span class="author">Dr. James Wright</span>
+                    <span class="date">May 3, 2026</span>
+                    <span class="read-time">12 min read</span>
+                </div>
+            </div>
+            <div class="social-share">
+                <a href="#">𝕏 Share</a> <a href="#">LinkedIn</a> <a href="#">Facebook</a> <a href="#">Copy Link</a>
+            </div>
+        </div>
+
+        <figure class="hero-image">
+            <img src="/images/impossibility-venn.svg" alt="Venn diagram showing incompatibility of fairness metrics">
+            <figcaption>The three circles of fairness metrics that cannot overlap in most real-world scenarios. Illustration: AI Ethics Review</figcaption>
+        </figure>
+
+        <div class="ad-leaderboard">
+            <p>ADVERTISEMENT</p>
+            <img src="/ads/ethics-conference.png" alt="AI Ethics Summit 2026">
+            <p>AI Ethics Summit 2026 — Register now for early access pricing. <a href="#">Learn more</a></p>
+        </div>
+
+        <div class="article-body">
+            <p>In the world of algorithmic fairness, there's a result so fundamental that it shapes every serious conversation about fair machine learning. It's often called the "impossibility theorem," and once you understand it, you'll see why the debate about COMPAS, hiring algorithms, and lending models can never be resolved by better technology alone.</p>
+
+            <h2>The Setup: Three Reasonable Requirements</h2>
+
+            <p>Imagine you're building a system that predicts whether someone will default on a loan. You want it to be fair. Here are three things that seem perfectly reasonable to ask for:</p>
+
+            <ol>
+                <li><strong>Calibration:</strong> When your model says someone has a 70% chance of defaulting, they should actually default about 70% of the time — and this should hold regardless of their demographic group.</li>
+                <li><strong>Equal false positive rates:</strong> The rate at which you incorrectly flag someone as likely to default should be the same across groups. (This is part of equalised odds.)</li>
+                <li><strong>Equal false negative rates:</strong> The rate at which you miss actual defaulters should also be the same across groups. (This is the other part of equalised odds.)</li>
+            </ol>
+
+            <p>Each of these seems not just reasonable but <em>necessary</em>. Surely any fair system should satisfy all three?</p>
+
+            <h2>The Proof: You Can't</h2>
+
+            <p>In 2016-2017, two independent research groups proved that these requirements are mathematically incompatible in most real-world scenarios:</p>
+
+            <ul>
+                <li><strong>Chouldechova (2017)</strong> showed that calibration and equal false positive/negative rates cannot both hold when the base rates (actual rates of the outcome) differ between groups.</li>
+                <li><strong>Kleinberg, Mullainathan, and Raghavan (2016)</strong> proved a broader version: three natural conditions on any risk score are mutually incompatible except in degenerate cases.</li>
+            </ul>
+
+            <p>This isn't a limitation of current algorithms. It's not something that can be fixed with more data, better features, or smarter engineering. It's a mathematical fact — as inescapable as the Pythagorean theorem.</p>
+
+            <div class="pullquote">
+                <blockquote>"The choice of which fairness metric to prioritise is a normative decision, not a technical one."</blockquote>
+            </div>
+
+            <h2>Why Base Rates Matter</h2>
+
+            <p>The key condition is differing base rates. If Group A defaults on loans at 10% and Group B defaults at 20%, then no classifier — no matter how sophisticated — can simultaneously be calibrated and have equal error rates across both groups.</p>
+
+            <p>In the real world, base rates almost always differ between demographic groups, because they reflect centuries of structural inequality, differing socioeconomic conditions, and measurement biases. The impossibility theorem means these structural differences create unavoidable fairness trade-offs in any predictive system.</p>
+
+            <h2>The COMPAS Connection</h2>
+
+            <p>This is exactly what happened in the famous COMPAS debate. ProPublica said COMPAS was biased because Black defendants had much higher false positive rates. Northpointe said COMPAS was fair because it was calibrated — the scores meant the same thing regardless of race. Both were right. Both couldn't be satisfied. The impossibility theorem explains why.</p>
+
+            <h2>What This Means for Practitioners</h2>
+
+            <p>If you're building ML systems that affect people's lives, the impossibility theorem has a clear implication: <strong>you must choose which type of fairness to prioritize, and that choice is a value judgment, not a technical one.</strong></p>
+
+            <p>No amount of engineering can escape this trade-off. The responsible thing is to make the choice explicitly, document it, and ensure the people affected by the system understand which definition of fairness is being applied and why.</p>
+        </div>
+
+        <div class="article-tags">
+            <a href="/tags/fairness">#fairness</a>
+            <a href="/tags/impossibility-theorem">#impossibility-theorem</a>
+            <a href="/tags/calibration">#calibration</a>
+            <a href="/tags/equalised-odds">#equalised-odds</a>
+            <a href="/tags/compas">#compas</a>
+        </div>
+
+        <div class="author-box">
+            <img src="/images/authors/james-wright-large.jpg" alt="Dr. James Wright">
+            <div>
+                <h3>Dr. James Wright</h3>
+                <p>Senior Research Editor at AI Ethics Review. Former ML researcher at DeepMind. Writes about the intersection of mathematics, ethics, and artificial intelligence. <a href="/authors/james-wright">More articles →</a></p>
+                <div class="social"><a href="#">Twitter</a> | <a href="#">Scholar</a></div>
+            </div>
+        </div>
+
+        <div class="related-reading">
+            <h3>Related Reading</h3>
+            <ul>
+                <li><a href="/articles/compas-breakdown">Breaking Down the COMPAS Debate</a></li>
+                <li><a href="/articles/calibration-guide">A Practitioner's Guide to Model Calibration</a></li>
+                <li><a href="/articles/fairness-metrics-compared">Fairness Metrics Compared: A Decision Framework</a></li>
+            </ul>
+        </div>
+
+        <div class="comments">
+            <h3>Discussion (89 comments)</h3>
+            <p><a href="/login">Log in</a> or <a href="/register">create an account</a> to join the discussion.</p>
+        </div>
+    </article>
+
+    <aside class="sidebar-sticky">
+        <div class="newsletter">
+            <h3>Weekly AI Ethics Digest</h3>
+            <p>The most important AI ethics stories, curated by our editors.</p>
+            <input type="email" placeholder="your@email.com">
+            <button>Subscribe</button>
+            <p class="fine-print">Free. Unsubscribe anytime. No spam.</p>
+        </div>
+        <div class="ad-sidebar">
+            <p>SPONSORED</p>
+            <p>Responsible AI Toolkit — Enterprise-grade fairness auditing. <a href="#">Request Demo</a></p>
+        </div>
+    </aside>
+
+    <footer>
+        <div class="footer-grid">
+            <div><h4>AI Ethics Review</h4><p>Independent journalism on artificial intelligence and society.</p></div>
+            <div><h4>Sections</h4><ul><li><a href="/research">Research</a></li><li><a href="/policy">Policy</a></li><li><a href="/industry">Industry</a></li></ul></div>
+            <div><h4>Company</h4><ul><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li><li><a href="/advertise">Advertise</a></li></ul></div>
+            <div><h4>Legal</h4><ul><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li></ul></div>
+        </div>
+        <p>&copy; 2026 AI Ethics Review. All rights reserved.</p>
+    </footer>
+    <script src="/js/main.js"></script>
+    <script src="/js/comments.js"></script>
+    <script src="/js/sticky-sidebar.js"></script>
+</body>
+</html>

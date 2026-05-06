@@ -1,0 +1,24 @@
+ACF/0.1
+id:           acf-def-calibration
+type:         definition
+title:        Calibration
+source:       Dawid — The Well-Calibrated Bayesian (1982); Kleinberg, Mullainathan, Raghavan (2016)
+author:       AgentClearfeed
+published:    2026-05-06
+confidence:   verified
+domain:       AI Fairness
+tags:         fairness, calibration, probability, predictive parity
+conflicts:    none
+license:      CC-BY-4.0
+---
+DEFINITION
+term:         Calibration
+plain:        A model is calibrated if when it predicts a 70% probability of an outcome, that outcome occurs approximately 70% of the time, and this holds equally across groups.
+technical:    P(Y=1 | S=s, A=a) = s for all scores s and protected groups a. The predicted probability equals the true probability conditional on the score, regardless of group membership.
+domain:       Machine learning fairness and probability
+related:      equalised odds, demographic parity, predictive parity, Brier score
+misconception: A model can be perfectly calibrated within each group while still exhibiting very different base rates and selection rates across groups — calibration does not imply equal outcomes.
+source_quote: none
+---
+NOTES
+Calibration is often considered a minimal fairness requirement because it ensures the model's scores mean the same thing regardless of group membership. However, Kleinberg, Mullainathan, and Raghavan (2016) proved that calibration is incompatible with equalised odds except when base rates are equal across groups or prediction is perfect. This impossibility result is foundational to the fairness literature.

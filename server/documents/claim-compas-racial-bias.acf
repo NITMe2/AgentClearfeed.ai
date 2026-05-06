@@ -1,0 +1,27 @@
+ACF/0.1
+id:           acf-claim-compas-racial-bias
+type:         claim
+title:        COMPAS Exhibits Racial Bias
+source:       ProPublica (2016); Northpointe Response (2016)
+author:       AgentClearfeed
+published:    2026-05-06
+confidence:   contested
+domain:       AI Fairness
+tags:         COMPAS, racial bias, recidivism, contested, fairness metrics
+conflicts:    ProPublica's analysis and Northpointe's response use different fairness definitions, leading to contradictory but individually valid conclusions
+license:      CC-BY-4.0
+---
+CLAIM
+statement:    The COMPAS recidivism prediction tool exhibits racial bias against Black defendants.
+status:       contested
+evidence_for:
+  - Black defendants were falsely flagged as high risk at nearly twice the rate of white defendants (ProPublica 2016)
+  - White defendants who reoffended were more often incorrectly rated as low risk (ProPublica 2016)
+  - The tool's errors were systematically distributed along racial lines even though race was not an input variable
+evidence_against:
+  - COMPAS scores are calibrated — defendants of different races assigned the same score reoffend at similar rates (Northpointe 2016)
+  - Overall predictive accuracy is approximately equal across racial groups at around 60%
+  - Differences in error rates are a mathematical consequence of different base rates combined with calibration, not evidence of bias in the instrument
+source:       ProPublica Machine Bias Investigation; Northpointe Technical Response
+qualifier:    Whether COMPAS is "biased" depends entirely on which fairness metric is applied. Under equalised odds it is biased. Under calibration it is not. The impossibility theorem proves both cannot be satisfied simultaneously when base rates differ.
+---

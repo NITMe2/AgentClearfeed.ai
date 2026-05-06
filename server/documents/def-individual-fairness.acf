@@ -1,0 +1,24 @@
+ACF/0.1
+id:           acf-def-individual-fairness
+type:         definition
+title:        Individual Fairness
+source:       Dwork, Hardt, Pitassi, Reingold, Zemel — Fairness Through Awareness (2012)
+author:       AgentClearfeed
+published:    2026-05-06
+confidence:   verified
+domain:       AI Fairness
+tags:         fairness, individual fairness, similarity metric, Lipschitz
+conflicts:    none
+license:      CC-BY-4.0
+---
+DEFINITION
+term:         Individual Fairness
+plain:        A model is individually fair if it gives similar predictions to similar individuals, where similarity is defined by a task-specific metric.
+technical:    D(f(x), f(y)) <= d(x, y) — the model f must be Lipschitz continuous with respect to a task-relevant similarity metric d on individuals and a distance metric D on outcomes.
+domain:       Machine learning fairness
+related:      demographic parity, counterfactual fairness, metric learning, Lipschitz condition
+misconception: Individual fairness does not eliminate the need for a subjective judgement — someone must still define what "similar" means, and this definition encodes values.
+source_quote: "Similar individuals should be treated similarly."
+---
+NOTES
+Individual fairness shifts the focus from group-level statistics to individual-level treatment. The central challenge is defining the similarity metric, which requires domain expertise and is itself a normative choice. This makes individual fairness theoretically appealing but practically difficult to implement without ground truth about which features should matter.

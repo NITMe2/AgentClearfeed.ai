@@ -1,0 +1,67 @@
+ACF/0.1
+id:           acf-index-ai-fairness
+type:         index
+title:        AI Fairness Knowledge Base Index
+source:       AgentClearfeed
+author:       AgentClearfeed
+published:    2026-05-06
+confidence:   verified
+domain:       AI Fairness
+tags:         index, fairness, bias, AI
+conflicts:    none
+license:      CC-BY-4.0
+---
+INDEX
+description:  Complete index of AI fairness documents in the AgentClearfeed knowledge base
+documents:
+  - id:       acf-def-demographic-parity
+    title:    Demographic Parity
+    type:     definition
+    domain:   AI Fairness
+    updated:  2026-05-06
+  - id:       acf-def-equalised-odds
+    title:    Equalised Odds
+    type:     definition
+    domain:   AI Fairness
+    updated:  2026-05-06
+  - id:       acf-def-disparate-impact
+    title:    Disparate Impact
+    type:     definition
+    domain:   AI Fairness
+    updated:  2026-05-06
+  - id:       acf-def-individual-fairness
+    title:    Individual Fairness
+    type:     definition
+    domain:   AI Fairness
+    updated:  2026-05-06
+  - id:       acf-def-calibration
+    title:    Calibration
+    type:     definition
+    domain:   AI Fairness
+    updated:  2026-05-06
+  - id:       acf-dataset-compas
+    title:    COMPAS Recidivism Dataset
+    type:     dataset
+    domain:   AI Fairness
+    updated:  2026-05-06
+  - id:       acf-dataset-adult-income
+    title:    Adult Income (Census) Dataset
+    type:     dataset
+    domain:   AI Fairness
+    updated:  2026-05-06
+  - id:       acf-article-propublica-machine-bias
+    title:    ProPublica Machine Bias Investigation
+    type:     article
+    domain:   AI Fairness
+    updated:  2026-05-06
+  - id:       acf-article-impossibility-theorem
+    title:    The Impossibility Theorem of Fairness
+    type:     article
+    domain:   AI Fairness
+    updated:  2026-05-06
+  - id:       acf-claim-compas-racial-bias
+    title:    COMPAS Exhibits Racial Bias
+    type:     claim
+    domain:   AI Fairness
+    updated:  2026-05-06
+---

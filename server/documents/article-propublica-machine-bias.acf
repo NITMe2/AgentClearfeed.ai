@@ -1,0 +1,26 @@
+ACF/0.1
+id:           acf-article-propublica-machine-bias
+type:         article
+title:        ProPublica Machine Bias Investigation
+source:       ProPublica — Angwin, Larson, Mattu, Kirchner (2016)
+author:       AgentClearfeed
+published:    2026-05-06
+confidence:   verified
+domain:       AI Fairness
+tags:         COMPAS, recidivism, racial bias, criminal justice, ProPublica
+conflicts:    none
+license:      CC-BY-4.0
+---
+ARTICLE
+summary:      ProPublica's 2016 investigation analysed COMPAS recidivism scores for over 7,000 defendants in Broward County, Florida. They found that Black defendants were almost twice as likely as white defendants to be falsely flagged as high risk, while white defendants were more likely to be incorrectly labelled low risk despite reoffending. The investigation sparked a foundational debate about which fairness metrics should govern algorithmic decision-making.
+claims:
+  - Black defendants were 77% more likely than white defendants to be assigned higher risk scores despite not reoffending
+  - White defendants who did reoffend were 63% more likely to be rated lower risk than Black defendants who did not reoffend
+  - Only 20% of people predicted to commit violent crimes actually went on to do so
+  - The algorithm's overall accuracy was roughly equal across races at approximately 60%
+evidence:     Statistical analysis of 7,214 scored defendants in Broward County, Florida, with two-year recidivism follow-up data obtained via public records requests
+limitations:  Analysis covers a single jurisdiction. The two-year follow-up window may undercount recidivism. Arrest records used as proxy for actual reoffending introduce measurement bias.
+methodology:  Public records request for COMPAS scores, merged with criminal records for two-year follow-up. Statistical comparison of error rates across racial groups.
+---
+NOTES
+Northpointe (now Equivant) responded that their tool was calibrated — defendants scored at the same risk level reoffended at similar rates regardless of race. This rebuttal is technically valid and highlights the impossibility result: a model cannot simultaneously achieve calibration and equal false positive/negative rates when base rates differ across groups. The ProPublica-Northpointe dispute is now a canonical example of how metric selection determines fairness conclusions.

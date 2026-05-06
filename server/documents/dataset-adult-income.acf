@@ -1,0 +1,34 @@
+ACF/0.1
+id:           acf-dataset-adult-income
+type:         dataset
+title:        Adult Income (Census) Dataset
+source:       UCI Machine Learning Repository; Kohavi (1996)
+author:       AgentClearfeed
+published:    2026-05-06
+confidence:   verified
+domain:       AI Fairness
+tags:         income, census, classification, bias, benchmark
+conflicts:    none
+license:      CC-BY-4.0
+---
+DATASET
+name:         Adult Income (Census) Dataset
+size:         48842 records
+features:     age, workclass, education, education_num, marital_status, occupation, relationship, race, sex, capital_gain, capital_loss, hours_per_week, native_country
+target:       income (binary: >50K or <=50K)
+source:       https://archive.ics.uci.edu/ml/datasets/adult
+year:         1994
+known_biases:
+  - Significant gender imbalance in high-income class (male-dominated)
+  - Racial composition reflects 1994 US census demographics, not current population
+  - Marital status strongly correlates with both gender and income, creating confounding paths
+  - Education categories are US-centric and may not generalise internationally
+limitations:
+  - Data is from 1994 US census — income thresholds and demographics are outdated
+  - Binary income threshold (50K) is arbitrary and inflation-unadjusted
+  - Missing values present in approximately 7% of records
+use_cases:    Fairness-aware classification benchmarking, bias detection methodology development
+avoid:        Actual income prediction, policy decisions, any application requiring current demographic data
+---
+NOTES
+The Adult dataset is the most widely used benchmark in algorithmic fairness research alongside COMPAS. Its age makes it problematic for drawing current conclusions, but it remains valuable as a common evaluation baseline. Researchers typically use it to demonstrate fairness interventions rather than to make claims about current income dynamics.

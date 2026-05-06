@@ -1,0 +1,33 @@
+ACF/0.1
+id:           acf-dataset-compas
+type:         dataset
+title:        COMPAS Recidivism Dataset
+source:       ProPublica — Machine Bias Investigation
+author:       AgentClearfeed
+published:    2026-05-06
+confidence:   verified
+domain:       AI Fairness
+tags:         recidivism, criminal justice, bias, COMPAS, ProPublica
+conflicts:    none
+license:      CC-BY-4.0
+---
+DATASET
+name:         COMPAS Recidivism Dataset
+size:         7214 records
+features:     age, sex, race, prior_counts, charge_degree, compas_score, two_year_recid
+target:       two_year_recid (binary recidivism within two years)
+source:       https://github.com/propublica/compas-analysis
+year:         2016
+known_biases:
+  - Black defendants scored higher risk at nearly twice the rate of white defendants who did not reoffend
+  - White defendants who did reoffend were more frequently scored lower risk than Black defendants who did not
+  - Age is a strong predictor and correlates with race in this dataset
+limitations:
+  - Single jurisdiction (Broward County, Florida)
+  - Two year follow-up window only
+  - COMPAS score methodology is proprietary and not fully disclosed
+use_cases:    Fairness metric benchmarking, bias auditing research, classifier evaluation
+avoid:        Production recidivism prediction, jurisdictions outside original study context
+---
+NOTES
+The COMPAS dataset became the central evidence in ProPublica's 2016 Machine Bias investigation. It subsequently became a standard benchmark in algorithmic fairness research. Northpointe (now Equivant) disputed ProPublica's analysis, arguing their metric choices were inappropriate. This dispute itself became a landmark case study in how metric selection shapes fairness conclusions.
