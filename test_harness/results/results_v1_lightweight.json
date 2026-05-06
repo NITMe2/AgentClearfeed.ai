@@ -1,0 +1,151 @@
+[
+  {
+    "query_id": "q1",
+    "question": "What is demographic parity in machine learning?",
+    "html": {
+      "answer": "Demographic parity in machine learning is a fairness criterion where a model produces positive predictions at equal rates across all demographic groups, meaning the probability of a positive outcome should be the same for every group defined by protected attributes like race or gender. Mathematically, it requires \\(P(\\hat{Y}=1 | A=a) = P(\\hat{Y}=1 | A=b)\\) for any two values \\(a\\) and \\(b\\) of the sensitive attribute \\(A\\).",
+      "context_tokens": 3398,
+      "prompt_tokens": 3433,
+      "answer_tokens": 97,
+      "total_tokens": 3530,
+      "latency_seconds": 67.42,
+      "grade": {
+        "facts_found": 2,
+        "facts_total": 3,
+        "accuracy": 0.67,
+        "hits": [
+          "equal positive prediction rates across groups",
+          "does not guarantee equal accuracy across groups"
+        ],
+        "misses": [
+          "also known as statistical parity"
+        ]
+      }
+    },
+    "acf": {
+      "answer": "Demographic parity in machine learning is a fairness criterion where a model produces positive predictions at equal rates across different demographic groups. Mathematically, it requires P(Y_hat=1 | A=0) = P(Y_hat=1 | A=1), where A represents a protected attribute and Y_hat is the predicted outcome.",
+      "context_tokens": 320,
+      "prompt_tokens": 355,
+      "answer_tokens": 65,
+      "total_tokens": 420,
+      "latency_seconds": 24.3,
+      "grade": {
+        "facts_found": 2,
+        "facts_total": 3,
+        "accuracy": 0.67,
+        "hits": [
+          "equal positive prediction rates across groups",
+          "does not guarantee equal accuracy across groups"
+        ],
+        "misses": [
+          "also known as statistical parity"
+        ]
+      }
+    },
+    "delta": {
+      "token_saving": 3078,
+      "token_saving_pct": 90.6,
+      "latency_diff": 43.12,
+      "accuracy_diff": 0.0
+    }
+  },
+  {
+    "query_id": "q2",
+    "question": "What are the known biases in the COMPAS recidivism dataset?",
+    "html": {
+      "answer": "The known biases and limitations of the COMPAS recidivism dataset include:\n\n1. **Single Jurisdiction**: Data is from Broward County, Florida only and may not generalize to other jurisdictions.\n2. **Limited Follow-up**: A two-year recidivism window may undercount actual reoffending.\n3. **Proxy Measures**: Uses re-arrest as a proxy for re-offending, which conflates criminal behavior with policing patterns.\n4. **Proprietary Algorithm**: The COMPAS scoring methodology is proprietary and not fully disclosed by Northpointe (now Equivant).\n5. **Racial Disparities in Error Rates**: Black defendants had significantly higher false positive rates.",
+      "context_tokens": 2784,
+      "prompt_tokens": 2825,
+      "answer_tokens": 137,
+      "total_tokens": 2962,
+      "latency_seconds": 71.47,
+      "grade": {
+        "facts_found": 3,
+        "facts_total": 3,
+        "accuracy": 1.0,
+        "hits": [
+          "Black defendants scored higher risk at nearly twice the rate",
+          "single jurisdiction Broward County",
+          "proprietary methodology"
+        ],
+        "misses": []
+      }
+    },
+    "acf": {
+      "answer": "The known biases in the COMPAS recidivism dataset include:\n- Black defendants received higher risk scores nearly twice as often as white defendants who did not reoffend.\n- White defendants who reoffended were more frequently assigned lower risk scores compared to Black defendants who did not reoffend.\n- Age is a strong predictor and correlates with race in the dataset.",
+      "context_tokens": 398,
+      "prompt_tokens": 439,
+      "answer_tokens": 73,
+      "total_tokens": 512,
+      "latency_seconds": 26.63,
+      "grade": {
+        "facts_found": 1,
+        "facts_total": 3,
+        "accuracy": 0.33,
+        "hits": [
+          "Black defendants scored higher risk at nearly twice the rate"
+        ],
+        "misses": [
+          "single jurisdiction Broward County",
+          "proprietary methodology"
+        ]
+      }
+    },
+    "delta": {
+      "token_saving": 2386,
+      "token_saving_pct": 85.7,
+      "latency_diff": 44.84,
+      "accuracy_diff": -0.67
+    }
+  },
+  {
+    "query_id": "q3",
+    "question": "Can a machine learning model satisfy calibration and equalised odds at the same time?",
+    "html": {
+      "answer": "No, according to the provided context, a machine learning model cannot simultaneously satisfy calibration and equalised odds in most real-world scenarios, especially when base rates (actual rates of the outcome) differ between demographic groups. This is due to mathematical incompatibility proven by research published in 2016-2017.",
+      "context_tokens": 2546,
+      "prompt_tokens": 2589,
+      "answer_tokens": 62,
+      "total_tokens": 2651,
+      "latency_seconds": 48.12,
+      "grade": {
+        "facts_found": 1,
+        "facts_total": 3,
+        "accuracy": 0.33,
+        "hits": [
+          "cannot be simultaneously satisfied when base rates differ"
+        ],
+        "misses": [
+          "mathematical impossibility not algorithmic limitation",
+          "choice of metric is a normative decision"
+        ]
+      }
+    },
+    "acf": {
+      "answer": "According to the article, a machine learning model cannot simultaneously satisfy calibration and equalised odds when base rates differ between groups, as proven by Chouldechova in 2017. This incompatibility is a mathematical constraint rather than a limitation of specific algorithms.",
+      "context_tokens": 465,
+      "prompt_tokens": 508,
+      "answer_tokens": 53,
+      "total_tokens": 561,
+      "latency_seconds": 22.23,
+      "grade": {
+        "facts_found": 2,
+        "facts_total": 3,
+        "accuracy": 0.67,
+        "hits": [
+          "cannot be simultaneously satisfied when base rates differ",
+          "mathematical impossibility not algorithmic limitation"
+        ],
+        "misses": [
+          "choice of metric is a normative decision"
+        ]
+      }
+    },
+    "delta": {
+      "token_saving": 2081,
+      "token_saving_pct": 81.7,
+      "latency_diff": 25.89,
+      "accuracy_diff": 0.34
+    }
+  }
+]

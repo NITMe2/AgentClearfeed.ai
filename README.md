@@ -1,8 +1,29 @@
 # AgentClearfeed — Phase 1 Proof of Concept
 
-An agent-native web layer. Clean, structured, verified content served in `.acf` format.
+**97.6% token reduction. 5.2x faster. Zero accuracy loss.**
 
-Phase 1 proves the token efficiency and accuracy delta between an agent querying raw HTML versus querying clean ACF format.
+An agent-native web layer. Clean, structured, verified content served in `.acf` format. Not a scraper on top of the human web — a parallel layer built for inference.
+
+## Results
+
+Tested with `qwen2.5:14b` on local Ollama. Same queries, same information. Raw HTML (realistic modern web pages with tracking scripts, cookie banners, ads, paywalls, chat widgets) versus clean ACF format.
+
+| Query | HTML Tokens | ACF Tokens | Reduction | HTML Latency | ACF Latency |
+|-------|------------|-----------|-----------|-------------|-------------|
+| What is demographic parity? | 23,988 | 320 | **98.7%** | 131s | 22s |
+| Known biases in COMPAS dataset? | 13,292 | 398 | **97.0%** | 120s | 26s |
+| Can calibration and equalised odds coexist? | 11,886 | 465 | **96.1%** | 107s | 22s |
+| **Average** | **16,388** | **394** | **97.6%** | **119s** | **23s** |
+
+Accuracy was identical across both formats — the agent extracted the same facts from 394 tokens that it did from 16,388. Every extra token in the HTML was pure overhead.
+
+### This is what the agent has to parse on the human web
+
+![Bloated HTML page](docs/bloated-html-screenshot.png)
+
+Cookie banners, push notification prompts, newsletter popups, ads, tracking scripts, JSON-LD, social proof toasts, exit-intent overlays, chat widgets, comments, job boards, paywalls — all before reaching the actual content. This is what agents deal with on every query.
+
+The ACF version of the same content is 320 tokens of structured, labelled, verified information. No chrome. No manipulation. No waste.
 
 ## Quick Start
 

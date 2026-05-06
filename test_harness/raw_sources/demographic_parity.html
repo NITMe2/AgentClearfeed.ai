@@ -1,267 +1,1072 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: http://ogp.me/ns#" itemscope itemtype="https://schema.org/Article">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Understanding Demographic Parity in Machine Learning | FairML Blog</title>
-    <meta name="description" content="Learn about demographic parity, one of the most important fairness metrics in machine learning. Our experts break down what it means and why it matters.">
-    <meta property="og:title" content="Understanding Demographic Parity in ML">
+    <meta name="description" content="Learn about demographic parity, one of the most important fairness metrics in machine learning. Our experts break down what it means and why it matters for responsible AI.">
+    <meta name="keywords" content="demographic parity, machine learning fairness, AI bias, statistical parity, group fairness, algorithmic fairness, ML metrics, fair AI, responsible AI, equitable algorithms">
+    <meta name="author" content="Dr. Sarah Chen">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta property="og:title" content="Understanding Demographic Parity in Machine Learning">
+    <meta property="og:description" content="A comprehensive guide to demographic parity — the most widely used fairness metric in ML.">
     <meta property="og:type" content="article">
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/blog.css">
+    <meta property="og:url" content="https://fairmlblog.com/articles/demographic-parity">
+    <meta property="og:image" content="https://fairmlblog.com/images/demographic-parity-hero.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="FairML Blog">
+    <meta property="article:published_time" content="2026-05-01T09:00:00Z">
+    <meta property="article:modified_time" content="2026-05-04T14:30:00Z">
+    <meta property="article:author" content="https://fairmlblog.com/authors/sarah-chen">
+    <meta property="article:section" content="Fairness Metrics">
+    <meta property="article:tag" content="demographic parity">
+    <meta property="article:tag" content="fairness">
+    <meta property="article:tag" content="bias">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@fairmlblog">
+    <meta name="twitter:creator" content="@drsarahchen_ml">
+    <meta name="twitter:title" content="Understanding Demographic Parity in Machine Learning">
+    <meta name="twitter:description" content="A comprehensive guide to demographic parity — the most widely used fairness metric in ML.">
+    <meta name="twitter:image" content="https://fairmlblog.com/images/demographic-parity-hero-twitter.jpg">
+    <link rel="canonical" href="https://fairmlblog.com/articles/demographic-parity">
+    <link rel="alternate" type="application/rss+xml" title="FairML Blog RSS" href="https://fairmlblog.com/feed.xml">
+    <link rel="alternate" hreflang="es" href="https://fairmlblog.com/es/articles/demographic-parity">
+    <link rel="alternate" hreflang="de" href="https://fairmlblog.com/de/articles/demographic-parity">
+    <link rel="alternate" hreflang="fr" href="https://fairmlblog.com/fr/articles/demographic-parity">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <script src="/js/analytics.js" async></script>
-    <script src="/js/cookie-consent.js"></script>
-    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date());</script>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preload" href="/fonts/FairMLIcons.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/css/main.min.css">
+    <link rel="stylesheet" href="/css/blog.min.css">
+    <link rel="stylesheet" href="/css/syntax-highlight.css">
+    <link rel="stylesheet" href="/css/cookie-consent.css">
+    <link rel="stylesheet" href="/css/chat-widget.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Understanding Demographic Parity in Machine Learning",
+        "description": "A comprehensive guide to demographic parity, one of the most important fairness metrics in machine learning.",
+        "image": {
+            "@type": "ImageObject",
+            "url": "https://fairmlblog.com/images/demographic-parity-hero.jpg",
+            "width": 1200,
+            "height": 630
+        },
+        "author": {
+            "@type": "Person",
+            "name": "Dr. Sarah Chen",
+            "url": "https://fairmlblog.com/authors/sarah-chen",
+            "jobTitle": "ML Research Lead",
+            "affiliation": {
+                "@type": "Organization",
+                "name": "FairML Blog"
+            },
+            "sameAs": [
+                "https://twitter.com/drsarahchen_ml",
+                "https://scholar.google.com/citations?user=abc123",
+                "https://www.linkedin.com/in/sarah-chen-ml"
+            ]
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "FairML Blog",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://fairmlblog.com/images/logo.png",
+                "width": 200,
+                "height": 60
+            }
+        },
+        "datePublished": "2026-05-01T09:00:00Z",
+        "dateModified": "2026-05-04T14:30:00Z",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://fairmlblog.com/articles/demographic-parity"
+        },
+        "wordCount": 1850,
+        "articleSection": "Fairness Metrics",
+        "keywords": ["demographic parity", "fairness", "machine learning", "bias", "statistical parity"]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://fairmlblog.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Articles", "item": "https://fairmlblog.com/articles"},
+            {"@type": "ListItem", "position": 3, "name": "Fairness Metrics", "item": "https://fairmlblog.com/articles/fairness"},
+            {"@type": "ListItem", "position": 4, "name": "Demographic Parity"}
+        ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "What is demographic parity?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Demographic parity (also called statistical parity) is a fairness metric that requires a model to produce positive predictions at equal rates across all demographic groups."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does demographic parity guarantee accuracy?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No. A model can satisfy demographic parity while being significantly less accurate for one group than another."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the mathematical definition of demographic parity?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "P(Ŷ=1 | A=0) = P(Ŷ=1 | A=1), where A is the protected attribute and Ŷ is the prediction."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-FXML0001');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FAIRML001"></script>
+    <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-FAIRML001', { 'page_title': 'Demographic Parity Guide', 'content_group': 'Fairness Metrics', 'custom_map': {'dimension1': 'article_category', 'dimension2': 'author_name'} });</script>
+
+    <!-- Facebook Pixel -->
+    <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod? n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0'; n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t,s)}(window, document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '1234567890123456'); fbq('track', 'PageView'); fbq('track', 'ViewContent', {content_name: 'Demographic Parity', content_category: 'Fairness Metrics', content_type: 'article'});</script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1234567890123456&ev=PageView&noscript=1"/></noscript>
+
+    <!-- LinkedIn Insight Tag -->
+    <script type="text/javascript">_linkedin_partner_id = "4567890"; window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || []; window._linkedin_data_partner_ids.push(_linkedin_partner_id);</script>
+    <script type="text/javascript">(function(l) { if (!l){window.lintrk = function(a,b){window.lintrk.q.push([a,b])}; window.lintrk.q=[]} var s = document.getElementsByTagName("script")[0]; var b = document.createElement("script"); b.type = "text/javascript";b.async = true; b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js"; s.parentNode.insertBefore(b, s);})(window.lintrk);</script>
+
+    <!-- Hotjar Tracking -->
+    <script>(function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:3456789,hjsv:6};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');</script>
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "fairml001abc");</script>
+
+    <!-- Segment Analytics -->
+    <script>!function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="fairml_segment_key_abc123";analytics.SNIPPET_VERSION="4.15.3";analytics.load("fairml_segment_key_abc123");analytics.page();}}();</script>
+
+    <!-- A/B Testing - Optimizely -->
+    <script src="https://cdn.optimizely.com/js/fairml_project_123.js"></script>
+
+    <!-- Push Notification Service Worker Registration -->
+    <script>if ('serviceWorker' in navigator) { navigator.serviceWorker.register('/sw.js').then(function(reg) { console.log('SW registered:', reg.scope); }); }</script>
+
+    <!-- Intercom Chat Widget -->
+    <script>window.intercomSettings = { api_base: "https://api-iam.intercom.io", app_id: "fairml_abc123", custom_launcher_selector: '#chat-launcher', alignment: 'right', horizontal_padding: 20, vertical_padding: 20, user_hash: '', name: '', email: '' };</script>
+    <script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/fairml_abc123';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();</script>
+
+    <!-- Cookie Consent Script -->
+    <script src="/js/cookie-consent-v3.min.js"></script>
+    <script>CookieConsent.init({ 'title': 'We value your privacy', 'description': 'We use cookies and similar tracking technologies to provide you with the best possible experience. Some cookies are essential for the site to function, while others help us understand how you interact with our content so we can improve it. We also use cookies for targeted advertising and social media integration.', 'delay': 500, 'categories': { 'essential': { 'label': 'Essential Cookies', 'description': 'These cookies are required for the website to function and cannot be disabled.', 'enabled': true, 'readOnly': true }, 'analytics': { 'label': 'Analytics Cookies', 'description': 'These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously.', 'enabled': true }, 'marketing': { 'label': 'Marketing Cookies', 'description': 'These cookies are used to deliver advertisements that are more relevant to you and your interests.', 'enabled': true }, 'social': { 'label': 'Social Media Cookies', 'description': 'These cookies enable social media features and integrations such as sharing buttons and embedded content.', 'enabled': true }, 'personalization': { 'label': 'Personalization Cookies', 'description': 'These cookies allow us to remember choices you make and provide enhanced, more personal features.', 'enabled': true } } });</script>
+
+    <style>
+        :root { --primary: #2563eb; --primary-dark: #1d4ed8; --accent: #f59e0b; --bg: #ffffff; --bg-alt: #f8fafc; --text: #1e293b; --text-muted: #64748b; --border: #e2e8f0; --success: #22c55e; --warning: #f59e0b; --danger: #ef4444; --shadow-sm: 0 1px 2px rgba(0,0,0,0.05); --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1); --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1); --radius: 8px; --transition: all 0.2s ease; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--text); line-height: 1.7; background: var(--bg); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .skip-link { position: absolute; top: -40px; left: 0; background: var(--primary); color: white; padding: 8px; z-index: 100000; transition: top 0.3s; }
+        .skip-link:focus { top: 0; }
+        .announcement-bar { background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%); color: white; text-align: center; padding: 10px 16px; font-size: 14px; position: relative; z-index: 1000; }
+        .announcement-bar a { color: #fbbf24; font-weight: 600; text-decoration: underline; }
+        .announcement-bar .close-btn { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; color: white; cursor: pointer; font-size: 18px; }
+        .site-header { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 999; box-shadow: var(--shadow-sm); }
+        .header-top { display: flex; align-items: center; justify-content: space-between; max-width: 1280px; margin: 0 auto; padding: 12px 24px; }
+        .logo { font-size: 22px; font-weight: 700; color: var(--primary); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+        .logo img { height: 32px; }
+        .main-nav { display: flex; align-items: center; gap: 24px; }
+        .main-nav a { color: var(--text); text-decoration: none; font-size: 15px; font-weight: 500; transition: var(--transition); padding: 6px 0; border-bottom: 2px solid transparent; }
+        .main-nav a:hover { color: var(--primary); border-bottom-color: var(--primary); }
+        .main-nav .dropdown { position: relative; }
+        .main-nav .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: white; min-width: 220px; border-radius: var(--radius); box-shadow: var(--shadow-lg); border: 1px solid var(--border); padding: 8px 0; }
+        .main-nav .dropdown:hover .dropdown-content { display: block; }
+        .main-nav .dropdown-content a { display: block; padding: 8px 16px; font-size: 14px; border-bottom: none; }
+        .search-bar { display: flex; align-items: center; background: var(--bg-alt); border: 1px solid var(--border); border-radius: 24px; padding: 6px 16px; width: 280px; }
+        .search-bar input { border: none; background: transparent; outline: none; width: 100%; font-size: 14px; }
+        .search-bar button { background: none; border: none; cursor: pointer; color: var(--text-muted); }
+        .header-actions { display: flex; align-items: center; gap: 12px; }
+        .header-actions .btn-login { color: var(--text); text-decoration: none; font-weight: 500; font-size: 14px; }
+        .header-actions .btn-signup { background: var(--primary); color: white; padding: 8px 20px; border-radius: 24px; text-decoration: none; font-weight: 600; font-size: 14px; transition: var(--transition); }
+        .header-actions .btn-signup:hover { background: var(--primary-dark); }
+        .header-actions .notification-bell { position: relative; cursor: pointer; }
+        .header-actions .notification-bell .badge { position: absolute; top: -5px; right: -5px; background: var(--danger); color: white; font-size: 10px; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    </style>
 </head>
 <body>
-    <div id="cookie-banner" style="position:fixed;bottom:0;width:100%;background:#333;color:#fff;padding:20px;z-index:9999;">
-        <p>We use cookies to improve your experience. By continuing to browse, you agree to our <a href="/privacy" style="color:#4af;">cookie policy</a>.</p>
-        <button onclick="acceptCookies()" style="background:#4af;border:none;padding:10px 20px;color:#fff;cursor:pointer;">Accept All</button>
-        <button onclick="rejectCookies()" style="background:transparent;border:1px solid #fff;padding:10px 20px;color:#fff;cursor:pointer;">Reject Non-Essential</button>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-FXML0001" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Push Notification Prompt -->
+    <div id="push-prompt" style="display:block;position:fixed;top:0;left:0;right:0;background:linear-gradient(135deg,#1e40af,#3b82f6);color:white;padding:16px 24px;z-index:10001;text-align:center;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+        <div style="max-width:800px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+                <span style="font-size:24px;">🔔</span>
+                <div style="text-align:left;">
+                    <strong style="font-size:15px;">Never miss an AI fairness update!</strong>
+                    <p style="font-size:13px;opacity:0.9;margin-top:2px;">Get notified when we publish new articles, datasets, and tools.</p>
+                </div>
+            </div>
+            <div style="display:flex;gap:8px;flex-shrink:0;">
+                <button onclick="enableNotifications()" style="background:white;color:#1e40af;border:none;padding:8px 20px;border-radius:20px;font-weight:600;cursor:pointer;font-size:13px;">Enable Notifications</button>
+                <button onclick="dismissPush()" style="background:transparent;color:white;border:1px solid rgba(255,255,255,0.4);padding:8px 16px;border-radius:20px;cursor:pointer;font-size:13px;">Not Now</button>
+            </div>
+        </div>
     </div>
 
+    <!-- Announcement Bar -->
+    <div class="announcement-bar" style="margin-top:72px;">
+        🎓 NEW COURSE: <a href="/courses/fairness-fundamentals">AI Fairness Fundamentals — Self-paced, 6 modules, certificate included</a> — Launch offer: 40% off with code FAIR2026
+        <button class="close-btn" aria-label="Close announcement">&times;</button>
+    </div>
+
+    <!-- Cookie Consent Banner (GDPR Compliant) -->
+    <div id="cookie-banner" style="position:fixed;bottom:0;left:0;right:0;background:white;border-top:2px solid var(--border);padding:24px 32px;z-index:10000;box-shadow:0 -4px 20px rgba(0,0,0,0.1);">
+        <div style="max-width:1200px;margin:0 auto;">
+            <div style="display:flex;align-items:flex-start;gap:24px;">
+                <div style="flex:1;">
+                    <h3 style="font-size:16px;margin-bottom:8px;color:#1e293b;">🍪 We respect your privacy</h3>
+                    <p style="font-size:13px;color:#64748b;line-height:1.6;margin-bottom:12px;">We use cookies and similar technologies to provide, protect, and improve our services. We also use them to understand how visitors interact with our content and to deliver personalised advertisements on our site and partner platforms. By clicking "Accept All", you consent to our use of cookies as described in our <a href="/cookie-policy" style="color:#2563eb;">Cookie Policy</a> and <a href="/privacy" style="color:#2563eb;">Privacy Policy</a>. You can manage your preferences at any time by clicking "Cookie Settings".</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:16px;margin-bottom:12px;">
+                        <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:#475569;"><input type="checkbox" checked disabled> <strong>Essential</strong> (Always active)</label>
+                        <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:#475569;"><input type="checkbox" checked> Analytics</label>
+                        <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:#475569;"><input type="checkbox" checked> Marketing</label>
+                        <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:#475569;"><input type="checkbox" checked> Social Media</label>
+                        <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:#475569;"><input type="checkbox" checked> Personalization</label>
+                    </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:8px;flex-shrink:0;">
+                    <button onclick="acceptAll()" style="background:#2563eb;color:white;border:none;padding:10px 28px;border-radius:6px;font-weight:600;cursor:pointer;font-size:14px;">Accept All</button>
+                    <button onclick="rejectNonEssential()" style="background:white;color:#1e293b;border:1px solid #cbd5e1;padding:10px 28px;border-radius:6px;font-weight:500;cursor:pointer;font-size:14px;">Reject Non-Essential</button>
+                    <button onclick="openCookieSettings()" style="background:transparent;color:#2563eb;border:none;padding:6px;cursor:pointer;font-size:13px;text-decoration:underline;">Cookie Settings</button>
+                </div>
+            </div>
+            <p style="font-size:11px;color:#94a3b8;margin-top:8px;">By continuing to use this site without making a selection, you consent to our use of essential cookies only. You can change your preferences at any time via the cookie icon in the bottom-left corner. For users in the EU/EEA, we comply with GDPR. For California residents, see our <a href="/ccpa" style="color:#2563eb;">CCPA Notice</a>. For UK visitors, see our <a href="/uk-privacy" style="color:#2563eb;">UK Privacy Notice</a>.</p>
+        </div>
+    </div>
+
+    <!-- Sticky Header -->
     <header class="site-header">
-        <nav class="main-nav">
-            <div class="logo"><a href="/">FairML Blog</a></div>
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/articles">Articles</a></li>
-                <li><a href="/tutorials">Tutorials</a></li>
-                <li><a href="/datasets">Datasets</a></li>
-                <li><a href="/tools">Tools</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
+        <div class="header-top">
+            <a href="/" class="logo">
+                <img src="/images/logo.svg" alt="FairML Blog Logo" width="32" height="32">
+                FairML Blog
+            </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <a href="/">Home</a>
+                <div class="dropdown">
+                    <a href="/articles">Articles ▾</a>
+                    <div class="dropdown-content">
+                        <a href="/articles/fairness">Fairness Metrics</a>
+                        <a href="/articles/bias">Bias Detection</a>
+                        <a href="/articles/datasets">Datasets</a>
+                        <a href="/articles/case-studies">Case Studies</a>
+                        <a href="/articles/tutorials">Tutorials</a>
+                        <a href="/articles/opinion">Opinion</a>
+                        <a href="/articles/research">Research Summaries</a>
+                        <a href="/articles/industry">Industry News</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <a href="/tools">Tools ▾</a>
+                    <div class="dropdown-content">
+                        <a href="/tools/fairkit">FairKit</a>
+                        <a href="/tools/bias-scanner">Bias Scanner</a>
+                        <a href="/tools/dataset-audit">Dataset Audit</a>
+                        <a href="/tools/model-cards">Model Card Generator</a>
+                    </div>
+                </div>
+                <a href="/datasets">Datasets</a>
+                <a href="/courses">Courses</a>
+                <a href="/podcast">Podcast</a>
+                <a href="/events">Events</a>
+                <a href="/community">Community</a>
+            </nav>
             <div class="search-bar">
-                <input type="text" placeholder="Search articles...">
-                <button>Search</button>
+                <input type="text" placeholder="Search articles, datasets, tools..." aria-label="Search">
+                <button aria-label="Search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></button>
             </div>
-            <div class="user-actions">
-                <a href="/login">Log In</a>
-                <a href="/signup" class="btn-primary">Sign Up Free</a>
+            <div class="header-actions">
+                <div class="notification-bell" aria-label="Notifications">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                    <span class="badge">3</span>
+                </div>
+                <a href="/login" class="btn-login">Log In</a>
+                <a href="/signup" class="btn-signup">Start Free Trial</a>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <div class="breadcrumbs">
-        <a href="/">Home</a> &gt; <a href="/articles">Articles</a> &gt; <a href="/articles/fairness">Fairness Metrics</a> &gt; <span>Demographic Parity</span>
+    <!-- Secondary Nav / Topic Bar -->
+    <div style="background:#f8fafc;border-bottom:1px solid #e2e8f0;padding:8px 0;overflow-x:auto;">
+        <div style="max-width:1280px;margin:0 auto;padding:0 24px;display:flex;gap:16px;white-space:nowrap;">
+            <a href="/topics/demographic-parity" style="font-size:13px;color:#2563eb;font-weight:600;text-decoration:none;padding:4px 12px;background:#eff6ff;border-radius:16px;">Demographic Parity</a>
+            <a href="/topics/equalised-odds" style="font-size:13px;color:#475569;text-decoration:none;padding:4px 12px;">Equalised Odds</a>
+            <a href="/topics/calibration" style="font-size:13px;color:#475569;text-decoration:none;padding:4px 12px;">Calibration</a>
+            <a href="/topics/compas" style="font-size:13px;color:#475569;text-decoration:none;padding:4px 12px;">COMPAS</a>
+            <a href="/topics/individual-fairness" style="font-size:13px;color:#475569;text-decoration:none;padding:4px 12px;">Individual Fairness</a>
+            <a href="/topics/disparate-impact" style="font-size:13px;color:#475569;text-decoration:none;padding:4px 12px;">Disparate Impact</a>
+            <a href="/topics/eu-ai-act" style="font-size:13px;color:#475569;text-decoration:none;padding:4px 12px;">EU AI Act</a>
+            <a href="/topics/bias-auditing" style="font-size:13px;color:#475569;text-decoration:none;padding:4px 12px;">Bias Auditing</a>
+            <a href="/topics/model-cards" style="font-size:13px;color:#475569;text-decoration:none;padding:4px 12px;">Model Cards</a>
+        </div>
     </div>
 
-    <div class="content-wrapper">
-        <aside class="sidebar-left">
-            <div class="newsletter-signup">
-                <h3>Stay Updated!</h3>
-                <p>Get the latest AI fairness insights delivered to your inbox weekly.</p>
+    <!-- Breadcrumbs -->
+    <div style="max-width:1280px;margin:0 auto;padding:12px 24px;">
+        <nav aria-label="Breadcrumb" style="font-size:13px;color:#64748b;">
+            <a href="/" style="color:#64748b;text-decoration:none;">Home</a>
+            <span style="margin:0 8px;">›</span>
+            <a href="/articles" style="color:#64748b;text-decoration:none;">Articles</a>
+            <span style="margin:0 8px;">›</span>
+            <a href="/articles/fairness" style="color:#64748b;text-decoration:none;">Fairness Metrics</a>
+            <span style="margin:0 8px;">›</span>
+            <span style="color:#1e293b;">Demographic Parity</span>
+        </nav>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div style="max-width:1280px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:220px 1fr 300px;gap:32px;">
+
+        <!-- Left Sidebar -->
+        <aside style="position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto;">
+            <div style="background:#f8fafc;border-radius:12px;padding:20px;margin-bottom:20px;border:1px solid #e2e8f0;">
+                <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;color:#1e293b;">📬 Newsletter</h3>
+                <p style="font-size:13px;color:#64748b;margin-bottom:12px;line-height:1.5;">The best AI fairness content, curated weekly. Trusted by 15,000+ ML practitioners.</p>
                 <form>
-                    <input type="email" placeholder="Enter your email">
-                    <button type="submit">Subscribe</button>
+                    <input type="email" placeholder="you@company.com" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:13px;margin-bottom:8px;">
+                    <button type="submit" style="width:100%;background:#2563eb;color:white;border:none;padding:8px;border-radius:6px;font-weight:600;cursor:pointer;font-size:13px;">Subscribe Free</button>
                 </form>
-                <p class="small">Join 15,000+ subscribers. No spam, ever.</p>
+                <p style="font-size:11px;color:#94a3b8;margin-top:6px;">No spam. Unsubscribe anytime. <a href="/privacy" style="color:#2563eb;">Privacy Policy</a></p>
             </div>
-            <div class="popular-posts">
-                <h3>Popular Articles</h3>
-                <ul>
-                    <li><a href="/articles/bias-in-nlp">Bias in NLP: A Complete Guide</a></li>
-                    <li><a href="/articles/fairness-toolkit">Top 10 Fairness Toolkits for 2026</a></li>
-                    <li><a href="/articles/compas-deep-dive">COMPAS: What Went Wrong?</a></li>
-                    <li><a href="/articles/eu-ai-act">EU AI Act: Fairness Requirements</a></li>
+
+            <div style="background:white;border-radius:12px;padding:20px;margin-bottom:20px;border:1px solid #e2e8f0;">
+                <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;color:#1e293b;">📖 Table of Contents</h3>
+                <ul style="list-style:none;font-size:13px;">
+                    <li style="margin-bottom:8px;"><a href="#what-is" style="color:#475569;text-decoration:none;">What is Demographic Parity?</a></li>
+                    <li style="margin-bottom:8px;"><a href="#why-matters" style="color:#475569;text-decoration:none;">Why Does It Matter?</a></li>
+                    <li style="margin-bottom:8px;"><a href="#examples" style="color:#475569;text-decoration:none;">Real-World Examples</a></li>
+                    <li style="margin-bottom:8px;"><a href="#math" style="color:#475569;text-decoration:none;">Mathematical Definition</a></li>
+                    <li style="margin-bottom:8px;"><a href="#misconceptions" style="color:#475569;text-decoration:none;">Common Misconceptions</a></li>
+                    <li style="margin-bottom:8px;"><a href="#related" style="color:#475569;text-decoration:none;">Related Concepts</a></li>
+                    <li style="margin-bottom:8px;"><a href="#code" style="color:#475569;text-decoration:none;">Code Example</a></li>
+                    <li style="margin-bottom:8px;"><a href="#bottom-line" style="color:#475569;text-decoration:none;">The Bottom Line</a></li>
+                    <li style="margin-bottom:8px;"><a href="#faq" style="color:#475569;text-decoration:none;">FAQ</a></li>
                 </ul>
+            </div>
+
+            <div style="background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:12px;padding:20px;margin-bottom:20px;border:1px solid #fbbf24;">
+                <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#92400e;">🏆 Top Contributor</h3>
+                <p style="font-size:13px;color:#78350f;line-height:1.5;">Dr. Sarah Chen has published 47 articles on algorithmic fairness. <a href="/authors/sarah-chen" style="color:#92400e;font-weight:600;">View profile →</a></p>
+            </div>
+
+            <div style="background:#f0fdf4;border-radius:12px;padding:20px;border:1px solid #86efac;">
+                <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;color:#166534;">✅ Verified Content</h3>
+                <p style="font-size:12px;color:#15803d;line-height:1.5;">This article has been peer-reviewed by 3 independent AI fairness researchers. Last verified: May 4, 2026.</p>
+                <div style="display:flex;gap:4px;margin-top:8px;">
+                    <img src="/images/reviewers/r1.jpg" alt="" width="24" height="24" style="border-radius:50%;">
+                    <img src="/images/reviewers/r2.jpg" alt="" width="24" height="24" style="border-radius:50%;">
+                    <img src="/images/reviewers/r3.jpg" alt="" width="24" height="24" style="border-radius:50%;">
+                </div>
             </div>
         </aside>
 
-        <main class="article-content">
-            <div class="article-meta">
-                <span class="category">Fairness Metrics</span>
-                <span class="reading-time">8 min read</span>
-                <span class="date">Published: May 1, 2026</span>
-                <span class="author">By Dr. Sarah Chen, ML Research Lead</span>
-            </div>
-
-            <h1>Understanding Demographic Parity in Machine Learning</h1>
-
-            <div class="share-buttons">
-                <a href="#" class="share-twitter">Share on Twitter</a>
-                <a href="#" class="share-linkedin">Share on LinkedIn</a>
-                <a href="#" class="share-facebook">Share on Facebook</a>
-                <a href="#" class="share-email">Email This Article</a>
-            </div>
-
-            <div class="featured-image">
-                <img src="/images/demographic-parity-hero.jpg" alt="Illustration of demographic parity concept showing balanced scales across different groups" width="800" height="400">
-                <caption>Demographic parity aims for equal prediction rates across groups. Image: FairML Blog</caption>
-            </div>
-
-            <div class="ad-banner">
-                <p>ADVERTISEMENT</p>
-                <div class="ad-content">
-                    <img src="/ads/fairness-course.jpg" alt="Ad: Master AI Fairness - Online Course">
-                    <p>Master AI Fairness — Enrol in our 8-week online course. Use code FAIRML20 for 20% off. <a href="/courses/fairness">Learn More</a></p>
+        <!-- Main Article -->
+        <main id="main-content">
+            <!-- Social Proof Banner -->
+            <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:12px 16px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;">
+                <div style="display:flex;align-items:center;gap:12px;">
+                    <span style="font-size:13px;color:#1e40af;">🔥 <strong>Trending:</strong> This article has been read 23,847 times this week</span>
                 </div>
-            </div>
-
-            <p>If you're working in machine learning, you've probably heard the term <strong>demographic parity</strong> thrown around in discussions about fairness and bias. But what does it actually mean? In this comprehensive guide, we'll break down everything you need to know about this crucial fairness metric.</p>
-
-            <h2>What is Demographic Parity?</h2>
-
-            <p>Demographic parity (also known as statistical parity or group fairness) is one of the most widely used definitions of fairness in machine learning. At its core, the concept is straightforward:</p>
-
-            <blockquote>
-                <p>A model satisfies demographic parity if it produces positive predictions at equal rates across all demographic groups.</p>
-            </blockquote>
-
-            <p>In more technical terms, a classifier satisfies demographic parity when:</p>
-
-            <p><code>P(Ŷ=1 | A=0) = P(Ŷ=1 | A=1)</code></p>
-
-            <p>Where A represents the protected attribute (such as race or gender) and Ŷ represents the model's prediction.</p>
-
-            <h2>Why Does Demographic Parity Matter?</h2>
-
-            <p>In many high-stakes decision-making contexts — hiring, lending, criminal justice — we want to ensure that our algorithms don't systematically favor one group over another. Demographic parity provides a simple, measurable criterion for checking this.</p>
-
-            <p>For example, if a hiring algorithm selects 30% of male applicants for interviews, demographic parity would require it to also select approximately 30% of female applicants.</p>
-
-            <div class="callout-box">
-                <h3>💡 Key Takeaway</h3>
-                <p>Demographic parity focuses on <em>outcomes</em>, not <em>process</em>. It doesn't care how the model makes decisions — only that the results are balanced across groups.</p>
-            </div>
-
-            <h2>Common Misconceptions</h2>
-
-            <p>One of the most important things to understand about demographic parity is what it does <em>not</em> guarantee. A model can satisfy demographic parity while being significantly less accurate for one group than another. Equal prediction rates don't mean equal error rates.</p>
-
-            <p>This is directly related to the famous impossibility theorem by Chouldechova (2017) and Kleinberg et al. (2016), which proved that demographic parity, calibration, and equalised odds cannot all be satisfied simultaneously except in trivial cases.</p>
-
-            <h2>Related Concepts</h2>
-
-            <p>Understanding demographic parity is easier when you know how it relates to other fairness metrics:</p>
-
-            <ul>
-                <li><strong>Equalised Odds</strong> — requires equal true positive and false positive rates across groups</li>
-                <li><strong>Individual Fairness</strong> — requires similar individuals to receive similar predictions</li>
-                <li><strong>Calibration</strong> — requires predicted probabilities to match actual outcomes across groups</li>
-                <li><strong>Disparate Impact</strong> — the legal framework for measuring disproportionate outcomes</li>
-            </ul>
-
-            <div class="ad-banner">
-                <p>ADVERTISEMENT</p>
-                <div class="ad-content">
-                    <img src="/ads/fairness-toolkit.jpg" alt="Ad: FairKit Pro - Automated Bias Detection">
-                    <p>FairKit Pro — Automated bias detection for your ML pipeline. Start your free trial today. <a href="https://fairkit.pro">Try Now</a></p>
-                </div>
-            </div>
-
-            <h2>The Bottom Line</h2>
-
-            <p>Demographic parity remains one of the most commonly cited group fairness metrics, but it's crucial to understand its limitations. The choice of which fairness metric to optimise for is ultimately a value judgement, not a purely technical decision.</p>
-
-            <p>As Barocas, Hardt, and Narayanan note in their influential textbook <em>Fairness and Machine Learning</em>: "Statistical parity requires that the proportion of people receiving a positive outcome is the same in each group."</p>
-
-            <div class="author-bio">
-                <img src="/images/authors/sarah-chen.jpg" alt="Dr. Sarah Chen" width="80" height="80">
-                <div>
-                    <h4>About the Author</h4>
-                    <p><strong>Dr. Sarah Chen</strong> is the ML Research Lead at FairML Blog. She holds a PhD in Computer Science from Stanford and has published over 30 papers on algorithmic fairness. <a href="/authors/sarah-chen">View all articles</a></p>
-                </div>
-            </div>
-
-            <div class="article-tags">
-                <span>Tags:</span>
-                <a href="/tags/fairness">fairness</a>
-                <a href="/tags/bias">bias</a>
-                <a href="/tags/classification">classification</a>
-                <a href="/tags/metrics">metrics</a>
-                <a href="/tags/demographic-parity">demographic parity</a>
-            </div>
-
-            <div class="related-articles">
-                <h3>You Might Also Like</h3>
-                <div class="article-grid">
-                    <div class="article-card">
-                        <img src="/images/thumbnails/equalised-odds.jpg" alt="Equalised Odds">
-                        <h4><a href="/articles/equalised-odds">Understanding Equalised Odds</a></h4>
-                        <p>A deep dive into equalised odds and how it differs from demographic parity.</p>
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <div style="display:flex;">
+                        <img src="/images/avatars/a1.jpg" alt="" width="24" height="24" style="border-radius:50%;border:2px solid white;margin-left:-8px;">
+                        <img src="/images/avatars/a2.jpg" alt="" width="24" height="24" style="border-radius:50%;border:2px solid white;margin-left:-8px;">
+                        <img src="/images/avatars/a3.jpg" alt="" width="24" height="24" style="border-radius:50%;border:2px solid white;margin-left:-8px;">
                     </div>
-                    <div class="article-card">
-                        <img src="/images/thumbnails/compas.jpg" alt="COMPAS Case Study">
-                        <h4><a href="/articles/compas-case-study">The COMPAS Case Study</a></h4>
-                        <p>How the COMPAS controversy revealed the impossibility of satisfying all fairness metrics.</p>
+                    <span style="font-size:12px;color:#64748b;">142 people reading now</span>
+                </div>
+            </div>
+
+            <article itemscope itemtype="https://schema.org/Article">
+                <div style="margin-bottom:24px;">
+                    <span style="display:inline-block;background:#eff6ff;color:#2563eb;font-size:12px;font-weight:600;padding:4px 10px;border-radius:4px;text-transform:uppercase;letter-spacing:0.5px;">Fairness Metrics</span>
+                    <span style="display:inline-block;background:#f0fdf4;color:#16a34a;font-size:12px;font-weight:600;padding:4px 10px;border-radius:4px;margin-left:8px;">Beginner Friendly</span>
+                    <span style="display:inline-block;background:#fefce8;color:#ca8a04;font-size:12px;font-weight:600;padding:4px 10px;border-radius:4px;margin-left:8px;">Updated May 2026</span>
+                </div>
+
+                <h1 itemprop="headline" style="font-size:36px;font-weight:800;line-height:1.2;margin-bottom:16px;color:#0f172a;">Understanding Demographic Parity in Machine Learning</h1>
+
+                <p style="font-size:18px;color:#64748b;margin-bottom:20px;line-height:1.6;" itemprop="description">A comprehensive guide to one of the most important and widely used fairness metrics in machine learning — what it means, why it matters, and where it falls short.</p>
+
+                <div style="display:flex;align-items:center;gap:16px;padding:16px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;margin-bottom:24px;flex-wrap:wrap;">
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        <img src="/images/authors/sarah-chen.jpg" alt="Dr. Sarah Chen" width="40" height="40" style="border-radius:50%;">
+                        <div>
+                            <a href="/authors/sarah-chen" style="font-size:14px;font-weight:600;color:#1e293b;text-decoration:none;" itemprop="author">Dr. Sarah Chen</a>
+                            <p style="font-size:12px;color:#64748b;">ML Research Lead · <time datetime="2026-05-01" itemprop="datePublished">May 1, 2026</time> · Updated <time datetime="2026-05-04" itemprop="dateModified">May 4, 2026</time></p>
+                        </div>
                     </div>
-                    <div class="article-card">
-                        <img src="/images/thumbnails/calibration.jpg" alt="Model Calibration">
-                        <h4><a href="/articles/calibration">Calibration: The Overlooked Metric</a></h4>
-                        <p>Why calibration might be the most important fairness metric you're not using.</p>
+                    <div style="display:flex;align-items:center;gap:12px;margin-left:auto;">
+                        <span style="font-size:13px;color:#64748b;">⏱ 8 min read</span>
+                        <span style="font-size:13px;color:#64748b;">💬 23 comments</span>
+                        <span style="font-size:13px;color:#64748b;">🔖 847 bookmarks</span>
                     </div>
                 </div>
+
+                <!-- Share Bar -->
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:24px;">
+                    <span style="font-size:13px;font-weight:600;color:#475569;">Share:</span>
+                    <a href="#" style="display:inline-flex;align-items:center;gap:4px;padding:6px 14px;background:#1da1f2;color:white;border-radius:6px;text-decoration:none;font-size:12px;font-weight:500;">𝕏 Twitter</a>
+                    <a href="#" style="display:inline-flex;align-items:center;gap:4px;padding:6px 14px;background:#0a66c2;color:white;border-radius:6px;text-decoration:none;font-size:12px;font-weight:500;">LinkedIn</a>
+                    <a href="#" style="display:inline-flex;align-items:center;gap:4px;padding:6px 14px;background:#1877f2;color:white;border-radius:6px;text-decoration:none;font-size:12px;font-weight:500;">Facebook</a>
+                    <a href="#" style="display:inline-flex;align-items:center;gap:4px;padding:6px 14px;background:#ff4500;color:white;border-radius:6px;text-decoration:none;font-size:12px;font-weight:500;">Reddit</a>
+                    <a href="#" style="display:inline-flex;align-items:center;gap:4px;padding:6px 14px;background:#25d366;color:white;border-radius:6px;text-decoration:none;font-size:12px;font-weight:500;">WhatsApp</a>
+                    <a href="#" style="display:inline-flex;align-items:center;gap:4px;padding:6px 14px;background:#475569;color:white;border-radius:6px;text-decoration:none;font-size:12px;font-weight:500;">📋 Copy Link</a>
+                </div>
+
+                <!-- Hero Image -->
+                <figure style="margin-bottom:32px;">
+                    <img src="/images/demographic-parity-hero.jpg" alt="Illustration showing balanced scales representing demographic parity across different groups, with data visualizations and ML model diagrams in the background" width="800" height="400" style="width:100%;height:auto;border-radius:12px;border:1px solid #e2e8f0;" itemprop="image">
+                    <figcaption style="font-size:12px;color:#94a3b8;margin-top:8px;text-align:center;">Demographic parity aims for equal prediction rates across demographic groups. Illustration by Maria Rodriguez for FairML Blog. Licensed under CC-BY-4.0.</figcaption>
+                </figure>
+
+                <!-- Ad Banner 1 -->
+                <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px;margin-bottom:28px;text-align:center;">
+                    <p style="font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Advertisement</p>
+                    <div style="background:linear-gradient(135deg,#1e3a5f,#2563eb);border-radius:8px;padding:24px;color:white;">
+                        <img src="/ads/fairness-course.jpg" alt="Master AI Fairness Online Course" width="468" height="60" style="max-width:100%;height:auto;margin-bottom:12px;">
+                        <h4 style="font-size:18px;margin-bottom:8px;">Master AI Fairness — Online Course</h4>
+                        <p style="font-size:14px;opacity:0.9;margin-bottom:12px;">8 weeks. Self-paced. Certificate included. Taught by leading researchers from Stanford, MIT, and Oxford.</p>
+                        <a href="/courses/fairness" style="display:inline-block;background:white;color:#1e40af;padding:10px 28px;border-radius:6px;font-weight:700;text-decoration:none;">Enrol Now — Use code FAIRML20 for 20% off</a>
+                        <p style="font-size:11px;opacity:0.7;margin-top:8px;">Join 4,200+ students. 4.9★ rating. 30-day money-back guarantee.</p>
+                    </div>
+                </div>
+
+                <!-- Article Body -->
+                <div itemprop="articleBody" style="font-size:16px;line-height:1.8;color:#334155;">
+
+                    <p>If you're working in machine learning, you've probably heard the term <strong>demographic parity</strong> thrown around in discussions about fairness and bias. But what does it actually mean? And more importantly, why should you care? In this comprehensive guide, we'll break down everything you need to know about this crucial fairness metric — from its mathematical foundations to its real-world implications.</p>
+
+                    <p>Whether you're a data scientist building production models, a product manager evaluating fairness requirements, or a researcher studying algorithmic bias, understanding demographic parity is essential for responsible AI development in 2026 and beyond.</p>
+
+                    <h2 id="what-is" style="font-size:24px;font-weight:700;margin-top:36px;margin-bottom:16px;color:#0f172a;">What is Demographic Parity?</h2>
+
+                    <p>Demographic parity (also known as <em>statistical parity</em>, <em>group fairness</em>, or <em>independence</em>) is one of the most widely used definitions of fairness in machine learning. At its core, the concept is deceptively straightforward:</p>
+
+                    <blockquote style="border-left:4px solid #2563eb;padding:16px 24px;margin:24px 0;background:#f8fafc;border-radius:0 8px 8px 0;">
+                        <p style="font-size:17px;font-style:italic;color:#1e293b;margin:0;">"A model satisfies demographic parity if it produces positive predictions at equal rates across all demographic groups."</p>
+                        <cite style="font-size:13px;color:#64748b;display:block;margin-top:8px;">— Barocas, Hardt, Narayanan, <em>Fairness and Machine Learning</em></cite>
+                    </blockquote>
+
+                    <h3 id="math" style="font-size:20px;font-weight:600;margin-top:28px;margin-bottom:12px;color:#0f172a;">The Mathematical Definition</h3>
+
+                    <p>In more technical terms, a classifier satisfies demographic parity when the following condition holds:</p>
+
+                    <div style="background:#1e293b;color:#e2e8f0;padding:20px 24px;border-radius:8px;margin:20px 0;font-family:'JetBrains Mono',monospace;font-size:15px;overflow-x:auto;">
+                        <code>P(Ŷ=1 | A=0) = P(Ŷ=1 | A=1)</code>
+                    </div>
+
+                    <p>Where:</p>
+                    <ul style="margin:12px 0 20px 24px;">
+                        <li style="margin-bottom:8px;"><strong>A</strong> represents the protected attribute (such as race, gender, age group, or disability status)</li>
+                        <li style="margin-bottom:8px;"><strong>Ŷ</strong> (Y-hat) represents the model's prediction</li>
+                        <li style="margin-bottom:8px;"><strong>P(Ŷ=1 | A=a)</strong> is the probability of receiving a positive prediction, given membership in group a</li>
+                    </ul>
+
+                    <p>In plain English: the proportion of positive predictions should be the same regardless of which demographic group someone belongs to.</p>
+
+                    <h2 id="why-matters" style="font-size:24px;font-weight:700;margin-top:36px;margin-bottom:16px;color:#0f172a;">Why Does Demographic Parity Matter?</h2>
+
+                    <p>In many high-stakes decision-making contexts — hiring, lending, criminal justice, healthcare, insurance, and education — we want to ensure that our algorithms don't systematically favor one group over another. Demographic parity provides a simple, measurable criterion for checking this.</p>
+
+                    <p>For example, if a hiring algorithm selects 30% of male applicants for interviews, demographic parity would require it to also select approximately 30% of female applicants. If it doesn't, that's a red flag that warrants investigation.</p>
+
+                    <!-- Inline Ad -->
+                    <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:16px;margin:24px 0;text-align:center;">
+                        <p style="font-size:10px;color:#92400e;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Sponsored</p>
+                        <p style="font-size:14px;color:#78350f;"><strong>FairKit Pro</strong> — Automated demographic parity testing for your ML pipeline. Integrates with scikit-learn, PyTorch, and TensorFlow. <a href="https://fairkit.pro" style="color:#2563eb;font-weight:600;">Start your free trial →</a></p>
+                    </div>
+
+                    <div style="background:#eff6ff;border-radius:12px;padding:24px;margin:28px 0;border:1px solid #bfdbfe;">
+                        <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;color:#1e40af;">💡 Key Takeaway</h3>
+                        <p style="font-size:15px;color:#1e3a5f;margin:0;line-height:1.6;">Demographic parity focuses on <em>outcomes</em>, not <em>process</em>. It doesn't care how the model makes decisions — only that the results are balanced across groups. This makes it easy to measure but controversial to enforce, since achieving equal outcomes may require treating groups differently during the decision process.</p>
+                    </div>
+
+                    <h2 id="examples" style="font-size:24px;font-weight:700;margin-top:36px;margin-bottom:16px;color:#0f172a;">Real-World Examples</h2>
+
+                    <p>To make this concrete, let's look at some real-world scenarios where demographic parity has been applied or debated:</p>
+
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0;">
+                        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px;">
+                            <h4 style="font-size:14px;font-weight:600;margin-bottom:8px;">🏦 Lending</h4>
+                            <p style="font-size:13px;color:#475569;line-height:1.5;">If a bank's loan approval algorithm approves 60% of white applicants, demographic parity requires it to also approve approximately 60% of Black applicants.</p>
+                        </div>
+                        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px;">
+                            <h4 style="font-size:14px;font-weight:600;margin-bottom:8px;">💼 Hiring</h4>
+                            <p style="font-size:13px;color:#475569;line-height:1.5;">Amazon's infamous recruiting tool was scrapped because it didn't satisfy demographic parity — it systematically downgraded résumés containing the word "women's."</p>
+                        </div>
+                        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px;">
+                            <h4 style="font-size:14px;font-weight:600;margin-bottom:8px;">⚖️ Criminal Justice</h4>
+                            <p style="font-size:13px;color:#475569;line-height:1.5;">The COMPAS recidivism tool sparked a national debate when ProPublica showed it violated equalised odds (a related metric) across racial groups.</p>
+                        </div>
+                        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px;">
+                            <h4 style="font-size:14px;font-weight:600;margin-bottom:8px;">🏥 Healthcare</h4>
+                            <p style="font-size:13px;color:#475569;line-height:1.5;">Obermeyer et al. (2019) showed a widely used healthcare algorithm systematically under-referred Black patients, effectively violating demographic parity.</p>
+                        </div>
+                    </div>
+
+                    <h2 id="misconceptions" style="font-size:24px;font-weight:700;margin-top:36px;margin-bottom:16px;color:#0f172a;">Common Misconceptions</h2>
+
+                    <div style="background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:20px;margin:20px 0;">
+                        <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;color:#991b1b;">⚠️ Important Warning</h3>
+                        <p style="font-size:15px;color:#7f1d1d;margin:0;line-height:1.6;">One of the most important things to understand about demographic parity is what it does <em>not</em> guarantee. <strong>A model can satisfy demographic parity while being significantly less accurate for one group than another.</strong> Equal prediction rates don't mean equal error rates.</p>
+                    </div>
+
+                    <p>This is directly related to the famous impossibility theorem by Chouldechova (2017) and Kleinberg et al. (2016), which proved that demographic parity, calibration, and equalised odds cannot all be satisfied simultaneously except in trivial cases. This mathematical result has profound implications: <strong>the choice of which fairness metric to optimise for is a value judgement, not a technical decision.</strong></p>
+
+                    <h2 id="related" style="font-size:24px;font-weight:700;margin-top:36px;margin-bottom:16px;color:#0f172a;">Related Concepts</h2>
+
+                    <p>Understanding demographic parity is easier when you know how it relates to other fairness metrics:</p>
+
+                    <table style="width:100%;border-collapse:collapse;margin:20px 0;font-size:14px;">
+                        <thead>
+                            <tr style="background:#f8fafc;">
+                                <th style="text-align:left;padding:12px;border:1px solid #e2e8f0;font-weight:600;">Metric</th>
+                                <th style="text-align:left;padding:12px;border:1px solid #e2e8f0;font-weight:600;">What It Requires</th>
+                                <th style="text-align:left;padding:12px;border:1px solid #e2e8f0;font-weight:600;">Relationship to DP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:12px;border:1px solid #e2e8f0;"><strong>Equalised Odds</strong></td>
+                                <td style="padding:12px;border:1px solid #e2e8f0;">Equal TPR and FPR across groups</td>
+                                <td style="padding:12px;border:1px solid #e2e8f0;">Stronger condition; conditions on true label</td>
+                            </tr>
+                            <tr style="background:#f8fafc;">
+                                <td style="padding:12px;border:1px solid #e2e8f0;"><strong>Individual Fairness</strong></td>
+                                <td style="padding:12px;border:1px solid #e2e8f0;">Similar individuals get similar predictions</td>
+                                <td style="padding:12px;border:1px solid #e2e8f0;">Individual-level vs group-level</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:12px;border:1px solid #e2e8f0;"><strong>Calibration</strong></td>
+                                <td style="padding:12px;border:1px solid #e2e8f0;">Predicted probabilities match actual outcomes</td>
+                                <td style="padding:12px;border:1px solid #e2e8f0;">Incompatible with DP when base rates differ</td>
+                            </tr>
+                            <tr style="background:#f8fafc;">
+                                <td style="padding:12px;border:1px solid #e2e8f0;"><strong>Disparate Impact</strong></td>
+                                <td style="padding:12px;border:1px solid #e2e8f0;">Four-fifths rule (≥80% selection rate ratio)</td>
+                                <td style="padding:12px;border:1px solid #e2e8f0;">Legal operationalisation of DP</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Mid-article Ad -->
+                    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px;margin:28px 0;text-align:center;">
+                        <p style="font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Advertisement</p>
+                        <div style="display:flex;align-items:center;gap:16px;justify-content:center;flex-wrap:wrap;">
+                            <img src="/ads/fairness-toolkit.jpg" alt="FairKit Pro" width="120" height="120" style="border-radius:8px;">
+                            <div style="text-align:left;max-width:400px;">
+                                <h4 style="font-size:16px;margin-bottom:4px;">FairKit Pro — Bias Detection Made Easy</h4>
+                                <p style="font-size:13px;color:#64748b;margin-bottom:8px;">Automated fairness testing for demographic parity, equalised odds, and 12 other metrics. One-line integration with scikit-learn.</p>
+                                <a href="https://fairkit.pro" style="display:inline-block;background:#2563eb;color:white;padding:8px 20px;border-radius:6px;text-decoration:none;font-weight:600;font-size:13px;">Start Free Trial</a>
+                            </div>
+                        </div>
+                        <p style="font-size:11px;color:#94a3b8;margin-top:8px;">Trusted by teams at Google, Microsoft, and Meta. SOC 2 Type II certified.</p>
+                    </div>
+
+                    <h2 id="code" style="font-size:24px;font-weight:700;margin-top:36px;margin-bottom:16px;color:#0f172a;">Code Example: Measuring Demographic Parity</h2>
+
+                    <p>Here's a quick example of how to check for demographic parity using Python and scikit-learn:</p>
+
+                    <div style="background:#1e293b;border-radius:8px;padding:20px;margin:20px 0;overflow-x:auto;">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                            <span style="font-size:12px;color:#94a3b8;">Python</span>
+                            <button style="background:#334155;color:#94a3b8;border:none;padding:4px 12px;border-radius:4px;font-size:12px;cursor:pointer;">📋 Copy</button>
+                        </div>
+                        <pre style="color:#e2e8f0;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.6;margin:0;"><code>import numpy as np
+
+def demographic_parity_difference(y_pred, sensitive_attr):
+    """Calculate the demographic parity difference."""
+    groups = np.unique(sensitive_attr)
+    rates = {}
+    for g in groups:
+        mask = sensitive_attr == g
+        rates[g] = y_pred[mask].mean()
+
+    max_rate = max(rates.values())
+    min_rate = min(rates.values())
+    return max_rate - min_rate  # 0 = perfect parity
+
+# Example usage
+y_pred = model.predict(X_test)
+dp_diff = demographic_parity_difference(y_pred, X_test['gender'])
+print(f"Demographic Parity Difference: {dp_diff:.4f}")
+# A value close to 0 indicates approximate parity</code></pre>
+                    </div>
+
+                    <h2 id="bottom-line" style="font-size:24px;font-weight:700;margin-top:36px;margin-bottom:16px;color:#0f172a;">The Bottom Line</h2>
+
+                    <p>Demographic parity remains one of the most commonly cited group fairness metrics, but it's crucial to understand its limitations. The choice of which fairness metric to optimise for is ultimately a value judgement, not a purely technical decision.</p>
+
+                    <p>As Barocas, Hardt, and Narayanan note in their influential textbook <em>Fairness and Machine Learning</em>: <strong>"Statistical parity requires that the proportion of people receiving a positive outcome is the same in each group."</strong></p>
+
+                    <p>The key insight is that fairness is not a single number you can optimise. It's a set of competing values that must be balanced in context. Demographic parity is one important lens, but it should never be the only one.</p>
+
+                    <!-- FAQ Section -->
+                    <h2 id="faq" style="font-size:24px;font-weight:700;margin-top:36px;margin-bottom:16px;color:#0f172a;">Frequently Asked Questions</h2>
+
+                    <div style="border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;margin:20px 0;">
+                        <details style="border-bottom:1px solid #e2e8f0;">
+                            <summary style="padding:16px;font-weight:600;cursor:pointer;background:#f8fafc;">Is demographic parity the same as equal opportunity?</summary>
+                            <p style="padding:16px;font-size:14px;color:#475569;line-height:1.6;">No. Equal opportunity only requires equal true positive rates across groups, while demographic parity requires equal overall positive prediction rates regardless of the true label. Equal opportunity is a weaker condition.</p>
+                        </details>
+                        <details style="border-bottom:1px solid #e2e8f0;">
+                            <summary style="padding:16px;font-weight:600;cursor:pointer;background:#f8fafc;">Can I satisfy demographic parity and calibration at the same time?</summary>
+                            <p style="padding:16px;font-size:14px;color:#475569;line-height:1.6;">In general, no. The impossibility theorem proves that these metrics are mutually exclusive when base rates differ between groups. You must choose which to prioritise.</p>
+                        </details>
+                        <details style="border-bottom:1px solid #e2e8f0;">
+                            <summary style="padding:16px;font-weight:600;cursor:pointer;background:#f8fafc;">Is demographic parity legally required?</summary>
+                            <p style="padding:16px;font-size:14px;color:#475569;line-height:1.6;">Not directly, but the related concept of disparate impact is legally actionable in the US under Title VII of the Civil Rights Act. The EU AI Act (2024) also includes fairness requirements for high-risk AI systems.</p>
+                        </details>
+                        <details>
+                            <summary style="padding:16px;font-weight:600;cursor:pointer;background:#f8fafc;">How do I enforce demographic parity in my model?</summary>
+                            <p style="padding:16px;font-size:14px;color:#475569;line-height:1.6;">Common approaches include: (1) pre-processing methods that transform the training data, (2) in-processing methods that add fairness constraints to the loss function, and (3) post-processing methods that adjust predictions after training. Libraries like Fairlearn and AIF360 provide implementations.</p>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Article Engagement -->
+                <div style="text-align:center;padding:32px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;margin:32px 0;">
+                    <p style="font-size:15px;color:#475569;margin-bottom:12px;">Was this article helpful?</p>
+                    <div style="display:flex;justify-content:center;gap:12px;">
+                        <button style="padding:8px 24px;border:1px solid #e2e8f0;border-radius:24px;background:white;cursor:pointer;font-size:14px;">👍 Yes (342)</button>
+                        <button style="padding:8px 24px;border:1px solid #e2e8f0;border-radius:24px;background:white;cursor:pointer;font-size:14px;">👎 No (12)</button>
+                    </div>
+                </div>
+
+                <!-- Author Bio -->
+                <div style="background:#f8fafc;border-radius:12px;padding:24px;margin:28px 0;display:flex;gap:20px;border:1px solid #e2e8f0;">
+                    <img src="/images/authors/sarah-chen.jpg" alt="Dr. Sarah Chen" width="80" height="80" style="border-radius:50%;flex-shrink:0;">
+                    <div>
+                        <h4 style="font-size:16px;font-weight:700;margin-bottom:4px;">About the Author</h4>
+                        <p style="font-size:14px;font-weight:600;color:#2563eb;margin-bottom:8px;">Dr. Sarah Chen</p>
+                        <p style="font-size:14px;color:#475569;line-height:1.6;margin-bottom:8px;">ML Research Lead at FairML Blog. PhD in Computer Science from Stanford. Published over 30 papers on algorithmic fairness. Previously at Google Brain and DeepMind. Forbes 30 Under 30 in AI (2024). Regular speaker at NeurIPS, ICML, and FAccT.</p>
+                        <div style="display:flex;gap:8px;">
+                            <a href="https://twitter.com/drsarahchen_ml" style="font-size:12px;color:#64748b;text-decoration:none;">𝕏 Twitter</a>
+                            <a href="https://linkedin.com/in/sarah-chen-ml" style="font-size:12px;color:#64748b;text-decoration:none;">LinkedIn</a>
+                            <a href="https://scholar.google.com" style="font-size:12px;color:#64748b;text-decoration:none;">Google Scholar</a>
+                            <a href="/authors/sarah-chen" style="font-size:12px;color:#2563eb;text-decoration:none;font-weight:600;">View all 47 articles →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tags -->
+                <div style="margin:20px 0;">
+                    <span style="font-size:13px;font-weight:600;color:#475569;">Tags:</span>
+                    <a href="/tags/fairness" style="display:inline-block;padding:4px 12px;background:#f1f5f9;border-radius:16px;font-size:12px;color:#475569;text-decoration:none;margin:4px 2px;">fairness</a>
+                    <a href="/tags/bias" style="display:inline-block;padding:4px 12px;background:#f1f5f9;border-radius:16px;font-size:12px;color:#475569;text-decoration:none;margin:4px 2px;">bias</a>
+                    <a href="/tags/classification" style="display:inline-block;padding:4px 12px;background:#f1f5f9;border-radius:16px;font-size:12px;color:#475569;text-decoration:none;margin:4px 2px;">classification</a>
+                    <a href="/tags/metrics" style="display:inline-block;padding:4px 12px;background:#f1f5f9;border-radius:16px;font-size:12px;color:#475569;text-decoration:none;margin:4px 2px;">metrics</a>
+                    <a href="/tags/demographic-parity" style="display:inline-block;padding:4px 12px;background:#f1f5f9;border-radius:16px;font-size:12px;color:#475569;text-decoration:none;margin:4px 2px;">demographic parity</a>
+                    <a href="/tags/statistical-parity" style="display:inline-block;padding:4px 12px;background:#f1f5f9;border-radius:16px;font-size:12px;color:#475569;text-decoration:none;margin:4px 2px;">statistical parity</a>
+                    <a href="/tags/responsible-ai" style="display:inline-block;padding:4px 12px;background:#f1f5f9;border-radius:16px;font-size:12px;color:#475569;text-decoration:none;margin:4px 2px;">responsible AI</a>
+                    <a href="/tags/ml-ethics" style="display:inline-block;padding:4px 12px;background:#f1f5f9;border-radius:16px;font-size:12px;color:#475569;text-decoration:none;margin:4px 2px;">ML ethics</a>
+                </div>
+            </article>
+
+            <!-- Related Articles Grid -->
+            <div style="margin:40px 0;">
+                <h3 style="font-size:20px;font-weight:700;margin-bottom:20px;color:#0f172a;">You Might Also Like</h3>
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;">
+                    <div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">
+                        <img src="/images/thumbnails/equalised-odds.jpg" alt="Equalised Odds" width="300" height="160" style="width:100%;height:auto;">
+                        <div style="padding:16px;">
+                            <span style="font-size:11px;color:#2563eb;font-weight:600;text-transform:uppercase;">Fairness Metrics</span>
+                            <h4 style="font-size:15px;margin:6px 0;"><a href="/articles/equalised-odds" style="color:#0f172a;text-decoration:none;">Understanding Equalised Odds: The Complete Guide</a></h4>
+                            <p style="font-size:13px;color:#64748b;line-height:1.4;">A deep dive into equalised odds and how it differs from demographic parity. Includes code examples.</p>
+                            <span style="font-size:12px;color:#94a3b8;">6 min read</span>
+                        </div>
+                    </div>
+                    <div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">
+                        <img src="/images/thumbnails/compas.jpg" alt="COMPAS Case Study" width="300" height="160" style="width:100%;height:auto;">
+                        <div style="padding:16px;">
+                            <span style="font-size:11px;color:#dc2626;font-weight:600;text-transform:uppercase;">Case Study</span>
+                            <h4 style="font-size:15px;margin:6px 0;"><a href="/articles/compas-case-study" style="color:#0f172a;text-decoration:none;">The COMPAS Case Study: When Fairness Metrics Collide</a></h4>
+                            <p style="font-size:13px;color:#64748b;line-height:1.4;">How the COMPAS controversy revealed the impossibility of satisfying all fairness metrics simultaneously.</p>
+                            <span style="font-size:12px;color:#94a3b8;">10 min read</span>
+                        </div>
+                    </div>
+                    <div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">
+                        <img src="/images/thumbnails/calibration.jpg" alt="Calibration" width="300" height="160" style="width:100%;height:auto;">
+                        <div style="padding:16px;">
+                            <span style="font-size:11px;color:#2563eb;font-weight:600;text-transform:uppercase;">Fairness Metrics</span>
+                            <h4 style="font-size:15px;margin:6px 0;"><a href="/articles/calibration" style="color:#0f172a;text-decoration:none;">Calibration: The Fairness Metric You're Probably Not Using</a></h4>
+                            <p style="font-size:13px;color:#64748b;line-height:1.4;">Why calibration might be the most important fairness metric in production ML systems.</p>
+                            <span style="font-size:12px;color:#94a3b8;">7 min read</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="comments-section">
-                <h3>Comments (23)</h3>
-                <div class="comment-form">
-                    <textarea placeholder="Join the discussion..."></textarea>
-                    <button>Post Comment</button>
+            <!-- More from FairML -->
+            <div style="background:#f8fafc;border-radius:12px;padding:24px;margin:28px 0;border:1px solid #e2e8f0;">
+                <h3 style="font-size:18px;font-weight:700;margin-bottom:16px;">More from FairML Blog</h3>
+                <ul style="list-style:none;margin:0;padding:0;">
+                    <li style="padding:12px 0;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;">
+                        <a href="/articles/bias-in-nlp" style="font-size:14px;color:#0f172a;text-decoration:none;font-weight:500;">Bias in NLP: A Comprehensive Guide for 2026</a>
+                        <span style="font-size:12px;color:#94a3b8;">12 min</span>
+                    </li>
+                    <li style="padding:12px 0;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;">
+                        <a href="/articles/fairness-toolkit" style="font-size:14px;color:#0f172a;text-decoration:none;font-weight:500;">Top 10 Fairness Toolkits You Should Know in 2026</a>
+                        <span style="font-size:12px;color:#94a3b8;">8 min</span>
+                    </li>
+                    <li style="padding:12px 0;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center;">
+                        <a href="/articles/eu-ai-act" style="font-size:14px;color:#0f172a;text-decoration:none;font-weight:500;">EU AI Act: What It Means for ML Fairness Requirements</a>
+                        <span style="font-size:12px;color:#94a3b8;">15 min</span>
+                    </li>
+                    <li style="padding:12px 0;display:flex;justify-content:space-between;align-items:center;">
+                        <a href="/articles/counterfactual-fairness" style="font-size:14px;color:#0f172a;text-decoration:none;font-weight:500;">Counterfactual Fairness: A Causal Approach to Bias</a>
+                        <span style="font-size:12px;color:#94a3b8;">11 min</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Comments Section -->
+            <div style="margin:40px 0;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+                    <h3 style="font-size:20px;font-weight:700;">Comments (23)</h3>
+                    <select style="padding:6px 12px;border:1px solid #e2e8f0;border-radius:6px;font-size:13px;color:#64748b;">
+                        <option>Most Recent</option>
+                        <option>Most Liked</option>
+                        <option>Oldest</option>
+                    </select>
                 </div>
-                <p>Please <a href="/login">log in</a> to comment. Be respectful and follow our <a href="/community-guidelines">community guidelines</a>.</p>
+                <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px;margin-bottom:20px;">
+                    <textarea placeholder="Share your thoughts on this article..." style="width:100%;height:80px;border:1px solid #e2e8f0;border-radius:6px;padding:12px;font-size:14px;resize:vertical;font-family:inherit;"></textarea>
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
+                        <p style="font-size:12px;color:#94a3b8;">Supports Markdown. Be respectful. Follow our <a href="/community-guidelines" style="color:#2563eb;">community guidelines</a>.</p>
+                        <button style="background:#2563eb;color:white;border:none;padding:8px 20px;border-radius:6px;font-weight:600;cursor:pointer;font-size:13px;">Post Comment</button>
+                    </div>
+                </div>
+                <p style="font-size:14px;color:#64748b;">Please <a href="/login" style="color:#2563eb;">log in</a> or <a href="/signup" style="color:#2563eb;">create a free account</a> to join the discussion. You can also sign in with Google, GitHub, or Twitter.</p>
+
+                <!-- Sample Comments -->
+                <div style="border-top:1px solid #e2e8f0;padding-top:20px;margin-top:20px;">
+                    <div style="display:flex;gap:12px;margin-bottom:24px;">
+                        <img src="/images/avatars/commenter1.jpg" alt="" width="36" height="36" style="border-radius:50%;flex-shrink:0;">
+                        <div>
+                            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                                <strong style="font-size:14px;">Alex Thompson</strong>
+                                <span style="font-size:12px;color:#94a3b8;">3 days ago</span>
+                                <span style="background:#eff6ff;color:#2563eb;font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600;">PRO</span>
+                            </div>
+                            <p style="font-size:14px;color:#334155;line-height:1.6;">Great explainer! One thing I'd add: in practice, most teams I've worked with use a relaxed version where they aim for the 80% rule (disparate impact ratio) rather than strict equality. The impossibility theorem makes strict parity untenable in most real systems.</p>
+                            <div style="display:flex;gap:12px;margin-top:8px;">
+                                <button style="background:none;border:none;font-size:12px;color:#64748b;cursor:pointer;">👍 14</button>
+                                <button style="background:none;border:none;font-size:12px;color:#64748b;cursor:pointer;">Reply</button>
+                                <button style="background:none;border:none;font-size:12px;color:#64748b;cursor:pointer;">Share</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:12px;margin-bottom:24px;">
+                        <img src="/images/avatars/commenter2.jpg" alt="" width="36" height="36" style="border-radius:50%;flex-shrink:0;">
+                        <div>
+                            <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+                                <strong style="font-size:14px;">Dr. Priya Mehta</strong>
+                                <span style="font-size:12px;color:#94a3b8;">2 days ago</span>
+                            </div>
+                            <p style="font-size:14px;color:#334155;line-height:1.6;">I think the section on misconceptions could be even stronger. Many practitioners I've seen conflate "equal prediction rates" with "fair outcomes" — when in reality, enforcing DP can sometimes make things worse for the groups it's trying to protect (e.g., by approving people who are likely to default, leading to worse outcomes).</p>
+                            <div style="display:flex;gap:12px;margin-top:8px;">
+                                <button style="background:none;border:none;font-size:12px;color:#64748b;cursor:pointer;">👍 8</button>
+                                <button style="background:none;border:none;font-size:12px;color:#64748b;cursor:pointer;">Reply</button>
+                                <button style="background:none;border:none;font-size:12px;color:#64748b;cursor:pointer;">Share</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
 
-        <aside class="sidebar-right">
-            <div class="ad-sidebar">
-                <p>SPONSORED</p>
-                <img src="/ads/ml-conference.jpg" alt="ML Fairness Conference 2026">
-                <p>ML Fairness Conference 2026 — June 15-17, San Francisco. Early bird tickets available. <a href="#">Register Now</a></p>
+        <!-- Right Sidebar -->
+        <aside style="position:sticky;top:80px;align-self:start;max-height:calc(100vh - 100px);overflow-y:auto;">
+            <!-- Sidebar Ad 1 -->
+            <div style="background:white;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:20px;text-align:center;">
+                <p style="font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Sponsored</p>
+                <img src="/ads/ml-conference.jpg" alt="ML Fairness Conference 2026" width="260" height="200" style="border-radius:8px;width:100%;height:auto;">
+                <h4 style="font-size:14px;margin-top:12px;margin-bottom:4px;">ML Fairness Conference 2026</h4>
+                <p style="font-size:13px;color:#64748b;margin-bottom:8px;">June 15-17, San Francisco. 3 days. 80+ speakers. 2000+ attendees.</p>
+                <a href="#" style="display:block;background:#2563eb;color:white;padding:8px;border-radius:6px;text-decoration:none;font-weight:600;font-size:13px;">Register — Early Bird $299</a>
             </div>
-            <div class="table-of-contents">
-                <h3>Table of Contents</h3>
-                <ul>
-                    <li><a href="#what-is">What is Demographic Parity?</a></li>
-                    <li><a href="#why-matters">Why Does It Matter?</a></li>
-                    <li><a href="#misconceptions">Common Misconceptions</a></li>
-                    <li><a href="#related">Related Concepts</a></li>
-                    <li><a href="#bottom-line">The Bottom Line</a></li>
+
+            <!-- Trending Articles -->
+            <div style="background:white;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:20px;">
+                <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">🔥 Trending This Week</h3>
+                <ul style="list-style:none;font-size:13px;">
+                    <li style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #f1f5f9;">
+                        <span style="color:#2563eb;font-weight:700;">01</span>
+                        <a href="#" style="color:#0f172a;text-decoration:none;margin-left:8px;">OpenAI's New Fairness Benchmark Results</a>
+                    </li>
+                    <li style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #f1f5f9;">
+                        <span style="color:#2563eb;font-weight:700;">02</span>
+                        <a href="#" style="color:#0f172a;text-decoration:none;margin-left:8px;">Why the EU AI Act Changes Everything</a>
+                    </li>
+                    <li style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #f1f5f9;">
+                        <span style="color:#2563eb;font-weight:700;">03</span>
+                        <a href="#" style="color:#0f172a;text-decoration:none;margin-left:8px;">Anthropic's Approach to Constitutional AI</a>
+                    </li>
+                    <li style="margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid #f1f5f9;">
+                        <span style="color:#2563eb;font-weight:700;">04</span>
+                        <a href="#" style="color:#0f172a;text-decoration:none;margin-left:8px;">Google's Fairness Indicators v2.0</a>
+                    </li>
+                    <li>
+                        <span style="color:#2563eb;font-weight:700;">05</span>
+                        <a href="#" style="color:#0f172a;text-decoration:none;margin-left:8px;">The State of AI Bias in Healthcare</a>
+                    </li>
                 </ul>
             </div>
-            <div class="social-follow">
-                <h3>Follow Us</h3>
-                <a href="#">Twitter</a> | <a href="#">LinkedIn</a> | <a href="#">GitHub</a> | <a href="#">YouTube</a>
+
+            <!-- Sidebar Ad 2 -->
+            <div style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:1px solid #86efac;border-radius:12px;padding:20px;margin-bottom:20px;text-align:center;">
+                <p style="font-size:10px;color:#166534;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Partner</p>
+                <h4 style="font-size:15px;color:#166534;margin-bottom:8px;">Responsible AI Toolkit</h4>
+                <p style="font-size:13px;color:#15803d;margin-bottom:12px;">Enterprise-grade bias detection and fairness auditing. Used by 500+ companies worldwide.</p>
+                <a href="#" style="display:block;background:#16a34a;color:white;padding:8px;border-radius:6px;text-decoration:none;font-weight:600;font-size:13px;">Request Demo</a>
+            </div>
+
+            <!-- Social Follow -->
+            <div style="background:white;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:20px;">
+                <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">Follow FairML Blog</h3>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                    <a href="#" style="display:flex;align-items:center;justify-content:center;gap:6px;padding:8px;background:#f8fafc;border-radius:6px;text-decoration:none;font-size:12px;color:#475569;">𝕏 12.4K</a>
+                    <a href="#" style="display:flex;align-items:center;justify-content:center;gap:6px;padding:8px;background:#f8fafc;border-radius:6px;text-decoration:none;font-size:12px;color:#475569;">LinkedIn 8.2K</a>
+                    <a href="#" style="display:flex;align-items:center;justify-content:center;gap:6px;padding:8px;background:#f8fafc;border-radius:6px;text-decoration:none;font-size:12px;color:#475569;">GitHub 3.1K</a>
+                    <a href="#" style="display:flex;align-items:center;justify-content:center;gap:6px;padding:8px;background:#f8fafc;border-radius:6px;text-decoration:none;font-size:12px;color:#475569;">YouTube 5.6K</a>
+                </div>
+            </div>
+
+            <!-- Podcast Promo -->
+            <div style="background:#1e293b;border-radius:12px;padding:20px;margin-bottom:20px;color:white;">
+                <h3 style="font-size:14px;font-weight:700;margin-bottom:8px;">🎙 FairML Podcast</h3>
+                <p style="font-size:13px;opacity:0.8;margin-bottom:12px;">Weekly conversations with AI fairness researchers and practitioners.</p>
+                <p style="font-size:12px;margin-bottom:4px;opacity:0.9;">Latest: <strong>Ep. 47 — Is Demographic Parity Dead?</strong></p>
+                <div style="display:flex;gap:8px;margin-top:12px;">
+                    <a href="#" style="font-size:11px;color:#93c5fd;">Apple</a>
+                    <a href="#" style="font-size:11px;color:#93c5fd;">Spotify</a>
+                    <a href="#" style="font-size:11px;color:#93c5fd;">Google</a>
+                    <a href="#" style="font-size:11px;color:#93c5fd;">RSS</a>
+                </div>
+            </div>
+
+            <!-- Job Board -->
+            <div style="background:white;border:1px solid #e2e8f0;border-radius:12px;padding:20px;margin-bottom:20px;">
+                <h3 style="font-size:14px;font-weight:700;margin-bottom:12px;">💼 AI Ethics Jobs</h3>
+                <div style="font-size:13px;">
+                    <div style="padding:8px 0;border-bottom:1px solid #f1f5f9;">
+                        <a href="#" style="color:#0f172a;text-decoration:none;font-weight:500;">ML Fairness Engineer</a>
+                        <p style="color:#64748b;font-size:12px;">Google · Remote · $180-250K</p>
+                    </div>
+                    <div style="padding:8px 0;border-bottom:1px solid #f1f5f9;">
+                        <a href="#" style="color:#0f172a;text-decoration:none;font-weight:500;">AI Ethics Researcher</a>
+                        <p style="color:#64748b;font-size:12px;">Anthropic · SF · $200-280K</p>
+                    </div>
+                    <div style="padding:8px 0;">
+                        <a href="#" style="color:#0f172a;text-decoration:none;font-weight:500;">Responsible AI Lead</a>
+                        <p style="color:#64748b;font-size:12px;">Microsoft · Redmond · $190-260K</p>
+                    </div>
+                </div>
+                <a href="/jobs" style="display:block;text-align:center;font-size:12px;color:#2563eb;margin-top:12px;font-weight:600;text-decoration:none;">View all 47 jobs →</a>
             </div>
         </aside>
     </div>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>FairML Blog</h4>
-                <p>Making machine learning fairness accessible to everyone.</p>
+    <!-- Pre-Footer CTA -->
+    <div style="background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 50%,#7c3aed 100%);color:white;padding:60px 24px;text-align:center;margin-top:60px;">
+        <h2 style="font-size:28px;font-weight:800;margin-bottom:12px;">Ready to build fairer ML systems?</h2>
+        <p style="font-size:16px;opacity:0.9;max-width:600px;margin:0 auto 24px;">Join 15,000+ ML practitioners getting weekly insights on fairness, bias, and responsible AI.</p>
+        <div style="display:flex;justify-content:center;gap:12px;max-width:500px;margin:0 auto;">
+            <input type="email" placeholder="you@company.com" style="flex:1;padding:14px 20px;border:none;border-radius:8px;font-size:15px;">
+            <button style="background:#f59e0b;color:#1e293b;padding:14px 28px;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:15px;white-space:nowrap;">Subscribe Free</button>
+        </div>
+        <p style="font-size:12px;opacity:0.7;margin-top:12px;">No spam. Unsubscribe anytime. Read by teams at Google, Meta, Anthropic, and OpenAI.</p>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background:#0f172a;color:#94a3b8;padding:48px 24px 24px;">
+        <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:32px;margin-bottom:40px;">
+            <div>
+                <h4 style="color:white;font-size:18px;margin-bottom:12px;">FairML Blog</h4>
+                <p style="font-size:14px;line-height:1.6;margin-bottom:16px;">The leading independent publication on machine learning fairness, algorithmic bias, and responsible AI. Founded in 2023.</p>
+                <div style="display:flex;gap:12px;">
+                    <a href="#" style="color:#64748b;font-size:20px;text-decoration:none;">𝕏</a>
+                    <a href="#" style="color:#64748b;font-size:20px;text-decoration:none;">in</a>
+                    <a href="#" style="color:#64748b;font-size:20px;text-decoration:none;">GH</a>
+                    <a href="#" style="color:#64748b;font-size:20px;text-decoration:none;">YT</a>
+                    <a href="#" style="color:#64748b;font-size:20px;text-decoration:none;">📧</a>
+                </div>
             </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="/about">About Us</a></li>
-                    <li><a href="/privacy">Privacy Policy</a></li>
-                    <li><a href="/terms">Terms of Service</a></li>
-                    <li><a href="/advertise">Advertise</a></li>
-                    <li><a href="/careers">Careers</a></li>
+            <div>
+                <h4 style="color:white;font-size:14px;margin-bottom:12px;">Content</h4>
+                <ul style="list-style:none;font-size:13px;line-height:2.2;">
+                    <li><a href="/articles" style="color:#94a3b8;text-decoration:none;">Articles</a></li>
+                    <li><a href="/tutorials" style="color:#94a3b8;text-decoration:none;">Tutorials</a></li>
+                    <li><a href="/datasets" style="color:#94a3b8;text-decoration:none;">Datasets</a></li>
+                    <li><a href="/papers" style="color:#94a3b8;text-decoration:none;">Research Papers</a></li>
+                    <li><a href="/glossary" style="color:#94a3b8;text-decoration:none;">Glossary</a></li>
+                    <li><a href="/courses" style="color:#94a3b8;text-decoration:none;">Courses</a></li>
                 </ul>
             </div>
-            <div class="footer-section">
-                <h4>Resources</h4>
-                <ul>
-                    <li><a href="/glossary">Fairness Glossary</a></li>
-                    <li><a href="/tools">Open Source Tools</a></li>
-                    <li><a href="/datasets">Benchmark Datasets</a></li>
-                    <li><a href="/papers">Research Papers</a></li>
+            <div>
+                <h4 style="color:white;font-size:14px;margin-bottom:12px;">Tools</h4>
+                <ul style="list-style:none;font-size:13px;line-height:2.2;">
+                    <li><a href="/tools/fairkit" style="color:#94a3b8;text-decoration:none;">FairKit</a></li>
+                    <li><a href="/tools/bias-scanner" style="color:#94a3b8;text-decoration:none;">Bias Scanner</a></li>
+                    <li><a href="/tools/dataset-audit" style="color:#94a3b8;text-decoration:none;">Dataset Audit</a></li>
+                    <li><a href="/tools/model-cards" style="color:#94a3b8;text-decoration:none;">Model Cards</a></li>
+                    <li><a href="/api" style="color:#94a3b8;text-decoration:none;">API</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color:white;font-size:14px;margin-bottom:12px;">Company</h4>
+                <ul style="list-style:none;font-size:13px;line-height:2.2;">
+                    <li><a href="/about" style="color:#94a3b8;text-decoration:none;">About Us</a></li>
+                    <li><a href="/team" style="color:#94a3b8;text-decoration:none;">Our Team</a></li>
+                    <li><a href="/careers" style="color:#94a3b8;text-decoration:none;">Careers</a></li>
+                    <li><a href="/press" style="color:#94a3b8;text-decoration:none;">Press</a></li>
+                    <li><a href="/contact" style="color:#94a3b8;text-decoration:none;">Contact</a></li>
+                    <li><a href="/advertise" style="color:#94a3b8;text-decoration:none;">Advertise</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 style="color:white;font-size:14px;margin-bottom:12px;">Legal</h4>
+                <ul style="list-style:none;font-size:13px;line-height:2.2;">
+                    <li><a href="/privacy" style="color:#94a3b8;text-decoration:none;">Privacy Policy</a></li>
+                    <li><a href="/terms" style="color:#94a3b8;text-decoration:none;">Terms of Service</a></li>
+                    <li><a href="/cookie-policy" style="color:#94a3b8;text-decoration:none;">Cookie Policy</a></li>
+                    <li><a href="/ccpa" style="color:#94a3b8;text-decoration:none;">CCPA Notice</a></li>
+                    <li><a href="/dmca" style="color:#94a3b8;text-decoration:none;">DMCA</a></li>
+                    <li><a href="/accessibility" style="color:#94a3b8;text-decoration:none;">Accessibility</a></li>
                 </ul>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 FairML Blog. All rights reserved.</p>
+        <div style="border-top:1px solid #1e293b;padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+            <p style="font-size:13px;">&copy; 2026 FairML Blog. All rights reserved. A product of FairML Media Inc.</p>
+            <p style="font-size:12px;">Made with ❤️ in San Francisco, London, and Singapore.</p>
         </div>
     </footer>
 
-    <script src="/js/main.js"></script>
+    <!-- Exit Intent Popup -->
+    <div id="exit-intent-popup" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:10002;display:flex;align-items:center;justify-content:center;">
+        <div style="background:white;border-radius:16px;padding:40px;max-width:500px;width:90%;text-align:center;position:relative;box-shadow:0 25px 50px rgba(0,0,0,0.25);">
+            <button onclick="closeExitPopup()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:24px;cursor:pointer;color:#94a3b8;">&times;</button>
+            <h2 style="font-size:24px;font-weight:800;margin-bottom:8px;color:#0f172a;">Wait! Before you go...</h2>
+            <p style="font-size:15px;color:#64748b;margin-bottom:20px;line-height:1.6;">Get our exclusive <strong>AI Fairness Cheat Sheet</strong> — a one-page reference covering all major fairness metrics, their mathematical definitions, and when to use each one.</p>
+            <img src="/images/cheat-sheet-preview.png" alt="AI Fairness Cheat Sheet Preview" width="300" height="200" style="border-radius:8px;border:1px solid #e2e8f0;margin-bottom:20px;">
+            <form>
+                <input type="email" placeholder="Enter your email address" style="width:100%;padding:14px 16px;border:2px solid #e2e8f0;border-radius:8px;font-size:15px;margin-bottom:12px;">
+                <button type="submit" style="width:100%;background:#2563eb;color:white;padding:14px;border:none;border-radius:8px;font-weight:700;font-size:16px;cursor:pointer;">Download Free Cheat Sheet</button>
+            </form>
+            <p style="font-size:11px;color:#94a3b8;margin-top:12px;">No spam. Your email is safe with us. 23,000+ downloads and counting.</p>
+        </div>
+    </div>
+
+    <!-- Social Proof Toast -->
+    <div id="social-proof-toast" style="position:fixed;bottom:100px;left:24px;background:white;border-radius:12px;padding:14px 20px;box-shadow:0 8px 24px rgba(0,0,0,0.12);z-index:9998;max-width:320px;display:flex;align-items:center;gap:12px;border:1px solid #e2e8f0;">
+        <img src="/images/avatars/random-reader.jpg" alt="" width="36" height="36" style="border-radius:50%;">
+        <div>
+            <p style="font-size:13px;color:#1e293b;margin-bottom:2px;"><strong>Someone from London</strong> just read this article</p>
+            <p style="font-size:11px;color:#94a3b8;">2 minutes ago · Verified by FairML</p>
+        </div>
+        <button onclick="this.parentElement.style.display='none'" style="background:none;border:none;color:#94a3b8;cursor:pointer;position:absolute;top:4px;right:8px;font-size:14px;">&times;</button>
+    </div>
+
+    <!-- Chat Widget Launcher -->
+    <div id="chat-launcher" style="position:fixed;bottom:24px;right:24px;z-index:9999;">
+        <button style="width:56px;height:56px;border-radius:50%;background:#2563eb;border:none;cursor:pointer;box-shadow:0 4px 12px rgba(37,99,235,0.4);display:flex;align-items:center;justify-content:center;color:white;font-size:24px;" aria-label="Open chat">💬</button>
+        <div style="position:absolute;bottom:68px;right:0;background:white;border-radius:12px;padding:12px 16px;box-shadow:0 4px 12px rgba(0,0,0,0.1);white-space:nowrap;font-size:13px;color:#1e293b;">
+            Need help? Chat with us! <button style="background:none;border:none;color:#94a3b8;cursor:pointer;margin-left:8px;">&times;</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/main.min.js"></script>
     <script src="/js/comments.js"></script>
     <script src="/js/share.js"></script>
+    <script src="/js/syntax-highlight.js"></script>
+    <script src="/js/reading-progress.js"></script>
+    <script src="/js/scroll-spy.js"></script>
+    <script src="/js/lazy-load.js"></script>
+    <script src="/js/social-proof.js"></script>
+    <script src="/js/exit-intent.js"></script>
+    <script src="/js/ab-test.js"></script>
+    <script src="/js/newsletter-popup.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+
+    <!-- Exit Intent Detection -->
+    <script>
+    document.addEventListener('mouseout', function(e) {
+        if (e.clientY < 0) {
+            document.getElementById('exit-intent-popup').style.display = 'flex';
+        }
+    });
+    </script>
+
+    <!-- Social Proof Rotation -->
+    <script>
+    const locations = ['London', 'New York', 'Berlin', 'Tokyo', 'Sydney', 'Toronto', 'Mumbai', 'Singapore', 'Paris', 'São Paulo'];
+    const times = ['just now', '1 minute ago', '2 minutes ago', '3 minutes ago', '5 minutes ago'];
+    setInterval(function() {
+        var toast = document.getElementById('social-proof-toast');
+        var loc = locations[Math.floor(Math.random() * locations.length)];
+        var time = times[Math.floor(Math.random() * times.length)];
+        toast.querySelector('strong').textContent = 'Someone from ' + loc;
+        toast.querySelector('p:last-child').textContent = time + ' · Verified by FairML';
+        toast.style.display = 'flex';
+        setTimeout(function() { toast.style.display = 'none'; }, 5000);
+    }, 15000);
+    </script>
+
+    <!-- Reading Progress Bar -->
+    <script>
+    window.addEventListener('scroll', function() {
+        var bar = document.getElementById('reading-progress');
+        if (!bar) { bar = document.createElement('div'); bar.id = 'reading-progress'; bar.style.cssText = 'position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#2563eb,#7c3aed);z-index:10000;transition:width 0.1s;'; document.body.appendChild(bar); }
+        var scrolled = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+        bar.style.width = scrolled + '%';
+    });
+    </script>
+
+    <!-- Performance Monitoring -->
+    <script>
+    if (window.performance) {
+        window.addEventListener('load', function() {
+            var timing = performance.timing;
+            var data = { dns: timing.domainLookupEnd - timing.domainLookupStart, tcp: timing.connectEnd - timing.connectStart, ttfb: timing.responseStart - timing.requestStart, domReady: timing.domContentLoadedEventEnd - timing.navigationStart, load: timing.loadEventEnd - timing.navigationStart, page: 'demographic-parity', timestamp: Date.now() };
+            navigator.sendBeacon('/api/perf', JSON.stringify(data));
+        });
+    }
+    </script>
 </body>
 </html>

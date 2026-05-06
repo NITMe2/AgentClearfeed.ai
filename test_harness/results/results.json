@@ -1,0 +1,152 @@
+[
+  {
+    "query_id": "q1",
+    "question": "What is demographic parity in machine learning?",
+    "html": {
+      "answer": "Demographic parity in machine learning is a fairness criterion where the proportion of individuals selected (e.g., for a loan, job offer) should be roughly equal across different demographic groups, regardless of group membership. It aims to ensure that sensitive attributes like race or gender do not influence outcomes disproportionately. Mathematically, it requires P(A=1|Z=z) to be approximately constant for all values z of the protected attribute Z, where A is the binary outcome variable indicating whether an individual is selected or not.",
+      "context_tokens": 23988,
+      "prompt_tokens": 24023,
+      "answer_tokens": 102,
+      "total_tokens": 24125,
+      "latency_seconds": 131.01,
+      "grade": {
+        "facts_found": 2,
+        "facts_total": 3,
+        "accuracy": 0.67,
+        "hits": [
+          "equal positive prediction rates across groups",
+          "does not guarantee equal accuracy across groups"
+        ],
+        "misses": [
+          "also known as statistical parity"
+        ]
+      }
+    },
+    "acf": {
+      "answer": "Demographic parity in machine learning is a fairness criterion where a model produces positive predictions at equal rates across different demographic groups, mathematically expressed as P(Y_hat=1 | A=a) being constant for all values of the protected attribute A, where Y_hat is the prediction variable.",
+      "context_tokens": 320,
+      "prompt_tokens": 355,
+      "answer_tokens": 57,
+      "total_tokens": 412,
+      "latency_seconds": 21.74,
+      "grade": {
+        "facts_found": 2,
+        "facts_total": 3,
+        "accuracy": 0.67,
+        "hits": [
+          "equal positive prediction rates across groups",
+          "does not guarantee equal accuracy across groups"
+        ],
+        "misses": [
+          "also known as statistical parity"
+        ]
+      }
+    },
+    "delta": {
+      "token_saving": 23668,
+      "token_saving_pct": 98.7,
+      "latency_diff": 109.27,
+      "accuracy_diff": 0.0
+    }
+  },
+  {
+    "query_id": "q2",
+    "question": "What are the known biases in the COMPAS recidivism dataset?",
+    "html": {
+      "answer": "The known biases in the COMPAS recidivism dataset include:\n\n- Higher false positive rates for low-risk black defendants compared to high-risk white defendants.\n- Potential racial disparities in risk assessments due to factors like differential policing practices across racial groups.\n- The use of re-arrest as a proxy for recidivism, which can be influenced by biased policing and enforcement practices rather than actual recidivist behavior.\n- Issues with sample selection, potentially leading to biased representation of certain populations or risk levels.",
+      "context_tokens": 13292,
+      "prompt_tokens": 13333,
+      "answer_tokens": 99,
+      "total_tokens": 13432,
+      "latency_seconds": 120.37,
+      "grade": {
+        "facts_found": 1,
+        "facts_total": 3,
+        "accuracy": 0.33,
+        "hits": [
+          "Black defendants scored higher risk at nearly twice the rate"
+        ],
+        "misses": [
+          "single jurisdiction Broward County",
+          "proprietary methodology"
+        ]
+      }
+    },
+    "acf": {
+      "answer": "The known biases in the COMPAS recidivism dataset include:\n- Black defendants were scored higher risk at nearly twice the rate of white defendants who did not reoffend.\n- White defendants who did reoffend were more frequently scored lower risk than Black defendants who did not.\n- Age is a strong predictor and correlates with race in this dataset.",
+      "context_tokens": 398,
+      "prompt_tokens": 439,
+      "answer_tokens": 70,
+      "total_tokens": 509,
+      "latency_seconds": 25.95,
+      "grade": {
+        "facts_found": 1,
+        "facts_total": 3,
+        "accuracy": 0.33,
+        "hits": [
+          "Black defendants scored higher risk at nearly twice the rate"
+        ],
+        "misses": [
+          "single jurisdiction Broward County",
+          "proprietary methodology"
+        ]
+      }
+    },
+    "delta": {
+      "token_saving": 12894,
+      "token_saving_pct": 97.0,
+      "latency_diff": 94.42,
+      "accuracy_diff": 0.0
+    }
+  },
+  {
+    "query_id": "q3",
+    "question": "Can a machine learning model satisfy calibration and equalised odds at the same time?",
+    "html": {
+      "answer": "No, a machine learning model cannot simultaneously satisfy both calibration and equalized odds when there are differences in base rates across different groups due to disparate prior probabilities of outcomes for those groups. The impossibility theorem highlights that strict adherence to these fairness criteria is mathematically impossible under certain conditions, although approximate versions can sometimes be improved together.",
+      "context_tokens": 11886,
+      "prompt_tokens": 11929,
+      "answer_tokens": 66,
+      "total_tokens": 11995,
+      "latency_seconds": 106.92,
+      "grade": {
+        "facts_found": 2,
+        "facts_total": 3,
+        "accuracy": 0.67,
+        "hits": [
+          "cannot be simultaneously satisfied when base rates differ",
+          "mathematical impossibility not algorithmic limitation"
+        ],
+        "misses": [
+          "choice of metric is a normative decision"
+        ]
+      }
+    },
+    "acf": {
+      "answer": "According to the Impossibility Theorem of Fairness, a machine learning model cannot simultaneously satisfy calibration and equalised odds when base rates differ between groups. This incompatibility is a mathematical constraint, not a limitation of specific algorithms.",
+      "context_tokens": 465,
+      "prompt_tokens": 508,
+      "answer_tokens": 47,
+      "total_tokens": 555,
+      "latency_seconds": 21.7,
+      "grade": {
+        "facts_found": 2,
+        "facts_total": 3,
+        "accuracy": 0.67,
+        "hits": [
+          "cannot be simultaneously satisfied when base rates differ",
+          "mathematical impossibility not algorithmic limitation"
+        ],
+        "misses": [
+          "choice of metric is a normative decision"
+        ]
+      }
+    },
+    "delta": {
+      "token_saving": 11421,
+      "token_saving_pct": 96.1,
+      "latency_diff": 85.22,
+      "accuracy_diff": 0.0
+    }
+  }
+]

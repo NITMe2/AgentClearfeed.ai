@@ -36,7 +36,7 @@ def query_ollama(prompt: str, context: str) -> dict:
     resp = httpx.post(
         OLLAMA_URL,
         json={"model": OLLAMA_MODEL, "prompt": full_prompt, "stream": False},
-        timeout=120.0,
+        timeout=600.0,
     )
     elapsed = time.time() - start
 

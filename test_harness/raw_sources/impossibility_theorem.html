@@ -1,175 +1,440 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: http://ogp.me/ns#" itemscope itemtype="https://schema.org/Article">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Impossibility Theorem of Fairness: Why You Can't Have It All | AI Ethics Review</title>
-    <meta name="description" content="An accessible explanation of why fairness metrics like calibration and equalised odds can't all be satisfied at the same time, and what this means for AI practitioners.">
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/article.css">
-    <script src="/js/analytics.js" async></script>
-    <script src="/js/ads.js" async></script>
-    <script>!function(e,t,n){/* tracking pixel */}(window,document,"script");</script>
+    <meta name="description" content="Two landmark papers proved that calibration, equalised odds, and demographic parity cannot all be satisfied simultaneously. Here's what that means for ML practitioners.">
+    <meta name="keywords" content="impossibility theorem, fairness, calibration, equalised odds, demographic parity, Chouldechova, Kleinberg, ML fairness, algorithmic bias, trade-offs, COMPAS">
+    <meta name="author" content="Dr. James Wright">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta property="og:title" content="The Impossibility Theorem of Fairness">
+    <meta property="og:description" content="Why calibration and equalised odds can't both be satisfied — and what that means for fair AI.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aiethicsreview.com/research/impossibility-theorem">
+    <meta property="og:image" content="https://aiethicsreview.com/images/impossibility-og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="AI Ethics Review">
+    <meta property="article:published_time" content="2026-05-03T10:00:00Z">
+    <meta property="article:author" content="https://aiethicsreview.com/authors/james-wright">
+    <meta property="article:section" content="Research">
+    <meta property="article:tag" content="impossibility theorem">
+    <meta property="article:tag" content="fairness">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@aiethicsreview">
+    <meta name="twitter:creator" content="@jameswrightAI">
+    <meta name="twitter:title" content="The Impossibility Theorem of Fairness">
+    <meta name="twitter:description" content="Why you can't have calibration and equalised odds at the same time.">
+    <meta name="twitter:image" content="https://aiethicsreview.com/images/impossibility-twitter.jpg">
+    <link rel="canonical" href="https://aiethicsreview.com/research/impossibility-theorem">
+    <link rel="alternate" type="application/rss+xml" title="AI Ethics Review" href="/feed.xml">
+    <link rel="alternate" hreflang="es" href="https://aiethicsreview.com/es/research/impossibility-theorem">
+    <link rel="alternate" hreflang="de" href="https://aiethicsreview.com/de/research/impossibility-theorem">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.min.css">
+    <link rel="stylesheet" href="/css/article.min.css">
+    <link rel="stylesheet" href="/css/paywall.css">
+    <link rel="stylesheet" href="/css/cookie-consent.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "The Impossibility Theorem of Fairness: Why You Can't Have It All",
+        "description": "Two landmark papers proved that key fairness metrics — calibration, equalised odds, and demographic parity — cannot all be satisfied simultaneously except in trivial cases.",
+        "image": "https://aiethicsreview.com/images/impossibility-hero.jpg",
+        "author": {"@type": "Person", "name": "Dr. James Wright", "url": "https://aiethicsreview.com/authors/james-wright", "jobTitle": "Senior Research Editor"},
+        "publisher": {"@type": "Organization", "name": "AI Ethics Review", "logo": {"@type": "ImageObject", "url": "https://aiethicsreview.com/images/logo.png"}},
+        "datePublished": "2026-05-03T10:00:00Z",
+        "dateModified": "2026-05-05T16:00:00Z",
+        "mainEntityOfPage": {"@type": "WebPage", "@id": "https://aiethicsreview.com/research/impossibility-theorem"},
+        "wordCount": 2400,
+        "articleSection": "Research",
+        "keywords": ["impossibility theorem", "fairness", "calibration", "equalised odds"]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://aiethicsreview.com/"},
+            {"@type": "ListItem", "position": 2, "name": "Research", "item": "https://aiethicsreview.com/research"},
+            {"@type": "ListItem", "position": 3, "name": "Fairness", "item": "https://aiethicsreview.com/research/fairness"},
+            {"@type": "ListItem", "position": 4, "name": "Impossibility Theorem"}
+        ]
+    }
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-AIER001');</script>
+    <!-- GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-AIER001"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-AIER001',{'page_title':'Impossibility Theorem','content_group':'Research'});</script>
+    <!-- Facebook Pixel -->
+    <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1122334455');fbq('track','PageView');</script>
+    <!-- Hotjar -->
+    <script>(function(h,o,t,j,a,r){h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};h._hjSettings={hjid:9876543,hjsv:6};a=o.getElementsByTagName('head')[0];r=o.createElement('script');r.async=1;r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;a.appendChild(r);})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');</script>
+    <!-- LinkedIn Insight -->
+    <script type="text/javascript">_linkedin_partner_id="1234567";window._linkedin_data_partner_ids=window._linkedin_data_partner_ids||[];window._linkedin_data_partner_ids.push(_linkedin_partner_id);</script>
+    <script type="text/javascript">(function(l){if(!l){window.lintrk=function(a,b){window.lintrk.q.push([a,b])};window.lintrk.q=[]}var s=document.getElementsByTagName("script")[0];var b=document.createElement("script");b.type="text/javascript";b.async=true;b.src="https://snap.licdn.com/li.lms-analytics/insight.min.js";s.parentNode.insertBefore(b,s);})(window.lintrk);</script>
+    <!-- Segment -->
+    <script>!function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/"+key+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="aier_key_abc123";analytics.SNIPPET_VERSION="4.15.3";analytics.load("aier_key_abc123");analytics.page()}}();</script>
+    <!-- Optimizely -->
+    <script src="https://cdn.optimizely.com/js/aier_project_789.js"></script>
+    <!-- Intercom -->
+    <script>window.intercomSettings={api_base:"https://api-iam.intercom.io",app_id:"aier_chat_456"};</script>
+    <script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',w.intercomSettings);}else{var d=document;var i=function(){i.c(arguments);};i.q=[];i.c=function(args){i.q.push(args);};w.Intercom=i;var l=function(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/aier_chat_456';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);};if(document.readyState==='complete'){l();}else{w.addEventListener('load',l,false);}}})();</script>
+    <!-- Cookie Consent -->
+    <script src="/js/cookie-consent-v3.min.js"></script>
+
+    <style>
+        :root{--serif:'Source Serif 4',Georgia,serif;--sans:'Inter',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace;--primary:#0f766e;--primary-dark:#0d9488;--accent:#f59e0b;--bg:#ffffff;--text:#1e293b;--text-muted:#64748b;--border:#e2e8f0;}
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:var(--sans);color:var(--text);line-height:1.7;background:var(--bg);}
+    </style>
 </head>
 <body>
-    <div class="cookie-consent-bar">
-        <p>This site uses cookies for analytics and personalized content. <a href="/cookies">Learn more</a></p>
-        <button onclick="acceptAll()">Got it</button>
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-AIER001" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- Paywall/Subscription Prompt -->
+    <div style="position:fixed;top:0;left:0;right:0;background:linear-gradient(135deg,#134e4a,#0f766e);color:white;padding:12px 24px;z-index:10001;text-align:center;">
+        <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;">
+            <span style="font-size:14px;"><strong>Limited access:</strong> You have 2 free articles remaining this month. Subscribe for unlimited access to all research.</span>
+            <div style="display:flex;gap:8px;">
+                <a href="/subscribe" style="background:white;color:#0f766e;padding:6px 18px;border-radius:16px;font-weight:700;text-decoration:none;font-size:12px;">Subscribe — $9.99/mo</a>
+                <button style="background:transparent;color:white;border:1px solid rgba(255,255,255,0.4);padding:6px 12px;border-radius:16px;cursor:pointer;font-size:12px;">Maybe Later</button>
+            </div>
+        </div>
     </div>
 
-    <header>
-        <div class="promo-bar">Limited time: Subscribe to AI Ethics Review Pro for just $9.99/month — <a href="/subscribe">Start Trial</a></div>
-        <nav>
-            <a href="/" class="brand">AI Ethics Review</a>
-            <ul>
-                <li><a href="/latest">Latest</a></li>
-                <li><a href="/research">Research</a></li>
-                <li><a href="/policy">Policy</a></li>
-                <li><a href="/tutorials">Tutorials</a></li>
-                <li><a href="/podcast">Podcast</a></li>
-                <li><a href="/events">Events</a></li>
-            </ul>
-            <div><a href="/subscribe" class="btn">Subscribe</a></div>
-        </nav>
+    <!-- Cookie Consent Banner -->
+    <div style="position:fixed;bottom:0;left:0;right:0;background:white;border-top:2px solid #e2e8f0;padding:20px 32px;z-index:10000;box-shadow:0 -4px 20px rgba(0,0,0,0.1);">
+        <div style="max-width:1100px;margin:0 auto;">
+            <h3 style="font-size:14px;margin-bottom:6px;">🍪 Cookie Preferences</h3>
+            <p style="font-size:12px;color:#64748b;margin-bottom:10px;">This site uses cookies for analytics, ad personalization, and to improve your reading experience. See our <a href="/cookies" style="color:#0f766e;">Cookie Policy</a> and <a href="/privacy" style="color:#0f766e;">Privacy Policy</a> for details.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:8px;">
+                <label style="font-size:12px;display:flex;gap:4px;align-items:center;"><input type="checkbox" checked disabled> Essential</label>
+                <label style="font-size:12px;display:flex;gap:4px;align-items:center;"><input type="checkbox" checked> Analytics</label>
+                <label style="font-size:12px;display:flex;gap:4px;align-items:center;"><input type="checkbox" checked> Marketing</label>
+                <label style="font-size:12px;display:flex;gap:4px;align-items:center;"><input type="checkbox"> Personalization</label>
+            </div>
+            <div style="display:flex;gap:8px;">
+                <button style="background:#0f766e;color:white;border:none;padding:8px 20px;border-radius:6px;font-weight:600;cursor:pointer;font-size:13px;">Accept All</button>
+                <button style="background:white;border:1px solid #cbd5e1;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:13px;">Essential Only</button>
+                <button style="background:none;border:none;color:#0f766e;cursor:pointer;font-size:12px;text-decoration:underline;">Manage Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header style="background:white;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:999;box-shadow:0 1px 3px rgba(0,0,0,0.05);">
+        <div style="max-width:1200px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;">
+            <a href="/" style="font-size:20px;font-weight:800;color:#0f766e;text-decoration:none;display:flex;align-items:center;gap:8px;">
+                <img src="/images/logo.svg" alt="" width="28" height="28"> AI Ethics Review
+            </a>
+            <nav style="display:flex;gap:20px;align-items:center;">
+                <a href="/latest" style="font-size:14px;color:#1e293b;text-decoration:none;font-weight:500;">Latest</a>
+                <div style="position:relative;"><a href="/research" style="font-size:14px;color:#1e293b;text-decoration:none;font-weight:500;">Research ▾</a></div>
+                <a href="/policy" style="font-size:14px;color:#1e293b;text-decoration:none;font-weight:500;">Policy</a>
+                <a href="/industry" style="font-size:14px;color:#1e293b;text-decoration:none;font-weight:500;">Industry</a>
+                <a href="/tutorials" style="font-size:14px;color:#1e293b;text-decoration:none;font-weight:500;">Tutorials</a>
+                <a href="/podcast" style="font-size:14px;color:#1e293b;text-decoration:none;font-weight:500;">Podcast</a>
+                <a href="/events" style="font-size:14px;color:#1e293b;text-decoration:none;font-weight:500;">Events</a>
+                <a href="/newsletter" style="font-size:14px;color:#1e293b;text-decoration:none;font-weight:500;">Newsletter</a>
+            </nav>
+            <div style="display:flex;gap:10px;align-items:center;">
+                <div style="background:#f1f5f9;border-radius:20px;padding:6px 14px;display:flex;gap:6px;width:200px;">
+                    <span style="color:#94a3b8;">🔍</span>
+                    <input type="search" placeholder="Search..." style="border:none;background:none;outline:none;font-size:13px;width:100%;">
+                </div>
+                <a href="/login" style="font-size:13px;color:#475569;text-decoration:none;">Sign In</a>
+                <a href="/subscribe" style="background:#0f766e;color:white;padding:7px 18px;border-radius:20px;text-decoration:none;font-size:13px;font-weight:600;">Subscribe</a>
+            </div>
+        </div>
     </header>
 
-    <div class="breadcrumbs">
-        <a href="/">Home</a> → <a href="/research">Research</a> → <a href="/research/fairness">Fairness</a> → <span>Impossibility Theorem</span>
+    <!-- Breadcrumbs -->
+    <div style="max-width:760px;margin:0 auto;padding:12px 24px;font-size:13px;color:#64748b;">
+        <a href="/" style="color:#64748b;text-decoration:none;">Home</a> <span style="margin:0 6px;">→</span>
+        <a href="/research" style="color:#64748b;text-decoration:none;">Research</a> <span style="margin:0 6px;">→</span>
+        <a href="/research/fairness" style="color:#64748b;text-decoration:none;">Fairness</a> <span style="margin:0 6px;">→</span>
+        <span style="color:#1e293b;">Impossibility Theorem</span>
     </div>
 
-    <article class="main-article">
-        <div class="article-header">
-            <span class="label">Research Explainer</span>
-            <h1>The Impossibility Theorem of Fairness: Why You Can't Have It All</h1>
-            <p class="subtitle">Two landmark papers proved that the most popular fairness metrics are mathematically incompatible. Here's what that means for practitioners.</p>
-            <div class="meta">
-                <img src="/images/authors/james-wright.jpg" alt="Dr. James Wright" class="author-avatar">
-                <div>
-                    <span class="author">Dr. James Wright</span>
-                    <span class="date">May 3, 2026</span>
-                    <span class="read-time">12 min read</span>
-                </div>
+    <!-- Article -->
+    <article style="max-width:760px;margin:0 auto;padding:0 24px;">
+        <div style="margin-bottom:28px;">
+            <span style="display:inline-block;background:#f0fdfa;color:#0f766e;font-size:11px;font-weight:700;padding:4px 10px;border-radius:4px;text-transform:uppercase;margin-bottom:12px;">Research Explainer</span>
+            <h1 style="font-size:38px;font-weight:800;line-height:1.15;margin-bottom:12px;color:#0f172a;font-family:var(--serif);">The Impossibility Theorem of Fairness: Why You Can't Have It All</h1>
+            <p style="font-size:18px;color:#64748b;line-height:1.6;">Two landmark papers proved that the most popular fairness metrics are mathematically incompatible. Here's what that means for practitioners building real systems.</p>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:16px;padding:16px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;margin-bottom:28px;">
+            <img src="/images/authors/james-wright.jpg" alt="Dr. James Wright" width="44" height="44" style="border-radius:50%;">
+            <div>
+                <a href="/authors/james-wright" style="font-size:14px;font-weight:600;color:#1e293b;text-decoration:none;">Dr. James Wright</a>
+                <p style="font-size:12px;color:#64748b;">Senior Research Editor · May 3, 2026 · 12 min read</p>
             </div>
-            <div class="social-share">
-                <a href="#">𝕏 Share</a> <a href="#">LinkedIn</a> <a href="#">Facebook</a> <a href="#">Copy Link</a>
+            <div style="margin-left:auto;display:flex;gap:6px;">
+                <a href="#" style="padding:5px 12px;background:#f1f5f9;border-radius:6px;font-size:12px;color:#475569;text-decoration:none;">𝕏</a>
+                <a href="#" style="padding:5px 12px;background:#f1f5f9;border-radius:6px;font-size:12px;color:#475569;text-decoration:none;">LinkedIn</a>
+                <a href="#" style="padding:5px 12px;background:#f1f5f9;border-radius:6px;font-size:12px;color:#475569;text-decoration:none;">Facebook</a>
+                <a href="#" style="padding:5px 12px;background:#f1f5f9;border-radius:6px;font-size:12px;color:#475569;text-decoration:none;">📋</a>
             </div>
         </div>
 
-        <figure class="hero-image">
-            <img src="/images/impossibility-venn.svg" alt="Venn diagram showing incompatibility of fairness metrics">
-            <figcaption>The three circles of fairness metrics that cannot overlap in most real-world scenarios. Illustration: AI Ethics Review</figcaption>
+        <!-- Hero Image -->
+        <figure style="margin-bottom:32px;">
+            <img src="/images/impossibility-venn.svg" alt="Venn diagram showing the mathematical incompatibility of calibration, equalised odds, and demographic parity" width="760" height="400" style="width:100%;height:auto;border-radius:12px;border:1px solid #e2e8f0;">
+            <figcaption style="font-size:12px;color:#94a3b8;margin-top:8px;text-align:center;">The three fairness metrics form an impossible triangle — you can satisfy at most two. Illustration: AI Ethics Review. Licensed under CC-BY-4.0.</figcaption>
         </figure>
 
-        <div class="ad-leaderboard">
-            <p>ADVERTISEMENT</p>
-            <img src="/ads/ethics-conference.png" alt="AI Ethics Summit 2026">
-            <p>AI Ethics Summit 2026 — Register now for early access pricing. <a href="#">Learn more</a></p>
+        <!-- Ad -->
+        <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px;margin-bottom:28px;text-align:center;">
+            <p style="font-size:10px;color:#94a3b8;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Advertisement</p>
+            <div style="display:flex;align-items:center;gap:16px;justify-content:center;">
+                <img src="/ads/ethics-summit.png" alt="AI Ethics Summit 2026" width="100" height="100" style="border-radius:8px;">
+                <div style="text-align:left;max-width:400px;">
+                    <h4 style="font-size:15px;margin-bottom:4px;">AI Ethics Summit 2026</h4>
+                    <p style="font-size:13px;color:#64748b;margin-bottom:8px;">September 22-24, London. Keynotes from Timnit Gebru, Cynthia Dwork, and Arvind Narayanan. Early bird registration open.</p>
+                    <a href="#" style="font-size:13px;color:#0f766e;font-weight:600;text-decoration:none;">Register now — £299 →</a>
+                </div>
+            </div>
         </div>
 
-        <div class="article-body">
+        <!-- Article Body -->
+        <div style="font-family:var(--serif);font-size:17px;line-height:1.9;color:#334155;">
             <p>In the world of algorithmic fairness, there's a result so fundamental that it shapes every serious conversation about fair machine learning. It's often called the "impossibility theorem," and once you understand it, you'll see why the debate about COMPAS, hiring algorithms, and lending models can never be resolved by better technology alone.</p>
 
-            <h2>The Setup: Three Reasonable Requirements</h2>
+            <p>This is not a limitation of our current tools. It is not something that will be fixed with more data, better features, or smarter engineering. It is a mathematical fact — as inescapable as the Pythagorean theorem — and it has profound implications for anyone building systems that affect people's lives.</p>
+
+            <h2 style="font-family:var(--sans);font-size:24px;font-weight:700;margin:36px 0 16px;color:#0f172a;">The Setup: Three Reasonable Requirements</h2>
 
             <p>Imagine you're building a system that predicts whether someone will default on a loan. You want it to be fair. Here are three things that seem perfectly reasonable to ask for:</p>
 
-            <ol>
-                <li><strong>Calibration:</strong> When your model says someone has a 70% chance of defaulting, they should actually default about 70% of the time — and this should hold regardless of their demographic group.</li>
-                <li><strong>Equal false positive rates:</strong> The rate at which you incorrectly flag someone as likely to default should be the same across groups. (This is part of equalised odds.)</li>
-                <li><strong>Equal false negative rates:</strong> The rate at which you miss actual defaulters should also be the same across groups. (This is the other part of equalised odds.)</li>
+            <ol style="margin:16px 0 24px 28px;line-height:2;">
+                <li style="margin-bottom:8px;"><strong style="font-family:var(--sans);">Calibration:</strong> When your model says someone has a 70% chance of defaulting, they should actually default about 70% of the time — and this should hold equally across demographic groups.</li>
+                <li style="margin-bottom:8px;"><strong style="font-family:var(--sans);">Equal false positive rates:</strong> The rate at which you incorrectly flag someone as likely to default should be the same across groups. This is part of equalised odds.</li>
+                <li style="margin-bottom:8px;"><strong style="font-family:var(--sans);">Equal false negative rates:</strong> The rate at which you miss actual defaulters should also be the same across groups. This is the other part of equalised odds.</li>
             </ol>
 
             <p>Each of these seems not just reasonable but <em>necessary</em>. Surely any fair system should satisfy all three?</p>
 
-            <h2>The Proof: You Can't</h2>
+            <h2 style="font-family:var(--sans);font-size:24px;font-weight:700;margin:36px 0 16px;color:#0f172a;">The Proof: You Can't</h2>
 
             <p>In 2016-2017, two independent research groups proved that these requirements are mathematically incompatible in most real-world scenarios:</p>
 
-            <ul>
-                <li><strong>Chouldechova (2017)</strong> showed that calibration and equal false positive/negative rates cannot both hold when the base rates (actual rates of the outcome) differ between groups.</li>
-                <li><strong>Kleinberg, Mullainathan, and Raghavan (2016)</strong> proved a broader version: three natural conditions on any risk score are mutually incompatible except in degenerate cases.</li>
+            <ul style="margin:16px 0 24px 28px;line-height:2;">
+                <li style="margin-bottom:8px;"><strong style="font-family:var(--sans);">Chouldechova (2017)</strong> showed that calibration and equal false positive/negative rates cannot both hold when the base rates (actual rates of the outcome) differ between groups.</li>
+                <li style="margin-bottom:8px;"><strong style="font-family:var(--sans);">Kleinberg, Mullainathan, and Raghavan (2016)</strong> proved a broader version: three natural conditions on any risk score are mutually incompatible except in degenerate cases.</li>
             </ul>
 
-            <p>This isn't a limitation of current algorithms. It's not something that can be fixed with more data, better features, or smarter engineering. It's a mathematical fact — as inescapable as the Pythagorean theorem.</p>
-
-            <div class="pullquote">
-                <blockquote>"The choice of which fairness metric to prioritise is a normative decision, not a technical one."</blockquote>
+            <!-- Inline newsletter -->
+            <div style="background:#f0fdfa;border:2px solid #99f6e4;border-radius:12px;padding:24px;margin:32px 0;text-align:center;">
+                <h3 style="font-family:var(--sans);font-size:16px;margin-bottom:8px;color:#0f766e;">📬 Enjoying this article?</h3>
+                <p style="font-size:14px;color:#475569;margin-bottom:12px;font-family:var(--sans);">Get research explainers like this delivered weekly. Join 28,000+ AI practitioners.</p>
+                <div style="display:flex;justify-content:center;gap:8px;max-width:400px;margin:0 auto;">
+                    <input type="email" placeholder="you@company.com" style="flex:1;padding:10px 14px;border:1px solid #e2e8f0;border-radius:6px;font-size:14px;">
+                    <button style="background:#0f766e;color:white;border:none;padding:10px 20px;border-radius:6px;font-weight:600;cursor:pointer;font-size:14px;">Subscribe</button>
+                </div>
+                <p style="font-size:11px;color:#94a3b8;margin-top:8px;font-family:var(--sans);">Free. No spam. Unsubscribe anytime.</p>
             </div>
 
-            <h2>Why Base Rates Matter</h2>
+            <p>This isn't a limitation of current algorithms. It's a <strong>mathematical impossibility</strong> — as inescapable as the laws of arithmetic. No amount of better engineering can resolve the tension.</p>
+
+            <div style="background:#1e293b;color:#e2e8f0;border-radius:8px;padding:24px;margin:28px 0;font-family:var(--sans);border-left:4px solid #0f766e;">
+                <p style="font-size:16px;font-style:italic;margin:0;line-height:1.6;">"The choice of which fairness metric to prioritise is a normative decision, not a technical one."</p>
+                <p style="font-size:13px;color:#94a3b8;margin-top:8px;">— Kleinberg, Mullainathan, Raghavan (2016)</p>
+            </div>
+
+            <h2 style="font-family:var(--sans);font-size:24px;font-weight:700;margin:36px 0 16px;color:#0f172a;">Why Base Rates Matter</h2>
 
             <p>The key condition is differing base rates. If Group A defaults on loans at 10% and Group B defaults at 20%, then no classifier — no matter how sophisticated — can simultaneously be calibrated and have equal error rates across both groups.</p>
 
-            <p>In the real world, base rates almost always differ between demographic groups, because they reflect centuries of structural inequality, differing socioeconomic conditions, and measurement biases. The impossibility theorem means these structural differences create unavoidable fairness trade-offs in any predictive system.</p>
+            <p>In the real world, base rates almost always differ between demographic groups, because they reflect centuries of structural inequality, differing socioeconomic conditions, and measurement biases. The impossibility theorem means these structural differences create unavoidable fairness trade-offs in any predictive system built on historical data.</p>
 
-            <h2>The COMPAS Connection</h2>
+            <!-- Ad -->
+            <div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:14px;margin:28px 0;text-align:center;">
+                <p style="font-size:10px;color:#92400e;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Sponsored</p>
+                <p style="font-size:14px;color:#78350f;font-family:var(--sans);"><strong>Responsible AI Toolkit</strong> — Enterprise-grade fairness testing with impossibility theorem trade-off analysis built in. <a href="#" style="color:#0f766e;font-weight:600;">Request a demo →</a></p>
+            </div>
 
-            <p>This is exactly what happened in the famous COMPAS debate. ProPublica said COMPAS was biased because Black defendants had much higher false positive rates. Northpointe said COMPAS was fair because it was calibrated — the scores meant the same thing regardless of race. Both were right. Both couldn't be satisfied. The impossibility theorem explains why.</p>
+            <h2 style="font-family:var(--sans);font-size:24px;font-weight:700;margin:36px 0 16px;color:#0f172a;">The COMPAS Connection</h2>
 
-            <h2>What This Means for Practitioners</h2>
+            <p>This is exactly what happened in the famous COMPAS debate. ProPublica said COMPAS was biased because Black defendants had much higher false positive rates. Northpointe said COMPAS was fair because it was calibrated — the scores meant the same thing regardless of race.</p>
+
+            <p><strong>Both were right. Both couldn't be satisfied.</strong> The impossibility theorem explains why — and it proves that the dispute was fundamentally unresolvable. ProPublica and Northpointe were each measuring a different (and legitimate) definition of fairness, and mathematics guarantees those definitions can't be simultaneously met.</p>
+
+            <h2 style="font-family:var(--sans);font-size:24px;font-weight:700;margin:36px 0 16px;color:#0f172a;">What This Means for Practitioners</h2>
 
             <p>If you're building ML systems that affect people's lives, the impossibility theorem has a clear implication: <strong>you must choose which type of fairness to prioritize, and that choice is a value judgment, not a technical one.</strong></p>
 
-            <p>No amount of engineering can escape this trade-off. The responsible thing is to make the choice explicitly, document it, and ensure the people affected by the system understand which definition of fairness is being applied and why.</p>
+            <p>No amount of engineering can escape this trade-off. The responsible approach is to:</p>
+
+            <ol style="margin:16px 0 24px 28px;line-height:2;">
+                <li>Make the choice explicitly and document which fairness metric you're optimising for</li>
+                <li>Explain <em>why</em> that metric was chosen for this particular context</li>
+                <li>Ensure the people affected by the system understand which definition of fairness is being applied</li>
+                <li>Acknowledge what the chosen metric does <em>not</em> guarantee</li>
+            </ol>
+
+            <p>The impossibility theorem is not a reason to give up on fairness. It's a reason to take the <em>choice</em> of fairness definition seriously — because that choice has real consequences for real people, and no algorithm can make it for you.</p>
         </div>
 
-        <div class="article-tags">
-            <a href="/tags/fairness">#fairness</a>
-            <a href="/tags/impossibility-theorem">#impossibility-theorem</a>
-            <a href="/tags/calibration">#calibration</a>
-            <a href="/tags/equalised-odds">#equalised-odds</a>
-            <a href="/tags/compas">#compas</a>
-        </div>
-
-        <div class="author-box">
-            <img src="/images/authors/james-wright-large.jpg" alt="Dr. James Wright">
-            <div>
-                <h3>Dr. James Wright</h3>
-                <p>Senior Research Editor at AI Ethics Review. Former ML researcher at DeepMind. Writes about the intersection of mathematics, ethics, and artificial intelligence. <a href="/authors/james-wright">More articles →</a></p>
-                <div class="social"><a href="#">Twitter</a> | <a href="#">Scholar</a></div>
+        <!-- Article Engagement -->
+        <div style="text-align:center;padding:28px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;margin:32px 0;">
+            <p style="font-size:14px;color:#475569;margin-bottom:10px;">Was this explainer helpful?</p>
+            <div style="display:flex;justify-content:center;gap:10px;">
+                <button style="padding:7px 20px;border:1px solid #e2e8f0;border-radius:20px;background:white;cursor:pointer;font-size:13px;">👍 Helpful (487)</button>
+                <button style="padding:7px 20px;border:1px solid #e2e8f0;border-radius:20px;background:white;cursor:pointer;font-size:13px;">👎 Not Helpful (9)</button>
             </div>
         </div>
 
-        <div class="related-reading">
-            <h3>Related Reading</h3>
-            <ul>
-                <li><a href="/articles/compas-breakdown">Breaking Down the COMPAS Debate</a></li>
-                <li><a href="/articles/calibration-guide">A Practitioner's Guide to Model Calibration</a></li>
-                <li><a href="/articles/fairness-metrics-compared">Fairness Metrics Compared: A Decision Framework</a></li>
-            </ul>
+        <!-- Tags -->
+        <div style="margin:20px 0;">
+            <a href="/tags/fairness" style="display:inline-block;padding:4px 12px;background:#f1f5f9;border-radius:16px;font-size:12px;color:#475569;text-decoration:none;margin:3px;">#fairness</a>
+            <a href="/tags/impossibility" style="display:inline-block;padding:4px 12px;background:#f1f5f9;border-radius:16px;font-size:12px;color:#475569;text-decoration:none;margin:3px;">#impossibility-theorem</a>
+            <a href="/tags/calibration" style="display:inline-block;padding:4px 12px;background:#f1f5f9;border-radius:16px;font-size:12px;color:#475569;text-decoration:none;margin:3px;">#calibration</a>
+            <a href="/tags/equalised-odds" style="display:inline-block;padding:4px 12px;background:#f1f5f9;border-radius:16px;font-size:12px;color:#475569;text-decoration:none;margin:3px;">#equalised-odds</a>
+            <a href="/tags/compas" style="display:inline-block;padding:4px 12px;background:#f1f5f9;border-radius:16px;font-size:12px;color:#475569;text-decoration:none;margin:3px;">#compas</a>
+            <a href="/tags/chouldechova" style="display:inline-block;padding:4px 12px;background:#f1f5f9;border-radius:16px;font-size:12px;color:#475569;text-decoration:none;margin:3px;">#chouldechova</a>
+            <a href="/tags/kleinberg" style="display:inline-block;padding:4px 12px;background:#f1f5f9;border-radius:16px;font-size:12px;color:#475569;text-decoration:none;margin:3px;">#kleinberg</a>
         </div>
 
-        <div class="comments">
-            <h3>Discussion (89 comments)</h3>
-            <p><a href="/login">Log in</a> or <a href="/register">create an account</a> to join the discussion.</p>
+        <!-- Author Bio -->
+        <div style="background:#f8fafc;border-radius:12px;padding:24px;margin:28px 0;display:flex;gap:20px;border:1px solid #e2e8f0;">
+            <img src="/images/authors/james-wright-large.jpg" alt="Dr. James Wright" width="72" height="72" style="border-radius:50%;">
+            <div>
+                <h4 style="font-size:15px;font-weight:700;margin-bottom:4px;">Dr. James Wright</h4>
+                <p style="font-size:13px;color:#64748b;margin-bottom:8px;line-height:1.6;">Senior Research Editor at AI Ethics Review. Former ML researcher at DeepMind. Writes about the intersection of mathematics, ethics, and artificial intelligence. PhD from University of Cambridge.</p>
+                <div style="display:flex;gap:8px;">
+                    <a href="#" style="font-size:12px;color:#64748b;text-decoration:none;">𝕏 Twitter</a>
+                    <a href="#" style="font-size:12px;color:#64748b;text-decoration:none;">Google Scholar</a>
+                    <a href="/authors/james-wright" style="font-size:12px;color:#0f766e;font-weight:600;text-decoration:none;">All articles →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Related -->
+        <div style="margin:32px 0;">
+            <h3 style="font-size:18px;font-weight:700;margin-bottom:16px;">Related Reading</h3>
+            <div style="display:grid;gap:16px;">
+                <a href="/articles/compas-breakdown" style="display:flex;gap:16px;padding:16px;border:1px solid #e2e8f0;border-radius:8px;text-decoration:none;">
+                    <img src="/images/thumbnails/compas.jpg" alt="" width="120" height="80" style="border-radius:6px;object-fit:cover;">
+                    <div><h4 style="font-size:15px;color:#0f172a;margin-bottom:4px;">Breaking Down the COMPAS Debate</h4><p style="font-size:13px;color:#64748b;">How two organisations measured the same algorithm and reached opposite conclusions about fairness.</p><span style="font-size:12px;color:#94a3b8;">10 min read</span></div>
+                </a>
+                <a href="/articles/calibration-guide" style="display:flex;gap:16px;padding:16px;border:1px solid #e2e8f0;border-radius:8px;text-decoration:none;">
+                    <img src="/images/thumbnails/calibration.jpg" alt="" width="120" height="80" style="border-radius:6px;object-fit:cover;">
+                    <div><h4 style="font-size:15px;color:#0f172a;margin-bottom:4px;">A Practitioner's Guide to Model Calibration</h4><p style="font-size:13px;color:#64748b;">Why calibration matters, how to measure it, and what to do when it conflicts with other fairness goals.</p><span style="font-size:12px;color:#94a3b8;">8 min read</span></div>
+                </a>
+                <a href="/articles/fairness-metrics-compared" style="display:flex;gap:16px;padding:16px;border:1px solid #e2e8f0;border-radius:8px;text-decoration:none;">
+                    <img src="/images/thumbnails/metrics.jpg" alt="" width="120" height="80" style="border-radius:6px;object-fit:cover;">
+                    <div><h4 style="font-size:15px;color:#0f172a;margin-bottom:4px;">Fairness Metrics Compared: A Decision Framework</h4><p style="font-size:13px;color:#64748b;">A practical guide to choosing the right fairness metric for your use case.</p><span style="font-size:12px;color:#94a3b8;">15 min read</span></div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Comments -->
+        <div style="margin:32px 0;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                <h3 style="font-size:18px;font-weight:700;">Discussion (89 comments)</h3>
+                <select style="padding:6px 10px;border:1px solid #e2e8f0;border-radius:6px;font-size:12px;"><option>Newest</option><option>Most Liked</option><option>Oldest</option></select>
+            </div>
+            <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:16px;margin-bottom:16px;">
+                <textarea placeholder="Share your thoughts..." style="width:100%;height:60px;border:1px solid #e2e8f0;border-radius:6px;padding:10px;font-size:14px;resize:vertical;font-family:inherit;"></textarea>
+                <div style="display:flex;justify-content:space-between;margin-top:8px;">
+                    <span style="font-size:11px;color:#94a3b8;">Markdown supported. Follow our <a href="/guidelines" style="color:#0f766e;">guidelines</a>.</span>
+                    <button style="background:#0f766e;color:white;border:none;padding:6px 16px;border-radius:6px;font-weight:600;font-size:12px;cursor:pointer;">Comment</button>
+                </div>
+            </div>
+            <p style="font-size:13px;color:#64748b;margin-bottom:20px;"><a href="/login" style="color:#0f766e;">Log in</a> or <a href="/register" style="color:#0f766e;">create an account</a> to comment.</p>
+
+            <div style="border-top:1px solid #e2e8f0;padding-top:16px;">
+                <div style="display:flex;gap:10px;margin-bottom:20px;">
+                    <img src="/avatars/c1.jpg" alt="" width="32" height="32" style="border-radius:50%;">
+                    <div>
+                        <div style="font-size:13px;margin-bottom:4px;"><strong>Prof. Amara Osei</strong> <span style="color:#94a3b8;">· 1 day ago</span> <span style="background:#f0fdfa;color:#0f766e;font-size:10px;padding:2px 6px;border-radius:4px;">SUBSCRIBER</span></div>
+                        <p style="font-size:14px;color:#334155;">The impossibility theorem changed how I teach my graduate fairness course. Before, students would ask "which metric is best?" Now they understand that the question itself is malformed.</p>
+                        <div style="display:flex;gap:10px;margin-top:6px;"><button style="background:none;border:none;font-size:12px;color:#64748b;cursor:pointer;">👍 23</button><button style="background:none;border:none;font-size:12px;color:#64748b;cursor:pointer;">Reply</button></div>
+                    </div>
+                </div>
+                <div style="display:flex;gap:10px;margin-bottom:20px;">
+                    <img src="/avatars/c2.jpg" alt="" width="32" height="32" style="border-radius:50%;">
+                    <div>
+                        <div style="font-size:13px;margin-bottom:4px;"><strong>@practical_ml</strong> <span style="color:#94a3b8;">· 3 days ago</span></div>
+                        <p style="font-size:14px;color:#334155;">Great explainer. One practical consideration: while strict impossibility holds, approximate versions of these metrics CAN be simultaneously improved. Worth noting for practitioners who might read this and throw up their hands.</p>
+                        <div style="display:flex;gap:10px;margin-top:6px;"><button style="background:none;border:none;font-size:12px;color:#64748b;cursor:pointer;">👍 15</button><button style="background:none;border:none;font-size:12px;color:#64748b;cursor:pointer;">Reply (4)</button></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </article>
 
-    <aside class="sidebar-sticky">
-        <div class="newsletter">
-            <h3>Weekly AI Ethics Digest</h3>
-            <p>The most important AI ethics stories, curated by our editors.</p>
-            <input type="email" placeholder="your@email.com">
-            <button>Subscribe</button>
-            <p class="fine-print">Free. Unsubscribe anytime. No spam.</p>
+    <!-- Newsletter CTA -->
+    <div style="background:linear-gradient(135deg,#134e4a,#0f766e,#115e59);color:white;padding:56px 24px;text-align:center;margin-top:48px;">
+        <h2 style="font-size:26px;font-weight:800;margin-bottom:8px;">Stay ahead of AI ethics research</h2>
+        <p style="font-size:15px;opacity:0.9;max-width:600px;margin:0 auto 24px;">Weekly research summaries, policy updates, and practical guides. Trusted by 28,000+ subscribers from Google, Anthropic, OpenAI, and top universities.</p>
+        <div style="display:flex;justify-content:center;gap:10px;max-width:480px;margin:0 auto;">
+            <input type="email" placeholder="you@company.com" style="flex:1;padding:14px 18px;border:none;border-radius:8px;font-size:15px;">
+            <button style="background:#f59e0b;color:#1e293b;padding:14px 28px;border:none;border-radius:8px;font-weight:700;cursor:pointer;font-size:15px;">Subscribe Free</button>
         </div>
-        <div class="ad-sidebar">
-            <p>SPONSORED</p>
-            <p>Responsible AI Toolkit — Enterprise-grade fairness auditing. <a href="#">Request Demo</a></p>
-        </div>
-    </aside>
+        <p style="font-size:12px;opacity:0.7;margin-top:10px;">No spam. Unsubscribe anytime. Free forever.</p>
+    </div>
 
-    <footer>
-        <div class="footer-grid">
-            <div><h4>AI Ethics Review</h4><p>Independent journalism on artificial intelligence and society.</p></div>
-            <div><h4>Sections</h4><ul><li><a href="/research">Research</a></li><li><a href="/policy">Policy</a></li><li><a href="/industry">Industry</a></li></ul></div>
-            <div><h4>Company</h4><ul><li><a href="/about">About</a></li><li><a href="/contact">Contact</a></li><li><a href="/advertise">Advertise</a></li></ul></div>
-            <div><h4>Legal</h4><ul><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li></ul></div>
+    <!-- Footer -->
+    <footer style="background:#0f172a;color:#94a3b8;padding:48px 24px 24px;">
+        <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:32px;margin-bottom:32px;">
+            <div>
+                <h4 style="color:white;font-size:16px;margin-bottom:12px;">AI Ethics Review</h4>
+                <p style="font-size:13px;line-height:1.6;">Independent journalism on artificial intelligence and society. Covering research, policy, and industry since 2022.</p>
+            </div>
+            <div><h4 style="color:white;font-size:13px;margin-bottom:10px;">Sections</h4><ul style="list-style:none;font-size:12px;line-height:2.2;"><li><a href="/research" style="color:#94a3b8;text-decoration:none;">Research</a></li><li><a href="/policy" style="color:#94a3b8;text-decoration:none;">Policy</a></li><li><a href="/industry" style="color:#94a3b8;text-decoration:none;">Industry</a></li><li><a href="/tutorials" style="color:#94a3b8;text-decoration:none;">Tutorials</a></li><li><a href="/podcast" style="color:#94a3b8;text-decoration:none;">Podcast</a></li></ul></div>
+            <div><h4 style="color:white;font-size:13px;margin-bottom:10px;">Company</h4><ul style="list-style:none;font-size:12px;line-height:2.2;"><li><a href="/about" style="color:#94a3b8;text-decoration:none;">About</a></li><li><a href="/team" style="color:#94a3b8;text-decoration:none;">Team</a></li><li><a href="/careers" style="color:#94a3b8;text-decoration:none;">Careers</a></li><li><a href="/contact" style="color:#94a3b8;text-decoration:none;">Contact</a></li><li><a href="/advertise" style="color:#94a3b8;text-decoration:none;">Advertise</a></li></ul></div>
+            <div><h4 style="color:white;font-size:13px;margin-bottom:10px;">Subscribe</h4><ul style="list-style:none;font-size:12px;line-height:2.2;"><li><a href="/subscribe" style="color:#94a3b8;text-decoration:none;">Pro Plan ($9.99/mo)</a></li><li><a href="/newsletter" style="color:#94a3b8;text-decoration:none;">Free Newsletter</a></li><li><a href="/rss" style="color:#94a3b8;text-decoration:none;">RSS Feed</a></li></ul></div>
+            <div><h4 style="color:white;font-size:13px;margin-bottom:10px;">Legal</h4><ul style="list-style:none;font-size:12px;line-height:2.2;"><li><a href="/privacy" style="color:#94a3b8;text-decoration:none;">Privacy</a></li><li><a href="/terms" style="color:#94a3b8;text-decoration:none;">Terms</a></li><li><a href="/cookies" style="color:#94a3b8;text-decoration:none;">Cookies</a></li><li><a href="/ccpa" style="color:#94a3b8;text-decoration:none;">CCPA</a></li><li><a href="/accessibility" style="color:#94a3b8;text-decoration:none;">Accessibility</a></li></ul></div>
         </div>
-        <p>&copy; 2026 AI Ethics Review. All rights reserved.</p>
+        <div style="border-top:1px solid #1e293b;padding-top:20px;display:flex;justify-content:space-between;font-size:12px;flex-wrap:wrap;gap:8px;">
+            <p>&copy; 2026 AI Ethics Review. All rights reserved.</p>
+            <p>Published by AI Ethics Media Ltd. London, UK.</p>
+        </div>
     </footer>
-    <script src="/js/main.js"></script>
-    <script src="/js/comments.js"></script>
-    <script src="/js/sticky-sidebar.js"></script>
+
+    <!-- Social Proof Toast -->
+    <div style="position:fixed;bottom:100px;left:20px;background:white;border-radius:10px;padding:12px 16px;box-shadow:0 8px 24px rgba(0,0,0,0.12);z-index:9998;max-width:300px;display:flex;align-items:center;gap:10px;border:1px solid #e2e8f0;">
+        <span style="font-size:20px;">📖</span>
+        <div><p style="font-size:12px;color:#1e293b;margin-bottom:2px;"><strong>PhD student from Stanford</strong> just read this</p><p style="font-size:10px;color:#94a3b8;">1 minute ago</p></div>
+    </div>
+
+    <!-- Chat Widget -->
+    <div style="position:fixed;bottom:20px;right:20px;z-index:9999;">
+        <button style="width:52px;height:52px;border-radius:50%;background:#0f766e;border:none;cursor:pointer;box-shadow:0 4px 12px rgba(15,118,110,0.4);color:white;font-size:22px;">💬</button>
+        <div style="position:absolute;bottom:64px;right:0;background:white;border-radius:10px;padding:10px 14px;box-shadow:0 4px 12px rgba(0,0,0,0.1);white-space:nowrap;font-size:12px;">Questions about fairness metrics? Chat with us!</div>
+    </div>
+
+    <script src="/js/main.min.js"></script>
+    <script src="/js/reading-progress.js"></script>
+    <script src="/js/scroll-spy.js"></script>
+    <script src="/js/social-proof.js"></script>
+    <script src="/js/paywall.js"></script>
+    <script src="/js/exit-intent.js"></script>
+    <script src="/js/ab-test.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+
+    <!-- Reading Progress -->
+    <script>window.addEventListener('scroll',function(){var b=document.getElementById('rp');if(!b){b=document.createElement('div');b.id='rp';b.style.cssText='position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,#0f766e,#14b8a6);z-index:10000;transition:width 0.1s;';document.body.appendChild(b);}b.style.width=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100+'%';});</script>
+
+    <!-- Social Proof Rotation -->
+    <script>var institutions=['Stanford','MIT','Oxford','Cambridge','Google','Anthropic','Meta','DeepMind','Berkeley','ETH Zurich'];var roles=['PhD student','researcher','professor','ML engineer','data scientist'];setInterval(function(){var inst=institutions[Math.floor(Math.random()*institutions.length)];var role=roles[Math.floor(Math.random()*roles.length)];var t=document.querySelector('[style*="bottom:100px"]');if(t){t.querySelector('strong').textContent=role+' from '+inst;t.style.display='flex';setTimeout(function(){t.style.display='none';},5000);}},20000);</script>
+
+    <!-- Performance beacon -->
+    <script>if(window.performance){window.addEventListener('load',function(){var t=performance.timing;navigator.sendBeacon('/api/perf',JSON.stringify({ttfb:t.responseStart-t.requestStart,load:t.loadEventEnd-t.navigationStart,page:'impossibility-theorem'}));});}</script>
 </body>
 </html>
