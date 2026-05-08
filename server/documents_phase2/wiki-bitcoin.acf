@@ -1,0 +1,29 @@
+ACF/0.1
+id:           acf-wiki-bitcoin
+type:         article
+title:        Bitcoin
+source:       Wikipedia — Bitcoin
+author:       AgentClearfeed
+published:    2026-05-08
+confidence:   verified
+domain:       Technology
+tags:         Bitcoin, cryptocurrency, blockchain, proof of work, Satoshi Nakamoto, decentralised, mining
+conflicts:    none
+license:      CC-BY-SA-4.0
+---
+ARTICLE
+summary:      Bitcoin is a decentralised digital currency created in 2009 by the pseudonymous Satoshi Nakamoto. It operates on a peer-to-peer network without a central authority, using a distributed public ledger called the blockchain to record all transactions. New bitcoins are created through a process called mining, which uses a proof-of-work consensus mechanism to validate transactions and prevent double-spending.
+claims:
+  - Bitcoin was introduced in a 2008 whitepaper by Satoshi Nakamoto and launched in January 2009
+  - The blockchain is a distributed public ledger that records every transaction in chronological blocks
+  - Proof of work consensus requires miners to solve computationally intensive puzzles to validate transaction blocks
+  - Double-spending is prevented because the network only accepts the longest valid chain, making it computationally infeasible to alter confirmed transactions
+  - The total supply is capped at 21 million bitcoins, with new coins issued as block rewards that halve approximately every four years (halving)
+  - Transactions are verified by a decentralised network of miners who compete to add blocks and earn rewards
+  - Bitcoin uses SHA-256 hashing algorithm for its proof-of-work mining
+evidence:     The Bitcoin whitepaper (Nakamoto, 2008), open-source codebase, publicly verifiable blockchain, and extensive academic analysis of the protocol
+limitations:  High energy consumption from proof-of-work mining. Transaction throughput is limited to approximately 7 transactions per second on the base layer. Price volatility limits use as a medium of exchange. Regulatory status varies by jurisdiction.
+methodology:  Encyclopedic synthesis of cryptocurrency literature and protocol documentation
+---
+NOTES
+Satoshi Nakamoto's identity remains unknown. The Bitcoin genesis block was mined on January 3, 2009, containing the text "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks." The Lightning Network is a layer-2 solution designed to address scalability limitations. Bitcoin's market capitalisation has made it the largest cryptocurrency by a significant margin.

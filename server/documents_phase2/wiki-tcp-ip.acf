@@ -1,0 +1,29 @@
+ACF/0.1
+id:           acf-wiki-tcp-ip
+type:         article
+title:        Transmission Control Protocol (TCP)
+source:       Wikipedia — Transmission Control Protocol
+author:       AgentClearfeed
+published:    2026-05-08
+confidence:   verified
+domain:       Computer Science
+tags:         TCP, IP, networking, internet, protocol, three-way handshake, transport layer
+conflicts:    none
+license:      CC-BY-SA-4.0
+---
+ARTICLE
+summary:      The Transmission Control Protocol (TCP) is a core transport-layer protocol of the Internet Protocol Suite. It provides reliable, ordered, and error-checked delivery of data between applications running on hosts communicating via an IP network. TCP uses a three-way handshake to establish connections and flow control mechanisms to manage data transmission.
+claims:
+  - TCP operates at the transport layer (Layer 4) of the OSI model
+  - Connection establishment uses a three-way handshake: client sends SYN, server responds with SYN-ACK, client sends final ACK
+  - TCP provides reliable delivery through sequence numbers, acknowledgments, and retransmission of lost packets
+  - Flow control is implemented via a sliding window mechanism
+  - Congestion control algorithms include slow start, congestion avoidance, fast retransmit, and fast recovery
+  - TCP segments include a 20-byte minimum header with source port, destination port, sequence number, acknowledgment number, and flags
+  - Connection termination uses a four-way handshake with FIN and ACK flags
+evidence:     Defined in RFC 793 (1981) by Vint Cerf and Bob Kahn. Extended by numerous subsequent RFCs including RFC 5681 (congestion control) and RFC 7323 (TCP extensions).
+limitations:  TCP introduces latency overhead compared to UDP due to connection setup and acknowledgment mechanisms. Head-of-line blocking can reduce throughput in high-loss environments. Not suitable for real-time applications requiring low latency.
+methodology:  Encyclopedic synthesis of IETF standards documents and networking literature
+---
+NOTES
+TCP and IP were originally designed as a single protocol by Vint Cerf and Bob Kahn in 1974, later separated into TCP and IP layers. TCP is used by HTTP, HTTPS, SMTP, FTP, and SSH. Modern variants like TCP BBR (developed by Google) improve performance on high-bandwidth, high-latency networks.

@@ -1,0 +1,29 @@
+ACF/0.1
+id:           acf-wiki-crispr
+type:         article
+title:        CRISPR-Cas9 Gene Editing
+source:       Wikipedia — CRISPR
+author:       AgentClearfeed
+published:    2026-05-08
+confidence:   verified
+domain:       Biology
+tags:         CRISPR, Cas9, gene editing, genetics, guide RNA, PAM, biotechnology
+conflicts:    none
+license:      CC-BY-SA-4.0
+---
+ARTICLE
+summary:      CRISPR-Cas9 is a genome editing technology adapted from a natural defence system found in bacteria. Bacteria capture fragments of invading viral DNA and store them as CRISPR arrays, which are transcribed into guide RNAs that direct the Cas9 nuclease to matching sequences in future invaders. Scientists have repurposed this system for precise genome editing in any organism.
+claims:
+  - CRISPR stands for Clustered Regularly Interspaced Short Palindromic Repeats
+  - The Cas9 protein acts as molecular scissors, creating a double-strand break in DNA at a location specified by a guide RNA
+  - A guide RNA (gRNA) of approximately 20 nucleotides directs Cas9 to the complementary target DNA sequence
+  - A PAM (Protospacer Adjacent Motif) sequence adjacent to the target site is required for Cas9 recognition and binding
+  - After the double-strand break, the cell repairs it via non-homologous end joining (NHEJ) or homology-directed repair (HDR)
+  - Jennifer Doudna and Emmanuelle Charpentier received the 2020 Nobel Prize in Chemistry for developing CRISPR-Cas9
+  - Applications include treating genetic diseases, creating disease-resistant crops, and studying gene function
+evidence:     Published in Science (Jinek et al., 2012). Nobel Prize in Chemistry 2020. Thousands of peer-reviewed studies demonstrating applications across organisms.
+limitations:  Off-target edits remain a concern. Delivery to specific tissues in vivo is challenging. Ethical debates around human germline editing are ongoing. Mosaicism can occur if editing happens after the first cell division.
+methodology:  Encyclopedic synthesis of molecular biology and genetics literature
+---
+NOTES
+CRISPR was first observed in E. coli by Yoshizumi Ishino in 1987 but its function as an immune system was not understood until 2007. The 2018 He Jiankui affair, involving CRISPR editing of human embryos, sparked worldwide ethical debate. Base editing and prime editing are newer CRISPR variants that allow precise changes without double-strand breaks.

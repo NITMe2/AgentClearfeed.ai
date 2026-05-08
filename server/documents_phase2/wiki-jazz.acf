@@ -1,0 +1,29 @@
+ACF/0.1
+id:           acf-wiki-jazz
+type:         article
+title:        Jazz
+source:       Wikipedia — Jazz
+author:       AgentClearfeed
+published:    2026-05-08
+confidence:   verified
+domain:       Music
+tags:         jazz, music, improvisation, blues, New Orleans, swing, bebop
+conflicts:    none
+license:      CC-BY-SA-4.0
+---
+ARTICLE
+summary:      Jazz is a music genre that originated in the African-American communities of New Orleans, Louisiana, in the late 19th and early 20th centuries. It is characterised by swing and blue notes, complex chords, call-and-response vocals, polyrhythms, and improvisation. Jazz has roots in blues, ragtime, and West African musical traditions.
+claims:
+  - Jazz originated in New Orleans in the late 19th to early 20th century from African-American communities
+  - Key characteristics include swing rhythm, blue notes, improvisation, polyrhythms, and syncopation
+  - Major subgenres include Dixieland, swing, bebop, cool jazz, hard bop, free jazz, jazz fusion, and smooth jazz
+  - Pioneering figures include Louis Armstrong, Duke Ellington, Charlie Parker, Miles Davis, John Coltrane, and Thelonious Monk
+  - The swing era (1930s-1940s) brought jazz to mainstream popularity with big band formats
+  - Bebop emerged in the 1940s as a more complex, virtuosic style led by Charlie Parker and Dizzy Gillespie
+  - Jazz fusion blended jazz improvisation with rock and funk rhythms starting in the late 1960s
+evidence:     Extensive discography, musicological analysis, oral histories, and contemporaneous journalism. The Smithsonian Collection of Classic Jazz provides a canonical recorded history.
+limitations:  Origins are debated among musicologists. The boundaries between jazz and related genres (blues, R&B, funk) are fluid and contested.
+methodology:  Encyclopedic synthesis of musicological and cultural history literature
+---
+NOTES
+Jazz has been called America's classical music. UNESCO designated April 30 as International Jazz Day. The genre has profoundly influenced rock, pop, hip-hop, and classical music. Jazz improvisation requires deep knowledge of harmony, scales, and rhythm, often described as real-time composition.

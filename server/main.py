@@ -10,6 +10,7 @@ from server.parser import load_documents
 app = FastAPI(title="AgentClearfeed", version="0.1")
 
 DOCS_DIR = Path(__file__).parent / "documents"
+DOCS_DIR_PHASE2 = Path(__file__).parent / "documents_phase2"
 documents: dict[str, dict] = {}
 
 
@@ -17,6 +18,8 @@ documents: dict[str, dict] = {}
 def startup():
     global documents
     documents = load_documents(DOCS_DIR)
+    if DOCS_DIR_PHASE2.exists():
+        documents.update(load_documents(DOCS_DIR_PHASE2))
 
 
 @app.get("/acf/document/{doc_id}", response_class=PlainTextResponse)

@@ -1,5 +1,6 @@
 """Test harness: compare agent performance on raw HTML vs ACF content."""
 
+import argparse
 import json
 import time
 from pathlib import Path
@@ -10,7 +11,7 @@ import tiktoken
 from test_harness.queries import QUERIES
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
-OLLAMA_MODEL = "qwen2.5:14b"
+DEFAULT_MODEL = "qwen2.5:14b"
 ACF_SERVER = "http://localhost:8000"
 RAW_DIR = Path(__file__).parent / "raw_sources"
 RESULTS_DIR = Path(__file__).parent / "results"
@@ -21,7 +22,7 @@ def count_tokens(text: str) -> int:
     return len(enc.encode(text))
 
 
-def query_ollama(prompt: str, context: str) -> dict:
+def query_ollama(prompt: str, context: str, model: str) -> dict:
     full_prompt = (
         f"You are a research assistant. Answer the question using ONLY the provided context.\n\n"
         f"CONTEXT:\n{context}\n\n"
@@ -35,7 +36,7 @@ def query_ollama(prompt: str, context: str) -> dict:
     start = time.time()
     resp = httpx.post(
         OLLAMA_URL,
-        json={"model": OLLAMA_MODEL, "prompt": full_prompt, "stream": False},
+        json={"model": model, "prompt": full_prompt, "stream": False},
         timeout=600.0,
     )
     elapsed = time.time() - start
@@ -85,7 +86,7 @@ def load_html_content(filename: str) -> str:
     return (RAW_DIR / filename).read_text(encoding="utf-8")
 
 
-def run_test(query: dict) -> dict:
+def run_test(query: dict, model: str) -> dict:
     print(f"\n{'='*60}")
     print(f"Query: {query['question']}")
     print(f"{'='*60}")
@@ -98,11 +99,11 @@ def run_test(query: dict) -> dict:
     print(f"  Ratio:        {count_tokens(html_content) / count_tokens(acf_content):.1f}x")
 
     print("\n  Running HTML query...")
-    html_result = query_ollama(query["question"], html_content)
+    html_result = query_ollama(query["question"], html_content, model)
     html_grade = grade_answer(html_result["answer"], query["expected_facts"])
 
     print("  Running ACF query...")
-    acf_result = query_ollama(query["question"], acf_content)
+    acf_result = query_ollama(query["question"], acf_content, model)
     acf_grade = grade_answer(acf_result["answer"], query["expected_facts"])
 
     token_saving = html_result["context_tokens"] - acf_result["context_tokens"]
@@ -171,23 +172,29 @@ def print_summary(results: list[dict]):
 
 
 def main():
+    parser = argparse.ArgumentParser(description="ACF vs HTML test harness")
+    parser.add_argument("--model", default=DEFAULT_MODEL, help=f"Ollama model (default: {DEFAULT_MODEL})")
+    args = parser.parse_args()
+    model = args.model
+
     RESULTS_DIR.mkdir(exist_ok=True)
 
     print("AgentClearfeed Test Harness")
     print("Comparing raw HTML vs ACF format for agent consumption")
-    print(f"Model: {OLLAMA_MODEL}")
+    print(f"Model: {model}")
     print(f"ACF Server: {ACF_SERVER}")
 
     results = []
     for query in QUERIES:
-        result = run_test(query)
+        result = run_test(query, model)
         results.append(result)
 
     print_summary(results)
 
-    output_path = RESULTS_DIR / "results.json"
+    safe_model_name = model.replace(":", "_").replace("/", "_")
+    output_path = RESULTS_DIR / f"results_{safe_model_name}.json"
     with open(output_path, "w") as f:
-        json.dump(results, f, indent=2)
+        json.dump({"model": model, "results": results}, f, indent=2)
     print(f"\nDetailed results saved to {output_path}")
 
 

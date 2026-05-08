@@ -1,0 +1,29 @@
+ACF/0.1
+id:           acf-wiki-great-wall
+type:         article
+title:        Great Wall of China
+source:       Wikipedia — Great Wall of China
+author:       AgentClearfeed
+published:    2026-05-08
+confidence:   verified
+domain:       History
+tags:         Great Wall, China, fortification, Ming dynasty, Qin Shi Huang, UNESCO
+conflicts:    none
+license:      CC-BY-SA-4.0
+---
+ARTICLE
+summary:      The Great Wall of China is a series of fortifications built across the historical northern borders of ancient Chinese states and Imperial China to protect against various nomadic groups from the Eurasian Steppe. The total length of all sections ever built is approximately 21,196 kilometres. The most well-known and best-preserved sections were built during the Ming dynasty (1368-1644).
+claims:
+  - Total length of all sections ever built is approximately 21,196 km as surveyed by China's State Administration of Cultural Heritage
+  - Construction began as early as the 7th century BC with various state walls; Qin Shi Huang connected and extended them around 221-206 BC
+  - The most recognisable sections were built during the Ming dynasty (1368-1644) using brick, stone, and tamped earth
+  - The wall served as border control, immigration regulation, trade route protection, and military defence
+  - It is a UNESCO World Heritage Site, designated in 1987
+  - The wall is not visible from space with the naked eye, contrary to popular myth
+  - An estimated 400,000 workers died during construction across various dynasties
+evidence:     Archaeological surveys, Chinese historical records (Shiji by Sima Qian), satellite imagery, and UNESCO documentation
+limitations:  Exact total length depends on which sections and dynasties are included. Many sections are in ruins or have disappeared entirely. Worker death estimates are rough.
+methodology:  Encyclopedic synthesis of Chinese history and archaeological survey data
+---
+NOTES
+The Great Wall is not a single continuous wall but a network of walls and fortifications built by successive dynasties over approximately 2,000 years. The Ming-era walls near Beijing are the most visited tourist sections. Major passes include Shanhaiguan (eastern end) and Jiayuguan (western end).

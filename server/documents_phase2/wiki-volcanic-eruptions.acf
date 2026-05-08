@@ -1,0 +1,29 @@
+ACF/0.1
+id:           acf-wiki-volcanic-eruptions
+type:         article
+title:        Types of Volcanic Eruptions
+source:       Wikipedia — Types of volcanic eruptions
+author:       AgentClearfeed
+published:    2026-05-08
+confidence:   verified
+domain:       Geology
+tags:         volcano, eruption, magma, lava, VEI, Plinian, Strombolian, pyroclastic flow
+conflicts:    none
+license:      CC-BY-SA-4.0
+---
+ARTICLE
+summary:      Volcanic eruptions are classified into several types based on their explosivity, lava composition, and eruption style. The main classification ranges from effusive (gentle lava flows) to explosive (violent ejection of tephra and pyroclastic material). The Volcanic Explosivity Index (VEI) provides a quantitative scale from 0 to 8 measuring eruption size.
+claims:
+  - Eruption types include Hawaiian, Strombolian, Vulcanian, Pelean, Plinian, and Surtseyan
+  - Hawaiian eruptions are the least explosive, producing fluid basaltic lava flows and lava fountains
+  - Strombolian eruptions involve intermittent explosions ejecting incandescent cinder and lava bombs
+  - Plinian eruptions are the most explosive, producing massive ash columns reaching 45 km into the stratosphere and devastating pyroclastic flows
+  - The Volcanic Explosivity Index (VEI) is a logarithmic scale from 0 (gentle) to 8 (mega-colossal, >1000 km3 of ejecta)
+  - Magma viscosity and gas content determine eruption style — low-viscosity basaltic magma produces effusive eruptions, high-viscosity silicic magma produces explosive eruptions
+  - Pyroclastic flows are fast-moving currents of hot gas and volcanic matter that can exceed 700C and travel at 100-700 km/h
+evidence:     Observational volcanology, geological record, historical accounts (Pliny the Younger on Vesuvius AD 79), seismic monitoring data, satellite remote sensing
+limitations:  Classification boundaries are not rigid — individual eruptions can transition between types. VEI is based on ejected volume and may not capture all hazard dimensions.
+methodology:  Encyclopedic synthesis of volcanological literature and observational records
+---
+NOTES
+The 1815 eruption of Mount Tambora (VEI 7) was the largest in recorded history, causing the "Year Without a Summer" in 1816. The 79 AD eruption of Vesuvius that destroyed Pompeii was a Plinian eruption (VEI 5). Supervolcanic eruptions (VEI 8) like Yellowstone approximately 640,000 years ago are exceedingly rare but have global climate impacts.

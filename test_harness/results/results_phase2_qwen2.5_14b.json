@@ -1,0 +1,294 @@
+{
+  "phase": 2,
+  "model": "qwen2.5:14b",
+  "num_documents": 10,
+  "num_queries": 5,
+  "html_total_tokens": 84022,
+  "acf_total_tokens": 5429,
+  "acf_fetch_overhead_seconds": 23.59,
+  "per_topic_tokens": {
+    "html": {
+      "photosynthesis": 8916,
+      "roman_empire": 9000,
+      "tcp_ip": 9000,
+      "jazz": 9000,
+      "great_wall": 9000,
+      "crispr": 8895,
+      "relativity": 6705,
+      "impressionism": 8640,
+      "volcanic_eruptions": 5794,
+      "bitcoin": 9000
+    },
+    "acf": {
+      "photosynthesis": 536,
+      "roman_empire": 516,
+      "tcp_ip": 499,
+      "jazz": 513,
+      "great_wall": 501,
+      "crispr": 569,
+      "relativity": 552,
+      "impressionism": 598,
+      "volcanic_eruptions": 608,
+      "bitcoin": 519
+    }
+  },
+  "results": [
+    {
+      "query_id": "p2q1",
+      "question": "What are the two main stages of photosynthesis and where does each occur?",
+      "target_topic": "photosynthesis",
+      "html": {
+        "answer": "The two main stages of photosynthesis are:\n\n1. **Light-dependent reactions**: These occur in the thylakoid membranes of chloroplasts, specifically within the grana stacks. This stage captures light energy and converts it into chemical energy (ATP and NADPH).\n\n2. **Calvin cycle (light-independent reactions)**: This takes place in the stroma of chloroplasts. The Calvin cycle uses ATP and NADPH produced by the light-dependent reactions to convert carbon dioxide into glucose.\n\nThese stages work together to enable plants to convert sunlight, water, and carbon dioxide into oxygen and energy-rich sugars like glucose.",
+        "context_tokens": 84022,
+        "prompt_tokens": 84082,
+        "answer_tokens": 127,
+        "total_tokens": 84209,
+        "latency_seconds": 64.52,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "light-dependent reactions occur in the thylakoid membranes",
+            "Calvin cycle or light-independent reactions occur in the stroma",
+            "light reactions produce ATP and NADPH"
+          ],
+          "misses": []
+        }
+      },
+      "acf": {
+        "answer": "The two main stages of photosynthesis are the light-dependent reactions and the Calvin cycle (light-independent reactions). The light-dependent reactions occur in the thylakoid membranes, while the Calvin cycle takes place in the stroma of chloroplasts.",
+        "context_tokens": 5429,
+        "prompt_tokens": 5489,
+        "answer_tokens": 49,
+        "total_tokens": 5538,
+        "latency_seconds": 35.09,
+        "fetch_overhead_seconds": 23.59,
+        "total_latency_seconds": 58.68,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "light-dependent reactions occur in the thylakoid membranes",
+            "Calvin cycle or light-independent reactions occur in the stroma",
+            "light reactions produce ATP and NADPH"
+          ],
+          "misses": []
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": 5.84,
+        "accuracy_diff": 0.0
+      }
+    },
+    {
+      "query_id": "p2q2",
+      "question": "How does the TCP three-way handshake establish a connection?",
+      "target_topic": "tcp_ip",
+      "html": {
+        "answer": "The TCP three-way (or 3-step) handshake to establish a connection works as follows:\n\n1. The client sends a SYN (synchronize) message to the server to initiate the connection.\n2. The server responds with a SYN-ACK (synchronize-acknowledge) message back to the client, acknowledging receipt of the first packet and sending synchronization information.\n3. The client replies with an ACK ( acknowledgment), confirming the connection is established.\n\nThis exchange ensures both sides are ready to transmit data in the agreed-upon sequence.",
+        "context_tokens": 84022,
+        "prompt_tokens": 84078,
+        "answer_tokens": 107,
+        "total_tokens": 84185,
+        "latency_seconds": 58.37,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "SYN packet sent by client to initiate connection",
+            "server responds with SYN-ACK",
+            "client sends final ACK to complete handshake"
+          ],
+          "misses": []
+        }
+      },
+      "acf": {
+        "answer": "The TCP three-way handshake establishes a connection through the following steps:\n1. The client sends a SYN (synchronize) segment to initiate the connection.\n2. The server responds with a SYN-ACK (synchronize-acknowledge) segment, acknowledging the receipt of the first packet and sending its own synchronization request.\n3. The client sends an ACK (acknowledgment) segment in response to the server's SYN-ACK, confirming the establishment of the connection.\n\nThis process ensures both sides are ready for data transmission by synchronizing sequence numbers.",
+        "context_tokens": 5429,
+        "prompt_tokens": 5485,
+        "answer_tokens": 109,
+        "total_tokens": 5594,
+        "latency_seconds": 56.33,
+        "fetch_overhead_seconds": 23.59,
+        "total_latency_seconds": 79.92,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "SYN packet sent by client to initiate connection",
+            "server responds with SYN-ACK",
+            "client sends final ACK to complete handshake"
+          ],
+          "misses": []
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": -21.55,
+        "accuracy_diff": 0.0
+      }
+    },
+    {
+      "query_id": "p2q3",
+      "question": "How does CRISPR-Cas9 identify and cut a specific location in DNA?",
+      "target_topic": "crispr",
+      "html": {
+        "answer": "CRISPR-Cas9 identifies and cuts a specific location in DNA through the following process:\n\n1. A guide RNA (gRNA) is designed to match the target DNA sequence.\n\n2. The gRNA pairs with the complementary strand of the targeted DNA site via Watson-Crick base pairing.\n\n3. Cas9, an endonuclease enzyme, uses the guidance from the gRNA to identify and bind to the specific DNA location.\n\n4. Once bound, Cas9 creates a double-strand break at that precise genomic locus.\n\n5. The specificity primarily comes from the 20-nucleotide sequence in the gRNA which must match the target DNA for Cas9 to cut.\n\nSo in summary, it relies on complementary base pairing between the guide RNA and target DNA to direct Cas9 to its cleavage site. The system enables highly targeted genome editing when used correctly.",
+        "context_tokens": 84022,
+        "prompt_tokens": 84084,
+        "answer_tokens": 175,
+        "total_tokens": 84259,
+        "latency_seconds": 80.85,
+        "grade": {
+          "facts_found": 2,
+          "facts_total": 3,
+          "accuracy": 0.67,
+          "hits": [
+            "guide RNA directs Cas9 to the target sequence",
+            "Cas9 creates a double-strand break in the DNA"
+          ],
+          "misses": [
+            "PAM sequence adjacent to target is required for recognition"
+          ]
+        }
+      },
+      "acf": {
+        "answer": "CRISPR-Cas9 identifies and cuts a specific location in DNA through a guide RNA (gRNA) that directs the Cas9 enzyme to the target site. The gRNA consists of approximately 20 nucleotides that bind to a complementary sequence in the DNA, aided by a Protospacer Adjacent Motif (PAM) sequence adjacent to the target site. Once bound, the Cas9 protein acts as molecular scissors to create a double-strand break at this specified location.",
+        "context_tokens": 5429,
+        "prompt_tokens": 5491,
+        "answer_tokens": 98,
+        "total_tokens": 5589,
+        "latency_seconds": 53.39,
+        "fetch_overhead_seconds": 23.59,
+        "total_latency_seconds": 76.98,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "guide RNA directs Cas9 to the target sequence",
+            "Cas9 creates a double-strand break in the DNA",
+            "PAM sequence adjacent to target is required for recognition"
+          ],
+          "misses": []
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": 3.87,
+        "accuracy_diff": 0.33
+      }
+    },
+    {
+      "query_id": "p2q4",
+      "question": "What distinguishes Impressionist painting from earlier academic art?",
+      "target_topic": "impressionism",
+      "html": {
+        "answer": "Impressionist painting differs from earlier academic art in several key ways:\n\n1. Subject matter: Impressionists focused on modern life, everyday scenes, and landscapes rather than historical or mythological themes.\n\n2. Technique: Impressionists used loose brush strokes and rapid application of paint to capture fleeting effects of light and color, while academic art featured highly detailed, polished surfaces.\n\n3. Composition: Impressionist works often had an open composition with less emphasis on clear lines and symmetry compared to the tightly structured compositions favored in academic painting.\n\n4. Color palette: Impressionists employed vibrant, pure colors and visible brush strokes to create optical mixing, whereas academic painters typically used a more subdued color scheme built from traditional earth tones.\n\n5. Lighting effects: Capturing changing light and atmospheric conditions was central to impressionism, while earlier art aimed for idealized lighting without temporal variation.\n\n6. Scale & size: Impressionist paintings were often smaller in scale, allowing for portability and display in non-traditional settings like salons or galleries, whereas academic works frequently included grand-scale canvases meant for public institutions.\n\nThese innovations reflected a broader shift from rigidly prescribed artistic rules to an emphasis on individual perception and expression.",
+        "context_tokens": 84022,
+        "prompt_tokens": 84079,
+        "answer_tokens": 244,
+        "total_tokens": 84323,
+        "latency_seconds": 101.8,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "visible brush strokes and open composition",
+            "emphasis on light and its changing qualities",
+            "ordinary subject matter and outdoor painting en plein air"
+          ],
+          "misses": []
+        }
+      },
+      "acf": {
+        "answer": "Impressionist painting, originating in Paris in the 1860s-1870s, distinguished itself from earlier academic art through visible brush strokes, open composition, emphasis on light and its changing qualities, and ordinary subject matter. Impressionists also frequently painted outdoors (en plein air) to capture natural light and color accurately.",
+        "context_tokens": 5429,
+        "prompt_tokens": 5486,
+        "answer_tokens": 66,
+        "total_tokens": 5552,
+        "latency_seconds": 44.14,
+        "fetch_overhead_seconds": 23.59,
+        "total_latency_seconds": 67.73,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "visible brush strokes and open composition",
+            "emphasis on light and its changing qualities",
+            "ordinary subject matter and outdoor painting en plein air"
+          ],
+          "misses": []
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": 34.07,
+        "accuracy_diff": 0.0
+      }
+    },
+    {
+      "query_id": "p2q5",
+      "question": "How does Bitcoin prevent double-spending without a central authority?",
+      "target_topic": "bitcoin",
+      "html": {
+        "answer": "Bitcoin prevents double-spending through a decentralized public ledger called the blockchain, which records all transactions. Miners validate transactions by solving complex cryptographic puzzles, adding new blocks to the chain. This process ensures transaction history is immutable and consensus is reached without needing a central authority.",
+        "context_tokens": 84022,
+        "prompt_tokens": 84079,
+        "answer_tokens": 53,
+        "total_tokens": 84132,
+        "latency_seconds": 43.02,
+        "grade": {
+          "facts_found": 2,
+          "facts_total": 3,
+          "accuracy": 0.67,
+          "hits": [
+            "transactions verified by network of miners",
+            "blockchain is a distributed public ledger"
+          ],
+          "misses": [
+            "proof of work consensus mechanism"
+          ]
+        }
+      },
+      "acf": {
+        "answer": "Bitcoin prevents double-spending through its decentralized blockchain ledger and proof-of-work consensus mechanism. Transactions are recorded in blocks, which must be validated by miners who solve complex cryptographic puzzles to add new blocks to the chain. The network accepts only the longest valid chain, making it computationally impractical for anyone to alter past transactions or spend the same bitcoins twice.",
+        "context_tokens": 5429,
+        "prompt_tokens": 5486,
+        "answer_tokens": 70,
+        "total_tokens": 5556,
+        "latency_seconds": 43.02,
+        "fetch_overhead_seconds": 23.59,
+        "total_latency_seconds": 66.61,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "proof of work consensus mechanism",
+            "transactions verified by network of miners",
+            "blockchain is a distributed public ledger"
+          ],
+          "misses": []
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": -23.59,
+        "accuracy_diff": 0.33
+      }
+    }
+  ]
+}
