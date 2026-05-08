@@ -1,6 +1,7 @@
-# AgentClearfeed — Phase 1 Proof of Concept
+# AgentClearfeed
 
-**97.6% token reduction. 5.2x faster. Zero accuracy loss.**
+**Phase 1:** 97.6% token reduction, 5.2x faster, zero accuracy loss.
+**Phase 2:** 93.5% token reduction across 10 docs — ACF *outscores* HTML on accuracy (1.00 vs 0.87).
 
 An agent-native web layer. Clean, structured, verified content served in `.acf` format. Not a scraper on top of the human web — a parallel layer built for inference.
 
@@ -16,6 +17,23 @@ Tested with `qwen2.5:14b` on local Ollama. Same queries, same information. Raw H
 | **Average** | **16,388** | **394** | **97.6%** | **119s** | **23s** |
 
 Accuracy was identical across both formats — the agent extracted the same facts from 394 tokens that it did from 16,388. Every extra token in the HTML was pure overhead.
+
+## Phase 2 Results — Multi-Document Retrieval
+
+10 diverse Wikipedia topics (Photosynthesis, Roman Empire, TCP/IP, Jazz, Great Wall of China, CRISPR, Theory of Relativity, Impressionism, Volcanic Eruptions, Bitcoin) concatenated as one big context. The model must find the needle in the haystack. ACF path includes realistic fetch overhead to simulate a conversion layer.
+
+| Query | Target | HTML Acc | ACF Acc | HTML Latency | ACF Latency |
+|-------|--------|----------|---------|-------------|-------------|
+| Stages of photosynthesis? | Photosynthesis | 1.00 | 1.00 | 65s | 59s |
+| TCP three-way handshake? | TCP/IP | 1.00 | 1.00 | 58s | 80s |
+| How does CRISPR-Cas9 cut DNA? | CRISPR | **0.67** | **1.00** | 81s | 77s |
+| Impressionist vs academic art? | Impressionism | 1.00 | 1.00 | 102s | 68s |
+| Bitcoin double-spending prevention? | Bitcoin | **0.67** | **1.00** | 43s | 67s |
+| **Average** | | **0.87** | **1.00** | **70s** | **70s** |
+
+- **Token reduction:** 84,022 → 5,429 tokens (**93.5%**)
+- **Accuracy:** ACF perfect (1.00), HTML missed facts on CRISPR and Bitcoin queries — the model got lost in 84K tokens of HTML noise
+- **Latency:** Roughly equal (~70s) even with 23.6s ACF fetch overhead included
 
 ### This is what the agent has to parse on the human web
 
@@ -34,8 +52,12 @@ pip install -r requirements.txt
 # Start the ACF server
 python -m server.main
 
-# In another terminal, run the test harness (requires Ollama with qwen2.5:14b)
+# In another terminal — Phase 1 (single-doc, AI fairness)
 python -m test_harness.harness
+
+# Phase 2 (multi-doc, 10 Wikipedia topics)
+python -m test_harness.phase2.fetch_wikipedia   # one-time: fetch HTML pages
+python -m test_harness.phase2.harness_phase2    # run the test
 ```
 
 ## Prerequisites
@@ -54,11 +76,18 @@ python -m test_harness.harness
 ├── server/
 │   ├── main.py                  # FastAPI server
 │   ├── parser.py                # ACF document parser
-│   └── documents/               # 10 AI fairness .acf documents + index
+│   ├── documents/               # Phase 1: 10 AI fairness .acf documents + index
+│   └── documents_phase2/        # Phase 2: 10 diverse Wikipedia .acf documents
 ├── test_harness/
-│   ├── harness.py               # Main test runner
-│   ├── queries.py               # Test queries with expected facts
-│   └── raw_sources/             # HTML equivalents for comparison
+│   ├── harness.py               # Phase 1 test runner (single-doc)
+│   ├── queries.py               # Phase 1 queries
+│   ├── raw_sources/             # Phase 1 HTML sources
+│   ├── phase2/
+│   │   ├── harness_phase2.py    # Phase 2 test runner (multi-doc retrieval)
+│   │   ├── queries_phase2.py    # Phase 2 queries (5 across 10 topics)
+│   │   ├── fetch_wikipedia.py   # Wikipedia HTML fetcher
+│   │   └── raw_sources/         # Phase 2 HTML sources (10 Wikipedia pages)
+│   └── results/                 # JSON results from all test runs
 └── requirements.txt
 ```
 
