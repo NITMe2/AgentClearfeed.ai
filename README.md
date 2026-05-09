@@ -2,7 +2,7 @@
 
 **The human web is broken for AI agents.** Pages built for human eyes are bloated with navigation, ads, cookie banners, tracking scripts, and layout markup. An agent parsing a typical webpage wastes 93-98% of its token budget on noise before reaching the actual content.
 
-AgentClearfeed is a parallel content layer built for inference. Clean, structured, verified content served in `.acf` format — not a scraper on top of the human web, but a native format designed for how AI agents actually consume information.
+AgentClearfeed is a parallel content layer built for inference. Clean, structured, verified content served in `.acf` format - not a scraper on top of the human web, but a native format designed for how AI agents actually consume information.
 
 ## Key Results
 
@@ -15,11 +15,11 @@ AgentClearfeed is a parallel content layer built for inference. Clean, structure
 
 ## Why This Matters
 
-LLM inference cost scales with input tokens. Every webpage an agent reads carries thousands of tokens of HTML markup, JavaScript, CSS classes, and UI chrome that contribute nothing to the answer. This isn't just wasteful — it actively degrades accuracy. Models get lost in the noise.
+LLM inference cost scales with input tokens. Every webpage an agent reads carries thousands of tokens of HTML markup, JavaScript, CSS classes, and UI chrome that contribute nothing to the answer. This isn't just wasteful - it actively degrades accuracy. Models get lost in the noise.
 
 ACF strips content down to structured, labelled fields. The result: agents read less, understand more, and cost a fraction to run.
 
-## Phase 1 — Single Document Retrieval
+## Phase 1 - Single Document Retrieval
 
 Three AI fairness questions answered from realistic modern webpages (cookie banners, tracking scripts, ads, paywalls, chat widgets) versus the same content in ACF format.
 
@@ -34,7 +34,7 @@ Three AI fairness questions answered from realistic modern webpages (cookie bann
 
 Accuracy was identical across both formats. Every extra token in the HTML was pure overhead.
 
-## Phase 2 — Multi-Document Retrieval
+## Phase 2 - Multi-Document Retrieval
 
 10 diverse Wikipedia topics (Photosynthesis, Roman Empire, TCP/IP, Jazz, Great Wall, CRISPR, Relativity, Impressionism, Volcanic Eruptions, Bitcoin) concatenated as a single context. The model must find the right document in the haystack and extract the answer. ACF timings include realistic fetch overhead from a conversion layer.
 
@@ -48,7 +48,7 @@ Tested across 4 models spanning local open-source, commercial API, and Chinese c
 | Claude Haiku 4.5 | Anthropic API | 0.67 | **1.00** | +0.33 |
 | Kimi K2.5 | Moonshot API | 0.13 | **0.93** | +0.80 |
 | Kimi K2.6 | Moonshot API | 0.00 | **0.80** | +0.80 |
-| Kimi K2.5 + Agent Swarm | Moonshot API | 0.20 | — | — |
+| Kimi K2.5 + Agent Swarm | Moonshot API | 0.20 | - | - |
 
 **ACF wins on every model.** The smaller or less HTML-savvy the model, the bigger the advantage.
 
@@ -62,7 +62,7 @@ Tested across 4 models spanning local open-source, commercial API, and Chinese c
 | Impressionist vs academic art? | Impressionism | 1.00 | 1.00 |
 | Bitcoin double-spending prevention? | Bitcoin | 1.00 | 1.00 |
 
-Haiku couldn't even find the TCP handshake answer in 84K tokens of HTML — it said the information wasn't in the context. With 5.4K tokens of ACF, it answered perfectly.
+Haiku couldn't even find the TCP handshake answer in 84K tokens of HTML - it said the information wasn't in the context. With 5.4K tokens of ACF, it answered perfectly.
 
 ### The Agent Swarm Test
 
@@ -70,7 +70,7 @@ Kimi K2.5 scored 0.13 on HTML retrieval. We tested whether Kimi's Agent Swarm fe
 
 **Result: 0.20 accuracy.** Agent Swarm barely moved the needle.
 
-More agents can't fix bad input. The swarm is still processing the same noisy HTML — orchestration doesn't solve a format problem. Meanwhile, a single ACF call with zero orchestration scores 0.93.
+More agents can't fix bad input. The swarm is still processing the same noisy HTML - orchestration doesn't solve a format problem. Meanwhile, a single ACF call with zero orchestration scores 0.93.
 
 **One cheap API call with ACF > an entire multi-agent pipeline with HTML.**
 
@@ -94,13 +94,13 @@ Consistent 93.5% reduction across all models and queries:
 
 ## What ACF Proves
 
-1. **Format is the bottleneck, not the model.** Kimi K2.6 scores 0.0 on HTML and 0.80 on ACF — same model, same content, different format.
+1. **Format is the bottleneck, not the model.** Kimi K2.6 scores 0.0 on HTML and 0.80 on ACF - same model, same content, different format.
 
-2. **ACF is model-agnostic.** Every model tested — from a 14B local model to frontier APIs to Chinese cloud providers — performs better with ACF.
+2. **ACF is model-agnostic.** Every model tested - from a 14B local model to frontier APIs to Chinese cloud providers - performs better with ACF.
 
 3. **ACF makes smaller models viable.** Tasks that require expensive frontier models with HTML work perfectly with cheap models on ACF. This changes the economics of agent deployments.
 
-4. **Orchestration can't fix format.** Agent Swarm, multi-agent pipelines, RAG — none of these solve the fundamental problem of noisy input. Clean input does.
+4. **Orchestration can't fix format.** Agent Swarm, multi-agent pipelines, RAG - none of these solve the fundamental problem of noisy input. Clean input does.
 
 ## Quick Start
 
@@ -111,10 +111,10 @@ pip install -r requirements.txt
 # Start the ACF server
 python -m server.main
 
-# Phase 1 — single-doc retrieval (requires Ollama + qwen2.5:14b)
+# Phase 1 - single-doc retrieval (requires Ollama + qwen2.5:14b)
 python -m test_harness.harness
 
-# Phase 2 — multi-doc retrieval
+# Phase 2 - multi-doc retrieval
 python -m test_harness.phase2.harness_phase2                          # Ollama (default: qwen2.5:14b)
 python -m test_harness.phase2.harness_phase2 --model claude-haiku     # Anthropic API
 python -m test_harness.phase2.harness_phase2 --model kimi-k2.5        # Kimi API
@@ -136,10 +136,10 @@ python -m test_harness.phase2.harness_phase2 --model kimi-k2.5 --swarm --html-on
 ACF (AgentClearfeed Format) is a plain text format designed for LLM consumption. Every field is explicit, every document is self-describing. See [ACF_Format_Spec.md](ACF_Format_Spec.md) for the full specification.
 
 Core principles:
-- **Token efficiency first** — every byte must earn its place
-- **Structured over prose** — fields not paragraphs
-- **Explicit affordances** — agents always know what they're reading
-- **Ungameable by design** — structured fields leave no room for SEO manipulation
+- **Token efficiency first** - every byte must earn its place
+- **Structured over prose** - fields not paragraphs
+- **Explicit affordances** - agents always know what they're reading
+- **Ungameable by design** - structured fields leave no room for SEO manipulation
 
 ## Project Structure
 
@@ -167,8 +167,8 @@ AgentClearfeed/
 ## API Endpoints
 
 ```
-GET /acf/document/{id}    — Fetch a single ACF document
-GET /acf/index            — List all documents
-GET /acf/domain/{domain}  — Get documents by domain
-GET /acf/query?q={query}  — Natural language search
+GET /acf/document/{id}    - Fetch a single ACF document
+GET /acf/index            - List all documents
+GET /acf/domain/{domain}  - Get documents by domain
+GET /acf/query?q={query}  - Natural language search
 ```
