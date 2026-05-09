@@ -1,0 +1,312 @@
+{
+  "phase": 2,
+  "model": "kimi-k2.6",
+  "num_documents": 10,
+  "num_queries": 5,
+  "html_total_tokens": 84022,
+  "acf_total_tokens": 5429,
+  "acf_fetch_overhead_seconds": 23.59,
+  "per_topic_tokens": {
+    "html": {
+      "photosynthesis": 8916,
+      "roman_empire": 9000,
+      "tcp_ip": 9000,
+      "jazz": 9000,
+      "great_wall": 9000,
+      "crispr": 8895,
+      "relativity": 6705,
+      "impressionism": 8640,
+      "volcanic_eruptions": 5794,
+      "bitcoin": 9000
+    },
+    "acf": {
+      "photosynthesis": 536,
+      "roman_empire": 516,
+      "tcp_ip": 499,
+      "jazz": 513,
+      "great_wall": 501,
+      "crispr": 569,
+      "relativity": 552,
+      "impressionism": 598,
+      "volcanic_eruptions": 608,
+      "bitcoin": 519
+    }
+  },
+  "results": [
+    {
+      "query_id": "p2q1",
+      "question": "What are the two main stages of photosynthesis and where does each occur?",
+      "target_topic": "photosynthesis",
+      "html": {
+        "answer": "",
+        "context_tokens": 84022,
+        "prompt_tokens": 84082,
+        "answer_tokens": 0,
+        "total_tokens": 84082,
+        "latency_seconds": 17.23,
+        "api_input_tokens": 84289,
+        "api_output_tokens": 512,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "light-dependent reactions occur in the thylakoid membranes",
+            "Calvin cycle or light-independent reactions occur in the stroma",
+            "light reactions produce ATP and NADPH"
+          ]
+        }
+      },
+      "acf": {
+        "answer": "The two main stages of photosynthesis are:\n\n1. **Light-dependent reactions** \u2014 occur in the **thylakoid membranes**\n2. **The Calvin cycle** (light-independent reactions) \u2014 occurs in the **stroma**",
+        "context_tokens": 5429,
+        "prompt_tokens": 5489,
+        "answer_tokens": 47,
+        "total_tokens": 5536,
+        "latency_seconds": 9.91,
+        "api_input_tokens": 5482,
+        "api_output_tokens": 271,
+        "fetch_overhead_seconds": 23.59,
+        "total_latency_seconds": 33.5,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "light-dependent reactions occur in the thylakoid membranes",
+            "Calvin cycle or light-independent reactions occur in the stroma",
+            "light reactions produce ATP and NADPH"
+          ],
+          "misses": []
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": -16.27,
+        "accuracy_diff": 1.0
+      }
+    },
+    {
+      "query_id": "p2q2",
+      "question": "How does the TCP three-way handshake establish a connection?",
+      "target_topic": "tcp_ip",
+      "html": {
+        "answer": "",
+        "context_tokens": 84022,
+        "prompt_tokens": 84078,
+        "answer_tokens": 0,
+        "total_tokens": 84078,
+        "latency_seconds": 34.58,
+        "api_input_tokens": 84285,
+        "api_output_tokens": 512,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "SYN packet sent by client to initiate connection",
+            "server responds with SYN-ACK",
+            "client sends final ACK to complete handshake"
+          ]
+        }
+      },
+      "acf": {
+        "answer": "According to the TCP article, connection establishment uses a three-way handshake: the client sends a SYN packet, the server responds with a SYN-ACK packet, and the client sends a final ACK packet.",
+        "context_tokens": 5429,
+        "prompt_tokens": 5485,
+        "answer_tokens": 40,
+        "total_tokens": 5525,
+        "latency_seconds": 8.85,
+        "api_input_tokens": 5478,
+        "api_output_tokens": 182,
+        "fetch_overhead_seconds": 23.59,
+        "total_latency_seconds": 32.44,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "SYN packet sent by client to initiate connection",
+            "server responds with SYN-ACK",
+            "client sends final ACK to complete handshake"
+          ],
+          "misses": []
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": 2.14,
+        "accuracy_diff": 1.0
+      }
+    },
+    {
+      "query_id": "p2q3",
+      "question": "How does CRISPR-Cas9 identify and cut a specific location in DNA?",
+      "target_topic": "crispr",
+      "html": {
+        "answer": "",
+        "context_tokens": 84022,
+        "prompt_tokens": 84084,
+        "answer_tokens": 0,
+        "total_tokens": 84084,
+        "latency_seconds": 16.1,
+        "api_input_tokens": 84291,
+        "api_output_tokens": 512,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "guide RNA directs Cas9 to the target sequence",
+            "Cas9 creates a double-strand break in the DNA",
+            "PAM sequence adjacent to target is required for recognition"
+          ]
+        }
+      },
+      "acf": {
+        "answer": "CRISPR-Cas9 identifies its target using a guide RNA (gRNA) of approximately 20 nucleotides that is complementary to the target DNA sequence. Cas9 also requires a PAM (Protospacer Adjacent Motif) sequence adjacent to the target site for recognition and binding. Once bound to the correct location, the Cas9 protein creates a double-strand break in the DNA.",
+        "context_tokens": 5429,
+        "prompt_tokens": 5491,
+        "answer_tokens": 81,
+        "total_tokens": 5572,
+        "latency_seconds": 16.35,
+        "api_input_tokens": 5484,
+        "api_output_tokens": 446,
+        "fetch_overhead_seconds": 23.59,
+        "total_latency_seconds": 39.94,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "guide RNA directs Cas9 to the target sequence",
+            "Cas9 creates a double-strand break in the DNA",
+            "PAM sequence adjacent to target is required for recognition"
+          ],
+          "misses": []
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": -23.84,
+        "accuracy_diff": 1.0
+      }
+    },
+    {
+      "query_id": "p2q4",
+      "question": "What distinguishes Impressionist painting from earlier academic art?",
+      "target_topic": "impressionism",
+      "html": {
+        "answer": "According to the provided context, Impressionist painting distinguished itself from earlier academic art in",
+        "context_tokens": 84022,
+        "prompt_tokens": 84079,
+        "answer_tokens": 17,
+        "total_tokens": 84096,
+        "latency_seconds": 16.26,
+        "api_input_tokens": 84285,
+        "api_output_tokens": 512,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "visible brush strokes and open composition",
+            "emphasis on light and its changing qualities",
+            "ordinary subject matter and outdoor painting en plein air"
+          ]
+        }
+      },
+      "acf": {
+        "answer": "Impressionist painting broke with academic traditions by featuring visible brush strokes, open composition, an emphasis on the accurate depiction of light in its changing qualities, ordinary subject matter, and the practice of painting outdoors (*en plein air*). The Impressionists also used pure unmixed colours placed side by side rather than blended on the palette, relying on",
+        "context_tokens": 5429,
+        "prompt_tokens": 5486,
+        "answer_tokens": 69,
+        "total_tokens": 5555,
+        "latency_seconds": 19.26,
+        "api_input_tokens": 5478,
+        "api_output_tokens": 512,
+        "fetch_overhead_seconds": 23.59,
+        "total_latency_seconds": 42.85,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "visible brush strokes and open composition",
+            "emphasis on light and its changing qualities",
+            "ordinary subject matter and outdoor painting en plein air"
+          ],
+          "misses": []
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": -26.59,
+        "accuracy_diff": 1.0
+      }
+    },
+    {
+      "query_id": "p2q5",
+      "question": "How does Bitcoin prevent double-spending without a central authority?",
+      "target_topic": "bitcoin",
+      "html": {
+        "answer": "",
+        "context_tokens": 84022,
+        "prompt_tokens": 84079,
+        "answer_tokens": 0,
+        "total_tokens": 84079,
+        "latency_seconds": 13.71,
+        "api_input_tokens": 84286,
+        "api_output_tokens": 512,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "proof of work consensus mechanism",
+            "transactions verified by network of miners",
+            "blockchain is a distributed public ledger"
+          ]
+        }
+      },
+      "acf": {
+        "answer": "",
+        "context_tokens": 5429,
+        "prompt_tokens": 5486,
+        "answer_tokens": 0,
+        "total_tokens": 5486,
+        "latency_seconds": 20.55,
+        "api_input_tokens": 5479,
+        "api_output_tokens": 512,
+        "fetch_overhead_seconds": 23.59,
+        "total_latency_seconds": 44.14,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "proof of work consensus mechanism",
+            "transactions verified by network of miners",
+            "blockchain is a distributed public ledger"
+          ]
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": -30.43,
+        "accuracy_diff": 0.0
+      }
+    }
+  ]
+}

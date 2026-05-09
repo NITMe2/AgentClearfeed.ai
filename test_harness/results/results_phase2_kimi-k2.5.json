@@ -1,0 +1,315 @@
+{
+  "phase": 2,
+  "model": "kimi-k2.5",
+  "num_documents": 10,
+  "num_queries": 5,
+  "html_total_tokens": 84022,
+  "acf_total_tokens": 5429,
+  "acf_fetch_overhead_seconds": 23.66,
+  "per_topic_tokens": {
+    "html": {
+      "photosynthesis": 8916,
+      "roman_empire": 9000,
+      "tcp_ip": 9000,
+      "jazz": 9000,
+      "great_wall": 9000,
+      "crispr": 8895,
+      "relativity": 6705,
+      "impressionism": 8640,
+      "volcanic_eruptions": 5794,
+      "bitcoin": 9000
+    },
+    "acf": {
+      "photosynthesis": 536,
+      "roman_empire": 516,
+      "tcp_ip": 499,
+      "jazz": 513,
+      "great_wall": 501,
+      "crispr": 569,
+      "relativity": 552,
+      "impressionism": 598,
+      "volcanic_eruptions": 608,
+      "bitcoin": 519
+    }
+  },
+  "results": [
+    {
+      "query_id": "p2q1",
+      "question": "What are the two main stages of photosynthesis and where does each occur?",
+      "target_topic": "photosynthesis",
+      "html": {
+        "answer": "",
+        "context_tokens": 84022,
+        "prompt_tokens": 84082,
+        "answer_tokens": 0,
+        "total_tokens": 84082,
+        "latency_seconds": 36.77,
+        "api_input_tokens": 84289,
+        "api_output_tokens": 512,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "light-dependent reactions occur in the thylakoid membranes",
+            "Calvin cycle or light-independent reactions occur in the stroma",
+            "light reactions produce ATP and NADPH"
+          ]
+        }
+      },
+      "acf": {
+        "answer": "The two main stages of photosynthesis are:\n\n1. **Light-dependent reactions** (light reactions) \u2014 occur in the **thylakoid membranes**\n2. **Calvin cycle** (light-independent reactions) \u2014 occurs in the **stroma**",
+        "context_tokens": 5429,
+        "prompt_tokens": 5489,
+        "answer_tokens": 51,
+        "total_tokens": 5540,
+        "latency_seconds": 9.72,
+        "api_input_tokens": 5482,
+        "api_output_tokens": 293,
+        "fetch_overhead_seconds": 23.66,
+        "total_latency_seconds": 33.38,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "light-dependent reactions occur in the thylakoid membranes",
+            "Calvin cycle or light-independent reactions occur in the stroma",
+            "light reactions produce ATP and NADPH"
+          ],
+          "misses": []
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": 3.39,
+        "accuracy_diff": 1.0
+      }
+    },
+    {
+      "query_id": "p2q2",
+      "question": "How does the TCP three-way handshake establish a connection?",
+      "target_topic": "tcp_ip",
+      "html": {
+        "answer": "",
+        "context_tokens": 84022,
+        "prompt_tokens": 84078,
+        "answer_tokens": 0,
+        "total_tokens": 84078,
+        "latency_seconds": 40.22,
+        "api_input_tokens": 84285,
+        "api_output_tokens": 512,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "SYN packet sent by client to initiate connection",
+            "server responds with SYN-ACK",
+            "client sends final ACK to complete handshake"
+          ]
+        }
+      },
+      "acf": {
+        "answer": "According to the document on Transmission Control Protocol (TCP), the three-way handshake establishes a connection as follows: the client sends SYN, the server responds with SYN-ACK, and the client sends a final ACK.",
+        "context_tokens": 5429,
+        "prompt_tokens": 5485,
+        "answer_tokens": 42,
+        "total_tokens": 5527,
+        "latency_seconds": 10.64,
+        "api_input_tokens": 5478,
+        "api_output_tokens": 276,
+        "fetch_overhead_seconds": 23.66,
+        "total_latency_seconds": 34.3,
+        "grade": {
+          "facts_found": 2,
+          "facts_total": 3,
+          "accuracy": 0.67,
+          "hits": [
+            "server responds with SYN-ACK",
+            "client sends final ACK to complete handshake"
+          ],
+          "misses": [
+            "SYN packet sent by client to initiate connection"
+          ]
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": 5.92,
+        "accuracy_diff": 0.67
+      }
+    },
+    {
+      "query_id": "p2q3",
+      "question": "How does CRISPR-Cas9 identify and cut a specific location in DNA?",
+      "target_topic": "crispr",
+      "html": {
+        "answer": "Based on the provided context, CRISPR-Cas9 identifies and cuts specific DNA locations through the following mechanism:\n\n**Cas9** (CRISPR-associated protein 9) is an enzyme that uses **CRISPR sequences as a guide** to recognize",
+        "context_tokens": 84022,
+        "prompt_tokens": 84084,
+        "answer_tokens": 52,
+        "total_tokens": 84136,
+        "latency_seconds": 18.4,
+        "api_input_tokens": 84291,
+        "api_output_tokens": 512,
+        "grade": {
+          "facts_found": 1,
+          "facts_total": 3,
+          "accuracy": 0.33,
+          "hits": [
+            "guide RNA directs Cas9 to the target sequence"
+          ],
+          "misses": [
+            "Cas9 creates a double-strand break in the DNA",
+            "PAM sequence adjacent to target is required for recognition"
+          ]
+        }
+      },
+      "acf": {
+        "answer": "CRISPR-Cas9 identifies and cuts DNA through the following mechanism:\n\n**Identification:**\n- A **guide RNA (gRNA)** of approximately 20 nucleotides directs the Cas9 protein to a complementary target DNA sequence.\n- Cas9 requires a **PAM (Protospacer Adjacent Motif)** sequence adjacent to the target site for recognition and binding.\n\n**Cutting:**\n- The **Cas9 protein** acts as molecular scissors, creating a **double-strand break** in the DNA at the location specified by the guide RNA.\n- After the break, the cell repairs the damage via non-homologous end joining (NHEJ) or homology-directed",
+        "context_tokens": 5429,
+        "prompt_tokens": 5491,
+        "answer_tokens": 139,
+        "total_tokens": 5630,
+        "latency_seconds": 11.67,
+        "api_input_tokens": 5484,
+        "api_output_tokens": 512,
+        "fetch_overhead_seconds": 23.66,
+        "total_latency_seconds": 35.33,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "guide RNA directs Cas9 to the target sequence",
+            "Cas9 creates a double-strand break in the DNA",
+            "PAM sequence adjacent to target is required for recognition"
+          ],
+          "misses": []
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": -16.93,
+        "accuracy_diff": 0.67
+      }
+    },
+    {
+      "query_id": "p2q4",
+      "question": "What distinguishes Impressionist painting from earlier academic art?",
+      "target_topic": "impressionism",
+      "html": {
+        "answer": "Based on the Impressionism Wikipedia article, Impressionist painting differs from earlier academic art in several key ways:\n\n**Technique and Style:**\n- **Brushwork**: Impressionists used freely brushed colors that took precedence over lines and contours, employing short \"broken\" brush strokes of mixed and pure unmixed color rather than blending smoothly or shading as was customary in academic painting.\n- **Light and Color**: They captured momentary and transient effects of sunlight and emphasized overall visual effects rather than fine details.\n\n**Subject Matter and Setting:**\n- **Outdoor painting**: They painted realistic scenes of everyday life outdoors (*en plein air*) rather than working in studios.\n- **Ordinary subjects**: They focused on candid poses, ordinary subject",
+        "context_tokens": 84022,
+        "prompt_tokens": 84079,
+        "answer_tokens": 147,
+        "total_tokens": 84226,
+        "latency_seconds": 15.71,
+        "api_input_tokens": 84285,
+        "api_output_tokens": 512,
+        "grade": {
+          "facts_found": 1,
+          "facts_total": 3,
+          "accuracy": 0.33,
+          "hits": [
+            "ordinary subject matter and outdoor painting en plein air"
+          ],
+          "misses": [
+            "visible brush strokes and open composition",
+            "emphasis on light and its changing qualities"
+          ]
+        }
+      },
+      "acf": {
+        "answer": "Impressionist painting distinguished itself from earlier academic art through several key characteristics: it featured **visible brush strokes** and **open composition** rather than the smooth, finished surfaces and formal compositions of academic painting; it emphasized the **accurate depiction of light** and its changing qualities; it focused on **ordinary subject matter** rather than historical, mythological, or religious themes; and artists painted **outdoors (en plein air)** to capture natural light. Additionally, Impressionists used **pure unmixed colours placed side by side** rather than blending on the palette, relying on optical mixing, and prioritized **perception over narrative**. The movement originated in Paris in the 1860s-1870s specifically as a reaction against the rigid rules of academic art.",
+        "context_tokens": 5429,
+        "prompt_tokens": 5486,
+        "answer_tokens": 156,
+        "total_tokens": 5642,
+        "latency_seconds": 18.38,
+        "api_input_tokens": 5478,
+        "api_output_tokens": 499,
+        "fetch_overhead_seconds": 23.66,
+        "total_latency_seconds": 42.04,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "visible brush strokes and open composition",
+            "emphasis on light and its changing qualities",
+            "ordinary subject matter and outdoor painting en plein air"
+          ],
+          "misses": []
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": -26.33,
+        "accuracy_diff": 0.67
+      }
+    },
+    {
+      "query_id": "p2q5",
+      "question": "How does Bitcoin prevent double-spending without a central authority?",
+      "target_topic": "bitcoin",
+      "html": {
+        "answer": "",
+        "context_tokens": 84022,
+        "prompt_tokens": 84079,
+        "answer_tokens": 0,
+        "total_tokens": 84079,
+        "latency_seconds": 19.38,
+        "api_input_tokens": 84286,
+        "api_output_tokens": 512,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "proof of work consensus mechanism",
+            "transactions verified by network of miners",
+            "blockchain is a distributed public ledger"
+          ]
+        }
+      },
+      "acf": {
+        "answer": "According to the provided context, Bitcoin prevents double-spending without a central authority by using a **distributed public ledger called the blockchain** combined with a **proof-of-work consensus mechanism**. \n\nSpecifically: \n- All transactions are recorded chronologically on the blockchain\n- Miners validate transactions by solving computationally intensive puzzles to add blocks to the chain\n- The network only accepts the **longest valid chain**, which makes it computationally infeasible to alter confirmed transactions or create conflicting transaction histories\n\nThis decentralized verification ensures that once a transaction is confirmed and added to the blockchain, it cannot be easily reversed or spent again.",
+        "context_tokens": 5429,
+        "prompt_tokens": 5486,
+        "answer_tokens": 126,
+        "total_tokens": 5612,
+        "latency_seconds": 16.21,
+        "api_input_tokens": 5479,
+        "api_output_tokens": 483,
+        "fetch_overhead_seconds": 23.66,
+        "total_latency_seconds": 39.87,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "proof of work consensus mechanism",
+            "transactions verified by network of miners",
+            "blockchain is a distributed public ledger"
+          ],
+          "misses": []
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": -20.49,
+        "accuracy_diff": 1.0
+      }
+    }
+  ]
+}

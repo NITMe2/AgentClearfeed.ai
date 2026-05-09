@@ -1,0 +1,314 @@
+{
+  "phase": 2,
+  "model": "claude-haiku",
+  "num_documents": 10,
+  "num_queries": 5,
+  "html_total_tokens": 84022,
+  "acf_total_tokens": 5429,
+  "acf_fetch_overhead_seconds": 23.64,
+  "per_topic_tokens": {
+    "html": {
+      "photosynthesis": 8916,
+      "roman_empire": 9000,
+      "tcp_ip": 9000,
+      "jazz": 9000,
+      "great_wall": 9000,
+      "crispr": 8895,
+      "relativity": 6705,
+      "impressionism": 8640,
+      "volcanic_eruptions": 5794,
+      "bitcoin": 9000
+    },
+    "acf": {
+      "photosynthesis": 536,
+      "roman_empire": 516,
+      "tcp_ip": 499,
+      "jazz": 513,
+      "great_wall": 501,
+      "crispr": 569,
+      "relativity": 552,
+      "impressionism": 598,
+      "volcanic_eruptions": 608,
+      "bitcoin": 519
+    }
+  },
+  "results": [
+    {
+      "query_id": "p2q1",
+      "question": "What are the two main stages of photosynthesis and where does each occur?",
+      "target_topic": "photosynthesis",
+      "html": {
+        "answer": "# Two Main Stages of Photosynthesis\n\nAccording to the provided document, the two main stages of photosynthesis are:\n\n## 1. Light-Dependent Reactions\n- **Where it occurs:** In plants, these reactions occur in the chloroplasts (specifically in structures containing chlorophyll pigments)\n- **What happens:** Light energy is absorbed by reaction centers containing photosynthetic pigments. Some energy is used to strip electrons from suitable substances such as water, producing oxygen gas. This stage produces two important molecules: reduced nicotinamide adenine dinucleotide phosphate (NADPH) and ATP.\n\n## 2. Light-Independent Reactions (Calvin Cycle)\n- **Where it occurs:** In plants, algae, and cyanobacteria\n- **What happens:** Atmospheric carbon dioxide is incorporated into already existing organic compounds, such as ribulose bisphosphate (RuBP). Using the ATP and NADPH produced by the light-dependent reactions, the resulting compounds are then reduced and removed to form further carbohydrates, such as glucose.\n\nThe light-dependent reactions provide the energy (ATP and NADPH) needed to power the light-independent Calvin cycle, which produces the actual sugar molecules.",
+        "context_tokens": 84022,
+        "prompt_tokens": 84082,
+        "answer_tokens": 247,
+        "total_tokens": 84329,
+        "latency_seconds": 6.92,
+        "api_input_tokens": 102675,
+        "api_output_tokens": 275,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "light-dependent reactions occur in the thylakoid membranes",
+            "Calvin cycle or light-independent reactions occur in the stroma",
+            "light reactions produce ATP and NADPH"
+          ],
+          "misses": []
+        }
+      },
+      "acf": {
+        "answer": "# Answer\n\nBased on the provided context, the two main stages of photosynthesis are:\n\n1. **Light-dependent reactions** - occur in the **thylakoid membranes** and produce ATP, NADPH, and oxygen as a byproduct\n\n2. **Calvin cycle (light-independent reactions)** - occur in the **stroma** and use ATP and NADPH to fix CO\u2082 into glyceraldehyde-3-phosphate (G3P)",
+        "context_tokens": 5429,
+        "prompt_tokens": 5489,
+        "answer_tokens": 94,
+        "total_tokens": 5583,
+        "latency_seconds": 58.0,
+        "api_input_tokens": 6028,
+        "api_output_tokens": 110,
+        "fetch_overhead_seconds": 23.64,
+        "total_latency_seconds": 81.64,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "light-dependent reactions occur in the thylakoid membranes",
+            "Calvin cycle or light-independent reactions occur in the stroma",
+            "light reactions produce ATP and NADPH"
+          ],
+          "misses": []
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": -74.72,
+        "accuracy_diff": 0.0
+      }
+    },
+    {
+      "query_id": "p2q2",
+      "question": "How does the TCP three-way handshake establish a connection?",
+      "target_topic": "tcp_ip",
+      "html": {
+        "answer": "# TCP Three-Way Handshake\n\nBased on the provided context, I cannot find specific information about how the TCP three-way handshake establishes a connection in the Transmission Control Protocol Wikipedia document provided.\n\nThe document confirms that TCP is the \"principal protocol used to stream data across an IP network\" and identifies it as operating at the Transport layer (Layer 4), but it does not contain detailed explanations of the three-way handshake mechanism itself.\n\nTo properly answer your question about the TCP three-way handshake process (SYN, SYN-ACK, and ACK), I would need additional documentation that specifically covers TCP connection establishment procedures.",
+        "context_tokens": 84022,
+        "prompt_tokens": 84078,
+        "answer_tokens": 122,
+        "total_tokens": 84200,
+        "latency_seconds": 3.3,
+        "api_input_tokens": 102672,
+        "api_output_tokens": 146,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "SYN packet sent by client to initiate connection",
+            "server responds with SYN-ACK",
+            "client sends final ACK to complete handshake"
+          ]
+        }
+      },
+      "acf": {
+        "answer": "# TCP Three-Way Handshake\n\nAccording to the provided context, the TCP three-way handshake establishes a connection through the following sequence:\n\n1. **Client sends SYN** - The client initiates the connection by sending a SYN (synchronize) packet\n2. **Server responds with SYN-ACK** - The server acknowledges the client's SYN and responds with its own SYN-ACK packet\n3. **Client sends final ACK** - The client sends a final ACK (acknowledgment) packet to confirm the connection\n\nThis three-step process establishes a reliable connection between the client and server before any data is transmitted.",
+        "context_tokens": 5429,
+        "prompt_tokens": 5485,
+        "answer_tokens": 124,
+        "total_tokens": 5609,
+        "latency_seconds": 41.11,
+        "api_input_tokens": 6025,
+        "api_output_tokens": 150,
+        "fetch_overhead_seconds": 23.64,
+        "total_latency_seconds": 64.75,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "SYN packet sent by client to initiate connection",
+            "server responds with SYN-ACK",
+            "client sends final ACK to complete handshake"
+          ],
+          "misses": []
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": -61.45,
+        "accuracy_diff": 1.0
+      }
+    },
+    {
+      "query_id": "p2q3",
+      "question": "How does CRISPR-Cas9 identify and cut a specific location in DNA?",
+      "target_topic": "crispr",
+      "html": {
+        "answer": "# How CRISPR-Cas9 Identifies and Cuts Specific DNA Locations\n\nBased on the provided context, CRISPR-Cas9 works through the following mechanism:\n\n## Identification Process\n\n**Cas9** (CRISPR-associated protein 9) is an enzyme that uses **CRISPR sequences as a guide** to recognize and locate specific DNA targets. The CRISPR sequences function as a blueprint that directs Cas9 to find DNA strands that are **complementary to the CRISPR sequence**.\n\n## Cutting Process\n\nOnce Cas9 has identified the matching DNA location using this guide sequence, it **opens up and cuts the specific strands of DNA** that are complementary to the CRISPR sequence.\n\n## Overall Function\n\nTogether, Cas9 enzymes and CRISPR sequences form the basis of **CRISPR-Cas9 technology**, which enables precise gene editing within living organisms. This system has wide-ranging applications including basic biological research, biotechnology product development, and disease treatment.",
+        "context_tokens": 84022,
+        "prompt_tokens": 84084,
+        "answer_tokens": 200,
+        "total_tokens": 84284,
+        "latency_seconds": 5.14,
+        "api_input_tokens": 102678,
+        "api_output_tokens": 238,
+        "grade": {
+          "facts_found": 1,
+          "facts_total": 3,
+          "accuracy": 0.33,
+          "hits": [
+            "guide RNA directs Cas9 to the target sequence"
+          ],
+          "misses": [
+            "Cas9 creates a double-strand break in the DNA",
+            "PAM sequence adjacent to target is required for recognition"
+          ]
+        }
+      },
+      "acf": {
+        "answer": "# Answer\n\nAccording to the CRISPR-Cas9 Gene Editing document, the system identifies and cuts DNA through the following mechanism:\n\n1. **Guide RNA Direction**: A guide RNA (gRNA) of approximately 20 nucleotides directs the Cas9 protein to the complementary target DNA sequence.\n\n2. **PAM Requirement**: A PAM (Protospacer Adjacent Motif) sequence adjacent to the target site is required for Cas9 recognition and binding.\n\n3. **Cutting Action**: The Cas9 protein acts as molecular scissors, creating a double-strand break in DNA at the location specified by the guide RNA.\n\nAfter the double-strand break occurs, the cell repairs it via either non-homologous end joining (NHEJ) or homology-directed repair (HDR).",
+        "context_tokens": 5429,
+        "prompt_tokens": 5491,
+        "answer_tokens": 161,
+        "total_tokens": 5652,
+        "latency_seconds": 45.24,
+        "api_input_tokens": 6031,
+        "api_output_tokens": 186,
+        "fetch_overhead_seconds": 23.64,
+        "total_latency_seconds": 68.88,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "guide RNA directs Cas9 to the target sequence",
+            "Cas9 creates a double-strand break in the DNA",
+            "PAM sequence adjacent to target is required for recognition"
+          ],
+          "misses": []
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": -63.74,
+        "accuracy_diff": 0.67
+      }
+    },
+    {
+      "query_id": "p2q4",
+      "question": "What distinguishes Impressionist painting from earlier academic art?",
+      "target_topic": "impressionism",
+      "html": {
+        "answer": "# Distinguishing Features of Impressionist Painting\n\nBased on the provided context, Impressionist painting differed from earlier academic art in several key ways:\n\n## Technique and Approach\n- **Brushwork**: Impressionists used freely brushed colors that took precedence over lines and contours, rather than the smooth, blended techniques of academic painting\n- **Color application**: They employed short \"broken\" brush strokes of mixed and pure unmixed color\u2014not blended smoothly or shaded as was customary\u2014to achieve intense color vibration\n- **Location**: They painted outdoors (*en plein air*) rather than exclusively in the studio, attempting to capture momentary effects\n\n## Subject Matter and Vision\n- **Subject selection**: They portrayed realistic scenes of everyday life in natural settings, rather than idealized or historical subjects\n- **Visual approach**: They recreated overall visual effects and sensations rather than delineating precise details of subjects\n- **Light emphasis**: They emphasized accurate depiction of light in its changing qualities, often accentuating the effects of the passage of time\n\n## Philosophical Difference\nThe Impressionists violated academic painting rules and developed \"a different way of seeing\" characterized as \"an art of immediacy and movement, of candid poses and compositions, of the play of light expressed in a bright and varied use of colour.\"\n\nIn essence, Impressionism moved away from formal studio-based precision toward capturing fleeting moments and the sensory experience of viewing light and color in nature.",
+        "context_tokens": 84022,
+        "prompt_tokens": 84079,
+        "answer_tokens": 288,
+        "total_tokens": 84367,
+        "latency_seconds": 6.17,
+        "api_input_tokens": 102670,
+        "api_output_tokens": 326,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "visible brush strokes and open composition",
+            "emphasis on light and its changing qualities",
+            "ordinary subject matter and outdoor painting en plein air"
+          ],
+          "misses": []
+        }
+      },
+      "acf": {
+        "answer": "Based on the provided context, Impressionist painting distinguished itself from earlier academic art in several key ways:\n\n1. **Technique**: Impressionists used visible brush strokes and emphasized the accurate depiction of light in its changing qualities, rather than following rigid academic rules.\n\n2. **Composition**: They employed open composition instead of the formal, structured compositions of academic art.\n\n3. **Subject Matter**: Impressionists painted ordinary subject matter rather than the grand historical or mythological themes favored by academic tradition.\n\n4. **Method**: They practiced painting outdoors (en plein air) to capture natural light and color directly, rather than working in studios from sketches.\n\n5. **Color Application**: Impressionists used pure unmixed colors placed side by side, relying on optical mixing, rather than blending colors on the palette as academic painters did.\n\nThe movement fundamentally represented a reaction against the rigid rules of academic art and prioritized the perception of light and color over narrative content, which proved to be a transformative shift that changed the trajectory of Western art.",
+        "context_tokens": 5429,
+        "prompt_tokens": 5486,
+        "answer_tokens": 207,
+        "total_tokens": 5693,
+        "latency_seconds": 38.95,
+        "api_input_tokens": 6023,
+        "api_output_tokens": 230,
+        "fetch_overhead_seconds": 23.64,
+        "total_latency_seconds": 62.59,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "visible brush strokes and open composition",
+            "emphasis on light and its changing qualities",
+            "ordinary subject matter and outdoor painting en plein air"
+          ],
+          "misses": []
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": -56.42,
+        "accuracy_diff": 0.0
+      }
+    },
+    {
+      "query_id": "p2q5",
+      "question": "How does Bitcoin prevent double-spending without a central authority?",
+      "target_topic": "bitcoin",
+      "html": {
+        "answer": "# How Bitcoin Prevents Double-Spending Without a Central Authority\n\nAccording to the provided documents, Bitcoin prevents double-spending through its decentralized consensus mechanism based on proof of work:\n\n## Key Mechanism\n\nBitcoin uses a **distributed ledger system** where transactions are validated and recorded on a blockchain. The system employs:\n\n1. **Proof of Work**: A consensus method where participants (miners) must solve complex mathematical problems to validate and add new blocks of transactions to the chain. This is mentioned in Bitcoin's technical specifications, which note the \"Timestamping scheme\" uses \"Proof of work (partial hash inversion)\" with the SHA-256 hash function.\n\n2. **Decentralized Validation**: Rather than relying on a single central authority to approve transactions, Bitcoin's network of independent nodes collectively verifies transactions. Each transaction is checked against the entire transaction history before being accepted.\n\n3. **Immutable Record**: Once a transaction is added to the blockchain and confirmed by subsequent blocks, it becomes extremely difficult to reverse or alter, preventing the same bitcoins from being spent twice.\n\nThis decentralized approach eliminates the need for a trusted intermediary (like a bank) while maintaining the security necessary to prevent double-spending attacks.",
+        "context_tokens": 84022,
+        "prompt_tokens": 84079,
+        "answer_tokens": 238,
+        "total_tokens": 84317,
+        "latency_seconds": 4.62,
+        "api_input_tokens": 102670,
+        "api_output_tokens": 267,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "proof of work consensus mechanism",
+            "transactions verified by network of miners",
+            "blockchain is a distributed public ledger"
+          ],
+          "misses": []
+        }
+      },
+      "acf": {
+        "answer": "# Answer\n\nAccording to the provided context, Bitcoin prevents double-spending through its **proof-of-work consensus mechanism and blockchain structure**:\n\n1. **Proof of Work**: Miners solve computationally intensive puzzles to validate transaction blocks and add them to the blockchain.\n\n2. **Longest Chain Rule**: The network only accepts the longest valid chain, making it computationally infeasible to alter confirmed transactions. This is because an attacker would need to redo the computational work for that block and all subsequent blocks faster than the honest network is adding new blocks.\n\nAs stated in the document: \"Double-spending is prevented because the network only accepts the longest valid chain, making it computationally infeasible to alter confirmed transactions.\"\n\nThis decentralised consensus mechanism replaces the need for a central authority to prevent double-spending.",
+        "context_tokens": 5429,
+        "prompt_tokens": 5486,
+        "answer_tokens": 162,
+        "total_tokens": 5648,
+        "latency_seconds": 39.48,
+        "api_input_tokens": 6023,
+        "api_output_tokens": 180,
+        "fetch_overhead_seconds": 23.64,
+        "total_latency_seconds": 63.12,
+        "grade": {
+          "facts_found": 2,
+          "facts_total": 3,
+          "accuracy": 0.67,
+          "hits": [
+            "proof of work consensus mechanism",
+            "transactions verified by network of miners"
+          ],
+          "misses": [
+            "blockchain is a distributed public ledger"
+          ]
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": -58.5,
+        "accuracy_diff": -0.33
+      }
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "phase": 2,
+  "model": "kimi-k2.5",
+  "swarm": true,
+  "html_only": true,
+  "num_documents": 10,
+  "num_queries": 5,
+  "html_total_tokens": 84022,
+  "acf_total_tokens": 0,
+  "acf_fetch_overhead_seconds": 0.0,
+  "per_topic_tokens": {
+    "html": {
+      "photosynthesis": 8916,
+      "roman_empire": 9000,
+      "tcp_ip": 9000,
+      "jazz": 9000,
+      "great_wall": 9000,
+      "crispr": 8895,
+      "relativity": 6705,
+      "impressionism": 8640,
+      "volcanic_eruptions": 5794,
+      "bitcoin": 9000
+    },
+    "acf": {}
+  },
+  "results": [
+    {
+      "query_id": "p2q1",
+      "question": "What are the two main stages of photosynthesis and where does each occur?",
+      "target_topic": "photosynthesis",
+      "swarm": true,
+      "html": {
+        "answer": "",
+        "context_tokens": 84022,
+        "prompt_tokens": 84082,
+        "answer_tokens": 0,
+        "total_tokens": 84082,
+        "latency_seconds": 16.77,
+        "api_input_tokens": 84289,
+        "api_output_tokens": 512,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "light-dependent reactions occur in the thylakoid membranes",
+            "Calvin cycle or light-independent reactions occur in the stroma",
+            "light reactions produce ATP and NADPH"
+          ]
+        }
+      }
+    },
+    {
+      "query_id": "p2q2",
+      "question": "How does the TCP three-way handshake establish a connection?",
+      "target_topic": "tcp_ip",
+      "swarm": true,
+      "html": {
+        "answer": "The provided documents do not contain information about the TCP three-way",
+        "context_tokens": 84022,
+        "prompt_tokens": 84078,
+        "answer_tokens": 12,
+        "total_tokens": 84090,
+        "latency_seconds": 16.9,
+        "api_input_tokens": 84285,
+        "api_output_tokens": 512,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "SYN packet sent by client to initiate connection",
+            "server responds with SYN-ACK",
+            "client sends final ACK to complete handshake"
+          ]
+        }
+      }
+    },
+    {
+      "query_id": "p2q3",
+      "question": "How does CRISPR-Cas9 identify and cut a specific location in DNA?",
+      "target_topic": "crispr",
+      "swarm": true,
+      "html": {
+        "answer": "Based on the provided context, CRISPR-Cas9 identifies and cuts specific DNA locations through the following mechanism:\n\n**Identification:** Cas9 uses CRISPR sequences as a guide to recognize DNA. The CRISPR RNA sequences are complementary to the target DNA sequence, allowing Cas9 to bind to specific strands of DNA that match this guide.\n\n**Cutting:** Once Cas9 recognizes and binds to the complementary DNA sequence (the specific location being targeted), it acts as an enzyme to \"open up\" and cut the specific strands at that location.\n\nAs described in the text: \"*Cas9 (or 'CRISPR-associated protein 9') is an enzyme that uses CRISPR sequences as a guide to recognize and open up specific strands of DNA that are complementary to the CRISPR sequence.*\"",
+        "context_tokens": 84022,
+        "prompt_tokens": 84084,
+        "answer_tokens": 162,
+        "total_tokens": 84246,
+        "latency_seconds": 14.05,
+        "api_input_tokens": 84291,
+        "api_output_tokens": 508,
+        "grade": {
+          "facts_found": 1,
+          "facts_total": 3,
+          "accuracy": 0.33,
+          "hits": [
+            "guide RNA directs Cas9 to the target sequence"
+          ],
+          "misses": [
+            "Cas9 creates a double-strand break in the DNA",
+            "PAM sequence adjacent to target is required for recognition"
+          ]
+        }
+      }
+    },
+    {
+      "query_id": "p2q4",
+      "question": "What distinguishes Impressionist painting from earlier academic art?",
+      "target_topic": "impressionism",
+      "swarm": true,
+      "html": {
+        "answer": "Based on the Impressionism article, Impressionist painting distinguished itself from earlier academic art in the following ways:\n\n**Brushwork and Color:**\n- Used freely brushed colors that took precedence over lines and contours\n- Employed short \"broken\" brush strokes of mixed and pure unmixed color\n- Did not blend smoothly or shade as was customary in academic painting\n- Aimed for intense color vibration rather than exact verisimilitude\n\n**Subject Matter and Setting:**\n- Painted realistic scenes of everyday life in natural settings\n- Worked outdoors (*en plein air*) rather than exclusively in studios\n- Attempted to capture a moment as experienced rather than creating detailed, finished compositions\n\n**Treatment of Light and Time:**\n-",
+        "context_tokens": 84022,
+        "prompt_tokens": 84079,
+        "answer_tokens": 150,
+        "total_tokens": 84229,
+        "latency_seconds": 14.62,
+        "api_input_tokens": 84285,
+        "api_output_tokens": 512,
+        "grade": {
+          "facts_found": 2,
+          "facts_total": 3,
+          "accuracy": 0.67,
+          "hits": [
+            "visible brush strokes and open composition",
+            "ordinary subject matter and outdoor painting en plein air"
+          ],
+          "misses": [
+            "emphasis on light and its changing qualities"
+          ]
+        }
+      }
+    },
+    {
+      "query_id": "p2q5",
+      "question": "How does Bitcoin prevent double-spending without a central authority?",
+      "target_topic": "bitcoin",
+      "swarm": true,
+      "html": {
+        "answer": "",
+        "context_tokens": 84022,
+        "prompt_tokens": 84079,
+        "answer_tokens": 0,
+        "total_tokens": 84079,
+        "latency_seconds": 14.37,
+        "api_input_tokens": 84286,
+        "api_output_tokens": 512,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "proof of work consensus mechanism",
+            "transactions verified by network of miners",
+            "blockchain is a distributed public ledger"
+          ]
+        }
+      }
+    }
+  ]
+}
