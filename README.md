@@ -10,8 +10,10 @@ AgentClearfeed is a parallel content layer built for inference. Clean, structure
 |--------|------|-----|-------------|
 | Tokens per query (Phase 1) | 16,388 | 394 | **97.6% reduction** |
 | Tokens per 10-doc retrieval (Phase 2) | 84,022 | 5,429 | **93.5% reduction** |
+| Tokens per live data page (Phase 3) | 13,287 | 173 | **98.7% reduction** |
 | Inference latency (Phase 1) | 119s | 23s | **5.2x faster** |
 | Multi-doc accuracy (avg across 4 models) | 0.42 | 0.93 | **+0.51 absolute** |
+| Data staleness — local model (Phase 3) | 113.5s | 9.8s | **11.5x fresher** |
 
 ## Why This Matters
 
@@ -92,6 +94,33 @@ Consistent 93.5% reduction across all models and queries:
 | Bitcoin | 9,000 | 519 | 17x |
 | **Total** | **84,022** | **5,429** | **15.5x** |
 
+## Phase 3 - Dynamic Content (Live Data)
+
+Phase 3 tests a new dimension: live data extraction. A realistic bloated crypto price tracker page (cookie banners, ads, navigation, trending coins sidebar, newsletter popup, tracking scripts) with a live Bitcoin price injected from the CoinGecko API on every request. The same live price is served in ACF action format.
+
+New metric: **staleness** — how old is the data by the time the model finishes answering? With live data, fewer tokens means faster inference means fresher answers.
+
+### Results
+
+| Model | Format | Tokens | Accuracy | Latency | Staleness |
+|-------|--------|-------:|:--------:|--------:|----------:|
+| Claude Haiku 4.5 | HTML | 13,287 | 1.00 | 1.2s | 1.7s |
+| Claude Haiku 4.5 | ACF | 173 | 1.00 | 0.9s | 1.2s |
+| Qwen 2.5 14B | HTML | 13,287 | 0.67 | 113.4s | 113.5s |
+| Qwen 2.5 14B | ACF | 173 | 0.67 | 9.8s | 9.8s |
+
+**98.7% token reduction. 76.8x compression ratio.**
+
+### What Phase 3 Shows
+
+Haiku handled both formats perfectly — it's fast enough that staleness barely differs. The local model is where the story gets interesting:
+
+- **Qwen on HTML (113s):** Found the price correctly but got confused by the 24h change — the bloated page has competing percentages everywhere (sidebar trending coins, ad copy, market stats). The model mistook Ethereum's +3.2% from the trending sidebar for Bitcoin's actual change and eventually gave up, saying the information wasn't explicitly stated.
+
+- **Qwen on ACF (10s):** Returned the exact price and change in two lines. No confusion, no hedging.
+
+- **Staleness gap:** By the time Qwen finishes processing 13K tokens of HTML, the price data is nearly **2 minutes old**. With ACF, it's under 10 seconds. For live financial data, that's the difference between a useful answer and a stale one.
+
 ## What ACF Proves
 
 1. **Format is the bottleneck, not the model.** Kimi K2.6 scores 0.0 on HTML and 0.80 on ACF - same model, same content, different format.
@@ -101,6 +130,8 @@ Consistent 93.5% reduction across all models and queries:
 3. **ACF makes smaller models viable.** Tasks that require expensive frontier models with HTML work perfectly with cheap models on ACF. This changes the economics of agent deployments.
 
 4. **Orchestration can't fix format.** Agent Swarm, multi-agent pipelines, RAG - none of these solve the fundamental problem of noisy input. Clean input does.
+
+5. **ACF keeps live data fresh.** With dynamic content, token bloat doesn't just cost money - it costs time. A local model takes 2 minutes to process a bloated price page, by which point the data is stale. ACF answers in 10 seconds with the same accuracy.
 
 ## Quick Start
 
@@ -119,6 +150,10 @@ python -m test_harness.phase2.harness_phase2                          # Ollama (
 python -m test_harness.phase2.harness_phase2 --model claude-haiku     # Anthropic API
 python -m test_harness.phase2.harness_phase2 --model kimi-k2.5        # Kimi API
 python -m test_harness.phase2.harness_phase2 --model kimi-k2.5 --swarm --html-only  # Agent Swarm test
+
+# Phase 3 - dynamic content (requires running ACF server + CoinGecko API access)
+python -m test_harness.phase3.harness_phase3                          # Default: claude-haiku
+python -m test_harness.phase3.harness_phase3 --model qwen2.5:14b      # Local model
 ```
 
 ### Prerequisites
@@ -149,6 +184,7 @@ AgentClearfeed/
 ├── server/
 │   ├── main.py                     # FastAPI server
 │   ├── parser.py                   # ACF document parser
+│   ├── phase3.py                   # Phase 3: live Bitcoin price endpoints
 │   ├── documents/                  # Phase 1: AI fairness .acf docs
 │   └── documents_phase2/           # Phase 2: 10 Wikipedia .acf docs
 ├── test_harness/
@@ -160,6 +196,9 @@ AgentClearfeed/
 │   │   ├── queries_phase2.py       # Phase 2 queries
 │   │   ├── fetch_wikipedia.py      # Wikipedia HTML fetcher
 │   │   └── raw_sources/            # Phase 2 HTML sources
+│   ├── phase3/
+│   │   ├── harness_phase3.py       # Phase 3 test runner (dynamic content + staleness)
+│   │   └── queries_phase3.py       # Phase 3 queries
 │   └── results/                    # JSON results from all runs
 └── requirements.txt
 ```
@@ -171,4 +210,8 @@ GET /acf/document/{id}    - Fetch a single ACF document
 GET /acf/index            - List all documents
 GET /acf/domain/{domain}  - Get documents by domain
 GET /acf/query?q={query}  - Natural language search
+
+# Phase 3 — Dynamic content (live CoinGecko data)
+GET /phase3/html/bitcoin-price  - Bloated crypto tracker page with live BTC price
+GET /phase3/acf/bitcoin-price   - Clean ACF action with same live price
 ```

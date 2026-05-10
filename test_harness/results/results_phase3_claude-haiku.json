@@ -1,0 +1,79 @@
+{
+  "phase": 3,
+  "test_type": "dynamic_content",
+  "model": "claude-haiku",
+  "num_queries": 1,
+  "data_source": "CoinGecko API (live)",
+  "results": [
+    {
+      "query_id": "p3q1",
+      "question": "What is the current Bitcoin price in USD and its 24-hour percentage change?",
+      "html": {
+        "answer": "Based on the provided document, the current Bitcoin price is **$80,729.00 USD** with a 24-hour percentage change of **+0.44%**.",
+        "context_tokens": 13287,
+        "prompt_tokens": 13348,
+        "answer_tokens": 36,
+        "total_tokens": 13384,
+        "latency_seconds": 1.19,
+        "api_input_tokens": 16344,
+        "api_output_tokens": 40,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "BTC or Bitcoin mentioned",
+            "bitcoin price in USD",
+            "24-hour percentage change"
+          ],
+          "misses": []
+        },
+        "data_served": {
+          "price_usd": 80729,
+          "change_24h": 0.44,
+          "market_cap": 1616797737592.9048,
+          "fetched_at": "2026-05-10T03:30:43.378644+00:00"
+        },
+        "fetch_seconds": 2.89,
+        "staleness_seconds": 1.67
+      },
+      "acf": {
+        "answer": "According to the provided document, the current Bitcoin price is **$80,729.00 USD** with a **24-hour percentage change of +0.44%**.",
+        "context_tokens": 173,
+        "prompt_tokens": 235,
+        "answer_tokens": 35,
+        "total_tokens": 270,
+        "latency_seconds": 1.04,
+        "api_input_tokens": 258,
+        "api_output_tokens": 39,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "BTC or Bitcoin mentioned",
+            "bitcoin price in USD",
+            "24-hour percentage change"
+          ],
+          "misses": []
+        },
+        "data_served": {
+          "price_usd": 80729,
+          "change_24h": 0.44,
+          "market_cap": 1616797737592.9048,
+          "fetched_at": "2026-05-10T03:30:48.014181+00:00"
+        },
+        "fetch_overhead_seconds": 2.96,
+        "total_latency_seconds": 4.0,
+        "staleness_seconds": 1.37
+      },
+      "delta": {
+        "token_saving": 13114,
+        "token_saving_pct": 98.7,
+        "latency_diff": -2.81,
+        "accuracy_diff": 0.0,
+        "staleness_diff": 0.3
+      }
+    }
+  ]
+}

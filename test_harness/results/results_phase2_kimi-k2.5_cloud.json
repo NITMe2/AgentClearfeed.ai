@@ -1,0 +1,292 @@
+{
+  "phase": 2,
+  "model": "kimi-k2.5:cloud",
+  "num_documents": 10,
+  "num_queries": 5,
+  "html_total_tokens": 84022,
+  "acf_total_tokens": 5429,
+  "acf_fetch_overhead_seconds": 23.89,
+  "per_topic_tokens": {
+    "html": {
+      "photosynthesis": 8916,
+      "roman_empire": 9000,
+      "tcp_ip": 9000,
+      "jazz": 9000,
+      "great_wall": 9000,
+      "crispr": 8895,
+      "relativity": 6705,
+      "impressionism": 8640,
+      "volcanic_eruptions": 5794,
+      "bitcoin": 9000
+    },
+    "acf": {
+      "photosynthesis": 536,
+      "roman_empire": 516,
+      "tcp_ip": 499,
+      "jazz": 513,
+      "great_wall": 501,
+      "crispr": 569,
+      "relativity": 552,
+      "impressionism": 598,
+      "volcanic_eruptions": 608,
+      "bitcoin": 519
+    }
+  },
+  "results": [
+    {
+      "query_id": "p2q1",
+      "question": "What are the two main stages of photosynthesis and where does each occur?",
+      "target_topic": "photosynthesis",
+      "html": {
+        "answer": "",
+        "context_tokens": 84022,
+        "prompt_tokens": 84082,
+        "answer_tokens": 0,
+        "total_tokens": 84082,
+        "latency_seconds": 2.65,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "light-dependent reactions occur in the thylakoid membranes",
+            "Calvin cycle or light-independent reactions occur in the stroma",
+            "light reactions produce ATP and NADPH"
+          ]
+        }
+      },
+      "acf": {
+        "answer": "",
+        "context_tokens": 5429,
+        "prompt_tokens": 5489,
+        "answer_tokens": 0,
+        "total_tokens": 5489,
+        "latency_seconds": 2.49,
+        "fetch_overhead_seconds": 23.89,
+        "total_latency_seconds": 26.38,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "light-dependent reactions occur in the thylakoid membranes",
+            "Calvin cycle or light-independent reactions occur in the stroma",
+            "light reactions produce ATP and NADPH"
+          ]
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": -23.73,
+        "accuracy_diff": 0.0
+      }
+    },
+    {
+      "query_id": "p2q2",
+      "question": "How does the TCP three-way handshake establish a connection?",
+      "target_topic": "tcp_ip",
+      "html": {
+        "answer": "",
+        "context_tokens": 84022,
+        "prompt_tokens": 84078,
+        "answer_tokens": 0,
+        "total_tokens": 84078,
+        "latency_seconds": 2.59,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "SYN packet sent by client to initiate connection",
+            "server responds with SYN-ACK",
+            "client sends final ACK to complete handshake"
+          ]
+        }
+      },
+      "acf": {
+        "answer": "",
+        "context_tokens": 5429,
+        "prompt_tokens": 5485,
+        "answer_tokens": 0,
+        "total_tokens": 5485,
+        "latency_seconds": 2.45,
+        "fetch_overhead_seconds": 23.89,
+        "total_latency_seconds": 26.34,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "SYN packet sent by client to initiate connection",
+            "server responds with SYN-ACK",
+            "client sends final ACK to complete handshake"
+          ]
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": -23.75,
+        "accuracy_diff": 0.0
+      }
+    },
+    {
+      "query_id": "p2q3",
+      "question": "How does CRISPR-Cas9 identify and cut a specific location in DNA?",
+      "target_topic": "crispr",
+      "html": {
+        "answer": "",
+        "context_tokens": 84022,
+        "prompt_tokens": 84084,
+        "answer_tokens": 0,
+        "total_tokens": 84084,
+        "latency_seconds": 2.51,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "guide RNA directs Cas9 to the target sequence",
+            "Cas9 creates a double-strand break in the DNA",
+            "PAM sequence adjacent to target is required for recognition"
+          ]
+        }
+      },
+      "acf": {
+        "answer": "",
+        "context_tokens": 5429,
+        "prompt_tokens": 5491,
+        "answer_tokens": 0,
+        "total_tokens": 5491,
+        "latency_seconds": 2.47,
+        "fetch_overhead_seconds": 23.89,
+        "total_latency_seconds": 26.36,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "guide RNA directs Cas9 to the target sequence",
+            "Cas9 creates a double-strand break in the DNA",
+            "PAM sequence adjacent to target is required for recognition"
+          ]
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": -23.85,
+        "accuracy_diff": 0.0
+      }
+    },
+    {
+      "query_id": "p2q4",
+      "question": "What distinguishes Impressionist painting from earlier academic art?",
+      "target_topic": "impressionism",
+      "html": {
+        "answer": "",
+        "context_tokens": 84022,
+        "prompt_tokens": 84079,
+        "answer_tokens": 0,
+        "total_tokens": 84079,
+        "latency_seconds": 2.68,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "visible brush strokes and open composition",
+            "emphasis on light and its changing qualities",
+            "ordinary subject matter and outdoor painting en plein air"
+          ]
+        }
+      },
+      "acf": {
+        "answer": "",
+        "context_tokens": 5429,
+        "prompt_tokens": 5486,
+        "answer_tokens": 0,
+        "total_tokens": 5486,
+        "latency_seconds": 2.47,
+        "fetch_overhead_seconds": 23.89,
+        "total_latency_seconds": 26.36,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "visible brush strokes and open composition",
+            "emphasis on light and its changing qualities",
+            "ordinary subject matter and outdoor painting en plein air"
+          ]
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": -23.68,
+        "accuracy_diff": 0.0
+      }
+    },
+    {
+      "query_id": "p2q5",
+      "question": "How does Bitcoin prevent double-spending without a central authority?",
+      "target_topic": "bitcoin",
+      "html": {
+        "answer": "",
+        "context_tokens": 84022,
+        "prompt_tokens": 84079,
+        "answer_tokens": 0,
+        "total_tokens": 84079,
+        "latency_seconds": 2.68,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "proof of work consensus mechanism",
+            "transactions verified by network of miners",
+            "blockchain is a distributed public ledger"
+          ]
+        }
+      },
+      "acf": {
+        "answer": "",
+        "context_tokens": 5429,
+        "prompt_tokens": 5486,
+        "answer_tokens": 0,
+        "total_tokens": 5486,
+        "latency_seconds": 2.49,
+        "fetch_overhead_seconds": 23.89,
+        "total_latency_seconds": 26.38,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "proof of work consensus mechanism",
+            "transactions verified by network of miners",
+            "blockchain is a distributed public ledger"
+          ]
+        }
+      },
+      "delta": {
+        "token_saving": 78593,
+        "token_saving_pct": 93.5,
+        "latency_diff": -23.7,
+        "accuracy_diff": 0.0
+      }
+    }
+  ]
+}

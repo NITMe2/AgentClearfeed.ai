@@ -1,0 +1,77 @@
+{
+  "phase": 3,
+  "test_type": "dynamic_content",
+  "model": "qwen2.5:14b",
+  "num_queries": 1,
+  "data_source": "CoinGecko API (live)",
+  "results": [
+    {
+      "query_id": "p3q1",
+      "question": "What is the current Bitcoin price in USD and its 24-hour percentage change?",
+      "html": {
+        "answer": "The current Bitcoin price in USD is $80,716. The 24-hour percentage change for Bitcoin is not directly provided in the given HTML code snippet, but it mentions that there has been a positive 24-hour percentage change since the color green (indicative of\u4ef7\u683c\u4e0a\u6da8) is used for \"+3.2%\". However, the exact 24-hour percentage change value for Bitcoin itself is specified as \"+3.2%\" for Ethereum in the trending coins section, which seems to be an error and not relevant to Bitcoin.\n\nTo find the precise 24-hour percentage change for Bitcoin, you would need to look at a more detailed financial data source or within the live price feed of the webpage (which isn't fully visible in this static HTML snippet).\n\nFrom the given information:\n\n- **Current Price:** $80,716\n- **24-Hour Change:** Not explicitly stated for Bitcoin but the overall trend is positive. \n\nFor accurate and up-to-date percentage change, refer to real-time financial data or a reliable cryptocurrency tracking website.",
+        "context_tokens": 13287,
+        "prompt_tokens": 13348,
+        "answer_tokens": 210,
+        "total_tokens": 13558,
+        "latency_seconds": 113.37,
+        "grade": {
+          "facts_found": 2,
+          "facts_total": 3,
+          "accuracy": 0.67,
+          "hits": [
+            "BTC or Bitcoin mentioned",
+            "bitcoin price in USD"
+          ],
+          "misses": [
+            "24-hour percentage change"
+          ]
+        },
+        "data_served": {
+          "price_usd": 80716,
+          "change_24h": 0.42,
+          "market_cap": 1616797737592.9048,
+          "fetched_at": "2026-05-10T03:32:08.982383+00:00"
+        },
+        "fetch_seconds": 3.8,
+        "staleness_seconds": 113.53
+      },
+      "acf": {
+        "answer": "price_usd:    80706.00\nchange_24h:   +0.41%",
+        "context_tokens": 173,
+        "prompt_tokens": 235,
+        "answer_tokens": 22,
+        "total_tokens": 257,
+        "latency_seconds": 9.84,
+        "grade": {
+          "facts_found": 2,
+          "facts_total": 3,
+          "accuracy": 0.67,
+          "hits": [
+            "bitcoin price in USD",
+            "24-hour percentage change"
+          ],
+          "misses": [
+            "BTC or Bitcoin mentioned"
+          ]
+        },
+        "data_served": {
+          "price_usd": 80706,
+          "change_24h": 0.41,
+          "market_cap": 1616466850197.154,
+          "fetched_at": "2026-05-10T03:34:12.848276+00:00"
+        },
+        "fetch_overhead_seconds": 10.33,
+        "total_latency_seconds": 20.17,
+        "staleness_seconds": 9.84
+      },
+      "delta": {
+        "token_saving": 13114,
+        "token_saving_pct": 98.7,
+        "latency_diff": 93.2,
+        "accuracy_diff": 0.0,
+        "staleness_diff": 103.69
+      }
+    }
+  ]
+}

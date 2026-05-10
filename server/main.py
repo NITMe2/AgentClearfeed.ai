@@ -6,8 +6,10 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import PlainTextResponse
 
 from server.parser import load_documents
+from server.phase3 import router as phase3_router
 
 app = FastAPI(title="AgentClearfeed", version="0.1")
+app.include_router(phase3_router)
 
 DOCS_DIR = Path(__file__).parent / "documents"
 DOCS_DIR_PHASE2 = Path(__file__).parent / "documents_phase2"
