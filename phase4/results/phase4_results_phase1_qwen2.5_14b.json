@@ -1,0 +1,758 @@
+{
+  "phase": 4,
+  "model": "qwen2.5:14b",
+  "queries": 3,
+  "tests": [
+    {
+      "test_id": 1,
+      "test_name": "ACF vs JSON",
+      "formats": [
+        "acf",
+        "json"
+      ],
+      "per_query": {
+        "acf": [
+          {
+            "query_id": "q1",
+            "a_tokens": 320,
+            "answer": "Demographic parity in machine learning is a fairness criterion where a model produces positive predictions at equal rates across different demographic groups, mathematically represented as P(Y_hat=1 | A=0) = P(Y_hat=1 | A=1), where A is a protected attribute and Y_hat is the prediction.",
+            "b_tokens": 355,
+            "total_tokens": 675,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "equal positive prediction rates across groups",
+                "does not guarantee equal accuracy across groups",
+                "protected attribute"
+              ],
+              "misses": []
+            },
+            "latency_ms": 26380,
+            "cost_usd": 0.000203
+          },
+          {
+            "query_id": "q2",
+            "a_tokens": 398,
+            "answer": "The known biases in the COMPAS recidivism dataset include:\n- Black defendants scored higher risk at nearly twice the rate of white defendants who did not reoffend.\n- White defendants who did reoffend were more frequently scored lower risk than Black defendants who did not.\n- Age is a strong predictor and correlates with race in this dataset.",
+            "b_tokens": 439,
+            "total_tokens": 837,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "Black defendants scored higher risk at nearly twice the rate",
+                "white defendants who did reoffend were more frequently scored lower risk",
+                "age is a strong predictor and correlates with race"
+              ],
+              "misses": []
+            },
+            "latency_ms": 18090,
+            "cost_usd": 0.000251
+          },
+          {
+            "query_id": "q3",
+            "a_tokens": 465,
+            "answer": "No, according to the Impossibility Theorem of Fairness, a machine learning model cannot simultaneously satisfy calibration and equalised odds when base rates differ between groups. This incompatibility is a mathematical fact applicable across different algorithms.",
+            "b_tokens": 508,
+            "total_tokens": 973,
+            "accuracy": 0.67,
+            "data_loss": 0.33,
+            "grade": {
+              "facts_found": 2,
+              "facts_total": 3,
+              "accuracy": 0.67,
+              "hits": [
+                "cannot be simultaneously satisfied when base rates differ",
+                "mathematical impossibility not algorithmic limitation"
+              ],
+              "misses": [
+                "choice of metric is a normative decision"
+              ]
+            },
+            "latency_ms": 12938,
+            "cost_usd": 0.000292
+          }
+        ],
+        "json": [
+          {
+            "query_id": "q1",
+            "a_tokens": 374,
+            "answer": "Demographic parity in machine learning is a fairness criterion where a model produces positive predictions at equal rates across different demographic groups. Mathematically, it requires \\( P(Y_hat=1 | A=0) = P(Y_hat=1 | A=1) \\), where \\( A \\) is a protected attribute and \\( Y_hat \\) is the model prediction.",
+            "b_tokens": 409,
+            "total_tokens": 783,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "equal positive prediction rates across groups",
+                "does not guarantee equal accuracy across groups",
+                "protected attribute"
+              ],
+              "misses": []
+            },
+            "latency_ms": 19429,
+            "cost_usd": 0.000235
+          },
+          {
+            "query_id": "q2",
+            "a_tokens": 446,
+            "answer": "The known biases in the COMPAS recidivism dataset include:\n- Black defendants scored higher risk at nearly twice the rate of white defendants who did not reoffend.\n- White defendants who did reoffend were more frequently scored lower risk than Black defendants who did not.\n- Age is a strong predictor and correlates with race in this dataset.",
+            "b_tokens": 487,
+            "total_tokens": 933,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "Black defendants scored higher risk at nearly twice the rate",
+                "white defendants who did reoffend were more frequently scored lower risk",
+                "age is a strong predictor and correlates with race"
+              ],
+              "misses": []
+            },
+            "latency_ms": 18451,
+            "cost_usd": 0.00028
+          },
+          {
+            "query_id": "q3",
+            "a_tokens": 519,
+            "answer": "No, according to the Impossibility Theorem of Fairness, a machine learning model cannot simultaneously satisfy calibration and equalised odds when base rates differ between groups. This incompatibility is a mathematical fact, not a limitation of any particular algorithm.",
+            "b_tokens": 562,
+            "total_tokens": 1081,
+            "accuracy": 0.67,
+            "data_loss": 0.33,
+            "grade": {
+              "facts_found": 2,
+              "facts_total": 3,
+              "accuracy": 0.67,
+              "hits": [
+                "cannot be simultaneously satisfied when base rates differ",
+                "mathematical impossibility not algorithmic limitation"
+              ],
+              "misses": [
+                "choice of metric is a normative decision"
+              ]
+            },
+            "latency_ms": 14390,
+            "cost_usd": 0.000324
+          }
+        ]
+      },
+      "aggregated": {
+        "acf": {
+          "a_tokens": 394,
+          "b_tokens": 434,
+          "total_tokens": 828,
+          "accuracy": 0.89,
+          "data_loss": 0.11,
+          "latency_ms": 19136,
+          "cost_usd": 0.000249
+        },
+        "json": {
+          "a_tokens": 446,
+          "b_tokens": 486,
+          "total_tokens": 932,
+          "accuracy": 0.89,
+          "data_loss": 0.11,
+          "latency_ms": 17423,
+          "cost_usd": 0.00028
+        }
+      }
+    },
+    {
+      "test_id": 2,
+      "test_name": "ACF vs TOON",
+      "formats": [
+        "acf",
+        "toon"
+      ],
+      "per_query": {
+        "acf": [
+          {
+            "query_id": "q1",
+            "a_tokens": 320,
+            "answer": "Demographic parity in machine learning is a fairness criterion where a model produces positive predictions at equal rates across different demographic groups, mathematically represented as P(Y_hat=1 | A=0) = P(Y_hat=1 | A=1), where A is a protected attribute and Y_hat is the prediction.",
+            "b_tokens": 355,
+            "total_tokens": 675,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "equal positive prediction rates across groups",
+                "does not guarantee equal accuracy across groups",
+                "protected attribute"
+              ],
+              "misses": []
+            },
+            "latency_ms": 16844,
+            "cost_usd": 0.000203
+          },
+          {
+            "query_id": "q2",
+            "a_tokens": 398,
+            "answer": "The known biases in the COMPAS recidivism dataset include:\n- Black defendants scored higher risk at nearly twice the rate of white defendants who did not reoffend.\n- White defendants who did reoffend were more frequently scored lower risk than Black defendants who did not.\n- Age is a strong predictor and correlates with race in this dataset.",
+            "b_tokens": 439,
+            "total_tokens": 837,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "Black defendants scored higher risk at nearly twice the rate",
+                "white defendants who did reoffend were more frequently scored lower risk",
+                "age is a strong predictor and correlates with race"
+              ],
+              "misses": []
+            },
+            "latency_ms": 18115,
+            "cost_usd": 0.000251
+          },
+          {
+            "query_id": "q3",
+            "a_tokens": 465,
+            "answer": "No, according to the Impossibility Theorem of Fairness, a machine learning model cannot simultaneously satisfy calibration and equalised odds when base rates differ between groups. This incompatibility is a mathematical fact applicable across different algorithms.",
+            "b_tokens": 508,
+            "total_tokens": 973,
+            "accuracy": 0.67,
+            "data_loss": 0.33,
+            "grade": {
+              "facts_found": 2,
+              "facts_total": 3,
+              "accuracy": 0.67,
+              "hits": [
+                "cannot be simultaneously satisfied when base rates differ",
+                "mathematical impossibility not algorithmic limitation"
+              ],
+              "misses": [
+                "choice of metric is a normative decision"
+              ]
+            },
+            "latency_ms": 12557,
+            "cost_usd": 0.000292
+          }
+        ],
+        "toon": [
+          {
+            "query_id": "q1",
+            "a_tokens": 335,
+            "answer": "Demographic parity in machine learning is a fairness criterion where a model produces positive predictions at equal rates across different demographic groups. Mathematically, it requires P(Y_hat=1 | A=a) to be the same for all values of the protected attribute A.",
+            "b_tokens": 370,
+            "total_tokens": 705,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "equal positive prediction rates across groups",
+                "does not guarantee equal accuracy across groups",
+                "protected attribute"
+              ],
+              "misses": []
+            },
+            "latency_ms": 14310,
+            "cost_usd": 0.000211
+          },
+          {
+            "query_id": "q2",
+            "a_tokens": 417,
+            "answer": "The known biases in the COMPAS recidivism dataset include:\n- Black defendants scored higher risk at nearly twice the rate of white defendants who did not reoffend.\n- White defendants who did reoffend were more frequently scored lower risk than Black defendants who did not.\n- Age is a strong predictor and correlates with race in this dataset.",
+            "b_tokens": 458,
+            "total_tokens": 875,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "Black defendants scored higher risk at nearly twice the rate",
+                "white defendants who did reoffend were more frequently scored lower risk",
+                "age is a strong predictor and correlates with race"
+              ],
+              "misses": []
+            },
+            "latency_ms": 18291,
+            "cost_usd": 0.000262
+          },
+          {
+            "query_id": "q3",
+            "a_tokens": 478,
+            "answer": "No, according to the Impossibility Theorem of Fairness, a machine learning model cannot simultaneously satisfy calibration and equalised odds when base rates differ between groups. This incompatibility is a mathematical fact, not a limitation of any particular algorithm.",
+            "b_tokens": 521,
+            "total_tokens": 999,
+            "accuracy": 0.67,
+            "data_loss": 0.33,
+            "grade": {
+              "facts_found": 2,
+              "facts_total": 3,
+              "accuracy": 0.67,
+              "hits": [
+                "cannot be simultaneously satisfied when base rates differ",
+                "mathematical impossibility not algorithmic limitation"
+              ],
+              "misses": [
+                "choice of metric is a normative decision"
+              ]
+            },
+            "latency_ms": 14396,
+            "cost_usd": 0.0003
+          }
+        ]
+      },
+      "aggregated": {
+        "acf": {
+          "a_tokens": 394,
+          "b_tokens": 434,
+          "total_tokens": 828,
+          "accuracy": 0.89,
+          "data_loss": 0.11,
+          "latency_ms": 15839,
+          "cost_usd": 0.000249
+        },
+        "toon": {
+          "a_tokens": 410,
+          "b_tokens": 450,
+          "total_tokens": 860,
+          "accuracy": 0.89,
+          "data_loss": 0.11,
+          "latency_ms": 15666,
+          "cost_usd": 0.000258
+        }
+      }
+    },
+    {
+      "test_id": 3,
+      "test_name": "JSON vs TOON",
+      "formats": [
+        "json",
+        "toon"
+      ],
+      "per_query": {
+        "json": [
+          {
+            "query_id": "q1",
+            "a_tokens": 374,
+            "answer": "Demographic parity in machine learning is a fairness criterion where a model produces positive predictions at equal rates across different demographic groups. Mathematically, it requires \\( P(Y_hat=1 | A=0) = P(Y_hat=1 | A=1) \\), where \\( A \\) is a protected attribute and \\( Y_hat \\) is the model prediction.",
+            "b_tokens": 409,
+            "total_tokens": 783,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "equal positive prediction rates across groups",
+                "does not guarantee equal accuracy across groups",
+                "protected attribute"
+              ],
+              "misses": []
+            },
+            "latency_ms": 19485,
+            "cost_usd": 0.000235
+          },
+          {
+            "query_id": "q2",
+            "a_tokens": 446,
+            "answer": "The known biases in the COMPAS recidivism dataset include:\n- Black defendants scored higher risk at nearly twice the rate of white defendants who did not reoffend.\n- White defendants who did reoffend were more frequently scored lower risk than Black defendants who did not.\n- Age is a strong predictor and correlates with race in this dataset.",
+            "b_tokens": 487,
+            "total_tokens": 933,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "Black defendants scored higher risk at nearly twice the rate",
+                "white defendants who did reoffend were more frequently scored lower risk",
+                "age is a strong predictor and correlates with race"
+              ],
+              "misses": []
+            },
+            "latency_ms": 18985,
+            "cost_usd": 0.00028
+          },
+          {
+            "query_id": "q3",
+            "a_tokens": 519,
+            "answer": "No, according to the Impossibility Theorem of Fairness, a machine learning model cannot simultaneously satisfy calibration and equalised odds when base rates differ between groups. This incompatibility is a mathematical fact, not a limitation of any particular algorithm.",
+            "b_tokens": 562,
+            "total_tokens": 1081,
+            "accuracy": 0.67,
+            "data_loss": 0.33,
+            "grade": {
+              "facts_found": 2,
+              "facts_total": 3,
+              "accuracy": 0.67,
+              "hits": [
+                "cannot be simultaneously satisfied when base rates differ",
+                "mathematical impossibility not algorithmic limitation"
+              ],
+              "misses": [
+                "choice of metric is a normative decision"
+              ]
+            },
+            "latency_ms": 14006,
+            "cost_usd": 0.000324
+          }
+        ],
+        "toon": [
+          {
+            "query_id": "q1",
+            "a_tokens": 335,
+            "answer": "Demographic parity in machine learning is a fairness criterion where a model produces positive predictions at equal rates across different demographic groups. Mathematically, it requires P(Y_hat=1 | A=a) to be the same for all values of the protected attribute A.",
+            "b_tokens": 370,
+            "total_tokens": 705,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "equal positive prediction rates across groups",
+                "does not guarantee equal accuracy across groups",
+                "protected attribute"
+              ],
+              "misses": []
+            },
+            "latency_ms": 14411,
+            "cost_usd": 0.000211
+          },
+          {
+            "query_id": "q2",
+            "a_tokens": 417,
+            "answer": "The known biases in the COMPAS recidivism dataset include:\n- Black defendants scored higher risk at nearly twice the rate of white defendants who did not reoffend.\n- White defendants who did reoffend were more frequently scored lower risk than Black defendants who did not.\n- Age is a strong predictor and correlates with race in this dataset.",
+            "b_tokens": 458,
+            "total_tokens": 875,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "Black defendants scored higher risk at nearly twice the rate",
+                "white defendants who did reoffend were more frequently scored lower risk",
+                "age is a strong predictor and correlates with race"
+              ],
+              "misses": []
+            },
+            "latency_ms": 18412,
+            "cost_usd": 0.000262
+          },
+          {
+            "query_id": "q3",
+            "a_tokens": 478,
+            "answer": "No, according to the Impossibility Theorem of Fairness, a machine learning model cannot simultaneously satisfy calibration and equalised odds when base rates differ between groups. This incompatibility is a mathematical fact, not a limitation of any particular algorithm.",
+            "b_tokens": 521,
+            "total_tokens": 999,
+            "accuracy": 0.67,
+            "data_loss": 0.33,
+            "grade": {
+              "facts_found": 2,
+              "facts_total": 3,
+              "accuracy": 0.67,
+              "hits": [
+                "cannot be simultaneously satisfied when base rates differ",
+                "mathematical impossibility not algorithmic limitation"
+              ],
+              "misses": [
+                "choice of metric is a normative decision"
+              ]
+            },
+            "latency_ms": 14162,
+            "cost_usd": 0.0003
+          }
+        ]
+      },
+      "aggregated": {
+        "json": {
+          "a_tokens": 446,
+          "b_tokens": 486,
+          "total_tokens": 932,
+          "accuracy": 0.89,
+          "data_loss": 0.11,
+          "latency_ms": 17492,
+          "cost_usd": 0.00028
+        },
+        "toon": {
+          "a_tokens": 410,
+          "b_tokens": 450,
+          "total_tokens": 860,
+          "accuracy": 0.89,
+          "data_loss": 0.11,
+          "latency_ms": 15662,
+          "cost_usd": 0.000258
+        }
+      }
+    },
+    {
+      "test_id": 4,
+      "test_name": "ACF vs JSON vs TOON",
+      "formats": [
+        "acf",
+        "json",
+        "toon"
+      ],
+      "per_query": {
+        "acf": [
+          {
+            "query_id": "q1",
+            "a_tokens": 320,
+            "answer": "Demographic parity in machine learning is a fairness criterion where a model produces positive predictions at equal rates across different demographic groups, mathematically represented as P(Y_hat=1 | A=0) = P(Y_hat=1 | A=1), where A is a protected attribute and Y_hat is the prediction.",
+            "b_tokens": 355,
+            "total_tokens": 675,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "equal positive prediction rates across groups",
+                "does not guarantee equal accuracy across groups",
+                "protected attribute"
+              ],
+              "misses": []
+            },
+            "latency_ms": 16370,
+            "cost_usd": 0.000203
+          },
+          {
+            "query_id": "q2",
+            "a_tokens": 398,
+            "answer": "The known biases in the COMPAS recidivism dataset include:\n- Black defendants scored higher risk at nearly twice the rate of white defendants who did not reoffend.\n- White defendants who did reoffend were more frequently scored lower risk than Black defendants who did not.\n- Age is a strong predictor and correlates with race in this dataset.",
+            "b_tokens": 439,
+            "total_tokens": 837,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "Black defendants scored higher risk at nearly twice the rate",
+                "white defendants who did reoffend were more frequently scored lower risk",
+                "age is a strong predictor and correlates with race"
+              ],
+              "misses": []
+            },
+            "latency_ms": 17867,
+            "cost_usd": 0.000251
+          },
+          {
+            "query_id": "q3",
+            "a_tokens": 465,
+            "answer": "No, according to the Impossibility Theorem of Fairness, a machine learning model cannot simultaneously satisfy calibration and equalised odds when base rates differ between groups. This incompatibility is a mathematical fact applicable across different algorithms.",
+            "b_tokens": 508,
+            "total_tokens": 973,
+            "accuracy": 0.67,
+            "data_loss": 0.33,
+            "grade": {
+              "facts_found": 2,
+              "facts_total": 3,
+              "accuracy": 0.67,
+              "hits": [
+                "cannot be simultaneously satisfied when base rates differ",
+                "mathematical impossibility not algorithmic limitation"
+              ],
+              "misses": [
+                "choice of metric is a normative decision"
+              ]
+            },
+            "latency_ms": 12901,
+            "cost_usd": 0.000292
+          }
+        ],
+        "json": [
+          {
+            "query_id": "q1",
+            "a_tokens": 374,
+            "answer": "Demographic parity in machine learning is a fairness criterion where a model produces positive predictions at equal rates across different demographic groups. Mathematically, it requires \\( P(Y_hat=1 | A=0) = P(Y_hat=1 | A=1) \\), where \\( A \\) is a protected attribute and \\( Y_hat \\) is the model prediction.",
+            "b_tokens": 409,
+            "total_tokens": 783,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "equal positive prediction rates across groups",
+                "does not guarantee equal accuracy across groups",
+                "protected attribute"
+              ],
+              "misses": []
+            },
+            "latency_ms": 19875,
+            "cost_usd": 0.000235
+          },
+          {
+            "query_id": "q2",
+            "a_tokens": 446,
+            "answer": "The known biases in the COMPAS recidivism dataset include:\n- Black defendants scored higher risk at nearly twice the rate of white defendants who did not reoffend.\n- White defendants who did reoffend were more frequently scored lower risk than Black defendants who did not.\n- Age is a strong predictor and correlates with race in this dataset.",
+            "b_tokens": 487,
+            "total_tokens": 933,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "Black defendants scored higher risk at nearly twice the rate",
+                "white defendants who did reoffend were more frequently scored lower risk",
+                "age is a strong predictor and correlates with race"
+              ],
+              "misses": []
+            },
+            "latency_ms": 18189,
+            "cost_usd": 0.00028
+          },
+          {
+            "query_id": "q3",
+            "a_tokens": 519,
+            "answer": "No, according to the Impossibility Theorem of Fairness, a machine learning model cannot simultaneously satisfy calibration and equalised odds when base rates differ between groups. This incompatibility is a mathematical fact, not a limitation of any particular algorithm.",
+            "b_tokens": 562,
+            "total_tokens": 1081,
+            "accuracy": 0.67,
+            "data_loss": 0.33,
+            "grade": {
+              "facts_found": 2,
+              "facts_total": 3,
+              "accuracy": 0.67,
+              "hits": [
+                "cannot be simultaneously satisfied when base rates differ",
+                "mathematical impossibility not algorithmic limitation"
+              ],
+              "misses": [
+                "choice of metric is a normative decision"
+              ]
+            },
+            "latency_ms": 14621,
+            "cost_usd": 0.000324
+          }
+        ],
+        "toon": [
+          {
+            "query_id": "q1",
+            "a_tokens": 335,
+            "answer": "Demographic parity in machine learning is a fairness criterion where a model produces positive predictions at equal rates across different demographic groups. Mathematically, it requires P(Y_hat=1 | A=a) to be the same for all values of the protected attribute A.",
+            "b_tokens": 370,
+            "total_tokens": 705,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "equal positive prediction rates across groups",
+                "does not guarantee equal accuracy across groups",
+                "protected attribute"
+              ],
+              "misses": []
+            },
+            "latency_ms": 13747,
+            "cost_usd": 0.000211
+          },
+          {
+            "query_id": "q2",
+            "a_tokens": 417,
+            "answer": "The known biases in the COMPAS recidivism dataset include:\n- Black defendants scored higher risk at nearly twice the rate of white defendants who did not reoffend.\n- White defendants who did reoffend were more frequently scored lower risk than Black defendants who did not.\n- Age is a strong predictor and correlates with race in this dataset.",
+            "b_tokens": 458,
+            "total_tokens": 875,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "Black defendants scored higher risk at nearly twice the rate",
+                "white defendants who did reoffend were more frequently scored lower risk",
+                "age is a strong predictor and correlates with race"
+              ],
+              "misses": []
+            },
+            "latency_ms": 18476,
+            "cost_usd": 0.000262
+          },
+          {
+            "query_id": "q3",
+            "a_tokens": 478,
+            "answer": "No, according to the Impossibility Theorem of Fairness, a machine learning model cannot simultaneously satisfy calibration and equalised odds when base rates differ between groups. This incompatibility is a mathematical fact, not a limitation of any particular algorithm.",
+            "b_tokens": 521,
+            "total_tokens": 999,
+            "accuracy": 0.67,
+            "data_loss": 0.33,
+            "grade": {
+              "facts_found": 2,
+              "facts_total": 3,
+              "accuracy": 0.67,
+              "hits": [
+                "cannot be simultaneously satisfied when base rates differ",
+                "mathematical impossibility not algorithmic limitation"
+              ],
+              "misses": [
+                "choice of metric is a normative decision"
+              ]
+            },
+            "latency_ms": 14537,
+            "cost_usd": 0.0003
+          }
+        ]
+      },
+      "aggregated": {
+        "acf": {
+          "a_tokens": 394,
+          "b_tokens": 434,
+          "total_tokens": 828,
+          "accuracy": 0.89,
+          "data_loss": 0.11,
+          "latency_ms": 15713,
+          "cost_usd": 0.000249
+        },
+        "json": {
+          "a_tokens": 446,
+          "b_tokens": 486,
+          "total_tokens": 932,
+          "accuracy": 0.89,
+          "data_loss": 0.11,
+          "latency_ms": 17562,
+          "cost_usd": 0.00028
+        },
+        "toon": {
+          "a_tokens": 410,
+          "b_tokens": 450,
+          "total_tokens": 860,
+          "accuracy": 0.89,
+          "data_loss": 0.11,
+          "latency_ms": 15587,
+          "cost_usd": 0.000258
+        }
+      }
+    }
+  ]
+}

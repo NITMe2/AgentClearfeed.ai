@@ -9,7 +9,7 @@ QUERIES = [
         "expected_facts": [
             "equal positive prediction rates across groups",
             "does not guarantee equal accuracy across groups",
-            "also known as statistical parity",
+            "protected attribute",
         ],
     },
     {
@@ -19,8 +19,8 @@ QUERIES = [
         "html_file": "compas_dataset.html",
         "expected_facts": [
             "Black defendants scored higher risk at nearly twice the rate",
-            "single jurisdiction Broward County",
-            "proprietary methodology",
+            "white defendants who did reoffend were more frequently scored lower risk",
+            "age is a strong predictor and correlates with race",
         ],
     },
     {

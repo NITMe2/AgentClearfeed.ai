@@ -1,217 +1,149 @@
-# AgentClearfeed
+# AgentClearfeed — Phase 4: Agent Communication Protocol
 
-**The human web is broken for AI agents.** Pages built for human eyes are bloated with navigation, ads, cookie banners, tracking scripts, and layout markup. An agent parsing a typical webpage wastes 93-98% of its token budget on noise before reaching the actual content.
+**Branch:** `Agent-Comm` | **Base:** [main](https://github.com/NITMe2/AgentClearfeed.ai)
 
-AgentClearfeed is a parallel content layer built for inference. Clean, structured, verified content served in `.acf` format - not a scraper on top of the human web, but a native format designed for how AI agents actually consume information.
+Phases 1–3 proved ACF beats HTML for agent document retrieval (97.6% token reduction, 5.2x faster, +0.51 accuracy across 4 models). Phase 4 asks the next question: **which format is best when agents talk to each other?**
 
-## Key Results
+Two agents in sequence. Agent A fetches a document and formats it. Agent B receives it and answers a question. Only the wire format changes: **ACF** vs **JSON** vs **TOON**.
 
-| Metric | HTML | ACF | Improvement |
-|--------|------|-----|-------------|
-| Tokens per query (Phase 1) | 16,388 | 394 | **97.6% reduction** |
-| Tokens per 10-doc retrieval (Phase 2) | 84,022 | 5,429 | **93.5% reduction** |
-| Tokens per live data page (Phase 3) | 13,287 | 173 | **98.7% reduction** |
-| Inference latency (Phase 1) | 119s | 23s | **5.2x faster** |
-| Multi-doc accuracy (avg across 4 models) | 0.42 | 0.93 | **+0.51 absolute** |
-| Data staleness — local model (Phase 3) | 113.5s | 9.8s | **11.5x fresher** |
+New metric: **data loss** — facts in Agent A's message that fail to appear in Agent B's answer. Measures information fidelity through the handoff, not just token count.
 
-## Why This Matters
+---
 
-LLM inference cost scales with input tokens. Every webpage an agent reads carries thousands of tokens of HTML markup, JavaScript, CSS classes, and UI chrome that contribute nothing to the answer. This isn't just wasteful - it actively degrades accuracy. Models get lost in the noise.
+## Results
 
-ACF strips content down to structured, labelled fields. The result: agents read less, understand more, and cost a fraction to run.
+### Phase 1 Dataset — AI Fairness (3 queries)
 
-## Phase 1 - Single Document Retrieval
+**Qwen 2.5 14B** (local, Ollama, seed=42, fully deterministic)
 
-Three AI fairness questions answered from realistic modern webpages (cookie banners, tracking scripts, ads, paywalls, chat widgets) versus the same content in ACF format.
+| Format | A Tokens | B Tokens | Total | Accuracy | Data Loss | Cost/query |
+|--------|:--------:|:--------:|:-----:|:--------:|:---------:|:----------:|
+| ACF | 394 | 434 | 828 | **0.89** | 0.11 | $0.000249 |
+| TOON | 410 | 450 | 860 | **0.89** | 0.11 | $0.000258 |
+| JSON | 446 | 486 | 932 | **0.89** | 0.11 | $0.000280 |
 
-**Model:** Qwen 2.5 14B (local, Ollama)
+Qwen with a fixed seed is completely format-agnostic on accuracy. ACF uses 11.2% fewer tokens than JSON. Format makes no difference to what survives the handoff — all three preserve facts equally.
 
-| Query | HTML Tokens | ACF Tokens | Reduction | HTML Latency | ACF Latency |
-|-------|------------|-----------|-----------|-------------|-------------|
-| What is demographic parity? | 23,988 | 320 | **98.7%** | 131s | 22s |
-| Known biases in COMPAS dataset? | 13,292 | 398 | **97.0%** | 120s | 26s |
-| Can calibration and equalised odds coexist? | 11,886 | 465 | **96.1%** | 107s | 22s |
-| **Average** | **16,388** | **394** | **97.6%** | **119s** | **23s** |
+**Claude Haiku 4.5 — Test 4 Finale (all three formats)**
 
-Accuracy was identical across both formats. Every extra token in the HTML was pure overhead.
+| Format | Total Tokens | Accuracy | Data Loss | Cost/query |
+|--------|:------------:|:--------:|:---------:|:----------:|
+| ACF | 828 | **1.00** | **0.00** | $0.000663 |
+| TOON | 860 | 0.89 | 0.11 | $0.000688 |
+| JSON | 932 | 0.89 | 0.11 | $0.000746 |
 
-## Phase 2 - Multi-Document Retrieval
+ACF is the only format that achieves perfect accuracy for Haiku in the three-way finale. Token efficiency and accuracy advantage in the same direction.
 
-10 diverse Wikipedia topics (Photosynthesis, Roman Empire, TCP/IP, Jazz, Great Wall, CRISPR, Relativity, Impressionism, Volcanic Eruptions, Bitcoin) concatenated as a single context. The model must find the right document in the haystack and extract the answer. ACF timings include realistic fetch overhead from a conversion layer.
+---
 
-### Cross-Model Accuracy Comparison
+### Phase 2 Dataset — Wikipedia (5 queries, Claude Haiku 4.5)
 
-Tested across 4 models spanning local open-source, commercial API, and Chinese cloud providers:
+| Format | Avg Tokens | Accuracy | Data Loss | Cost/query |
+|--------|:----------:|:--------:|:---------:|:----------:|
+| ACF | 1,129 | **1.00** | 0.00 | $0.000903 |
+| TOON | 1,150 | **1.00** | 0.00 | $0.000920 |
+| JSON | 1,228 | **1.00** | 0.00 | $0.000982 |
 
-| Model | Type | HTML Accuracy | ACF Accuracy | ACF Advantage |
-|-------|------|:------------:|:------------:|:-------------:|
-| Qwen 2.5 14B | Local (Ollama) | 0.87 | **1.00** | +0.13 |
-| Claude Haiku 4.5 | Anthropic API | 0.67 | **1.00** | +0.33 |
-| Kimi K2.5 | Moonshot API | 0.13 | **0.93** | +0.80 |
-| Kimi K2.6 | Moonshot API | 0.00 | **0.80** | +0.80 |
-| Kimi K2.5 + Agent Swarm | Moonshot API | 0.20 | - | - |
+Perfect accuracy across all formats on Wikipedia content — Haiku handles clean structured docs regardless of format. ACF still wins on tokens (-8.1% vs JSON). TOON closes the gap on article content with structured lists.
 
-**ACF wins on every model.** The smaller or less HTML-savvy the model, the bigger the advantage.
+---
 
-### Per-Query Breakdown (Claude Haiku 4.5)
+### Token Efficiency Across Both Datasets
 
-| Query | Target | HTML Acc | ACF Acc |
-|-------|--------|:--------:|:-------:|
-| Stages of photosynthesis? | Photosynthesis | 1.00 | 1.00 |
-| TCP three-way handshake? | TCP/IP | 0.00 | 1.00 |
-| How does CRISPR-Cas9 cut DNA? | CRISPR | 0.33 | 1.00 |
-| Impressionist vs academic art? | Impressionism | 1.00 | 1.00 |
-| Bitcoin double-spending prevention? | Bitcoin | 1.00 | 1.00 |
+| Comparison | AI Fairness | Wikipedia |
+|-----------|:-----------:|:---------:|
+| ACF vs JSON | **-11.2%** | **-8.1%** |
+| TOON vs JSON | -7.7% | -6.4% |
+| ACF vs TOON | -3.9% | -1.9% |
 
-Haiku couldn't even find the TCP handshake answer in 84K tokens of HTML - it said the information wasn't in the context. With 5.4K tokens of ACF, it answered perfectly.
+ACF < TOON < JSON on token count, consistently. The gap narrows on longer Wikipedia articles where JSON's fixed syntax overhead becomes proportionally smaller.
 
-### The Agent Swarm Test
+---
 
-Kimi K2.5 scored 0.13 on HTML retrieval. We tested whether Kimi's Agent Swarm feature (multi-agent orchestration with up to 100 sub-agents) could rescue HTML performance.
+### Four Test Structure
 
-**Result: 0.20 accuracy.** Agent Swarm barely moved the needle.
+Each run compares formats in four rounds — same query, same data, same model, only format changes:
 
-More agents can't fix bad input. The swarm is still processing the same noisy HTML - orchestration doesn't solve a format problem. Meanwhile, a single ACF call with zero orchestration scores 0.93.
+| Test | Formats | Purpose |
+|------|---------|---------|
+| 1 | ACF vs JSON | Direct comparison, most common baseline |
+| 2 | ACF vs TOON | ACF vs best compact alternative |
+| 3 | JSON vs TOON | Validates against TOON's published benchmarks |
+| 4 | ACF vs JSON vs TOON | Finale — all three together |
 
-**One cheap API call with ACF > an entire multi-agent pipeline with HTML.**
+---
 
-### Token Efficiency
+## Key Findings
 
-Consistent 93.5% reduction across all models and queries:
+**1. Data loss is format-agnostic for capable models.** Qwen (deterministic) preserves facts identically across ACF, TOON, and JSON. The information survives the handoff regardless of wire format.
 
-| Topic | HTML Tokens | ACF Tokens | Ratio |
-|-------|-----------|-----------|-------|
-| Photosynthesis | 8,916 | 536 | 17x |
-| Roman Empire | 9,000 | 516 | 17x |
-| TCP/IP | 9,000 | 499 | 18x |
-| Jazz | 9,000 | 513 | 18x |
-| Great Wall | 9,000 | 501 | 18x |
-| CRISPR | 8,895 | 569 | 16x |
-| Relativity | 6,705 | 552 | 12x |
-| Impressionism | 8,640 | 598 | 14x |
-| Volcanic Eruptions | 5,794 | 608 | 10x |
-| Bitcoin | 9,000 | 519 | 17x |
-| **Total** | **84,022** | **5,429** | **15.5x** |
+**2. ACF wins on tokens, consistently.** 8-11% fewer tokens than JSON across both datasets and both models. Smaller messages, lower cost, same or better accuracy.
 
-## Phase 3 - Dynamic Content (Live Data)
+**3. TOON is a credible middle ground.** 6-8% fewer tokens than JSON. Readable, structured, and — on tabular content like TCP handshake steps or CRISPR mechanisms — starts to close the gap with ACF.
 
-Phase 3 tests a new dimension: live data extraction. A realistic bloated crypto price tracker page (cookie banners, ads, navigation, trending coins sidebar, newsletter popup, tracking scripts) with a live Bitcoin price injected from the CoinGecko API on every request. The same live price is served in ACF action format.
+**4. The same advantage holds end-to-end.** ACF beat HTML by 93-98% in retrieval. It beats JSON by 8-11% in agent comms. The format wins at every layer of the stack.
 
-New metric: **staleness** — how old is the data by the time the model finishes answering? With live data, fewer tokens means faster inference means fresher answers.
+---
 
-### Results
+## TOON Note
 
-| Model | Format | Tokens | Accuracy | Latency | Staleness |
-|-------|--------|-------:|:--------:|--------:|----------:|
-| Claude Haiku 4.5 | HTML | 13,287 | 1.00 | 1.2s | 1.7s |
-| Claude Haiku 4.5 | ACF | 173 | 1.00 | 0.9s | 1.2s |
-| Qwen 2.5 14B | HTML | 13,287 | 0.67 | 113.4s | 113.5s |
-| Qwen 2.5 14B | ACF | 173 | 0.67 | 9.8s | 9.8s |
+[toon-format](https://github.com/toon-format/toon) v0.1.0 ships with a stub encoder (`NotImplementedError`). This repo includes a custom implementation in `phase4/formatters/toon_fmt.py` built from the published spec.
 
-**98.7% token reduction. 76.8x compression ratio.**
+---
 
-### What Phase 3 Shows
+## Running Phase 4
 
-Haiku handled both formats perfectly — it's fast enough that staleness barely differs. The local model is where the story gets interesting:
-
-- **Qwen on HTML (113s):** Found the price correctly but got confused by the 24h change — the bloated page has competing percentages everywhere (sidebar trending coins, ad copy, market stats). The model mistook Ethereum's +3.2% from the trending sidebar for Bitcoin's actual change and eventually gave up, saying the information wasn't explicitly stated.
-
-- **Qwen on ACF (10s):** Returned the exact price and change in two lines. No confusion, no hedging.
-
-- **Staleness gap:** By the time Qwen finishes processing 13K tokens of HTML, the price data is nearly **2 minutes old**. With ACF, it's under 10 seconds. For live financial data, that's the difference between a useful answer and a stale one.
-
-## What ACF Proves
-
-1. **Format is the bottleneck, not the model.** Kimi K2.6 scores 0.0 on HTML and 0.80 on ACF - same model, same content, different format.
-
-2. **ACF is model-agnostic.** Every model tested - from a 14B local model to frontier APIs to Chinese cloud providers - performs better with ACF.
-
-3. **ACF makes smaller models viable.** Tasks that require expensive frontier models with HTML work perfectly with cheap models on ACF. This changes the economics of agent deployments.
-
-4. **Orchestration can't fix format.** Agent Swarm, multi-agent pipelines, RAG - none of these solve the fundamental problem of noisy input. Clean input does.
-
-5. **ACF keeps live data fresh.** With dynamic content, token bloat doesn't just cost money - it costs time. A local model takes 2 minutes to process a bloated price page, by which point the data is stale. ACF answers in 10 seconds with the same accuracy.
-
-## Quick Start
+No server needed — reads documents directly from `server/documents/`.
 
 ```bash
-# Install dependencies
 pip install -r requirements.txt
 
-# Start the ACF server
-python -m server.main
+# AI Fairness dataset (3 queries)
+python -m phase4.orchestrator                                          # Qwen 2.5 14B (default)
+python -m phase4.orchestrator --model claude-haiku                    # Claude Haiku 4.5
 
-# Phase 1 - single-doc retrieval (requires Ollama + qwen2.5:14b)
-python -m test_harness.harness
-
-# Phase 2 - multi-doc retrieval
-python -m test_harness.phase2.harness_phase2                          # Ollama (default: qwen2.5:14b)
-python -m test_harness.phase2.harness_phase2 --model claude-haiku     # Anthropic API
-python -m test_harness.phase2.harness_phase2 --model kimi-k2.5        # Kimi API
-python -m test_harness.phase2.harness_phase2 --model kimi-k2.5 --swarm --html-only  # Agent Swarm test
-
-# Phase 3 - dynamic content (requires running ACF server + CoinGecko API access)
-python -m test_harness.phase3.harness_phase3                          # Default: claude-haiku
-python -m test_harness.phase3.harness_phase3 --model qwen2.5:14b      # Local model
+# Wikipedia dataset (5 queries)
+python -m phase4.orchestrator --dataset phase2                        # Qwen
+python -m phase4.orchestrator --dataset phase2 --model claude-haiku   # Haiku
 ```
 
 ### Prerequisites
 
 - Python 3.11+
-- [Ollama](https://ollama.ai) for local models (`ollama pull qwen2.5:14b`)
-- `.env` file with API keys for cloud models:
+- [Ollama](https://ollama.ai) + `ollama pull qwen2.5:14b` (for local model runs)
+- `.env` with API keys for cloud models:
   ```
   ANTHROPIC_API_KEY=sk-ant-...
   KIMI_API_KEY=sk-...
   ```
 
-## ACF Format
+---
 
-ACF (AgentClearfeed Format) is a plain text format designed for LLM consumption. Every field is explicit, every document is self-describing. See [ACF_Format_Spec.md](ACF_Format_Spec.md) for the full specification.
-
-Core principles:
-- **Token efficiency first** - every byte must earn its place
-- **Structured over prose** - fields not paragraphs
-- **Explicit affordances** - agents always know what they're reading
-- **Ungameable by design** - structured fields leave no room for SEO manipulation
-
-## Project Structure
+## File Structure
 
 ```
-AgentClearfeed/
-├── ACF_Format_Spec.md              # Format specification
-├── server/
-│   ├── main.py                     # FastAPI server
-│   ├── parser.py                   # ACF document parser
-│   ├── phase3.py                   # Phase 3: live Bitcoin price endpoints
-│   ├── documents/                  # Phase 1: AI fairness .acf docs
-│   └── documents_phase2/           # Phase 2: 10 Wikipedia .acf docs
-├── test_harness/
-│   ├── harness.py                  # Phase 1 test runner
-│   ├── queries.py                  # Phase 1 queries
-│   ├── raw_sources/                # Phase 1 HTML sources
-│   ├── phase2/
-│   │   ├── harness_phase2.py       # Phase 2 test runner (multi-model)
-│   │   ├── queries_phase2.py       # Phase 2 queries
-│   │   ├── fetch_wikipedia.py      # Wikipedia HTML fetcher
-│   │   └── raw_sources/            # Phase 2 HTML sources
-│   ├── phase3/
-│   │   ├── harness_phase3.py       # Phase 3 test runner (dynamic content + staleness)
-│   │   └── queries_phase3.py       # Phase 3 queries
-│   └── results/                    # JSON results from all runs
-└── requirements.txt
+phase4/
+├── agent_a.py              # Fetches document, formats in ACF/JSON/TOON
+├── agent_b.py              # Receives message, queries model, grades answer
+├── orchestrator.py         # Runs all 4 tests (--model, --dataset flags)
+├── formatters/
+│   ├── acf.py              # ACF passthrough
+│   ├── json_fmt.py         # json.dumps
+│   └── toon_fmt.py         # TOON encoder (custom implementation)
+└── results/
+    ├── phase4_results_phase1_qwen2.5_14b.json
+    ├── phase4_results_phase1_claude-haiku.json
+    └── phase4_results_phase2_claude-haiku.json
 ```
 
-## API Endpoints
+---
 
-```
-GET /acf/document/{id}    - Fetch a single ACF document
-GET /acf/index            - List all documents
-GET /acf/domain/{domain}  - Get documents by domain
-GET /acf/query?q={query}  - Natural language search
+## Prior Phases
 
-# Phase 3 — Dynamic content (live CoinGecko data)
-GET /phase3/html/bitcoin-price  - Bloated crypto tracker page with live BTC price
-GET /phase3/acf/bitcoin-price   - Clean ACF action with same live price
-```
+| Phase | What | Headline |
+|-------|------|---------|
+| 1 | Single-doc retrieval, HTML vs ACF | 97.6% token reduction, 5.2x faster |
+| 2 | Multi-doc retrieval, 4 models | ACF wins on every model tested |
+| 3 | Live data, staleness metric | 98.7% reduction, 11.5x fresher |
+
+Full results and methodology on the [main branch](https://github.com/NITMe2/AgentClearfeed.ai).

@@ -1,0 +1,1146 @@
+{
+  "phase": 4,
+  "dataset": "phase2",
+  "model": "claude-haiku",
+  "queries": 5,
+  "tests": [
+    {
+      "test_id": 1,
+      "test_name": "ACF vs JSON",
+      "formats": [
+        "acf",
+        "json"
+      ],
+      "per_query": {
+        "acf": [
+          {
+            "query_id": "p2q1",
+            "a_tokens": 536,
+            "answer": "According to the provided context, the two main stages of photosynthesis are:\n\n1. **Light-dependent reactions** - occur in the thylakoid membranes and produce ATP, NADPH, and oxygen as a byproduct\n\n2. **The Calvin cycle (light-independent reactions)** - occurs in the stroma and uses ATP and NADPH to fix CO2 into glyceraldehyde-3-phosphate (G3P)\n\nBoth stages take place within chloroplasts.",
+            "b_tokens": 578,
+            "total_tokens": 1114,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "light-dependent reactions occur in the thylakoid membranes",
+                "Calvin cycle or light-independent reactions occur in the stroma",
+                "light reactions produce ATP and NADPH"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1216,
+            "cost_usd": 0.000891
+          },
+          {
+            "query_id": "p2q2",
+            "a_tokens": 499,
+            "answer": "# TCP Three-Way Handshake\n\nAccording to the provided context, the TCP three-way handshake establishes a connection through the following sequence:\n\n1. **Client sends SYN** - The client initiates the connection by sending a synchronization packet\n2. **Server responds with SYN-ACK** - The server acknowledges the client's request and sends its own synchronization packet\n3. **Client sends final ACK** - The client acknowledges the server's response, completing the handshake\n\nThis process allows both client and server to establish synchronized connection parameters before data transmission begins.",
+            "b_tokens": 537,
+            "total_tokens": 1036,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "SYN packet sent by client to initiate connection",
+                "server responds with SYN-ACK",
+                "client sends final ACK to complete handshake"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1444,
+            "cost_usd": 0.000829
+          },
+          {
+            "query_id": "p2q3",
+            "a_tokens": 569,
+            "answer": "# How CRISPR-Cas9 Identifies and Cuts DNA\n\nAccording to the context, CRISPR-Cas9 identifies and cuts a specific DNA location through the following process:\n\n1. **Guide RNA Direction**: A guide RNA (gRNA) of approximately 20 nucleotides directs the Cas9 protein to the complementary target DNA sequence.\n\n2. **PAM Recognition**: A PAM (Protospacer Adjacent Motif) sequence adjacent to the target site is required for Cas9 recognition and binding.\n\n3. **DNA Cutting**: The Cas9 protein acts as molecular scissors, creating a double-strand break in DNA at the location specified by the guide RNA.\n\nAfter the cut is made, the cell repairs the break through either non-homologous end joining (NHEJ) or homology-directed repair (HDR).",
+            "b_tokens": 613,
+            "total_tokens": 1182,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "guide RNA directs Cas9 to the target sequence",
+                "Cas9 creates a double-strand break in the DNA",
+                "PAM sequence adjacent to target is required for recognition"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1798,
+            "cost_usd": 0.000946
+          },
+          {
+            "query_id": "p2q4",
+            "a_tokens": 598,
+            "answer": "# Distinctions from Academic Art\n\nAccording to the provided context, Impressionism distinguished itself from earlier academic art through several key innovations:\n\n1. **Visible Brushstrokes** - Rather than the smooth, invisible brushwork of academic painting, Impressionists left their brushstrokes visible\n\n2. **Open Composition** - They moved away from the rigid compositional rules of academic traditions\n\n3. **Focus on Light** - Impressionists emphasized the accurate depiction of light in its changing qualities, rather than narrative or historical subjects\n\n4. **Ordinary Subject Matter** - They painted everyday scenes instead of the grand historical, mythological, or religious themes favored by academic art\n\n5. **Plein Air Practice** - They painted outdoors (en plein air) to capture natural light and color directly, rather than working in studios\n\n6. **Color Technique** - They used pure unmixed colors placed side by side for optical mixing, rather than blending colors on the palette\n\nThe context notes that Impressionism emerged in the 1860s-1870s as \"a reaction against the rigid rules of academic art\" and \"fundamentally changed the trajectory of Western art by prioritising perception over narrative.\"",
+            "b_tokens": 637,
+            "total_tokens": 1235,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "visible brush strokes and open composition",
+                "emphasis on light and its changing qualities",
+                "ordinary subject matter and outdoor painting en plein air"
+              ],
+              "misses": []
+            },
+            "latency_ms": 2599,
+            "cost_usd": 0.000988
+          },
+          {
+            "query_id": "p2q5",
+            "a_tokens": 519,
+            "answer": "According to the context, Bitcoin prevents double-spending through its proof-of-work consensus mechanism and blockchain structure:\n\n1. **Longest chain rule**: The network only accepts the longest valid chain, making it computationally infeasible to alter confirmed transactions.\n\n2. **Proof-of-work validation**: Miners solve computationally intensive puzzles to validate transaction blocks, which secures the network against tampering.\n\n3. **Distributed ledger**: The blockchain is a distributed public ledger where all transactions are recorded chronologically in blocks across the peer-to-peer network, creating transparency and redundancy without needing a central authority.\n\nThis decentralized approach means that attempting to double-spend would require controlling the majority of the network's computing power to create an alternative, longer chain\u2014making such an attack economically impractical.",
+            "b_tokens": 558,
+            "total_tokens": 1077,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "proof of work consensus mechanism",
+                "transactions verified by network of miners",
+                "blockchain is a distributed public ledger"
+              ],
+              "misses": []
+            },
+            "latency_ms": 2479,
+            "cost_usd": 0.000862
+          }
+        ],
+        "json": [
+          {
+            "query_id": "p2q1",
+            "a_tokens": 590,
+            "answer": "According to the context, the two main stages of photosynthesis are:\n\n1. **Light-dependent reactions** - occur in the thylakoid membranes and produce ATP, NADPH, and oxygen as a byproduct\n\n2. **Calvin cycle (light-independent reactions)** - occurs in the stroma and uses ATP and NADPH to fix CO2 into glyceraldehyde-3-phosphate (G3P)\n\nBoth stages take place within chloroplasts.",
+            "b_tokens": 632,
+            "total_tokens": 1222,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "light-dependent reactions occur in the thylakoid membranes",
+                "Calvin cycle or light-independent reactions occur in the stroma",
+                "light reactions produce ATP and NADPH"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1264,
+            "cost_usd": 0.000978
+          },
+          {
+            "query_id": "p2q2",
+            "a_tokens": 547,
+            "answer": "According to the provided context, the TCP three-way handshake establishes a connection through the following steps:\n\n1. **Client sends SYN** - The client initiates the connection by sending a SYN (synchronization) packet\n2. **Server responds with SYN-ACK** - The server receives the SYN and responds with a SYN-ACK packet\n3. **Client sends final ACK** - The client sends a final ACK (acknowledgment) packet to complete the handshake\n\nThis three-step process allows the client and server to establish a reliable connection before data transmission begins.",
+            "b_tokens": 585,
+            "total_tokens": 1132,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "SYN packet sent by client to initiate connection",
+                "server responds with SYN-ACK",
+                "client sends final ACK to complete handshake"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1599,
+            "cost_usd": 0.000906
+          },
+          {
+            "query_id": "p2q3",
+            "a_tokens": 619,
+            "answer": "# How CRISPR-Cas9 Identifies and Cuts DNA\n\nCRISPR-Cas9 identifies and cuts DNA through the following mechanism:\n\n1. **Guide RNA Direction**: A guide RNA (gRNA) of approximately 20 nucleotides directs the Cas9 protein to the complementary target DNA sequence.\n\n2. **PAM Recognition**: A PAM (Protospacer Adjacent Motif) sequence adjacent to the target site is required for Cas9 recognition and binding.\n\n3. **Cutting Action**: The Cas9 protein acts as molecular scissors, creating a double-strand break in DNA at the location specified by the guide RNA.\n\nAfter the cut is made, the cell repairs the break through either non-homologous end joining (NHEJ) or homology-directed repair (HDR).",
+            "b_tokens": 663,
+            "total_tokens": 1282,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "guide RNA directs Cas9 to the target sequence",
+                "Cas9 creates a double-strand break in the DNA",
+                "PAM sequence adjacent to target is required for recognition"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1801,
+            "cost_usd": 0.001026
+          },
+          {
+            "query_id": "p2q4",
+            "a_tokens": 645,
+            "answer": "# Key Distinctions of Impressionism from Academic Art\n\nAccording to the context, Impressionism broke with academic painting traditions through several defining characteristics:\n\n1. **Visible brush strokes** - Rather than the smooth, invisible brushwork of academic painting\n\n2. **Open composition** - Moving away from rigid compositional rules\n\n3. **Emphasis on light** - Focusing on the accurate depiction of light in its changing qualities, rather than narrative or historical subject matter\n\n4. **Ordinary subject matter** - Depicting everyday scenes instead of grandiose historical or mythological themes\n\n5. **Plein air practice** - Painting outdoors (en plein air) to capture natural light and color directly, rather than in studio settings\n\n6. **Optical color mixing** - Using pure unmixed colors placed side by side rather than blended on the palette\n\nThe context notes that Impressionism was fundamentally a reaction against \"the rigid rules of academic art\" and that the movement \"fundamentally changed the trajectory of Western art by prioritising perception over narrative.\"",
+            "b_tokens": 684,
+            "total_tokens": 1329,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "visible brush strokes and open composition",
+                "emphasis on light and its changing qualities",
+                "ordinary subject matter and outdoor painting en plein air"
+              ],
+              "misses": []
+            },
+            "latency_ms": 2085,
+            "cost_usd": 0.001063
+          },
+          {
+            "query_id": "p2q5",
+            "a_tokens": 567,
+            "answer": "According to the context, Bitcoin prevents double-spending through its proof-of-work consensus mechanism and blockchain structure:\n\n1. **Longest Valid Chain Rule**: The network only accepts the longest valid chain, making it computationally infeasible to alter confirmed transactions.\n\n2. **Proof-of-Work Validation**: Miners solve computationally intensive puzzles to validate transaction blocks. This distributed validation process ensures that transactions are legitimate before being added to the blockchain.\n\n3. **Distributed Ledger**: The blockchain is a distributed public ledger that records every transaction in chronological blocks across a decentralized network, preventing any single entity from fraudulently spending the same coins twice.\n\nThis decentralized approach eliminates the need for a central authority to prevent double-spending.",
+            "b_tokens": 606,
+            "total_tokens": 1173,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "proof of work consensus mechanism",
+                "transactions verified by network of miners",
+                "blockchain is a distributed public ledger"
+              ],
+              "misses": []
+            },
+            "latency_ms": 2028,
+            "cost_usd": 0.000938
+          }
+        ]
+      },
+      "aggregated": {
+        "acf": {
+          "a_tokens": 544,
+          "b_tokens": 585,
+          "total_tokens": 1129,
+          "accuracy": 1.0,
+          "data_loss": 0.0,
+          "latency_ms": 1907,
+          "cost_usd": 0.000903
+        },
+        "json": {
+          "a_tokens": 594,
+          "b_tokens": 634,
+          "total_tokens": 1228,
+          "accuracy": 1.0,
+          "data_loss": 0.0,
+          "latency_ms": 1755,
+          "cost_usd": 0.000982
+        }
+      }
+    },
+    {
+      "test_id": 2,
+      "test_name": "ACF vs TOON",
+      "formats": [
+        "acf",
+        "toon"
+      ],
+      "per_query": {
+        "acf": [
+          {
+            "query_id": "p2q1",
+            "a_tokens": 536,
+            "answer": "According to the provided context, the two main stages of photosynthesis are:\n\n1. **Light-dependent reactions** - occur in the thylakoid membranes and produce ATP, NADPH, and oxygen as a byproduct\n\n2. **The Calvin cycle (light-independent reactions)** - occur in the stroma and use ATP and NADPH to fix CO2 into glyceraldehyde-3-phosphate (G3P)\n\nBoth stages take place within the chloroplast.",
+            "b_tokens": 578,
+            "total_tokens": 1114,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "light-dependent reactions occur in the thylakoid membranes",
+                "Calvin cycle or light-independent reactions occur in the stroma",
+                "light reactions produce ATP and NADPH"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1195,
+            "cost_usd": 0.000891
+          },
+          {
+            "query_id": "p2q2",
+            "a_tokens": 499,
+            "answer": "# TCP Three-Way Handshake\n\nAccording to the provided context, the TCP three-way handshake establishes a connection through the following sequence:\n\n1. **Client sends SYN** - The client initiates the connection by sending a SYN (synchronization) packet\n2. **Server responds with SYN-ACK** - The server acknowledges the client's SYN and sends its own SYN packet back\n3. **Client sends final ACK** - The client sends an acknowledgment (ACK) back to the server\n\nThis three-step process allows both the client and server to establish synchronized sequence numbers and confirm their ability to communicate before data transmission begins.",
+            "b_tokens": 537,
+            "total_tokens": 1036,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "SYN packet sent by client to initiate connection",
+                "server responds with SYN-ACK",
+                "client sends final ACK to complete handshake"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1719,
+            "cost_usd": 0.000829
+          },
+          {
+            "query_id": "p2q3",
+            "a_tokens": 569,
+            "answer": "According to the provided context, CRISPR-Cas9 identifies and cuts a specific location in DNA through the following process:\n\n1. **Guide RNA Direction**: A guide RNA (gRNA) of approximately 20 nucleotides directs the Cas9 protein to the complementary target DNA sequence.\n\n2. **PAM Requirement**: A PAM (Protospacer Adjacent Motif) sequence adjacent to the target site is required for Cas9 recognition and binding.\n\n3. **Cutting Action**: The Cas9 protein acts as molecular scissors, creating a double-strand break in the DNA at the location specified by the guide RNA.\n\nAfter the double-strand break is made, the cell then repairs it through either non-homologous end joining (NHEJ) or homology-directed repair (HDR).",
+            "b_tokens": 613,
+            "total_tokens": 1182,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "guide RNA directs Cas9 to the target sequence",
+                "Cas9 creates a double-strand break in the DNA",
+                "PAM sequence adjacent to target is required for recognition"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1808,
+            "cost_usd": 0.000946
+          },
+          {
+            "query_id": "p2q4",
+            "a_tokens": 598,
+            "answer": "# Distinguishing Features of Impressionism\n\nImpressionism broke from academic art traditions in several key ways:\n\n1. **Visible Brushstrokes** - Rather than seamless, polished surfaces, Impressionists left visible brushwork\n\n2. **Emphasis on Light** - They focused on accurately depicting light and its changing qualities, rather than narrative or historical subjects\n\n3. **Open Composition** - They moved away from rigid, formal compositions\n\n4. **Ordinary Subject Matter** - They painted everyday scenes instead of grand historical or mythological themes\n\n5. **Plein Air Practice** - They painted outdoors (en plein air) to capture natural light and color directly, rather than working in studios from memory or sketches\n\n6. **Color Application** - They used pure unmixed colors placed side by side, relying on optical mixing, rather than blending colors on the palette\n\n7. **Rejection of Academic Rules** - The movement emerged as a **reaction against the rigid rules of academic art**\n\nAccording to the context, these innovations fundamentally changed Western art by prioritizing **perception over narrative**.",
+            "b_tokens": 637,
+            "total_tokens": 1235,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "visible brush strokes and open composition",
+                "emphasis on light and its changing qualities",
+                "ordinary subject matter and outdoor painting en plein air"
+              ],
+              "misses": []
+            },
+            "latency_ms": 3289,
+            "cost_usd": 0.000988
+          },
+          {
+            "query_id": "p2q5",
+            "a_tokens": 519,
+            "answer": "According to the provided context, Bitcoin prevents double-spending through its decentralized consensus mechanism:\n\n1. **Proof-of-Work Consensus**: The network uses a proof-of-work system where miners solve computationally intensive puzzles to validate transaction blocks.\n\n2. **Longest Chain Rule**: The network only accepts the longest valid chain as legitimate. This makes it computationally infeasible to alter confirmed transactions, since an attacker would need to redo all the computational work that has been done since a transaction was confirmed.\n\n3. **Distributed Ledger**: All transactions are recorded on the blockchain, a distributed public ledger that is maintained across a decentralized network of miners. This public record ensures transparency and allows the network to verify that a bitcoin hasn't been spent twice.\n\nTogether, these mechanisms allow Bitcoin to prevent double-spending without requiring a central authority to validate transactions.",
+            "b_tokens": 558,
+            "total_tokens": 1077,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "proof of work consensus mechanism",
+                "transactions verified by network of miners",
+                "blockchain is a distributed public ledger"
+              ],
+              "misses": []
+            },
+            "latency_ms": 2397,
+            "cost_usd": 0.000862
+          }
+        ],
+        "toon": [
+          {
+            "query_id": "p2q1",
+            "a_tokens": 547,
+            "answer": "According to the context, the two main stages of photosynthesis are:\n\n1. **Light-dependent reactions** - occur in the thylakoid membranes and produce ATP, NADPH, and oxygen as a byproduct\n\n2. **Calvin cycle (light-independent reactions)** - occur in the stroma and use ATP and NADPH to fix CO2 into glyceraldehyde-3-phosphate (G3P)\n\nBoth stages take place within chloroplasts.",
+            "b_tokens": 589,
+            "total_tokens": 1136,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "light-dependent reactions occur in the thylakoid membranes",
+                "Calvin cycle or light-independent reactions occur in the stroma",
+                "light reactions produce ATP and NADPH"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1279,
+            "cost_usd": 0.000909
+          },
+          {
+            "query_id": "p2q2",
+            "a_tokens": 510,
+            "answer": "According to the context, the TCP three-way handshake establishes a connection as follows:\n\n1. **Client sends SYN** - The client initiates the connection by sending a SYN (synchronize) packet\n2. **Server responds with SYN-ACK** - The server receives the SYN and responds with a SYN-ACK packet\n3. **Client sends final ACK** - The client sends a final ACK (acknowledgment) packet back to the server\n\nThis three-step process allows both the client and server to synchronize their sequence numbers and establish a reliable connection before data transmission begins.",
+            "b_tokens": 548,
+            "total_tokens": 1058,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "SYN packet sent by client to initiate connection",
+                "server responds with SYN-ACK",
+                "client sends final ACK to complete handshake"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1479,
+            "cost_usd": 0.000846
+          },
+          {
+            "query_id": "p2q3",
+            "a_tokens": 580,
+            "answer": "# How CRISPR-Cas9 Identifies and Cuts DNA\n\nCRISPR-Cas9 uses a two-component targeting system:\n\n1. **Guide RNA Direction**: A guide RNA (gRNA) of approximately 20 nucleotides directs the Cas9 protein to a complementary target DNA sequence.\n\n2. **PAM Requirement**: A PAM (Protospacer Adjacent Motif) sequence adjacent to the target site is required for Cas9 recognition and binding.\n\n3. **Cutting Action**: Once positioned at the correct location, the Cas9 protein acts as molecular scissors, creating a double-strand break in the DNA.\n\nAfter the cut, the cell repairs the break through either non-homologous end joining (NHEJ) or homology-directed repair (HDR).",
+            "b_tokens": 624,
+            "total_tokens": 1204,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "guide RNA directs Cas9 to the target sequence",
+                "Cas9 creates a double-strand break in the DNA",
+                "PAM sequence adjacent to target is required for recognition"
+              ],
+              "misses": []
+            },
+            "latency_ms": 2148,
+            "cost_usd": 0.000963
+          },
+          {
+            "query_id": "p2q4",
+            "a_tokens": 609,
+            "answer": "# Distinguishing Features of Impressionism\n\nImpressionist painting broke from academic art traditions through several key distinctions:\n\n1. **Visible brush strokes** - Rather than smooth, invisible brushwork favored by academics\n2. **Open composition** - Moving away from rigid, formal arrangements\n3. **Emphasis on light** - Focused on accurately depicting light in its changing qualities, rather than narrative content\n4. **Ordinary subject matter** - Depicting everyday scenes instead of historical, mythological, or religious themes\n5. **Plein air painting** - Artists painted outdoors to capture natural light and color directly, instead of working exclusively in studios\n6. **Color technique** - Used pure, unmixed colors placed side by side for optical mixing, rather than blending on the palette\n\nAccording to the context, Impressionism emerged in 1860s-1870s Paris as an explicit **reaction against the rigid rules of academic art**, fundamentally prioritizing **perception over narrative** and shifting the trajectory of Western art.",
+            "b_tokens": 648,
+            "total_tokens": 1257,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "visible brush strokes and open composition",
+                "emphasis on light and its changing qualities",
+                "ordinary subject matter and outdoor painting en plein air"
+              ],
+              "misses": []
+            },
+            "latency_ms": 2614,
+            "cost_usd": 0.001006
+          },
+          {
+            "query_id": "p2q5",
+            "a_tokens": 528,
+            "answer": "According to the provided context, Bitcoin prevents double-spending through its proof-of-work consensus mechanism and blockchain structure:\n\n1. **Longest Chain Rule**: The network only accepts the longest valid chain, making it computationally infeasible to alter confirmed transactions.\n\n2. **Proof-of-Work Validation**: Miners solve computationally intensive puzzles to validate transaction blocks, ensuring only legitimate transactions are recorded.\n\n3. **Distributed Ledger**: The blockchain serves as a distributed public ledger that records every transaction in chronological blocks across the decentralized network, making it transparent and verifiable.\n\nTogether, these mechanisms allow the decentralized network to reach consensus on valid transactions without requiring a central authority.",
+            "b_tokens": 567,
+            "total_tokens": 1095,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "proof of work consensus mechanism",
+                "transactions verified by network of miners",
+                "blockchain is a distributed public ledger"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1665,
+            "cost_usd": 0.000876
+          }
+        ]
+      },
+      "aggregated": {
+        "acf": {
+          "a_tokens": 544,
+          "b_tokens": 585,
+          "total_tokens": 1129,
+          "accuracy": 1.0,
+          "data_loss": 0.0,
+          "latency_ms": 2082,
+          "cost_usd": 0.000903
+        },
+        "toon": {
+          "a_tokens": 555,
+          "b_tokens": 595,
+          "total_tokens": 1150,
+          "accuracy": 1.0,
+          "data_loss": 0.0,
+          "latency_ms": 1837,
+          "cost_usd": 0.00092
+        }
+      }
+    },
+    {
+      "test_id": 3,
+      "test_name": "JSON vs TOON",
+      "formats": [
+        "json",
+        "toon"
+      ],
+      "per_query": {
+        "json": [
+          {
+            "query_id": "p2q1",
+            "a_tokens": 590,
+            "answer": "Based on the provided context, the two main stages of photosynthesis are:\n\n1. **Light-dependent reactions** - occur in the thylakoid membranes and produce ATP, NADPH, and oxygen as a byproduct\n\n2. **Calvin cycle (light-independent reactions)** - occur in the stroma and use ATP and NADPH to fix CO2 into glyceraldehyde-3-phosphate (G3P)\n\nBoth stages take place within chloroplasts.",
+            "b_tokens": 632,
+            "total_tokens": 1222,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "light-dependent reactions occur in the thylakoid membranes",
+                "Calvin cycle or light-independent reactions occur in the stroma",
+                "light reactions produce ATP and NADPH"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1239,
+            "cost_usd": 0.000978
+          },
+          {
+            "query_id": "p2q2",
+            "a_tokens": 547,
+            "answer": "According to the provided context, the TCP three-way handshake establishes a connection through the following sequence:\n\n1. **Client sends SYN** - The client initiates the connection by sending a SYN (synchronization) packet\n2. **Server responds with SYN-ACK** - The server acknowledges the client's SYN and sends back its own SYN-ACK packet\n3. **Client sends final ACK** - The client sends a final ACK (acknowledgment) packet to complete the handshake\n\nThis three-way handshake allows both the client and server to synchronize sequence numbers and establish a reliable connection before data transmission begins.",
+            "b_tokens": 585,
+            "total_tokens": 1132,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "SYN packet sent by client to initiate connection",
+                "server responds with SYN-ACK",
+                "client sends final ACK to complete handshake"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1532,
+            "cost_usd": 0.000906
+          },
+          {
+            "query_id": "p2q3",
+            "a_tokens": 619,
+            "answer": "According to the context, CRISPR-Cas9 identifies and cuts DNA through the following process:\n\n1. **Guide RNA Direction**: A guide RNA (gRNA) of approximately 20 nucleotides directs the Cas9 protein to a complementary target DNA sequence.\n\n2. **PAM Requirement**: A PAM (Protospacer Adjacent Motif) sequence adjacent to the target site is required for Cas9 recognition and binding.\n\n3. **Cutting Action**: The Cas9 protein acts as molecular scissors, creating a double-strand break in the DNA at the location specified by the guide RNA.",
+            "b_tokens": 663,
+            "total_tokens": 1282,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "guide RNA directs Cas9 to the target sequence",
+                "Cas9 creates a double-strand break in the DNA",
+                "PAM sequence adjacent to target is required for recognition"
+              ],
+              "misses": []
+            },
+            "latency_ms": 2011,
+            "cost_usd": 0.001026
+          },
+          {
+            "query_id": "p2q4",
+            "a_tokens": 645,
+            "answer": "# Key Distinctions of Impressionism from Academic Art\n\nAccording to the provided context, Impressionism broke with academic painting traditions through several distinguishing features:\n\n1. **Visible Brush Strokes** - Rather than the smooth, invisible brushwork of academic painting\n\n2. **Open Composition** - Departing from rigid compositional rules\n\n3. **Emphasis on Light** - Focus on the accurate depiction of light in its changing qualities, rather than narrative or historical subjects\n\n4. **Ordinary Subject Matter** - Moving away from grand historical or mythological themes to everyday scenes\n\n5. **Outdoor Painting (En Plein Air)** - Painting outdoors to capture natural light and color directly, rather than working from studios based on academic conventions\n\n6. **Color Application** - Using pure unmixed colors placed side by side rather than blended on the palette, relying on optical mixing\n\nThe context notes that Impressionism emerged in the 1860s-1870s specifically as \"a reaction against the rigid rules of academic art\" and that the movement \"fundamentally changed the trajectory of Western art by prioritising perception over narrative.\"",
+            "b_tokens": 684,
+            "total_tokens": 1329,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "visible brush strokes and open composition",
+                "emphasis on light and its changing qualities",
+                "ordinary subject matter and outdoor painting en plein air"
+              ],
+              "misses": []
+            },
+            "latency_ms": 4240,
+            "cost_usd": 0.001063
+          },
+          {
+            "query_id": "p2q5",
+            "a_tokens": 567,
+            "answer": "According to the provided context, Bitcoin prevents double-spending through its proof-of-work consensus mechanism and blockchain structure:\n\nThe network only accepts the longest valid chain, making it computationally infeasible to alter confirmed transactions. Proof of work requires miners to solve computationally intensive puzzles to validate transaction blocks. This decentralised validation process, where miners compete to add blocks and earn rewards, ensures that transactions are verified across the distributed network without needing a central authority.",
+            "b_tokens": 606,
+            "total_tokens": 1173,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "proof of work consensus mechanism",
+                "transactions verified by network of miners",
+                "blockchain is a distributed public ledger"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1972,
+            "cost_usd": 0.000938
+          }
+        ],
+        "toon": [
+          {
+            "query_id": "p2q1",
+            "a_tokens": 547,
+            "answer": "According to the context, the two main stages of photosynthesis are:\n\n1. **Light-dependent reactions** - occur in the thylakoid membranes and produce ATP, NADPH, and oxygen as a byproduct\n\n2. **The Calvin cycle (light-independent reactions)** - occur in the stroma and use ATP and NADPH to fix CO2 into glyceraldehyde-3-phosphate (G3P)",
+            "b_tokens": 589,
+            "total_tokens": 1136,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "light-dependent reactions occur in the thylakoid membranes",
+                "Calvin cycle or light-independent reactions occur in the stroma",
+                "light reactions produce ATP and NADPH"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1086,
+            "cost_usd": 0.000909
+          },
+          {
+            "query_id": "p2q2",
+            "a_tokens": 510,
+            "answer": "# TCP Three-Way Handshake\n\nAccording to the provided context, the TCP three-way handshake establishes a connection through the following sequence:\n\n1. **Client sends SYN** - The client initiates the connection by sending a SYN (synchronize) packet\n2. **Server responds with SYN-ACK** - The server acknowledges the client's request and sends its own synchronization packet\n3. **Client sends final ACK** - The client sends an acknowledgment packet to confirm the connection\n\nThis three-way handshake completes the connection establishment between two hosts communicating via an IP network.",
+            "b_tokens": 548,
+            "total_tokens": 1058,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "SYN packet sent by client to initiate connection",
+                "server responds with SYN-ACK",
+                "client sends final ACK to complete handshake"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1616,
+            "cost_usd": 0.000846
+          },
+          {
+            "query_id": "p2q3",
+            "a_tokens": 580,
+            "answer": "According to the provided context, CRISPR-Cas9 identifies and cuts DNA through the following process:\n\n1. **Guide RNA Direction**: A guide RNA (gRNA) of approximately 20 nucleotides directs the Cas9 protein to the complementary target DNA sequence.\n\n2. **PAM Recognition**: A PAM (Protospacer Adjacent Motif) sequence adjacent to the target site is required for Cas9 recognition and binding.\n\n3. **Cutting Action**: Once the Cas9 protein is directed to the correct location, it acts as molecular scissors, creating a double-strand break in the DNA at the location specified by the guide RNA.\n\nIn essence, the guide RNA acts as a homing beacon that matches the target sequence, while the PAM sequence confirms the correct location, enabling Cas9 to make a precise cut.",
+            "b_tokens": 624,
+            "total_tokens": 1204,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "guide RNA directs Cas9 to the target sequence",
+                "Cas9 creates a double-strand break in the DNA",
+                "PAM sequence adjacent to target is required for recognition"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1944,
+            "cost_usd": 0.000963
+          },
+          {
+            "query_id": "p2q4",
+            "a_tokens": 609,
+            "answer": "# Key Distinctions of Impressionism from Academic Art\n\nAccording to the context, Impressionism broke with academic painting traditions in several fundamental ways:\n\n1. **Visible brushstrokes** - Rather than smooth, blended finishes\n2. **Open composition** - Departing from rigid compositional rules\n3. **Emphasis on light** - Focus on accurately depicting light in its changing qualities, rather than narrative\n4. **Ordinary subject matter** - Moving away from grand historical or mythological themes\n5. **Plein air practice** - Painting outdoors to capture natural light and color directly\n6. **Color technique** - Using pure unmixed colors placed side by side for optical mixing, rather than blending on the palette\n\nThe context notes that Impressionism originated as \"a reaction against the rigid rules of academic art\" and \"fundamentally changed the trajectory of Western art by prioritising perception over narrative.\"",
+            "b_tokens": 648,
+            "total_tokens": 1257,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "visible brush strokes and open composition",
+                "emphasis on light and its changing qualities",
+                "ordinary subject matter and outdoor painting en plein air"
+              ],
+              "misses": []
+            },
+            "latency_ms": 3593,
+            "cost_usd": 0.001006
+          },
+          {
+            "query_id": "p2q5",
+            "a_tokens": 528,
+            "answer": "According to the provided context, Bitcoin prevents double-spending through its proof-of-work consensus mechanism and blockchain structure:\n\nThe network only accepts the longest valid chain, making it computationally infeasible to alter confirmed transactions. Proof-of-work consensus requires miners to solve computationally intensive puzzles to validate transaction blocks. This decentralised network of miners competes to add blocks and earn rewards, with all transactions recorded chronologically in the distributed public ledger called the blockchain.\n\nThis approach eliminates the need for a central authority while maintaining transaction security.",
+            "b_tokens": 567,
+            "total_tokens": 1095,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "proof of work consensus mechanism",
+                "transactions verified by network of miners",
+                "blockchain is a distributed public ledger"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1601,
+            "cost_usd": 0.000876
+          }
+        ]
+      },
+      "aggregated": {
+        "json": {
+          "a_tokens": 594,
+          "b_tokens": 634,
+          "total_tokens": 1228,
+          "accuracy": 1.0,
+          "data_loss": 0.0,
+          "latency_ms": 2199,
+          "cost_usd": 0.000982
+        },
+        "toon": {
+          "a_tokens": 555,
+          "b_tokens": 595,
+          "total_tokens": 1150,
+          "accuracy": 1.0,
+          "data_loss": 0.0,
+          "latency_ms": 1968,
+          "cost_usd": 0.00092
+        }
+      }
+    },
+    {
+      "test_id": 4,
+      "test_name": "ACF vs JSON vs TOON",
+      "formats": [
+        "acf",
+        "json",
+        "toon"
+      ],
+      "per_query": {
+        "acf": [
+          {
+            "query_id": "p2q1",
+            "a_tokens": 536,
+            "answer": "According to the context, the two main stages of photosynthesis are:\n\n1. **Light-dependent reactions** - occur in the thylakoid membranes and produce ATP, NADPH, and oxygen as a byproduct\n\n2. **Calvin cycle (light-independent reactions)** - occur in the stroma and use ATP and NADPH to fix CO2 into glyceraldehyde-3-phosphate (G3P)",
+            "b_tokens": 578,
+            "total_tokens": 1114,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "light-dependent reactions occur in the thylakoid membranes",
+                "Calvin cycle or light-independent reactions occur in the stroma",
+                "light reactions produce ATP and NADPH"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1509,
+            "cost_usd": 0.000891
+          },
+          {
+            "query_id": "p2q2",
+            "a_tokens": 499,
+            "answer": "# TCP Three-Way Handshake\n\nAccording to the provided context, the TCP three-way handshake establishes a connection through the following sequence:\n\n1. **Client sends SYN** - The client initiates the connection by sending a SYN (synchronization) packet\n2. **Server responds with SYN-ACK** - The server replies with a SYN-ACK packet\n3. **Client sends final ACK** - The client sends a final ACK (acknowledgment) packet to complete the handshake\n\nThis three-way handshake is TCP's mechanism for reliably establishing connections between hosts communicating via an IP network.",
+            "b_tokens": 537,
+            "total_tokens": 1036,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "SYN packet sent by client to initiate connection",
+                "server responds with SYN-ACK",
+                "client sends final ACK to complete handshake"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1555,
+            "cost_usd": 0.000829
+          },
+          {
+            "query_id": "p2q3",
+            "a_tokens": 569,
+            "answer": "# How CRISPR-Cas9 Identifies and Cuts DNA\n\nAccording to the context, CRISPR-Cas9 identifies and cuts DNA through the following mechanism:\n\n1. **Guide RNA Direction**: A guide RNA (gRNA) of approximately 20 nucleotides directs the Cas9 protein to a complementary target DNA sequence.\n\n2. **PAM Requirement**: A PAM (Protospacer Adjacent Motif) sequence adjacent to the target site is required for Cas9 recognition and binding.\n\n3. **Cutting Action**: The Cas9 protein acts as molecular scissors, creating a double-strand break in the DNA at the location specified by the guide RNA.\n\nIn summary, the guide RNA provides the specificity by binding to matching DNA sequences, while the PAM sequence enables Cas9 recognition, allowing the system to precisely target and cut a specific DNA location.",
+            "b_tokens": 613,
+            "total_tokens": 1182,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "guide RNA directs Cas9 to the target sequence",
+                "Cas9 creates a double-strand break in the DNA",
+                "PAM sequence adjacent to target is required for recognition"
+              ],
+              "misses": []
+            },
+            "latency_ms": 2177,
+            "cost_usd": 0.000946
+          },
+          {
+            "query_id": "p2q4",
+            "a_tokens": 598,
+            "answer": "# Key Distinctions of Impressionist Painting\n\nAccording to the context, Impressionism distinguished itself from academic art through:\n\n1. **Subject Matter**: Use of ordinary subjects rather than grand historical or mythological themes\n\n2. **Technique**: \n   - Visible brush strokes (rather than smooth, blended surfaces)\n   - Open composition (less formal, structured arrangements)\n   - Pure unmixed colours placed side by side for optical mixing (rather than blending on the palette)\n\n3. **Focus on Light**: Emphasis on accurate depiction of light in its changing qualities, rather than narrative content\n\n4. **Methodology**: Painting outdoors (en plein air) to directly observe and capture natural light and colour\n\nThe context notes that Impressionism emerged as \"a reaction against the rigid rules of academic art,\" fundamentally shifting Western art's priorities from narrative to **perception**.",
+            "b_tokens": 637,
+            "total_tokens": 1235,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "visible brush strokes and open composition",
+                "emphasis on light and its changing qualities",
+                "ordinary subject matter and outdoor painting en plein air"
+              ],
+              "misses": []
+            },
+            "latency_ms": 2503,
+            "cost_usd": 0.000988
+          },
+          {
+            "query_id": "p2q5",
+            "a_tokens": 519,
+            "answer": "According to the provided context, Bitcoin prevents double-spending through its proof-of-work consensus mechanism and blockchain structure:\n\n1. **Longest chain rule**: The network only accepts the longest valid chain, making it computationally infeasible to alter confirmed transactions.\n\n2. **Proof-of-work consensus**: Miners solve computationally intensive puzzles to validate transaction blocks. This process requires significant computational resources, which deters attempts to fraudulently alter the transaction history.\n\n3. **Distributed ledger**: The blockchain is a distributed public ledger that records every transaction in chronological blocks across the peer-to-peer network, allowing all participants to verify transactions without relying on a central authority.\n\nTogether, these mechanisms create a system where reversing or duplicating transactions would require an attacker to redo the work of the entire network, making double-spending economically impractical.",
+            "b_tokens": 558,
+            "total_tokens": 1077,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "proof of work consensus mechanism",
+                "transactions verified by network of miners",
+                "blockchain is a distributed public ledger"
+              ],
+              "misses": []
+            },
+            "latency_ms": 2106,
+            "cost_usd": 0.000862
+          }
+        ],
+        "json": [
+          {
+            "query_id": "p2q1",
+            "a_tokens": 590,
+            "answer": "According to the context, the two main stages of photosynthesis are:\n\n1. **Light-dependent reactions** - occur in the thylakoid membranes and produce ATP, NADPH, and oxygen as a byproduct\n\n2. **Calvin cycle (light-independent reactions)** - occurs in the stroma and uses ATP and NADPH to fix CO2 into glyceraldehyde-3-phosphate (G3P)",
+            "b_tokens": 632,
+            "total_tokens": 1222,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "light-dependent reactions occur in the thylakoid membranes",
+                "Calvin cycle or light-independent reactions occur in the stroma",
+                "light reactions produce ATP and NADPH"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1001,
+            "cost_usd": 0.000978
+          },
+          {
+            "query_id": "p2q2",
+            "a_tokens": 547,
+            "answer": "# TCP Three-Way Handshake\n\nAccording to the provided context, the TCP three-way handshake establishes a connection through the following steps:\n\n1. **Client sends SYN** - The client initiates the connection by sending a SYN (synchronization) packet\n2. **Server responds with SYN-ACK** - The server acknowledges and responds with a SYN-ACK packet\n3. **Client sends final ACK** - The client sends a final ACK (acknowledgment) packet to complete the handshake\n\nThis three-way handshake is the standard mechanism TCP uses to establish reliable connections between communicating hosts.",
+            "b_tokens": 585,
+            "total_tokens": 1132,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "SYN packet sent by client to initiate connection",
+                "server responds with SYN-ACK",
+                "client sends final ACK to complete handshake"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1699,
+            "cost_usd": 0.000906
+          },
+          {
+            "query_id": "p2q3",
+            "a_tokens": 619,
+            "answer": "# How CRISPR-Cas9 Identifies and Cuts DNA\n\nAccording to the context, CRISPR-Cas9 identifies and cuts specific DNA locations through the following mechanism:\n\n1. **Guide RNA Direction**: A guide RNA (gRNA) of approximately 20 nucleotides directs the Cas9 protein to the complementary target DNA sequence.\n\n2. **PAM Sequence Recognition**: A PAM (Protospacer Adjacent Motif) sequence adjacent to the target site is required for Cas9 recognition and binding.\n\n3. **Cutting Action**: The Cas9 protein acts as molecular scissors, creating a double-strand break in DNA at the location specified by the guide RNA.\n\nAfter the cut is made, the cell then repairs the double-strand break through either non-homologous end joining (NHEJ) or homology-directed repair (HDR).",
+            "b_tokens": 663,
+            "total_tokens": 1282,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "guide RNA directs Cas9 to the target sequence",
+                "Cas9 creates a double-strand break in the DNA",
+                "PAM sequence adjacent to target is required for recognition"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1909,
+            "cost_usd": 0.001026
+          },
+          {
+            "query_id": "p2q4",
+            "a_tokens": 645,
+            "answer": "# Key Distinctions of Impressionist Painting\n\nImpressionism broke with academic painting traditions in several fundamental ways:\n\n1. **Brushwork**: Impressionists used visible brush strokes rather than the smooth, blended finishes of academic art\n\n2. **Composition**: They employed open composition, departing from the rigid compositional rules of academic tradition\n\n3. **Focus on Light**: They emphasized the accurate depiction of light in its changing qualities, a priority that shifted from academic art's focus on narrative\n\n4. **Subject Matter**: They painted ordinary, everyday subjects rather than the historical, mythological, or heroic subjects favored by academia\n\n5. **Technique**: They used pure unmixed colours placed side by side and relied on optical mixing, rather than blending pigments on the palette\n\n6. **Method**: They practiced painting outdoors (en plein air) to capture natural light and color directly from nature, rather than working in studios\n\nAccording to the context, Impressionism \"fundamentally changed the trajectory of Western art by prioritising perception over narrative,\" marking a significant departure from the academic approach.",
+            "b_tokens": 684,
+            "total_tokens": 1329,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "visible brush strokes and open composition",
+                "emphasis on light and its changing qualities",
+                "ordinary subject matter and outdoor painting en plein air"
+              ],
+              "misses": []
+            },
+            "latency_ms": 2694,
+            "cost_usd": 0.001063
+          },
+          {
+            "query_id": "p2q5",
+            "a_tokens": 567,
+            "answer": "According to the provided context, Bitcoin prevents double-spending through its proof-of-work consensus mechanism and blockchain structure:\n\n1. **Longest valid chain rule**: The network only accepts the longest valid chain, making it computationally infeasible to alter confirmed transactions.\n\n2. **Proof-of-work validation**: Miners solve computationally intensive puzzles to validate transaction blocks. This process requires significant computational effort, which secures the network against attacks.\n\n3. **Distributed ledger**: The blockchain is a distributed public ledger that records every transaction in chronological blocks across a decentralized network of miners who compete to add blocks and earn rewards.\n\nTogether, these mechanisms create a system where attempting to reverse or duplicate transactions would require controlling more computing power than the rest of the honest network combined, making such attacks economically and practically infeasible.",
+            "b_tokens": 606,
+            "total_tokens": 1173,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "proof of work consensus mechanism",
+                "transactions verified by network of miners",
+                "blockchain is a distributed public ledger"
+              ],
+              "misses": []
+            },
+            "latency_ms": 2091,
+            "cost_usd": 0.000938
+          }
+        ],
+        "toon": [
+          {
+            "query_id": "p2q1",
+            "a_tokens": 547,
+            "answer": "According to the provided context, the two main stages of photosynthesis are:\n\n1. **Light-dependent reactions** - occur in the thylakoid membranes and produce ATP, NADPH, and oxygen as a byproduct\n\n2. **The Calvin cycle (light-independent reactions)** - occurs in the stroma and uses ATP and NADPH to fix CO2 into glyceraldehyde-3-phosphate (G3P)",
+            "b_tokens": 589,
+            "total_tokens": 1136,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "light-dependent reactions occur in the thylakoid membranes",
+                "Calvin cycle or light-independent reactions occur in the stroma",
+                "light reactions produce ATP and NADPH"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1235,
+            "cost_usd": 0.000909
+          },
+          {
+            "query_id": "p2q2",
+            "a_tokens": 510,
+            "answer": "# TCP Three-Way Handshake\n\nAccording to the provided context, the TCP three-way handshake establishes a connection through the following steps:\n\n1. **Client sends SYN** - The client initiates the connection by sending a SYN (synchronization) packet to the server\n\n2. **Server responds with SYN-ACK** - The server acknowledges the client's request and sends back a SYN-ACK packet\n\n3. **Client sends final ACK** - The client completes the handshake by sending an acknowledgment (ACK) packet to the server\n\nThis three-way handshake enables both parties to synchronize and establish reliable communication before any application data is exchanged.",
+            "b_tokens": 548,
+            "total_tokens": 1058,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "SYN packet sent by client to initiate connection",
+                "server responds with SYN-ACK",
+                "client sends final ACK to complete handshake"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1724,
+            "cost_usd": 0.000846
+          },
+          {
+            "query_id": "p2q3",
+            "a_tokens": 580,
+            "answer": "# How CRISPR-Cas9 Identifies and Cuts DNA\n\nAccording to the context, CRISPR-Cas9 identifies and cuts specific DNA locations through the following process:\n\n1. **Guide RNA Direction**: A guide RNA (gRNA) of approximately 20 nucleotides directs the Cas9 protein to the complementary target DNA sequence.\n\n2. **PAM Recognition**: A PAM (Protospacer Adjacent Motif) sequence adjacent to the target site is required for Cas9 recognition and binding.\n\n3. **Cutting Action**: Once Cas9 is directed to the correct location, the Cas9 protein acts as molecular scissors, creating a double-strand break in the DNA at the location specified by the guide RNA.\n\nAfter the cut is made, the cell repairs the break through either non-homologous end joining (NHEJ) or homology-directed repair (HDR).",
+            "b_tokens": 624,
+            "total_tokens": 1204,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "guide RNA directs Cas9 to the target sequence",
+                "Cas9 creates a double-strand break in the DNA",
+                "PAM sequence adjacent to target is required for recognition"
+              ],
+              "misses": []
+            },
+            "latency_ms": 2236,
+            "cost_usd": 0.000963
+          },
+          {
+            "query_id": "p2q4",
+            "a_tokens": 609,
+            "answer": "# Distinctions of Impressionist Painting from Academic Art\n\nAccording to the provided context, Impressionism broke with academic painting traditions in several key ways:\n\n1. **Visible brush strokes** - Rather than the smooth, invisible brushwork of academic painting\n\n2. **Open composition** - Departing from rigid, formally structured compositions\n\n3. **Emphasis on light** - Focusing on accurate depiction of light in its changing qualities, rather than narrative or historical subjects\n\n4. **Ordinary subject matter** - Moving away from grand historical, mythological, or religious themes\n\n5. **Plein air practice** - Painting outdoors to capture natural light and color, rather than working primarily in studios\n\nThe context notes that Impressionism originated as \"a reaction against the rigid rules of academic art\" and fundamentally changed Western art by \"prioritising perception over narrative.\"",
+            "b_tokens": 648,
+            "total_tokens": 1257,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "visible brush strokes and open composition",
+                "emphasis on light and its changing qualities",
+                "ordinary subject matter and outdoor painting en plein air"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1985,
+            "cost_usd": 0.001006
+          },
+          {
+            "query_id": "p2q5",
+            "a_tokens": 528,
+            "answer": "According to the context, Bitcoin prevents double-spending through its proof-of-work consensus mechanism and blockchain structure:\n\nThe network only accepts the longest valid chain, making it computationally infeasible to alter confirmed transactions. This distributed validation system works because a decentralized network of miners compete to add blocks and verify transactions using proof-of-work, which requires solving computationally intensive puzzles. This makes it practically impossible for anyone to fraudulently spend the same bitcoin twice, as doing so would require controlling the majority of the network's computing power.",
+            "b_tokens": 567,
+            "total_tokens": 1095,
+            "accuracy": 1.0,
+            "data_loss": 0.0,
+            "grade": {
+              "facts_found": 3,
+              "facts_total": 3,
+              "accuracy": 1.0,
+              "hits": [
+                "proof of work consensus mechanism",
+                "transactions verified by network of miners",
+                "blockchain is a distributed public ledger"
+              ],
+              "misses": []
+            },
+            "latency_ms": 1781,
+            "cost_usd": 0.000876
+          }
+        ]
+      },
+      "aggregated": {
+        "acf": {
+          "a_tokens": 544,
+          "b_tokens": 585,
+          "total_tokens": 1129,
+          "accuracy": 1.0,
+          "data_loss": 0.0,
+          "latency_ms": 1970,
+          "cost_usd": 0.000903
+        },
+        "json": {
+          "a_tokens": 594,
+          "b_tokens": 634,
+          "total_tokens": 1228,
+          "accuracy": 1.0,
+          "data_loss": 0.0,
+          "latency_ms": 1879,
+          "cost_usd": 0.000982
+        },
+        "toon": {
+          "a_tokens": 555,
+          "b_tokens": 595,
+          "total_tokens": 1150,
+          "accuracy": 1.0,
+          "data_loss": 0.0,
+          "latency_ms": 1792,
+          "cost_usd": 0.00092
+        }
+      }
+    }
+  ]
+}
