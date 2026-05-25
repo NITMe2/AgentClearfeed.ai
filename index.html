@@ -222,7 +222,7 @@
     }
 
     .prob-card p {
-      font-size: 0.87rem;
+      font-size: 1rem;
       color: var(--muted);
       line-height: 1.75;
     }
@@ -260,7 +260,7 @@
     }
 
     .cdesc {
-      font-size: 0.84rem;
+      font-size: 0.94rem;
       color: var(--dim);
       line-height: 1.6;
     }
@@ -345,7 +345,7 @@
     }
 
     .why-card p {
-      font-size: 0.84rem;
+      font-size: 1rem;
       color: var(--dim);
       line-height: 1.65;
     }
@@ -384,6 +384,8 @@
     td.metric  { color: #888; font-size: 0.8rem; }
     td.html-v  { color: var(--muted); }
     td.improv  { color: var(--accent); font-weight: 700; letter-spacing: 0.02em; }
+
+    .acf-row td:first-child { border-left: 3px solid var(--accent); }
 
     .phase-tag {
       font-size: 0.65rem;
@@ -455,7 +457,7 @@
     }
 
     .ph-desc {
-      font-size: 0.78rem;
+      font-size: 1rem;
       color: var(--muted);
       line-height: 1.55;
     }
@@ -569,7 +571,7 @@
       <h1>The human web is<br>broken for AI agents.<span class="cursor">_</span></h1>
       <p class="hero-sub">
         <strong>AgentClearfeed</strong> is a parallel content layer built for inference.
-        Clean, structured, verified content served in <code>.acf</code> format —
+        Clean, structured, verified content served in <code>.acf</code> format -
         not a scraper on top of the human web, but a native format designed for
         how AI agents actually consume information.
       </p>
@@ -592,7 +594,7 @@
       <div class="prob-card">
         <span class="prob-icon">~/</span>
         <h3>Scraping</h3>
-        <p>Fragile, breaks constantly. Dependent on HTML structure that changes without warning. 93–98% of every scraped page is noise — ads, navigation, cookie banners, tracking scripts — before the agent reaches actual content.</p>
+        <p>Fragile, breaks constantly. Dependent on HTML structure that changes without warning. 93-98% of every scraped page is noise - ads, navigation, cookie banners, tracking scripts - before the agent reaches actual content.</p>
       </div>
       <div class="prob-card">
         <span class="prob-icon">{}</span>
@@ -613,7 +615,7 @@
 ══════════════════════════════════════════════════════════════ -->
 <section id="results">
   <div class="wrap">
-    <div class="eyebrow">Benchmarks — Phases 1–3</div>
+    <div class="eyebrow">Benchmarks - Phases 1-4</div>
     <h2>The numbers.</h2>
     <div class="counter-grid">
 
@@ -638,7 +640,7 @@
       <div class="ccard" data-type="accuracy">
         <span class="cnum" style="font-size:clamp(1.6rem,3.2vw,2.4rem)"><span class="acc-from">0.42</span>&thinsp;&rarr;&thinsp;<span class="acc-to" style="color:var(--accent)">0.42</span></span>
         <div class="clabel">Accuracy</div>
-        <p class="cdesc">Multi-doc accuracy averaged across 4 models: Qwen 14B, Claude Haiku, Kimi K2.5, Kimi K2.6. Same content — different format.</p>
+        <p class="cdesc">Multi-doc accuracy averaged across 4 models: Qwen 14B, Claude Haiku, Kimi K2.5, Kimi K2.6. Same content - different format.</p>
       </div>
 
       <div class="ccard" data-counter="11.5" data-suffix="x">
@@ -648,9 +650,9 @@
       </div>
 
       <div class="ccard" data-type="static">
-        <span class="cnum" style="font-size:clamp(1.4rem,2.8vw,2rem);line-height:1.4">1 vs 100</span>
-        <div class="clabel">Agent Swarm</div>
-        <p class="cdesc">Kimi 100-agent swarm scored <span class="lo">0.20 accuracy</span> on HTML. Single ACF call scored <span class="hi">0.93</span>. Orchestration doesn't fix bad input.</p>
+        <span class="cnum">8-11%</span>
+        <div class="clabel">Agent Comms Saving</div>
+        <p class="cdesc">ACF beats JSON in agent-to-agent communication across all models and datasets. Phase 4 complete.</p>
       </div>
 
     </div>
@@ -770,6 +772,94 @@
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════
+     PHASE 4 RESULTS
+══════════════════════════════════════════════════════════════ -->
+<section id="data-p4">
+  <div class="wrap">
+    <div class="eyebrow">Phase 4 - Agent Communication</div>
+    <h2>Agent communication results.</h2>
+
+    <p style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Qwen 2.5 14B - AI Fairness dataset (deterministic, seed=42)</p>
+    <div class="tbl-wrap" style="margin-bottom:2.5rem">
+      <table>
+        <thead>
+          <tr>
+            <th>Format</th>
+            <th>Total Tokens</th>
+            <th>Accuracy</th>
+            <th>Data Loss</th>
+            <th>Cost/query</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="acf-row">
+            <td>ACF</td>
+            <td>828</td>
+            <td>0.89</td>
+            <td>0.11</td>
+            <td>$0.000249</td>
+          </tr>
+          <tr>
+            <td>TOON</td>
+            <td>860</td>
+            <td>0.89</td>
+            <td>0.11</td>
+            <td>$0.000258</td>
+          </tr>
+          <tr>
+            <td>JSON</td>
+            <td>932</td>
+            <td>0.89</td>
+            <td>0.11</td>
+            <td>$0.000280</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Claude Haiku 4.5 - three-way finale</p>
+    <div class="tbl-wrap" style="margin-bottom:2rem">
+      <table>
+        <thead>
+          <tr>
+            <th>Format</th>
+            <th>Total Tokens</th>
+            <th>Accuracy</th>
+            <th>Data Loss</th>
+            <th>Cost/query</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="acf-row">
+            <td>ACF</td>
+            <td>828</td>
+            <td class="improv">1.00</td>
+            <td class="improv">0.00</td>
+            <td>$0.000663</td>
+          </tr>
+          <tr>
+            <td>TOON</td>
+            <td>860</td>
+            <td>0.89</td>
+            <td>0.11</td>
+            <td>$0.000688</td>
+          </tr>
+          <tr>
+            <td>JSON</td>
+            <td>932</td>
+            <td>0.89</td>
+            <td>0.11</td>
+            <td>$0.000746</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:0.9rem;color:var(--accent);">ACF is the only format achieving perfect accuracy. 8-11% fewer tokens than JSON at every layer of the stack.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
      PHASES
 ══════════════════════════════════════════════════════════════ -->
 <section id="phases">
@@ -800,16 +890,16 @@
       </div>
 
       <div class="ph-item">
-        <div class="ph-dot wip">04</div>
-        <div class="ph-status wip">In Progress</div>
+        <div class="ph-dot done">04</div>
+        <div class="ph-status done">Complete</div>
         <div class="ph-title">Agent-to-Agent Communication</div>
-        <p class="ph-desc">Which format wins when agents talk to each other? ACF vs JSON vs TOON. Data forthcoming.</p>
+        <p class="ph-desc">ACF vs JSON vs TOON in agent-to-agent comms. 8-11% fewer tokens than JSON. Only format achieving perfect accuracy with Haiku.</p>
       </div>
 
       <div class="ph-item">
         <div class="ph-dot soon">05</div>
         <div class="ph-status soon">Planned</div>
-        <div class="ph-title">Index &amp; Publisher Tools</div>
+        <div class="ph-title">Index and Publisher Tools</div>
         <p class="ph-desc">Discovery layer and tooling for publishers to serve ACF natively at scale.</p>
       </div>
 
@@ -828,7 +918,7 @@
         <a href="https://github.com/NITMe2/AgentClearfeed.ai" target="_blank" rel="noopener">GitHub</a>
         <a href="https://github.com/NITMe2/AgentClearfeed.ai/blob/main/ACF_Format_Spec.md" target="_blank" rel="noopener">Spec</a>
       </div>
-      <div class="foot-credit">Built by Niteesh Tapr&egrave; — May 2026</div>
+      <div class="foot-credit">Built by Niteesh Tapre - May 2026</div>
     </div>
   </div>
 </footer>
