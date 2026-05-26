@@ -1,0 +1,308 @@
+[
+  {
+    "query_id": "p6q1",
+    "question": "How do neural networks learn, and what are the main challenges in training them?",
+    "formats": {
+      "evolved": {
+        "answer": "",
+        "per_fetcher_tokens": 1555,
+        "total_context_tokens": 4665,
+        "b_tokens": 4716,
+        "total_tokens": 9381,
+        "accuracy": 0.0,
+        "data_loss": 1.0,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "weights are adjusted through backpropagation",
+            "gradient descent minimizes the loss function",
+            "vanishing gradient problem affects deep networks"
+          ]
+        },
+        "latency_ms": 75642,
+        "cost_usd": 0.002814,
+        "swarm": true
+      },
+      "acf": {
+        "answer": "",
+        "per_fetcher_tokens": 1576,
+        "total_context_tokens": 4728,
+        "b_tokens": 4779,
+        "total_tokens": 9507,
+        "accuracy": 0.0,
+        "data_loss": 1.0,
+        "grade": {
+          "facts_found": 0,
+          "facts_total": 3,
+          "accuracy": 0.0,
+          "hits": [],
+          "misses": [
+            "weights are adjusted through backpropagation",
+            "gradient descent minimizes the loss function",
+            "vanishing gradient problem affects deep networks"
+          ]
+        },
+        "latency_ms": 34497,
+        "cost_usd": 0.002852,
+        "swarm": true
+      },
+      "json": {
+        "answer": "According to the provided context, neural networks learn via **backpropagation**, described as an optimization algorithm for artificial neural networks, and **gradient descent**, a first-order iterative algorithm for minimizing a differentiable multivariate function.\n\nThe provided context does not specify the main challenges in training neural networks.",
+        "per_fetcher_tokens": 1570,
+        "total_context_tokens": 4711,
+        "b_tokens": 4760,
+        "total_tokens": 9471,
+        "accuracy": 0.33,
+        "data_loss": 0.67,
+        "grade": {
+          "facts_found": 1,
+          "facts_total": 3,
+          "accuracy": 0.33,
+          "hits": [
+            "gradient descent minimizes the loss function"
+          ],
+          "misses": [
+            "weights are adjusted through backpropagation",
+            "vanishing gradient problem affects deep networks"
+          ]
+        },
+        "latency_ms": 31894,
+        "cost_usd": 0.002841,
+        "swarm": true
+      }
+    }
+  },
+  {
+    "query_id": "p6q2",
+    "question": "What is CRISPR and how is it used in medicine?",
+    "formats": {
+      "evolved": {
+        "answer": "CRISPR (Clustered Regularly Interspaced Short Palindromic Repeats) is a family of DNA sequences found in prokaryotic organisms (bacteria and archaea) that functions as an antiviral defense system, providing heritable, acquired immunity against bacteriophages. When combined with the Cas9 enzyme (CRISPR-associated protein 9), it forms the CRISPR-Cas9 system, a technology used to edit genes within living organisms.\n\nIn medicine, CRISPR-Cas9 is used for **gene therapy** to treat diseases by enabling targeted modification of DNA sequences. It introduces site-specific double-stranded breaks in DNA, allowing for gene inactivation, removal, or insertion through cellular repair mechanisms. This manipulation of gene expression or alteration of biological properties of living cells produces therapeutic effects. The development of this genome editing technique was recognized by the 2020 Nobel Prize in Chemistry.",
+        "per_fetcher_tokens": 2025,
+        "total_context_tokens": 6074,
+        "b_tokens": 6122,
+        "total_tokens": 12196,
+        "accuracy": 1.0,
+        "data_loss": 0.0,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "CRISPR-Cas9 can edit DNA sequences",
+            "guide RNA directs the Cas9 protein",
+            "used to treat genetic diseases"
+          ],
+          "misses": []
+        },
+        "latency_ms": 30614,
+        "cost_usd": 0.003659,
+        "swarm": true
+      },
+      "acf": {
+        "answer": "CRISPR (clustered regularly interspaced short palindromic repeats) is a family of DNA sequences found in prokaryotic organisms like bacteria and archaea. Originally part of their antiviral defense system, these sequences are used with the Cas9 enzyme (CRISPR-associated protein 9) to form the CRISPR-Cas9 gene editing technology.\n\nIn medicine, CRISPR-Cas9 is used for **gene therapy**\u2014manipulating gene expression or altering the biological properties of living cells to produce therapeutic effects. The system introduces site-specific double-stranded breaks in DNA, enabling gene inactivation, removal, or insertion to treat diseases. This technology allows for targeted modification of DNA sequences within living organisms to permanently change a cell's genome.",
+        "per_fetcher_tokens": 2045,
+        "total_context_tokens": 6135,
+        "b_tokens": 6183,
+        "total_tokens": 12318,
+        "accuracy": 1.0,
+        "data_loss": 0.0,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "CRISPR-Cas9 can edit DNA sequences",
+            "guide RNA directs the Cas9 protein",
+            "used to treat genetic diseases"
+          ],
+          "misses": []
+        },
+        "latency_ms": 26429,
+        "cost_usd": 0.003695,
+        "swarm": true
+      },
+      "json": {
+        "answer": "**CRISPR** (Clustered Regularly Interspaced Short Palindromic Repeats) is a family of DNA sequences found in prokaryotic organisms (bacteria and archaea) that functions as an antiviral defense system. When combined with the **Cas9** enzyme (CRISPR-associated protein 9), it forms **CRISPR-Cas9**, a genome editing technology.\n\nIn medicine, CRISPR-Cas9 is used for:\n- **Treating diseases** through gene therapy by enabling targeted modification of DNA sequences in living organisms\n- Introducing site-specific DNA breaks to **inactivate, remove, or insert genes** via cellular repair mechanisms\n- Manipulating gene expression to produce therapeutic effects by altering the biological properties of living cells\n\nThe development of CRISPR-Cas9 genome editing was recognized with the Nobel Prize in Chemistry in 2020.",
+        "per_fetcher_tokens": 2044,
+        "total_context_tokens": 6132,
+        "b_tokens": 6178,
+        "total_tokens": 12310,
+        "accuracy": 1.0,
+        "data_loss": 0.0,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "CRISPR-Cas9 can edit DNA sequences",
+            "guide RNA directs the Cas9 protein",
+            "used to treat genetic diseases"
+          ],
+          "misses": []
+        },
+        "latency_ms": 26394,
+        "cost_usd": 0.003693,
+        "swarm": true
+      }
+    }
+  },
+  {
+    "query_id": "p6q3",
+    "question": "How does climate change affect biodiversity?",
+    "formats": {
+      "evolved": {
+        "answer": "Climate change affects biodiversity by forcing species to relocate or become extinct, particularly in mountains, coral reefs, and the Arctic. It contributes to habitat destruction and fragmentation, changes the geographical distribution of suitable habitats for plants, and intensifies weather extremes (heat waves, wildfires, storms, and droughts) that harm ecosystems. Climate change plays a significant role in the ongoing Holocene extinction (sixth mass extinction), with estimates suggesting up to 30% of all species could be extinct by 2050 and extinction rates currently hundreds of times higher than background rates.",
+        "per_fetcher_tokens": 2025,
+        "total_context_tokens": 6074,
+        "b_tokens": 6116,
+        "total_tokens": 12190,
+        "accuracy": 0.33,
+        "data_loss": 0.67,
+        "grade": {
+          "facts_found": 1,
+          "facts_total": 3,
+          "accuracy": 0.33,
+          "hits": [
+            "habitat loss is a primary driver of species extinction"
+          ],
+          "misses": [
+            "rising temperatures shift species ranges",
+            "coral reefs are threatened by ocean warming"
+          ]
+        },
+        "latency_ms": 21746,
+        "cost_usd": 0.003657,
+        "swarm": true
+      },
+      "acf": {
+        "answer": "Climate change affects biodiversity in several key ways:\n\n**Direct impacts on species and ecosystems:**\n- Forces species to relocate or become extinct, particularly in vulnerable ecosystems like mountains, coral reefs, and the Arctic\n- Contributes to the ongoing \"Holocene extinction\" or \"sixth mass extinction\" through habitat destruction and environmental changes\n- Causes bleaching of corals due to marine heatwaves and intensifies wildfires through heat and drought\n\n**Habitat alteration:**\n- Indirectly causes habitat destruction by changing environmental conditions, making habitats unsuitable for native species\n- Alters geographical habitats suitable for plant growth, impacting plant diversity distribution and migration ability\n- Contributes to thawing permafrost, glacier retreat, and sea ice decline in the Arctic\n\n**Long-term environmental changes:**\n- Causes ocean heating, ocean acidification, and sea level rise, which persist for centuries even if warming is minimized\n- Increases extreme weather events (storms, droughts, heat waves) that threaten ecosystems\n\n**Contribution to extinction rates:**\n- Plays a significant role alongside habitat destruction in decreasing biodiversity\n- Has been estimated to contribute to potential extinction of up to 30% of all species by 2050\n- Current extinction rates are hundreds of times higher than background rates, with climate change as a contributing factor",
+        "per_fetcher_tokens": 2045,
+        "total_context_tokens": 6136,
+        "b_tokens": 6178,
+        "total_tokens": 12314,
+        "accuracy": 0.67,
+        "data_loss": 0.33,
+        "grade": {
+          "facts_found": 2,
+          "facts_total": 3,
+          "accuracy": 0.67,
+          "hits": [
+            "habitat loss is a primary driver of species extinction",
+            "coral reefs are threatened by ocean warming"
+          ],
+          "misses": [
+            "rising temperatures shift species ranges"
+          ]
+        },
+        "latency_ms": 29318,
+        "cost_usd": 0.003694,
+        "swarm": true
+      },
+      "json": {
+        "answer": "Climate change affects biodiversity by forcing species to relocate or become extinct, particularly in vulnerable regions like mountains, coral reefs, and the Arctic. It contributes to habitat destruction and degradation, changes the geographical distribution of habitats suitable for plants, and increases extreme weather events such as heat waves, wildfires, droughts, and intense storms. These impacts cause ongoing biodiversity loss and genetic diversity loss, with climate change playing a significant role alongside other factors like habitat destruction.",
+        "per_fetcher_tokens": 2051,
+        "total_context_tokens": 6153,
+        "b_tokens": 6193,
+        "total_tokens": 12346,
+        "accuracy": 0.33,
+        "data_loss": 0.67,
+        "grade": {
+          "facts_found": 1,
+          "facts_total": 3,
+          "accuracy": 0.33,
+          "hits": [
+            "habitat loss is a primary driver of species extinction"
+          ],
+          "misses": [
+            "rising temperatures shift species ranges",
+            "coral reefs are threatened by ocean warming"
+          ]
+        },
+        "latency_ms": 16882,
+        "cost_usd": 0.003704,
+        "swarm": true
+      }
+    }
+  },
+  {
+    "query_id": "p6q4",
+    "question": "What is the role of central banks in controlling inflation?",
+    "formats": {
+      "evolved": {
+        "answer": "Based on the provided context, central banks control inflation through **monetary policy**, which involves managing **interest rates** and **money supply** to achieve **price stability**. \n\nSpecifically, the context indicates that:\n- Central banks are the **monetary authority** responsible for monetary policy\n- They utilize tools such as **interest rates**, **bank reserves requirements**, and the **discount window** \n- **Inflation targeting** is listed as a specific monetary policy approach used by central banks\n- The goal is to manage the **devaluation of money's purchasing power** (inflation) and maintain price stability",
+        "per_fetcher_tokens": 2023,
+        "total_context_tokens": 6068,
+        "b_tokens": 6115,
+        "total_tokens": 12183,
+        "accuracy": 0.67,
+        "data_loss": 0.33,
+        "grade": {
+          "facts_found": 2,
+          "facts_total": 3,
+          "accuracy": 0.67,
+          "hits": [
+            "central banks set interest rates",
+            "raising interest rates reduces spending and inflation"
+          ],
+          "misses": [
+            "quantitative easing increases money supply"
+          ]
+        },
+        "latency_ms": 19222,
+        "cost_usd": 0.003655,
+        "swarm": true
+      },
+      "acf": {
+        "answer": "Based on the provided context, central banks control inflation through **monetary policy**, which involves managing **interest rates** and **money supply**. The context identifies **inflation targeting** as a specific monetary policy tool used by central banks.",
+        "per_fetcher_tokens": 2044,
+        "total_context_tokens": 6132,
+        "b_tokens": 6179,
+        "total_tokens": 12311,
+        "accuracy": 0.67,
+        "data_loss": 0.33,
+        "grade": {
+          "facts_found": 2,
+          "facts_total": 3,
+          "accuracy": 0.67,
+          "hits": [
+            "central banks set interest rates",
+            "raising interest rates reduces spending and inflation"
+          ],
+          "misses": [
+            "quantitative easing increases money supply"
+          ]
+        },
+        "latency_ms": 21332,
+        "cost_usd": 0.003693,
+        "swarm": true
+      },
+      "json": {
+        "answer": "Based on the provided context, central banks control inflation by managing **monetary policy**, which involves setting **interest rates** and controlling the **money supply**. Specific tools mentioned include **inflation targeting**, **bank reserve requirements**, **open market operations**, and **quantitative easing**. As the government body responsible for monetary authority, the central bank uses these mechanisms to influence price stability and combat the devaluation of money's purchasing power.",
+        "per_fetcher_tokens": 2049,
+        "total_context_tokens": 6147,
+        "b_tokens": 6191,
+        "total_tokens": 12338,
+        "accuracy": 1.0,
+        "data_loss": 0.0,
+        "grade": {
+          "facts_found": 3,
+          "facts_total": 3,
+          "accuracy": 1.0,
+          "hits": [
+            "central banks set interest rates",
+            "raising interest rates reduces spending and inflation",
+            "quantitative easing increases money supply"
+          ],
+          "misses": []
+        },
+        "latency_ms": 29146,
+        "cost_usd": 0.003701,
+        "swarm": true
+      }
+    }
+  }
+]

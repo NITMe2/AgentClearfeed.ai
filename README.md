@@ -1,16 +1,86 @@
-# AgentClearfeed — Phase 4: Agent Communication Protocol
+# AgentClearfeed — Phase 6: Multi-Agent Swarm with Live Content
 
-**Branch:** `Agent-Comm` | **Base:** [main](https://github.com/NITMe2/AgentClearfeed.ai)
+**Branch:** `phase4-agent-comms-test` | **Base:** [main](https://github.com/NITMe2/AgentClearfeed.ai)
 
-Phases 1–3 proved ACF beats HTML for agent document retrieval (97.6% token reduction, 5.2x faster, +0.51 accuracy across 4 models). Phase 4 asks the next question: **which format is best when agents talk to each other?**
+> **Note:** `max_tokens` is set conservatively for cost control during testing, not representative of production deployment.
+
+---
+
+## Phase 6 — Multi-Agent Swarm with Live Content
+
+Tests whether evolved-ACF's efficiency advantage holds — and compounds — across a realistic multi-agent topology with live Wikipedia content.
+
+**Standard run — single Kimi K2.5 coordinator (4 queries × 3 Wikipedia sources)**
+
+| Format | Avg ctx tokens | Avg accuracy | Compounding |
+|--------|:--------------:|:------------:|:-----------:|
+| **Evolved** | **5,720** | **0.67** | 0.989x |
+| ACF | 5,783 | 0.58 | 0.999x |
+| JSON | 5,786 | 0.42 | 1.000x |
+
+With a capable model, evolved-ACF wins on both axes: 1.1% fewer context tokens and highest accuracy.
+
+**Explicit 3-agent run — 3 parallel Haiku sub-agents → Haiku coordinator**
+
+```
+Query
+  ├── Haiku sub-agent A (doc 1 in wire fmt) → answer A ─┐
+  ├── Haiku sub-agent B (doc 2 in wire fmt) → answer B ──→ Haiku Coordinator → Final answer
+  └── Haiku sub-agent C (doc 3 in wire fmt) → answer C ─┘
+```
+
+| Format | Avg ctx tokens | Avg accuracy | Compounding |
+|--------|:--------------:|:------------:|:-----------:|
+| Evolved | 5,720 | 0.42 | 0.989x |
+| ACF | 5,783 | 0.42 | 0.999x |
+| **JSON** | **5,786** | **0.50** | 1.000x |
+
+The accuracy ranking flips with smaller models. Evolved-ACF's compressed positional encoding requires sufficient model capability to parse reliably — below that threshold, JSON's explicit structure wins even at higher token cost.
+
+```bash
+python -m phase6.orchestrator             # Standard run (Kimi K2.5)
+python -m phase6.orchestrator --explicit  # Explicit 3-agent topology (Claude Haiku)
+```
+
+---
+
+## Phase 5 — Genetic Algorithm: Evolving the Format
+
+A DEAP genetic algorithm evolved document format schemas starting from ACF as the seed individual. Fitness = 60% accuracy + 40% token efficiency. Model: llama3.1:8b via Ollama.
+
+| Schema | Tokens | Accuracy | Fitness |
+|--------|:------:|:--------:|:-------:|
+| ACF seed | 759 | 0.67 | 0.941 |
+| **Evolved** | **682** | **0.78** | **1.073** |
+
+**+13.99% fitness improvement.** Converged at generation 7; entire population at the same solution by generation 10.
+
+**Winning evolved schema:**
+```python
+{
+    "delimiter": ":",
+    "key_style": "none",       # no key names — positional values only
+    "nesting": "flat",         # strip section headers from body
+    "field_order": ["id", "type", "title", "source", "author", "confidence", "domain", "tags"],
+    "quote_values": False,
+    "newline_sep": False,      # header collapsed to a single space-separated line
+}
+```
+
+Evolution didn't replace ACF — it evolved from it. Same delimiter, same fields, same body structure. Just stripped key names and collapsed the header to one line. "ACF designed the structure; evolution found a more compressed encoding."
+
+```bash
+python -m phase5.baseline    # Baseline: ACF vs JSON vs TOON on llama3.1:8b
+python -m phase5.ga          # Genetic algorithm evolution (10 generations)
+```
+
+---
+
+## Phase 4 — Agent Communication Protocol (ACF vs JSON vs TOON)
 
 Two agents in sequence. Agent A fetches a document and formats it. Agent B receives it and answers a question. Only the wire format changes: **ACF** vs **JSON** vs **TOON**.
 
 New metric: **data loss** — facts in Agent A's message that fail to appear in Agent B's answer. Measures information fidelity through the handoff, not just token count.
-
----
-
-## Results
 
 ### Phase 1 Dataset — AI Fairness (3 queries)
 
@@ -34,8 +104,6 @@ Qwen with a fixed seed is completely format-agnostic on accuracy. ACF uses 11.2%
 
 ACF is the only format that achieves perfect accuracy for Haiku in the three-way finale. Token efficiency and accuracy advantage in the same direction.
 
----
-
 ### Phase 2 Dataset — Wikipedia (5 queries, Claude Haiku 4.5)
 
 | Format | Avg Tokens | Accuracy | Data Loss | Cost/query |
@@ -45,8 +113,6 @@ ACF is the only format that achieves perfect accuracy for Haiku in the three-way
 | JSON | 1,228 | **1.00** | 0.00 | $0.000982 |
 
 Perfect accuracy across all formats on Wikipedia content — Haiku handles clean structured docs regardless of format. ACF still wins on tokens (-8.1% vs JSON). TOON closes the gap on article content with structured lists.
-
----
 
 ### Token Efficiency Across Both Datasets
 
@@ -58,11 +124,7 @@ Perfect accuracy across all formats on Wikipedia content — Haiku handles clean
 
 ACF < TOON < JSON on token count, consistently. The gap narrows on longer Wikipedia articles where JSON's fixed syntax overhead becomes proportionally smaller.
 
----
-
 ### Four Test Structure
-
-Each run compares formats in four rounds — same query, same data, same model, only format changes:
 
 | Test | Formats | Purpose |
 |------|---------|---------|
@@ -71,17 +133,13 @@ Each run compares formats in four rounds — same query, same data, same model, 
 | 3 | JSON vs TOON | Validates against TOON's published benchmarks |
 | 4 | ACF vs JSON vs TOON | Finale — all three together |
 
----
+```bash
+pip install -r requirements.txt
 
-## Key Findings
-
-**1. Data loss is format-agnostic for capable models.** Qwen (deterministic) preserves facts identically across ACF, TOON, and JSON. The information survives the handoff regardless of wire format.
-
-**2. ACF wins on tokens, consistently.** 8-11% fewer tokens than JSON across both datasets and both models. Smaller messages, lower cost, same or better accuracy.
-
-**3. TOON is a credible middle ground.** 6-8% fewer tokens than JSON. Readable, structured, and — on tabular content like TCP handshake steps or CRISPR mechanisms — starts to close the gap with ACF.
-
-**4. The same advantage holds end-to-end.** ACF beat HTML by 93-98% in retrieval. It beats JSON by 8-11% in agent comms. The format wins at every layer of the stack.
+python -m phase4.orchestrator                                          # Qwen 2.5 14B (default)
+python -m phase4.orchestrator --model claude-haiku                    # Claude Haiku 4.5
+python -m phase4.orchestrator --dataset phase2 --model claude-haiku   # Wikipedia dataset
+```
 
 ---
 
@@ -91,50 +149,15 @@ Each run compares formats in four rounds — same query, same data, same model, 
 
 ---
 
-## Running Phase 4
-
-No server needed — reads documents directly from `server/documents/`.
-
-```bash
-pip install -r requirements.txt
-
-# AI Fairness dataset (3 queries)
-python -m phase4.orchestrator                                          # Qwen 2.5 14B (default)
-python -m phase4.orchestrator --model claude-haiku                    # Claude Haiku 4.5
-
-# Wikipedia dataset (5 queries)
-python -m phase4.orchestrator --dataset phase2                        # Qwen
-python -m phase4.orchestrator --dataset phase2 --model claude-haiku   # Haiku
-```
-
-### Prerequisites
+## Prerequisites
 
 - Python 3.11+
-- [Ollama](https://ollama.ai) + `ollama pull qwen2.5:14b` (for local model runs)
-- `.env` with API keys for cloud models:
+- [Ollama](https://ollama.ai) + `ollama pull qwen2.5:14b` / `ollama pull llama3.1:8b`
+- `.env` with API keys:
   ```
   ANTHROPIC_API_KEY=sk-ant-...
   KIMI_API_KEY=sk-...
   ```
-
----
-
-## File Structure
-
-```
-phase4/
-├── agent_a.py              # Fetches document, formats in ACF/JSON/TOON
-├── agent_b.py              # Receives message, queries model, grades answer
-├── orchestrator.py         # Runs all 4 tests (--model, --dataset flags)
-├── formatters/
-│   ├── acf.py              # ACF passthrough
-│   ├── json_fmt.py         # json.dumps
-│   └── toon_fmt.py         # TOON encoder (custom implementation)
-└── results/
-    ├── phase4_results_phase1_qwen2.5_14b.json
-    ├── phase4_results_phase1_claude-haiku.json
-    └── phase4_results_phase2_claude-haiku.json
-```
 
 ---
 
