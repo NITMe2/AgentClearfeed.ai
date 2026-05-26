@@ -1,6 +1,6 @@
 # AgentClearfeed — Phase 6: Multi-Agent Swarm with Live Content
 
-**Branch:** `phase4-agent-comms-test` | **Base:** [main](https://github.com/NITMe2/AgentClearfeed.ai)
+**Branch:** `Agent-Comm` | **Base:** [main](https://github.com/NITMe2/AgentClearfeed.ai)
 
 > **Note:** `max_tokens` is set conservatively for cost control during testing, not representative of production deployment.
 
