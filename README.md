@@ -13,7 +13,7 @@ AgentClearfeed is a parallel content layer built for inference. Clean, structure
 | Tokens per live data page (Phase 3) | 13,287 | 173 | **98.7% reduction** |
 | Inference latency (Phase 1) | 119s | 23s | **5.2x faster** |
 | Multi-doc accuracy (avg across 4 models) | 0.42 | 0.93 | **+0.51 absolute** |
-| Data staleness — local model (Phase 3) | 113.5s | 9.8s | **11.5x fresher** |
+| Data staleness  - local model (Phase 3) | 113.5s | 9.8s | **11.5x fresher** |
 
 ## Why This Matters
 
@@ -98,7 +98,7 @@ Consistent 93.5% reduction across all models and queries:
 
 Phase 3 tests a new dimension: live data extraction. A realistic bloated crypto price tracker page (cookie banners, ads, navigation, trending coins sidebar, newsletter popup, tracking scripts) with a live Bitcoin price injected from the CoinGecko API on every request. The same live price is served in ACF action format.
 
-New metric: **staleness** — how old is the data by the time the model finishes answering? With live data, fewer tokens means faster inference means fresher answers.
+New metric: **staleness**  - how old is the data by the time the model finishes answering? With live data, fewer tokens means faster inference means fresher answers.
 
 ### Results
 
@@ -113,9 +113,9 @@ New metric: **staleness** — how old is the data by the time the model finishes
 
 ### What Phase 3 Shows
 
-Haiku handled both formats perfectly — it's fast enough that staleness barely differs. The local model is where the story gets interesting:
+Haiku handled both formats perfectly  - it's fast enough that staleness barely differs. The local model is where the story gets interesting:
 
-- **Qwen on HTML (113s):** Found the price correctly but got confused by the 24h change — the bloated page has competing percentages everywhere (sidebar trending coins, ad copy, market stats). The model mistook Ethereum's +3.2% from the trending sidebar for Bitcoin's actual change and eventually gave up, saying the information wasn't explicitly stated.
+- **Qwen on HTML (113s):** Found the price correctly but got confused by the 24h change  - the bloated page has competing percentages everywhere (sidebar trending coins, ad copy, market stats). The model mistook Ethereum's +3.2% from the trending sidebar for Bitcoin's actual change and eventually gave up, saying the information wasn't explicitly stated.
 
 - **Qwen on ACF (10s):** Returned the exact price and change in two lines. No confusion, no hedging.
 
@@ -211,7 +211,7 @@ GET /acf/index            - List all documents
 GET /acf/domain/{domain}  - Get documents by domain
 GET /acf/query?q={query}  - Natural language search
 
-# Phase 3 — Dynamic content (live CoinGecko data)
+# Phase 3  - Dynamic content (live CoinGecko data)
 GET /phase3/html/bitcoin-price  - Bloated crypto tracker page with live BTC price
 GET /phase3/acf/bitcoin-price   - Clean ACF action with same live price
 ```
