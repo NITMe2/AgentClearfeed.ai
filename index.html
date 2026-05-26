@@ -615,7 +615,7 @@
 ══════════════════════════════════════════════════════════════ -->
 <section id="results">
   <div class="wrap">
-    <div class="eyebrow">Benchmarks - Phases 1-4</div>
+    <div class="eyebrow">Benchmarks - Phases 1-6</div>
     <h2>The numbers.</h2>
     <div class="counter-grid">
 
@@ -653,6 +653,18 @@
         <span class="cnum">8-11%</span>
         <div class="clabel">Agent Comms Saving</div>
         <p class="cdesc">ACF beats JSON in agent-to-agent communication across all models and datasets. Phase 4 complete.</p>
+      </div>
+
+      <div class="ccard" data-counter="13.99" data-suffix="%">
+        <span class="cnum">0%</span>
+        <div class="clabel">Format Fitness Gain</div>
+        <p class="cdesc">Phase 5 - genetic algorithm evolved ACF encoding. <span class="hi">682 tokens</span> vs <span class="lo">759 seed</span>. Accuracy <span class="hi">0.78</span> vs 0.67.</p>
+      </div>
+
+      <div class="ccard" data-type="static">
+        <span class="cnum">0.67</span>
+        <div class="clabel">Evolved-ACF Accuracy</div>
+        <p class="cdesc">Phase 6 - multi-agent swarm with live Wikipedia. Evolved-ACF <span class="hi">0.67</span> vs JSON <span class="lo">0.42</span> on capable models. Format compression has a capability floor.</p>
       </div>
 
     </div>
@@ -856,6 +868,126 @@
     </div>
 
     <p style="font-family:var(--mono);font-size:0.9rem;color:var(--accent);">ACF is the only format achieving perfect accuracy. 8-11% fewer tokens than JSON at every layer of the stack.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PHASE 5 RESULTS
+══════════════════════════════════════════════════════════════ -->
+<section id="data-p5">
+  <div class="wrap">
+    <div class="eyebrow">Phase 5 - Genetic Algorithm</div>
+    <h2>Format evolution results.</h2>
+
+    <p style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">DEAP GA - llama3.1:8b - fitness = 60% accuracy + 40% token efficiency</p>
+    <div class="tbl-wrap" style="margin-bottom:2rem">
+      <table>
+        <thead>
+          <tr>
+            <th>Schema</th>
+            <th>Tokens</th>
+            <th>Accuracy</th>
+            <th>Fitness</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ACF seed</td>
+            <td>759</td>
+            <td>0.67</td>
+            <td>0.941</td>
+          </tr>
+          <tr class="acf-row">
+            <td>Evolved</td>
+            <td class="improv">682</td>
+            <td class="improv">0.78</td>
+            <td class="improv">1.073</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:0.9rem;color:var(--accent);">+13.99% fitness improvement. Converged at generation 7. Positional header, no key names, single-line encoding.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PHASE 6 RESULTS
+══════════════════════════════════════════════════════════════ -->
+<section id="data-p6">
+  <div class="wrap">
+    <div class="eyebrow">Phase 6 - Multi-Agent Swarm</div>
+    <h2>Swarm results.</h2>
+
+    <p style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Standard run - Kimi K2.5 coordinator (4 queries x 3 Wikipedia sources)</p>
+    <div class="tbl-wrap" style="margin-bottom:2.5rem">
+      <table>
+        <thead>
+          <tr>
+            <th>Format</th>
+            <th>Avg Ctx Tokens</th>
+            <th>Avg Accuracy</th>
+            <th>Compounding</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="acf-row">
+            <td>Evolved</td>
+            <td class="improv">5,720</td>
+            <td class="improv">0.67</td>
+            <td>0.989x</td>
+          </tr>
+          <tr>
+            <td>ACF</td>
+            <td>5,783</td>
+            <td>0.58</td>
+            <td>0.999x</td>
+          </tr>
+          <tr>
+            <td>JSON</td>
+            <td>5,786</td>
+            <td>0.42</td>
+            <td>1.000x</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Explicit 3-agent run - 3 parallel Haiku sub-agents + Haiku coordinator</p>
+    <div class="tbl-wrap" style="margin-bottom:2rem">
+      <table>
+        <thead>
+          <tr>
+            <th>Format</th>
+            <th>Avg Ctx Tokens</th>
+            <th>Avg Accuracy</th>
+            <th>Compounding</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Evolved</td>
+            <td>5,720</td>
+            <td>0.42</td>
+            <td>0.989x</td>
+          </tr>
+          <tr>
+            <td>ACF</td>
+            <td>5,783</td>
+            <td>0.42</td>
+            <td>0.999x</td>
+          </tr>
+          <tr class="acf-row">
+            <td>JSON</td>
+            <td>5,786</td>
+            <td class="improv">0.50</td>
+            <td>1.000x</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:0.9rem;color:var(--accent);">Evolved-ACF's compressed encoding has a capability floor. Larger models benefit from compression; smaller models prefer JSON's explicit structure.</p>
   </div>
 </section>
 
