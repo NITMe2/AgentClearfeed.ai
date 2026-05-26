@@ -1,4 +1,4 @@
-# AgentClearfeed — ACF-Champion: Format Evolution & Validation
+# AgentClearfeed  - ACF-Champion: Format Evolution & Validation
 
 **Branch:** `ACF-Champion` | **Base:** [main](https://github.com/NITMe2/AgentClearfeed.ai)
 
@@ -6,9 +6,9 @@
 
 ---
 
-## Phase 5-GA — Cross-Species Evolution & Champion Validation
+## Phase 5-GA  - Cross-Species Evolution & Champion Validation
 
-Two genetic algorithm lineages seeded from opposite ends of the schema space (ACF and JSON). Their best genes were cross-bred into a hybrid, then a combined GA was seeded from both — finding a new champion that neither lineage reached alone.
+Two genetic algorithm lineages seeded from opposite ends of the schema space (ACF and JSON). Their best genes were cross-bred into a hybrid, then a combined GA was seeded from both  - finding a new champion that neither lineage reached alone.
 
 ### Evolution Timeline
 
@@ -29,7 +29,7 @@ Two genetic algorithm lineages seeded from opposite ends of the schema space (AC
     "delimiter": ":",
     "key_style": "none",       # positional values only
     "nesting": "flat",         # strip body section headers
-    "field_order": ["title", "author", "source"],   # 3 fields — everything else is noise
+    "field_order": ["title", "author", "source"],   # 3 fields  - everything else is noise
     "quote_values": False,
     "newline_sep": False,       # single space-separated line
 }
@@ -37,9 +37,9 @@ Two genetic algorithm lineages seeded from opposite ends of the schema space (AC
 
 Wire format: `Demographic Parity AgentClearfeed Barocas, Hardt, Narayanan`
 
-The combined GA discovered that id, confidence, domain, and tags are dead weight for QA tasks. The body carries the answer — the header only needs to identify the source.
+The combined GA discovered that id, confidence, domain, and tags are dead weight for QA tasks. The body carries the answer  - the header only needs to identify the source.
 
-### Champion Validation — A2A (Claude Haiku 4.5, Phase 1 dataset)
+### Champion Validation  - A2A (Claude Haiku 4.5, Phase 1 dataset)
 
 | Format | Total Tokens | Accuracy | Data Loss | Cost/query |
 |--------|:------------:|:--------:|:---------:|:----------:|
@@ -57,11 +57,11 @@ python -m phase5.validate_champion  # Champion in A2A validation
 
 ---
 
-## Phase 6 — Multi-Agent Swarm with Live Content
+## Phase 6  - Multi-Agent Swarm with Live Content
 
-Tests whether evolved-ACF's efficiency advantage holds — and compounds — across a realistic multi-agent topology with live Wikipedia content.
+Tests whether evolved-ACF's efficiency advantage holds  - and compounds  - across a realistic multi-agent topology with live Wikipedia content.
 
-**Standard run — single Kimi K2.5 coordinator (4 queries x 3 Wikipedia sources)**
+**Standard run  - single Kimi K2.5 coordinator (4 queries x 3 Wikipedia sources)**
 
 | Format | Avg ctx tokens | Avg accuracy | Compounding |
 |--------|:--------------:|:------------:|:-----------:|
@@ -71,7 +71,7 @@ Tests whether evolved-ACF's efficiency advantage holds — and compounds — acr
 
 With a capable model, evolved-ACF wins on both axes: 1.1% fewer context tokens and highest accuracy.
 
-**Explicit 3-agent run — 3 parallel Haiku sub-agents -> Haiku coordinator**
+**Explicit 3-agent run  - 3 parallel Haiku sub-agents -> Haiku coordinator**
 
 ```
 Query
@@ -86,7 +86,7 @@ Query
 | ACF | 5,783 | 0.42 | 0.999x |
 | **JSON** | **5,786** | **0.50** | 1.000x |
 
-The accuracy ranking flips with smaller models. Evolved-ACF's compressed positional encoding requires sufficient model capability to parse reliably — below that threshold, JSON's explicit structure wins even at higher token cost.
+The accuracy ranking flips with smaller models. Evolved-ACF's compressed positional encoding requires sufficient model capability to parse reliably  - below that threshold, JSON's explicit structure wins even at higher token cost.
 
 ```bash
 python -m phase6.orchestrator             # Standard run (Kimi K2.5)
@@ -95,7 +95,7 @@ python -m phase6.orchestrator --explicit  # Explicit 3-agent topology (Claude Ha
 
 ---
 
-## Phase 5 — Genetic Algorithm: Evolving the Format (ACF seed)
+## Phase 5  - Genetic Algorithm: Evolving the Format (ACF seed)
 
 A DEAP genetic algorithm evolved document format schemas starting from ACF as the seed individual. Fitness = 60% accuracy + 40% token efficiency. Model: llama3.1:8b via Ollama.
 
@@ -106,7 +106,7 @@ A DEAP genetic algorithm evolved document format schemas starting from ACF as th
 
 **+13.99% fitness improvement.** Converged at generation 7; entire population at the same solution by generation 10.
 
-Evolution didn't replace ACF — it evolved from it. Same delimiter, same fields, same body structure. Just stripped key names and collapsed the header to one line.
+Evolution didn't replace ACF  - it evolved from it. Same delimiter, same fields, same body structure. Just stripped key names and collapsed the header to one line.
 
 ```bash
 python -m phase5.baseline    # Baseline: ACF vs JSON vs TOON on llama3.1:8b
@@ -115,15 +115,15 @@ python -m phase5.ga          # Genetic algorithm evolution (10 generations, ACF 
 
 ---
 
-## Phase 4 — Agent Communication Protocol (ACF vs JSON vs TOON)
+## Phase 4  - Agent Communication Protocol (ACF vs JSON vs TOON)
 
 Two agents in sequence. Agent A fetches a document and formats it. Agent B receives it and answers a question. Only the wire format changes: **ACF** vs **JSON** vs **TOON**.
 
-New metric: **data loss** — facts in Agent A's message that fail to appear in Agent B's answer.
+New metric: **data loss**  - facts in Agent A's message that fail to appear in Agent B's answer.
 
-### Phase 1 Dataset — AI Fairness (3 queries)
+### Phase 1 Dataset  - AI Fairness (3 queries)
 
-**Claude Haiku 4.5 — Test 4 Finale**
+**Claude Haiku 4.5  - Test 4 Finale**
 
 | Format | Total Tokens | Accuracy | Data Loss | Cost/query |
 |--------|:------------:|:--------:|:---------:|:----------:|
