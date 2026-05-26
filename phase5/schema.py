@@ -34,6 +34,19 @@ ACF_SEED = {
     "newline_sep": True,
 }
 
+# JSON seed — same structure but quoted values (JSON's key characteristic in this space)
+JSON_SEED = {
+    "delimiter": ":",
+    "key_style": "full",
+    "nesting": "nested",
+    "field_order": [
+        "id", "type", "title", "source", "author",
+        "published", "confidence", "domain", "tags",
+    ],
+    "quote_values": True,
+    "newline_sep": True,
+}
+
 
 def _clone(schema: dict) -> dict:
     s = dict(schema)

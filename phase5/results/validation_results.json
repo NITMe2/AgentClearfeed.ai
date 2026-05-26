@@ -1,0 +1,263 @@
+{
+  "phase": "5-GA",
+  "label": "champion_validation",
+  "model": "claude-haiku",
+  "dataset": "phase1",
+  "queries": 3,
+  "test": {
+    "test_id": 1,
+    "test_name": "Champion vs ACF vs JSON",
+    "formats": [
+      "champion",
+      "acf",
+      "json"
+    ],
+    "per_query": {
+      "champion": [
+        {
+          "query_id": "q1",
+          "a_tokens": 228,
+          "answer": "# Demographic Parity\n\nDemographic parity is a fairness metric in machine learning that requires a model to produce positive predictions at **equal rates across demographic groups**.\n\n**Technical definition:** P(Y_hat=1 | A=0) = P(Y_hat=1 | A=1), where A is a protected attribute and Y_hat is the model prediction.\n\nIn simpler terms, the proportion of people receiving a positive outcome should be the same for each demographic group.\n\n**Important caveat:** Demographic parity does not guarantee equal accuracy across groups. A model can satisfy demographic parity while being less accurate for one group than another.",
+          "b_tokens": 263,
+          "total_tokens": 491,
+          "accuracy": 1.0,
+          "data_loss": 0.0,
+          "grade": {
+            "facts_found": 3,
+            "facts_total": 3,
+            "accuracy": 1.0,
+            "hits": [
+              "equal positive prediction rates across groups",
+              "does not guarantee equal accuracy across groups",
+              "protected attribute"
+            ],
+            "misses": []
+          },
+          "latency_ms": 7851,
+          "cost_usd": 0.000393
+        },
+        {
+          "query_id": "q2",
+          "a_tokens": 300,
+          "answer": "# Known Biases in the COMPAS Recidivism Dataset\n\nAccording to the provided context, the known biases are:\n\n1. **Racial bias in risk scoring**: Black defendants scored higher risk at nearly twice the rate of white defendants who did not reoffend\n\n2. **Disparate outcomes for reoffenders**: White defendants who did reoffend were more frequently scored lower risk than Black defendants who did not\n\n3. **Age correlation**: Age is a strong predictor and correlates with race in this dataset",
+          "b_tokens": 341,
+          "total_tokens": 641,
+          "accuracy": 1.0,
+          "data_loss": 0.0,
+          "grade": {
+            "facts_found": 3,
+            "facts_total": 3,
+            "accuracy": 1.0,
+            "hits": [
+              "Black defendants scored higher risk at nearly twice the rate",
+              "white defendants who did reoffend were more frequently scored lower risk",
+              "age is a strong predictor and correlates with race"
+            ],
+            "misses": []
+          },
+          "latency_ms": 2237,
+          "cost_usd": 0.000513
+        },
+        {
+          "query_id": "q3",
+          "a_tokens": 366,
+          "answer": "According to the Impossibility Theorem of Fairness, a machine learning model **cannot satisfy both calibration and equalised odds simultaneously when base rates differ between groups**.\n\nThis is a mathematical impossibility, not a technical limitation. As stated in the context, Chouldechova (2017) proved that \"calibration and equal false positive/negative rates are mutually exclusive when base rates differ.\"\n\nThe only exceptions are trivial cases where base rates are equal across groups or prediction is perfect. In practice, this means choosing which fairness metric to prioritize is a **normative decision** (a values-based choice) rather than a technical one.",
+          "b_tokens": 409,
+          "total_tokens": 775,
+          "accuracy": 1.0,
+          "data_loss": 0.0,
+          "grade": {
+            "facts_found": 3,
+            "facts_total": 3,
+            "accuracy": 1.0,
+            "hits": [
+              "cannot be simultaneously satisfied when base rates differ",
+              "mathematical impossibility not algorithmic limitation",
+              "choice of metric is a normative decision"
+            ],
+            "misses": []
+          },
+          "latency_ms": 2187,
+          "cost_usd": 0.00062
+        }
+      ],
+      "acf": [
+        {
+          "query_id": "q1",
+          "a_tokens": 320,
+          "answer": "# Demographic Parity\n\nDemographic parity is a machine learning fairness metric where **a model produces positive predictions at equal rates across different demographic groups**.\n\n## Technical Definition\nMathematically, it is expressed as:\n**P(\u0176=1 | A=0) = P(\u0176=1 | A=1)**\n\nwhere A is a protected attribute (e.g., gender, race) and \u0176 is the model's prediction.\n\n## Key Point\nDemographic parity does **not** guarantee equal accuracy across groups. A model can satisfy demographic parity while performing less accurately for one demographic group than another.\n\n## Context\nDemographic parity is one of the most commonly cited group fairness metrics, but it often conflicts with other fairness measures like equalised odds and calibration. Simultaneously satisfying all three metrics is mathematically impossible in most real-world scenarios.",
+          "b_tokens": 355,
+          "total_tokens": 675,
+          "accuracy": 1.0,
+          "data_loss": 0.0,
+          "grade": {
+            "facts_found": 3,
+            "facts_total": 3,
+            "accuracy": 1.0,
+            "hits": [
+              "equal positive prediction rates across groups",
+              "does not guarantee equal accuracy across groups",
+              "protected attribute"
+            ],
+            "misses": []
+          },
+          "latency_ms": 1994,
+          "cost_usd": 0.00054
+        },
+        {
+          "query_id": "q2",
+          "a_tokens": 398,
+          "answer": "According to the context, the known biases in the COMPAS recidivism dataset are:\n\n1. **Black defendants scored higher risk at nearly twice the rate of white defendants who did not reoffend**\n\n2. **White defendants who did reoffend were more frequently scored lower risk than Black defendants who did not**\n\n3. **Age is a strong predictor and correlates with race in this dataset**\n\nThese biases were documented in ProPublica's 2016 Machine Bias investigation and have made the dataset a standard benchmark for algorithmic fairness research.",
+          "b_tokens": 439,
+          "total_tokens": 837,
+          "accuracy": 1.0,
+          "data_loss": 0.0,
+          "grade": {
+            "facts_found": 3,
+            "facts_total": 3,
+            "accuracy": 1.0,
+            "hits": [
+              "Black defendants scored higher risk at nearly twice the rate",
+              "white defendants who did reoffend were more frequently scored lower risk",
+              "age is a strong predictor and correlates with race"
+            ],
+            "misses": []
+          },
+          "latency_ms": 1485,
+          "cost_usd": 0.00067
+        },
+        {
+          "query_id": "q3",
+          "a_tokens": 465,
+          "answer": "According to the context, **not in general cases**.\n\nA machine learning model cannot satisfy both calibration and equalised odds simultaneously **when base rates differ between groups**. This is a mathematical impossibility, not a limitation of any particular algorithm.\n\nHowever, the context notes that satisfying all conditions simultaneously is possible in trivial cases:\n- When base rates are equal across groups, or\n- When prediction is perfect\n\nThe context also mentions that approximate versions or alternative formalisations of these metrics may permit partial compatibility.",
+          "b_tokens": 508,
+          "total_tokens": 973,
+          "accuracy": 0.67,
+          "data_loss": 0.33,
+          "grade": {
+            "facts_found": 2,
+            "facts_total": 3,
+            "accuracy": 0.67,
+            "hits": [
+              "cannot be simultaneously satisfied when base rates differ",
+              "mathematical impossibility not algorithmic limitation"
+            ],
+            "misses": [
+              "choice of metric is a normative decision"
+            ]
+          },
+          "latency_ms": 5904,
+          "cost_usd": 0.000778
+        }
+      ],
+      "json": [
+        {
+          "query_id": "q1",
+          "a_tokens": 374,
+          "answer": "# Demographic Parity\n\n**Definition:** Demographic parity is a fairness metric that measures whether a machine learning model produces positive predictions at equal rates across different demographic groups.\n\n**Technical Definition:** A model satisfies demographic parity when:\nP(Y_hat=1 | A=0) = P(Y_hat=1 | A=1)\n\nWhere A is a protected attribute (e.g., race, gender) and Y_hat is the model's prediction.\n\n**Key Point:** Demographic parity does not guarantee equal accuracy across groups. A model can satisfy demographic parity while performing less accurately for one demographic group than another.\n\n**Important Context:** Demographic parity often conflicts with other fairness metrics like equalised odds and calibration. It is mathematically impossible to simultaneously satisfy all three in most real-world scenarios, making the choice of which metric to prioritize a values-based decision rather than a purely technical one.",
+          "b_tokens": 409,
+          "total_tokens": 783,
+          "accuracy": 1.0,
+          "data_loss": 0.0,
+          "grade": {
+            "facts_found": 3,
+            "facts_total": 3,
+            "accuracy": 1.0,
+            "hits": [
+              "equal positive prediction rates across groups",
+              "does not guarantee equal accuracy across groups",
+              "protected attribute"
+            ],
+            "misses": []
+          },
+          "latency_ms": 2565,
+          "cost_usd": 0.000626
+        },
+        {
+          "query_id": "q2",
+          "a_tokens": 446,
+          "answer": "According to the provided context, the known biases in the COMPAS recidivism dataset are:\n\n1. **Racial bias in risk scoring**: Black defendants scored higher risk at nearly twice the rate of white defendants who did not reoffend.\n\n2. **Disparate outcomes for reoffenders**: White defendants who did reoffend were more frequently scored lower risk than Black defendants who did not reoffend.\n\n3. **Age correlation with race**: Age is a strong predictor and correlates with race in this dataset.",
+          "b_tokens": 487,
+          "total_tokens": 933,
+          "accuracy": 1.0,
+          "data_loss": 0.0,
+          "grade": {
+            "facts_found": 3,
+            "facts_total": 3,
+            "accuracy": 1.0,
+            "hits": [
+              "Black defendants scored higher risk at nearly twice the rate",
+              "white defendants who did reoffend were more frequently scored lower risk",
+              "age is a strong predictor and correlates with race"
+            ],
+            "misses": []
+          },
+          "latency_ms": 1301,
+          "cost_usd": 0.000746
+        },
+        {
+          "query_id": "q3",
+          "a_tokens": 519,
+          "answer": "According to the context, **calibration and equalised odds cannot both be satisfied simultaneously when base rates differ between groups**. This is a mathematical impossibility, not a limitation of any particular algorithm.\n\nHowever, the context notes one exception: satisfying all three conditions (calibration, equalised odds, and demographic parity) simultaneously is only possible when **base rates are equal** across groups or when **prediction is perfect**.\n\nThe context also mentions that approximate versions or alternative formalisations of these metrics may permit partial compatibility, but the strict formal definitions are mathematically incompatible in most real-world scenarios.",
+          "b_tokens": 562,
+          "total_tokens": 1081,
+          "accuracy": 0.67,
+          "data_loss": 0.33,
+          "grade": {
+            "facts_found": 2,
+            "facts_total": 3,
+            "accuracy": 0.67,
+            "hits": [
+              "cannot be simultaneously satisfied when base rates differ",
+              "mathematical impossibility not algorithmic limitation"
+            ],
+            "misses": [
+              "choice of metric is a normative decision"
+            ]
+          },
+          "latency_ms": 1715,
+          "cost_usd": 0.000865
+        }
+      ]
+    },
+    "aggregated": {
+      "champion": {
+        "a_tokens": 298,
+        "b_tokens": 338,
+        "total_tokens": 636,
+        "accuracy": 1.0,
+        "data_loss": 0.0,
+        "latency_ms": 4092,
+        "cost_usd": 0.000509
+      },
+      "acf": {
+        "a_tokens": 394,
+        "b_tokens": 434,
+        "total_tokens": 828,
+        "accuracy": 0.89,
+        "data_loss": 0.11,
+        "latency_ms": 3128,
+        "cost_usd": 0.000663
+      },
+      "json": {
+        "a_tokens": 446,
+        "b_tokens": 486,
+        "total_tokens": 932,
+        "accuracy": 0.89,
+        "data_loss": 0.11,
+        "latency_ms": 1860,
+        "cost_usd": 0.000746
+      }
+    }
+  },
+  "phase4_haiku_baseline": {
+    "acf": {
+      "acc": 1.0,
+      "total_tokens": 828
+    },
+    "json": {
+      "acc": 0.89,
+      "total_tokens": 932
+    }
+  }
+}

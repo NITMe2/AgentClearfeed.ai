@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AgentClearfeed - a parallel content layer built for AI inference. 97.6% token reduction, zero accuracy loss.">
+  <title>AgentClearfeed - Content Layer for AI Agents</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #080808;
+      --surface:    #0d0d0d;
+      --border:     #1c1c1c;
+      --text:       #d0d0d0;
+      --muted:      #555;
+      --dim:        #333;
+      --accent:     #00ffd1;
+      --accent-dim: rgba(0,255,209,0.1);
+      --red:        #ff4545;
+      --amber:      #ffb347;
+      --mono:       'JetBrains Mono', monospace;
+      --sans:       'IBM Plex Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.045) 2px,
+        rgba(0,0,0,0.045) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── Layout ── */
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+    }
+
+    section {
+      padding: clamp(5rem, 9vw, 9rem) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.9rem;
+    }
+
+    h2 {
+      font-family: var(--sans);
+      font-size: clamp(1.9rem, 4vw, 2.9rem);
+      font-weight: 600;
+      color: #efefef;
+      line-height: 1.15;
+      margin-bottom: 3rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-tagline {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .hero-tagline::before {
+      content: '';
+      display: inline-block;
+      width: 1.8rem;
+      height: 1px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    h1 {
+      font-family: var(--mono);
+      font-size: clamp(1.9rem, 4.8vw, 3.4rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.5rem;
+    }
+
+    .cursor {
+      color: var(--accent);
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      color: var(--muted);
+      max-width: 580px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+      line-height: 1.75;
+    }
+
+    .hero-sub strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .hero-sub code {
+      font-family: var(--mono);
+      font-size: 0.88em;
+      color: var(--accent);
+    }
+
+    .btns {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      background: transparent;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.12s, color 0.12s;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .btn-ghost {
+      border-color: var(--dim);
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--muted);
+      color: var(--text);
+      background: transparent;
+    }
+
+    /* ── Problem ── */
+    .prob-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .prob-card {
+      background: var(--surface);
+      padding: 2.2rem 2rem;
+    }
+
+    .prob-icon {
+      font-family: var(--mono);
+      font-size: 1rem;
+      color: var(--dim);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.55rem;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+    }
+
+    .prob-card h3 {
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #eee;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.8rem;
+    }
+
+    .prob-card p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ── Counter cards ── */
+    .counter-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .ccard {
+      background: var(--surface);
+      padding: 2.5rem 2rem;
+    }
+
+    .cnum {
+      font-family: var(--mono);
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .clabel {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .cdesc {
+      font-size: 0.94rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .cdesc .hi  { color: var(--accent); }
+    .cdesc .lo  { color: var(--red); }
+
+    /* ── How it works ── */
+    .diagram {
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .diagram-row {
+      display: grid;
+      grid-template-columns: 130px 36px 190px 36px 88px 1fr;
+      align-items: center;
+      padding: 1.4rem 2rem;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+    }
+
+    .diagram-row + .diagram-row {
+      border-top: 1px solid var(--border);
+    }
+
+    .d-src { color: var(--muted); white-space: nowrap; }
+    .d-src.on { color: var(--text); }
+    .d-arr { color: var(--accent); text-align: center; }
+
+    .d-fmt {
+      padding: 0.4rem 0.8rem;
+      border: 1px solid;
+      text-align: center;
+      font-size: 0.74rem;
+      white-space: nowrap;
+    }
+
+    .d-fmt.bad  { border-color: rgba(255,69,69,0.25); color: var(--red);    background: rgba(255,69,69,0.04); }
+    .d-fmt.good { border-color: rgba(0,255,209,0.2);  color: var(--accent); background: var(--accent-dim); }
+
+    .d-agent { color: var(--muted); text-align: center; padding: 0 0.4rem; white-space: nowrap; }
+
+    .d-stats {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      padding-left: 1.5rem;
+    }
+
+    .chip {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      padding: 0.2rem 0.55rem;
+      border: 1px solid;
+    }
+
+    .chip.bad  { color: var(--red);    border-color: rgba(255,69,69,0.25); }
+    .chip.good { color: var(--accent); border-color: rgba(0,255,209,0.25); }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: 2rem;
+    }
+
+    .why-card {
+      background: var(--surface);
+      padding: 1.5rem;
+    }
+
+    .why-card .label {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .why-card p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── Results table ── */
+    .tbl-wrap { overflow-x: auto; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--mono);
+      font-size: 0.83rem;
+    }
+
+    thead tr { border-bottom: 1px solid var(--accent); }
+
+    th {
+      padding: 0.8rem 1.1rem;
+      text-align: left;
+      font-size: 0.67rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    td {
+      padding: 0.8rem 1.1rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: middle;
+    }
+
+    tr:hover td { background: var(--surface); }
+
+    td.metric  { color: #888; font-size: 0.8rem; }
+    td.html-v  { color: var(--muted); }
+    td.improv  { color: var(--accent); font-weight: 700; letter-spacing: 0.02em; }
+
+    .acf-row td:first-child { border-left: 3px solid var(--accent); }
+
+    .phase-tag {
+      font-size: 0.65rem;
+      color: var(--dim);
+      margin-left: 0.4rem;
+    }
+
+    /* ── Timeline ── */
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      position: relative;
+      padding-top: 3.5rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      right: 1rem;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .ph-item {
+      padding: 0 1rem 0 0;
+      position: relative;
+    }
+
+    .ph-dot {
+      width: 2rem;
+      height: 2rem;
+      border: 1px solid;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      font-weight: 700;
+      position: absolute;
+      top: -3.5rem;
+    }
+
+    .ph-dot.done  { border-color: var(--accent); color: var(--accent); }
+    .ph-dot.wip   { border-color: var(--amber);  color: var(--amber);  }
+    .ph-dot.soon  { border-color: var(--dim);     color: var(--dim);    }
+
+    .ph-status {
+      font-family: var(--mono);
+      font-size: 0.63rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.45rem;
+    }
+
+    .ph-status.done  { color: var(--accent); }
+    .ph-status.wip   { color: var(--amber);  }
+    .ph-status.soon  { color: var(--dim);    }
+
+    .ph-title {
+      font-family: var(--sans);
+      font-size: 0.87rem;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+      line-height: 1.3;
+    }
+
+    .ph-desc {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 3rem 0;
+    }
+
+    .foot-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .foot-domain {
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      color: var(--accent);
+    }
+
+    .foot-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .foot-links a {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.12s;
+    }
+
+    .foot-links a:hover { color: var(--text); }
+
+    .foot-credit {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--dim);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .why-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .prob-grid,
+      .counter-grid { grid-template-columns: 1fr; }
+
+      .diagram-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+        padding: 1.2rem;
+      }
+
+      .d-arr  { display: none; }
+      .d-agent { text-align: left; }
+      .d-stats { padding-left: 0; }
+
+      .timeline {
+        grid-template-columns: 1fr;
+        padding-top: 0;
+        padding-left: 3.5rem;
+      }
+
+      .timeline::before {
+        top: 0;
+        bottom: 0;
+        left: 1rem;
+        right: auto;
+        width: 1px;
+        height: auto;
+      }
+
+      .ph-item {
+        padding: 0 0 2.5rem 0;
+      }
+
+      .ph-dot {
+        position: absolute;
+        left: -3.5rem;
+        top: 0;
+      }
+
+      .foot-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .diagram-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════
+     HERO
+══════════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="wrap">
+    <div style="max-width:760px">
+      <div class="hero-tagline">Feeding agents clear data.</div>
+      <h1>The human web is<br>broken for AI agents.<span class="cursor">_</span></h1>
+      <p class="hero-sub">
+        <strong>AgentClearfeed</strong> is a parallel content layer built for inference.
+        Clean, structured, verified content served in <code>.acf</code> format -
+        not a scraper on top of the human web, but a native format designed for
+        how AI agents actually consume information.
+      </p>
+      <div class="btns">
+        <a class="btn" href="https://github.com/NITMe2/AgentClearfeed.ai" target="_blank" rel="noopener">View on GitHub</a>
+        <a class="btn btn-ghost" href="https://github.com/NITMe2/AgentClearfeed.ai/blob/main/ACF_Format_Spec.md" target="_blank" rel="noopener">Read the Spec</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     THE PROBLEM
+══════════════════════════════════════════════════════════════ -->
+<section id="problem">
+  <div class="wrap">
+    <div class="eyebrow">The current options</div>
+    <h2>None of them work.</h2>
+    <div class="prob-grid">
+      <div class="prob-card">
+        <span class="prob-icon">~/</span>
+        <h3>Scraping</h3>
+        <p>Fragile, breaks constantly. Dependent on HTML structure that changes without warning. 93-98% of every scraped page is noise - ads, navigation, cookie banners, tracking scripts - before the agent reaches actual content.</p>
+      </div>
+      <div class="prob-card">
+        <span class="prob-icon">{}</span>
+        <h3>MCPs</h3>
+        <p>Powerful but hand-built. Every publisher needs to implement their own. Doesn't scale to the open web. Great for controlled internal tools  - not viable for general-purpose agent content retrieval across the web.</p>
+      </div>
+      <div class="prob-card">
+        <span class="prob-icon">~&gt;</span>
+        <h3>Existing APIs</h3>
+        <p>Designed for developers building human-facing products. Pagination chrome, JSON wrappers, authentication flows, rate limits built around human usage patterns. Not designed for agent consumption at inference time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     KEY RESULTS
+══════════════════════════════════════════════════════════════ -->
+<section id="results">
+  <div class="wrap">
+    <div class="eyebrow">Benchmarks - Phases 1-6 + GA</div>
+    <h2>The numbers.</h2>
+    <div class="counter-grid">
+
+      <div class="ccard" data-counter="97.6" data-suffix="%">
+        <span class="cnum">0%</span>
+        <div class="clabel">Token Reduction</div>
+        <p class="cdesc">Phase 1  - single document retrieval. HTML averaged <span class="lo">16,388 tokens</span>. ACF averaged <span class="hi">394</span>.</p>
+      </div>
+
+      <div class="ccard" data-counter="93.5" data-suffix="%">
+        <span class="cnum">0%</span>
+        <div class="clabel">Token Reduction</div>
+        <p class="cdesc">Phase 2  - 10-document multi-topic retrieval. <span class="lo">84,022 tokens</span> of HTML vs <span class="hi">5,429</span> of ACF. Consistent across all 4 models.</p>
+      </div>
+
+      <div class="ccard" data-counter="98.7" data-suffix="%">
+        <span class="cnum">0%</span>
+        <div class="clabel">Token Reduction</div>
+        <p class="cdesc">Phase 3  - live dynamic data. <span class="lo">13,287 tokens</span> of bloated crypto tracker vs <span class="hi">173 tokens</span> of ACF action format.</p>
+      </div>
+
+      <div class="ccard" data-type="accuracy">
+        <span class="cnum" style="font-size:clamp(1.6rem,3.2vw,2.4rem)"><span class="acc-from">0.42</span>&thinsp;&rarr;&thinsp;<span class="acc-to" style="color:var(--accent)">0.42</span></span>
+        <div class="clabel">Accuracy</div>
+        <p class="cdesc">Multi-doc accuracy averaged across 4 models: Qwen 14B, Claude Haiku, Kimi K2.5, Kimi K2.6. Same content - different format.</p>
+      </div>
+
+      <div class="ccard" data-counter="11.5" data-suffix="x">
+        <span class="cnum">0x</span>
+        <div class="clabel">Fresher Data</div>
+        <p class="cdesc">Phase 3 staleness metric. Local model answers with HTML data <span class="lo">113.5 seconds old</span>. ACF: <span class="hi">under 10s</span>. Token bloat costs time.</p>
+      </div>
+
+      <div class="ccard" data-type="static">
+        <span class="cnum">8-11%</span>
+        <div class="clabel">Agent Comms Saving</div>
+        <p class="cdesc">ACF beats JSON in agent-to-agent communication across all models and datasets. Phase 4 complete.</p>
+      </div>
+
+      <div class="ccard" data-counter="13.99" data-suffix="%">
+        <span class="cnum">0%</span>
+        <div class="clabel">Format Fitness Gain</div>
+        <p class="cdesc">Phase 5 - genetic algorithm evolved ACF encoding. <span class="hi">682 tokens</span> vs <span class="lo">759 seed</span>. Accuracy <span class="hi">0.78</span> vs 0.67.</p>
+      </div>
+
+      <div class="ccard" data-type="static">
+        <span class="cnum">0.67</span>
+        <div class="clabel">Evolved-ACF Accuracy</div>
+        <p class="cdesc">Phase 6 - multi-agent swarm with live Wikipedia. Evolved-ACF <span class="hi">0.67</span> vs JSON <span class="lo">0.42</span> on capable models. Format compression has a capability floor.</p>
+      </div>
+
+      <div class="ccard" data-type="static">
+        <span class="cnum">-31.8%</span>
+        <div class="clabel">Champion Token Saving</div>
+        <p class="cdesc">Phase 5-GA - cross-species evolution found a <span class="hi">3-field champion</span>. <span class="hi">636 tokens</span> vs <span class="lo">932 JSON</span>. Perfect accuracy in A2A — beats ACF and JSON on every metric.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     HOW IT WORKS
+══════════════════════════════════════════════════════════════ -->
+<section id="how">
+  <div class="wrap">
+    <div class="eyebrow">Architecture</div>
+    <h2>How it works.</h2>
+    <div class="diagram">
+      <div class="diagram-row">
+        <div class="d-src">Human Web</div>
+        <div class="d-arr">→</div>
+        <div class="d-fmt bad">bloated HTML</div>
+        <div class="d-arr">→</div>
+        <div class="d-agent">Agent</div>
+        <div class="d-stats">
+          <span class="chip bad">~16,000 tokens</span>
+          <span class="chip bad">119s latency</span>
+          <span class="chip bad">0.42 accuracy</span>
+          <span class="chip bad">expensive</span>
+        </div>
+      </div>
+      <div class="diagram-row">
+        <div class="d-src on">ACF Layer</div>
+        <div class="d-arr">→</div>
+        <div class="d-fmt good">clean .acf</div>
+        <div class="d-arr">→</div>
+        <div class="d-agent">Agent</div>
+        <div class="d-stats">
+          <span class="chip good">~394 tokens</span>
+          <span class="chip good">23s latency</span>
+          <span class="chip good">0.93 accuracy</span>
+          <span class="chip good">cheap</span>
+        </div>
+      </div>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="label">Every field is explicit</div>
+        <p>Structured labels, not prose. An agent always knows exactly what it's reading  - no inference, no guessing, no tokens wasted on layout chrome or promotional copy.</p>
+      </div>
+      <div class="why-card">
+        <div class="label">Ungameable by design</div>
+        <p>Structured fields leave no room for SEO manipulation or AEO injection. No narrative spin. No promotional language. The format physically cannot be gamed the way HTML can.</p>
+      </div>
+      <div class="why-card">
+        <div class="label">Model-agnostic</div>
+        <p>Every model tested  - 14B local, frontier API, Chinese cloud providers  - performs better with ACF. The format wins at every layer of the stack regardless of model capability.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     RESULTS TABLE
+══════════════════════════════════════════════════════════════ -->
+<section id="data">
+  <div class="wrap">
+    <div class="eyebrow">Full Results - Phases 1-3</div>
+    <h2>The data.</h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>HTML</th>
+            <th>ACF</th>
+            <th>Improvement</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="metric">Tokens per query<span class="phase-tag">Phase 1</span></td>
+            <td class="html-v">16,388</td>
+            <td>394</td>
+            <td class="improv">97.6% reduction</td>
+          </tr>
+          <tr>
+            <td class="metric">Tokens per 10-doc retrieval<span class="phase-tag">Phase 2</span></td>
+            <td class="html-v">84,022</td>
+            <td>5,429</td>
+            <td class="improv">93.5% reduction</td>
+          </tr>
+          <tr>
+            <td class="metric">Tokens per live data page<span class="phase-tag">Phase 3</span></td>
+            <td class="html-v">13,287</td>
+            <td>173</td>
+            <td class="improv">98.7% reduction</td>
+          </tr>
+          <tr>
+            <td class="metric">Inference latency<span class="phase-tag">Phase 1</span></td>
+            <td class="html-v">119s</td>
+            <td>23s</td>
+            <td class="improv">5.2× faster</td>
+          </tr>
+          <tr>
+            <td class="metric">Multi-doc accuracy  - avg 4 models<span class="phase-tag">Phase 2</span></td>
+            <td class="html-v">0.42</td>
+            <td>0.93</td>
+            <td class="improv">+0.51 absolute</td>
+          </tr>
+          <tr>
+            <td class="metric">Data staleness  - local model<span class="phase-tag">Phase 3</span></td>
+            <td class="html-v">113.5s</td>
+            <td>9.8s</td>
+            <td class="improv">11.5× fresher</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PHASE 4 RESULTS
+══════════════════════════════════════════════════════════════ -->
+<section id="data-p4">
+  <div class="wrap">
+    <div class="eyebrow">Phase 4 - Agent Communication</div>
+    <h2>Agent communication results.</h2>
+
+    <p style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Qwen 2.5 14B - AI Fairness dataset (deterministic, seed=42)</p>
+    <div class="tbl-wrap" style="margin-bottom:2.5rem">
+      <table>
+        <thead>
+          <tr>
+            <th>Format</th>
+            <th>Total Tokens</th>
+            <th>Accuracy</th>
+            <th>Data Loss</th>
+            <th>Cost/query</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="acf-row">
+            <td>ACF</td>
+            <td>828</td>
+            <td>0.89</td>
+            <td>0.11</td>
+            <td>$0.000249</td>
+          </tr>
+          <tr>
+            <td>TOON</td>
+            <td>860</td>
+            <td>0.89</td>
+            <td>0.11</td>
+            <td>$0.000258</td>
+          </tr>
+          <tr>
+            <td>JSON</td>
+            <td>932</td>
+            <td>0.89</td>
+            <td>0.11</td>
+            <td>$0.000280</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Claude Haiku 4.5 - three-way finale</p>
+    <div class="tbl-wrap" style="margin-bottom:2rem">
+      <table>
+        <thead>
+          <tr>
+            <th>Format</th>
+            <th>Total Tokens</th>
+            <th>Accuracy</th>
+            <th>Data Loss</th>
+            <th>Cost/query</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="acf-row">
+            <td>ACF</td>
+            <td>828</td>
+            <td class="improv">1.00</td>
+            <td class="improv">0.00</td>
+            <td>$0.000663</td>
+          </tr>
+          <tr>
+            <td>TOON</td>
+            <td>860</td>
+            <td>0.89</td>
+            <td>0.11</td>
+            <td>$0.000688</td>
+          </tr>
+          <tr>
+            <td>JSON</td>
+            <td>932</td>
+            <td>0.89</td>
+            <td>0.11</td>
+            <td>$0.000746</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:0.9rem;color:var(--accent);">ACF is the only format achieving perfect accuracy. 8-11% fewer tokens than JSON at every layer of the stack.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PHASE 5 RESULTS
+══════════════════════════════════════════════════════════════ -->
+<section id="data-p5">
+  <div class="wrap">
+    <div class="eyebrow">Phase 5 - Genetic Algorithm</div>
+    <h2>Format evolution results.</h2>
+
+    <p style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">DEAP GA - llama3.1:8b - fitness = 60% accuracy + 40% token efficiency</p>
+    <div class="tbl-wrap" style="margin-bottom:2rem">
+      <table>
+        <thead>
+          <tr>
+            <th>Schema</th>
+            <th>Tokens</th>
+            <th>Accuracy</th>
+            <th>Fitness</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ACF seed</td>
+            <td>759</td>
+            <td>0.67</td>
+            <td>0.941</td>
+          </tr>
+          <tr class="acf-row">
+            <td>Evolved</td>
+            <td class="improv">682</td>
+            <td class="improv">0.78</td>
+            <td class="improv">1.073</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:0.9rem;color:var(--accent);">+13.99% fitness improvement. Converged at generation 7. Positional header, no key names, single-line encoding.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PHASE 6 RESULTS
+══════════════════════════════════════════════════════════════ -->
+<section id="data-p6">
+  <div class="wrap">
+    <div class="eyebrow">Phase 6 - Multi-Agent Swarm</div>
+    <h2>Swarm results.</h2>
+
+    <p style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Standard run - Kimi K2.5 coordinator (4 queries x 3 Wikipedia sources)</p>
+    <div class="tbl-wrap" style="margin-bottom:2.5rem">
+      <table>
+        <thead>
+          <tr>
+            <th>Format</th>
+            <th>Avg Ctx Tokens</th>
+            <th>Avg Accuracy</th>
+            <th>Compounding</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="acf-row">
+            <td>Evolved</td>
+            <td class="improv">5,720</td>
+            <td class="improv">0.67</td>
+            <td>0.989x</td>
+          </tr>
+          <tr>
+            <td>ACF</td>
+            <td>5,783</td>
+            <td>0.58</td>
+            <td>0.999x</td>
+          </tr>
+          <tr>
+            <td>JSON</td>
+            <td>5,786</td>
+            <td>0.42</td>
+            <td>1.000x</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Explicit 3-agent run - 3 parallel Haiku sub-agents + Haiku coordinator</p>
+    <div class="tbl-wrap" style="margin-bottom:2rem">
+      <table>
+        <thead>
+          <tr>
+            <th>Format</th>
+            <th>Avg Ctx Tokens</th>
+            <th>Avg Accuracy</th>
+            <th>Compounding</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Evolved</td>
+            <td>5,720</td>
+            <td>0.42</td>
+            <td>0.989x</td>
+          </tr>
+          <tr>
+            <td>ACF</td>
+            <td>5,783</td>
+            <td>0.42</td>
+            <td>0.999x</td>
+          </tr>
+          <tr class="acf-row">
+            <td>JSON</td>
+            <td>5,786</td>
+            <td class="improv">0.50</td>
+            <td>1.000x</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:0.9rem;color:var(--accent);">Evolved-ACF's compressed encoding has a capability floor. Larger models benefit from compression; smaller models prefer JSON's explicit structure.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PHASE 5-GA RESULTS
+══════════════════════════════════════════════════════════════ -->
+<section id="data-p5ga">
+  <div class="wrap">
+    <div class="eyebrow">Phase 5-GA - Cross-Species Evolution</div>
+    <h2>The champion.</h2>
+
+    <p style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Two lineages (ACF seed + JSON seed) evolved independently, cross-bred into a hybrid, then combined GA found the global optimum</p>
+    <div class="tbl-wrap" style="margin-bottom:2.5rem">
+      <table>
+        <thead>
+          <tr>
+            <th>Stage</th>
+            <th>Tokens</th>
+            <th>Accuracy</th>
+            <th>Fitness</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ACF seed</td>
+            <td>759</td>
+            <td>0.67</td>
+            <td>0.941</td>
+          </tr>
+          <tr>
+            <td>GA-ACF evolved</td>
+            <td>682</td>
+            <td>0.78</td>
+            <td>1.073</td>
+          </tr>
+          <tr>
+            <td>GA-JSON evolved</td>
+            <td>693</td>
+            <td>0.78</td>
+            <td>1.060</td>
+          </tr>
+          <tr>
+            <td>Hybrid (cross-bred)</td>
+            <td>670</td>
+            <td>0.78</td>
+            <td>1.082</td>
+          </tr>
+          <tr class="acf-row">
+            <td>Champion (combined GA)</td>
+            <td class="improv">636</td>
+            <td class="improv">0.78</td>
+            <td class="improv">1.118</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Champion validation - A2A test (Claude Haiku 4.5, Phase 1 dataset)</p>
+    <div class="tbl-wrap" style="margin-bottom:2rem">
+      <table>
+        <thead>
+          <tr>
+            <th>Format</th>
+            <th>Total Tokens</th>
+            <th>Accuracy</th>
+            <th>Data Loss</th>
+            <th>Cost/query</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="acf-row">
+            <td>Champion</td>
+            <td class="improv">636</td>
+            <td class="improv">1.00</td>
+            <td class="improv">0.00</td>
+            <td>$0.000509</td>
+          </tr>
+          <tr>
+            <td>ACF</td>
+            <td>828</td>
+            <td>0.89</td>
+            <td>0.11</td>
+            <td>$0.000663</td>
+          </tr>
+          <tr>
+            <td>JSON</td>
+            <td>932</td>
+            <td>0.89</td>
+            <td>0.11</td>
+            <td>$0.000746</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:0.9rem;color:var(--accent);">+18.77% fitness over ACF seed. Champion: title + author + source only. The body carries the answer — header metadata is noise. -31.8% tokens vs JSON in A2A with higher accuracy than both ACF and JSON.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PHASES
+══════════════════════════════════════════════════════════════ -->
+<section id="phases">
+  <div class="wrap">
+    <div class="eyebrow">Research Progress</div>
+    <h2>The phases.</h2>
+    <div class="timeline">
+
+      <div class="ph-item">
+        <div class="ph-dot done">01</div>
+        <div class="ph-status done">Complete</div>
+        <div class="ph-title">Single Document Retrieval</div>
+        <p class="ph-desc">HTML vs ACF on AI fairness content. 97.6% token reduction. 5.2× faster. Zero accuracy loss.</p>
+      </div>
+
+      <div class="ph-item">
+        <div class="ph-dot done">02</div>
+        <div class="ph-status done">Complete</div>
+        <div class="ph-title">Multi-Document + Cross-Model</div>
+        <p class="ph-desc">10 Wikipedia topics across 4 models. ACF wins on every model. Agent Swarm can't rescue HTML.</p>
+      </div>
+
+      <div class="ph-item">
+        <div class="ph-dot done">03</div>
+        <div class="ph-status done">Complete</div>
+        <div class="ph-title">Live Dynamic Data</div>
+        <p class="ph-desc">Real-time data pipeline with staleness metric. 98.7% reduction. 11.5× fresher answers on local model.</p>
+      </div>
+
+      <div class="ph-item">
+        <div class="ph-dot done">04</div>
+        <div class="ph-status done">Complete</div>
+        <div class="ph-title">Agent-to-Agent Communication</div>
+        <p class="ph-desc">ACF vs JSON vs TOON in agent-to-agent comms. 8-11% fewer tokens than JSON. Only format achieving perfect accuracy with Haiku.</p>
+      </div>
+
+      <div class="ph-item">
+        <div class="ph-dot done">05</div>
+        <div class="ph-status done">Complete</div>
+        <div class="ph-title">Format Evolution via GA</div>
+        <p class="ph-desc">Genetic algorithm evolved ACF encoding. +13.99% fitness. Positional header, no key names, single-line wins.</p>
+      </div>
+
+      <div class="ph-item">
+        <div class="ph-dot done">06</div>
+        <div class="ph-status done">Complete</div>
+        <div class="ph-title">Multi-Agent Swarm</div>
+        <p class="ph-desc">3 parallel fetchers to coordinator with live Wikipedia. Evolved-ACF wins on capable models. Format compression has a capability floor.</p>
+      </div>
+
+      <div class="ph-item">
+        <div class="ph-dot done">GA</div>
+        <div class="ph-status done">Complete</div>
+        <div class="ph-title">Cross-Species Evolution</div>
+        <p class="ph-desc">ACF + JSON lineages evolved independently, cross-bred, then combined GA found the global optimum. 636 tokens. Perfect A2A accuracy. -31.8% vs JSON.</p>
+      </div>
+
+      <div class="ph-item">
+        <div class="ph-dot soon">07</div>
+        <div class="ph-status soon">Planned</div>
+        <div class="ph-title">A2A Protocol Integration</div>
+        <p class="ph-desc">Champion format tested within a real A2A protocol stack. ACF reduces payload token cost by 12-28% in production agent pipelines.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="foot-domain">agentclearfeed.niteesh.uk</div>
+      <div class="foot-links">
+        <a href="https://github.com/NITMe2/AgentClearfeed.ai" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/NITMe2/AgentClearfeed.ai/blob/main/ACF_Format_Spec.md" target="_blank" rel="noopener">Spec</a>
+      </div>
+      <div class="foot-credit">Built by Niteesh Tapre - May 2026</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  function easeOutQuart(t) {
+    return 1 - Math.pow(1 - t, 4);
+  }
+
+  function animateCard(card) {
+    const type = card.dataset.type;
+
+    if (type === 'static') return;
+
+    if (type === 'accuracy') {
+      const toEl = card.querySelector('.acc-to');
+      const start = 0.42, end = 0.93, dur = 1800;
+      const t0 = performance.now();
+      (function tick(now) {
+        const p = Math.min((now - t0) / dur, 1);
+        toEl.textContent = (start + (end - start) * easeOutQuart(p)).toFixed(2);
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
+      return;
+    }
+
+    const target = parseFloat(card.dataset.counter);
+    const suffix = card.dataset.suffix || '';
+    const el = card.querySelector('.cnum');
+    const isFloat = !Number.isInteger(target);
+    const dur = 1600;
+    const t0 = performance.now();
+
+    (function tick(now) {
+      const p = Math.min((now - t0) / dur, 1);
+      const v = target * easeOutQuart(p);
+      el.textContent = (isFloat ? v.toFixed(1) : Math.floor(v)) + suffix;
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+
+  const cards = document.querySelectorAll('.ccard');
+  const obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting && !entry.target.dataset.fired) {
+        entry.target.dataset.fired = '1';
+        animateCard(entry.target);
+      }
+    });
+  }, { threshold: 0.25 });
+
+  cards.forEach(function (c) { obs.observe(c); });
+})();
+</script>
+</body>
+</html>

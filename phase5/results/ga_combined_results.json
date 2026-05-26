@@ -1,0 +1,81 @@
+{
+  "hybrid_fitness_baseline": 1.0821,
+  "best_fitness": 1.117606,
+  "best_tokens": 636,
+  "best_accuracy": 0.78,
+  "best_schema": {
+    "delimiter": ":",
+    "key_style": "none",
+    "nesting": "flat",
+    "field_order": [
+      "title",
+      "author",
+      "source"
+    ],
+    "quote_values": false,
+    "newline_sep": false
+  },
+  "generations": [
+    {
+      "gen": 1,
+      "best_fitness": 1.074973,
+      "mean_fitness": 1.069391,
+      "re_evaluated": 9
+    },
+    {
+      "gen": 2,
+      "best_fitness": 1.100491,
+      "mean_fitness": 1.08389,
+      "re_evaluated": 17
+    },
+    {
+      "gen": 3,
+      "best_fitness": 1.100491,
+      "mean_fitness": 1.092041,
+      "re_evaluated": 18
+    },
+    {
+      "gen": 4,
+      "best_fitness": 1.108931,
+      "mean_fitness": 1.096281,
+      "re_evaluated": 9
+    },
+    {
+      "gen": 5,
+      "best_fitness": 1.114974,
+      "mean_fitness": 1.099473,
+      "re_evaluated": 13
+    },
+    {
+      "gen": 6,
+      "best_fitness": 1.114974,
+      "mean_fitness": 1.106321,
+      "re_evaluated": 10
+    },
+    {
+      "gen": 7,
+      "best_fitness": 1.114974,
+      "mean_fitness": 1.111938,
+      "re_evaluated": 8
+    },
+    {
+      "gen": 8,
+      "best_fitness": 1.117163,
+      "mean_fitness": 1.114079,
+      "re_evaluated": 14
+    },
+    {
+      "gen": 9,
+      "best_fitness": 1.117163,
+      "mean_fitness": 1.115194,
+      "re_evaluated": 13
+    },
+    {
+      "gen": 10,
+      "best_fitness": 1.117606,
+      "mean_fitness": 1.115675,
+      "re_evaluated": 13
+    }
+  ],
+  "evolved_format_example": "Demographic Parity AgentClearfeed Barocas, Hardt, Narayanan \u2014 Fairness and Machine Learning\n---\nterm:         Demographic Parity\nplain:        A model satisfies demographic parity if it produces positive predictions at equal rates across demographic groups.\ntechnical:    P(Y_hat=1 | A=0) = P(Y_hat=1 | A=1) where A is a protected attribute and Y_hat is the model prediction.\ndomain:       Machine learning fairness\nrelated:      equalised odds, individual fairness, calibration, disparate impact\nmisconception: Demographic parity does not guarantee equal accuracy across groups \u2014 a model can satisfy demographic parity while being less accurate for one group.\nsource_quote: \"Statistical parity requires that the proportion of people receiving a positive outcome is the same in each group.\"\n---\nDemographic parity is one of the most commonly cited group fairness metrics but is frequently in tension with equalised odds and calibration. Satisfying all three simultaneously is mathematically impossible in most real-world scenarios. The choice of which metric to optimise for is a value judgement, not a technical one."
+}

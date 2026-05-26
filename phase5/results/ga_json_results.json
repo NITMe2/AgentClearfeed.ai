@@ -1,0 +1,88 @@
+{
+  "baseline_json_fitness": 0.940827,
+  "baseline_json_tokens": 760,
+  "baseline_json_accuracy": 0.67,
+  "best_fitness": 1.060226,
+  "best_tokens": 693,
+  "best_accuracy": 0.78,
+  "improvement_pct": 12.69,
+  "best_schema": {
+    "delimiter": ":",
+    "key_style": "none",
+    "nesting": "flat",
+    "field_order": [
+      "id",
+      "title",
+      "source",
+      "author",
+      "published",
+      "confidence",
+      "domain"
+    ],
+    "quote_values": true,
+    "newline_sep": true
+  },
+  "generations": [
+    {
+      "gen": 1,
+      "best_fitness": 1.016755,
+      "mean_fitness": 1.001433,
+      "re_evaluated": 16
+    },
+    {
+      "gen": 2,
+      "best_fitness": 1.016755,
+      "mean_fitness": 1.014241,
+      "re_evaluated": 12
+    },
+    {
+      "gen": 3,
+      "best_fitness": 1.031179,
+      "mean_fitness": 1.01821,
+      "re_evaluated": 12
+    },
+    {
+      "gen": 4,
+      "best_fitness": 1.031179,
+      "mean_fitness": 1.021938,
+      "re_evaluated": 10
+    },
+    {
+      "gen": 5,
+      "best_fitness": 1.040533,
+      "mean_fitness": 1.029044,
+      "re_evaluated": 11
+    },
+    {
+      "gen": 6,
+      "best_fitness": 1.041234,
+      "mean_fitness": 1.034074,
+      "re_evaluated": 8
+    },
+    {
+      "gen": 7,
+      "best_fitness": 1.045031,
+      "mean_fitness": 1.037745,
+      "re_evaluated": 13
+    },
+    {
+      "gen": 8,
+      "best_fitness": 1.054823,
+      "mean_fitness": 1.046458,
+      "re_evaluated": 15
+    },
+    {
+      "gen": 9,
+      "best_fitness": 1.054823,
+      "mean_fitness": 1.049806,
+      "re_evaluated": 13
+    },
+    {
+      "gen": 10,
+      "best_fitness": 1.060226,
+      "mean_fitness": 1.054809,
+      "re_evaluated": 12
+    }
+  ],
+  "evolved_format_example": "\"acf-def-demographic-parity\"\n\"Demographic Parity\"\n\"Barocas, Hardt, Narayanan \u2014 Fairness and Machine Learning\"\n\"AgentClearfeed\"\n\"2026-05-06\"\n\"verified\"\n\"AI Fairness\"\n---\nterm:         Demographic Parity\nplain:        A model satisfies demographic parity if it produces positive predictions at equal rates across demographic groups.\ntechnical:    P(Y_hat=1 | A=0) = P(Y_hat=1 | A=1) where A is a protected attribute and Y_hat is the model prediction.\ndomain:       Machine learning fairness\nrelated:      equalised odds, individual fairness, calibration, disparate impact\nmisconception: Demographic parity does not guarantee equal accuracy across groups \u2014 a model can satisfy demographic parity while being less accurate for one group.\nsource_quote: \"Statistical parity requires that the proportion of people receiving a positive outcome is the same in each group.\"\n---\nDemographic parity is one of the most commonly cited group fairness metrics but is frequently in tension with equalised odds and calibration. Satisfying all three simultaneously is mathematically impossible in most real-world scenarios. The choice of which metric to optimise for is a value judgement, not a technical one."
+}

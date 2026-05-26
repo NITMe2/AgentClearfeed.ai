@@ -1,8 +1,59 @@
-# AgentClearfeed — Phase 6: Multi-Agent Swarm with Live Content
+# AgentClearfeed — ACF-Champion: Format Evolution & Validation
 
-**Branch:** `Agent-Comm` | **Base:** [main](https://github.com/NITMe2/AgentClearfeed.ai)
+**Branch:** `ACF-Champion` | **Base:** [main](https://github.com/NITMe2/AgentClearfeed.ai)
 
 > **Note:** `max_tokens` is set conservatively for cost control during testing, not representative of production deployment.
+
+---
+
+## Phase 5-GA — Cross-Species Evolution & Champion Validation
+
+Two genetic algorithm lineages seeded from opposite ends of the schema space (ACF and JSON). Their best genes were cross-bred into a hybrid, then a combined GA was seeded from both — finding a new champion that neither lineage reached alone.
+
+### Evolution Timeline
+
+| Stage | Schema | Tokens | Accuracy | Fitness |
+|-------|--------|:------:|:--------:|:-------:|
+| ACF seed | full keys, nested, no quotes | 759 | 0.67 | 0.941 |
+| GA-ACF evolved | no keys, flat, no quotes | 682 | 0.78 | 1.073 |
+| GA-JSON evolved | no keys, flat, quoted | 693 | 0.78 | 1.060 |
+| Hybrid (cross-bred) | ACF compression + JSON field_order | 670 | 0.78 | 1.082 |
+| **Champion (combined GA)** | **3 fields: title author source** | **636** | **0.78** | **1.118** |
+
+**+18.77% fitness improvement over the original ACF seed.**
+
+### Champion Schema
+
+```python
+{
+    "delimiter": ":",
+    "key_style": "none",       # positional values only
+    "nesting": "flat",         # strip body section headers
+    "field_order": ["title", "author", "source"],   # 3 fields — everything else is noise
+    "quote_values": False,
+    "newline_sep": False,       # single space-separated line
+}
+```
+
+Wire format: `Demographic Parity AgentClearfeed Barocas, Hardt, Narayanan`
+
+The combined GA discovered that id, confidence, domain, and tags are dead weight for QA tasks. The body carries the answer — the header only needs to identify the source.
+
+### Champion Validation — A2A (Claude Haiku 4.5, Phase 1 dataset)
+
+| Format | Total Tokens | Accuracy | Data Loss | Cost/query |
+|--------|:------------:|:--------:|:---------:|:----------:|
+| **Champion** | **636** | **1.00** | **0.00** | $0.000509 |
+| ACF | 828 | 0.89 | 0.11 | $0.000663 |
+| JSON | 932 | 0.89 | 0.11 | $0.000746 |
+
+Champion wins on every axis: -23.2% tokens vs ACF, -31.8% vs JSON, and higher accuracy than both in agent-to-agent communication.
+
+```bash
+python -m phase5.ga_json          # GA seeded from JSON
+python -m phase5.ga_combined      # Combined GA (both lineages)
+python -m phase5.validate_champion  # Champion in A2A validation
+```
 
 ---
 
@@ -10,7 +61,7 @@
 
 Tests whether evolved-ACF's efficiency advantage holds — and compounds — across a realistic multi-agent topology with live Wikipedia content.
 
-**Standard run — single Kimi K2.5 coordinator (4 queries × 3 Wikipedia sources)**
+**Standard run — single Kimi K2.5 coordinator (4 queries x 3 Wikipedia sources)**
 
 | Format | Avg ctx tokens | Avg accuracy | Compounding |
 |--------|:--------------:|:------------:|:-----------:|
@@ -20,13 +71,13 @@ Tests whether evolved-ACF's efficiency advantage holds — and compounds — acr
 
 With a capable model, evolved-ACF wins on both axes: 1.1% fewer context tokens and highest accuracy.
 
-**Explicit 3-agent run — 3 parallel Haiku sub-agents → Haiku coordinator**
+**Explicit 3-agent run — 3 parallel Haiku sub-agents -> Haiku coordinator**
 
 ```
 Query
-  ├── Haiku sub-agent A (doc 1 in wire fmt) → answer A ─┐
-  ├── Haiku sub-agent B (doc 2 in wire fmt) → answer B ──→ Haiku Coordinator → Final answer
-  └── Haiku sub-agent C (doc 3 in wire fmt) → answer C ─┘
+  |- Haiku sub-agent A (doc 1 in wire fmt) -> answer A -|
+  |- Haiku sub-agent B (doc 2 in wire fmt) -> answer B ---> Haiku Coordinator -> Final answer
+  |- Haiku sub-agent C (doc 3 in wire fmt) -> answer C -|
 ```
 
 | Format | Avg ctx tokens | Avg accuracy | Compounding |
@@ -44,7 +95,7 @@ python -m phase6.orchestrator --explicit  # Explicit 3-agent topology (Claude Ha
 
 ---
 
-## Phase 5 — Genetic Algorithm: Evolving the Format
+## Phase 5 — Genetic Algorithm: Evolving the Format (ACF seed)
 
 A DEAP genetic algorithm evolved document format schemas starting from ACF as the seed individual. Fitness = 60% accuracy + 40% token efficiency. Model: llama3.1:8b via Ollama.
 
@@ -55,23 +106,11 @@ A DEAP genetic algorithm evolved document format schemas starting from ACF as th
 
 **+13.99% fitness improvement.** Converged at generation 7; entire population at the same solution by generation 10.
 
-**Winning evolved schema:**
-```python
-{
-    "delimiter": ":",
-    "key_style": "none",       # no key names — positional values only
-    "nesting": "flat",         # strip section headers from body
-    "field_order": ["id", "type", "title", "source", "author", "confidence", "domain", "tags"],
-    "quote_values": False,
-    "newline_sep": False,      # header collapsed to a single space-separated line
-}
-```
-
-Evolution didn't replace ACF — it evolved from it. Same delimiter, same fields, same body structure. Just stripped key names and collapsed the header to one line. "ACF designed the structure; evolution found a more compressed encoding."
+Evolution didn't replace ACF — it evolved from it. Same delimiter, same fields, same body structure. Just stripped key names and collapsed the header to one line.
 
 ```bash
 python -m phase5.baseline    # Baseline: ACF vs JSON vs TOON on llama3.1:8b
-python -m phase5.ga          # Genetic algorithm evolution (10 generations)
+python -m phase5.ga          # Genetic algorithm evolution (10 generations, ACF seed)
 ```
 
 ---
@@ -80,21 +119,11 @@ python -m phase5.ga          # Genetic algorithm evolution (10 generations)
 
 Two agents in sequence. Agent A fetches a document and formats it. Agent B receives it and answers a question. Only the wire format changes: **ACF** vs **JSON** vs **TOON**.
 
-New metric: **data loss** — facts in Agent A's message that fail to appear in Agent B's answer. Measures information fidelity through the handoff, not just token count.
+New metric: **data loss** — facts in Agent A's message that fail to appear in Agent B's answer.
 
 ### Phase 1 Dataset — AI Fairness (3 queries)
 
-**Qwen 2.5 14B** (local, Ollama, seed=42, fully deterministic)
-
-| Format | A Tokens | B Tokens | Total | Accuracy | Data Loss | Cost/query |
-|--------|:--------:|:--------:|:-----:|:--------:|:---------:|:----------:|
-| ACF | 394 | 434 | 828 | **0.89** | 0.11 | $0.000249 |
-| TOON | 410 | 450 | 860 | **0.89** | 0.11 | $0.000258 |
-| JSON | 446 | 486 | 932 | **0.89** | 0.11 | $0.000280 |
-
-Qwen with a fixed seed is completely format-agnostic on accuracy. ACF uses 11.2% fewer tokens than JSON. Format makes no difference to what survives the handoff — all three preserve facts equally.
-
-**Claude Haiku 4.5 — Test 4 Finale (all three formats)**
+**Claude Haiku 4.5 — Test 4 Finale**
 
 | Format | Total Tokens | Accuracy | Data Loss | Cost/query |
 |--------|:------------:|:--------:|:---------:|:----------:|
@@ -102,43 +131,8 @@ Qwen with a fixed seed is completely format-agnostic on accuracy. ACF uses 11.2%
 | TOON | 860 | 0.89 | 0.11 | $0.000688 |
 | JSON | 932 | 0.89 | 0.11 | $0.000746 |
 
-ACF is the only format that achieves perfect accuracy for Haiku in the three-way finale. Token efficiency and accuracy advantage in the same direction.
-
-### Phase 2 Dataset — Wikipedia (5 queries, Claude Haiku 4.5)
-
-| Format | Avg Tokens | Accuracy | Data Loss | Cost/query |
-|--------|:----------:|:--------:|:---------:|:----------:|
-| ACF | 1,129 | **1.00** | 0.00 | $0.000903 |
-| TOON | 1,150 | **1.00** | 0.00 | $0.000920 |
-| JSON | 1,228 | **1.00** | 0.00 | $0.000982 |
-
-Perfect accuracy across all formats on Wikipedia content — Haiku handles clean structured docs regardless of format. ACF still wins on tokens (-8.1% vs JSON). TOON closes the gap on article content with structured lists.
-
-### Token Efficiency Across Both Datasets
-
-| Comparison | AI Fairness | Wikipedia |
-|-----------|:-----------:|:---------:|
-| ACF vs JSON | **-11.2%** | **-8.1%** |
-| TOON vs JSON | -7.7% | -6.4% |
-| ACF vs TOON | -3.9% | -1.9% |
-
-ACF < TOON < JSON on token count, consistently. The gap narrows on longer Wikipedia articles where JSON's fixed syntax overhead becomes proportionally smaller.
-
-### Four Test Structure
-
-| Test | Formats | Purpose |
-|------|---------|---------|
-| 1 | ACF vs JSON | Direct comparison, most common baseline |
-| 2 | ACF vs TOON | ACF vs best compact alternative |
-| 3 | JSON vs TOON | Validates against TOON's published benchmarks |
-| 4 | ACF vs JSON vs TOON | Finale — all three together |
-
 ```bash
-pip install -r requirements.txt
-
-python -m phase4.orchestrator                                          # Qwen 2.5 14B (default)
-python -m phase4.orchestrator --model claude-haiku                    # Claude Haiku 4.5
-python -m phase4.orchestrator --dataset phase2 --model claude-haiku   # Wikipedia dataset
+python -m phase4.orchestrator --model claude-haiku   # Claude Haiku 4.5
 ```
 
 ---
@@ -152,7 +146,7 @@ python -m phase4.orchestrator --dataset phase2 --model claude-haiku   # Wikipedi
 ## Prerequisites
 
 - Python 3.11+
-- [Ollama](https://ollama.ai) + `ollama pull qwen2.5:14b` / `ollama pull llama3.1:8b`
+- [Ollama](https://ollama.ai) + `ollama pull llama3.1:8b`
 - `.env` with API keys:
   ```
   ANTHROPIC_API_KEY=sk-ant-...

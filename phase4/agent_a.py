@@ -4,7 +4,7 @@ from pathlib import Path
 
 import tiktoken
 
-from phase4.formatters import acf, json_fmt, toon_fmt
+from phase4.formatters import acf, json_fmt, toon_fmt, champion
 from server.parser import load_documents
 
 _SERVER_DIR = Path(__file__).resolve().parents[1] / "server"
@@ -14,6 +14,7 @@ FORMATTERS = {
     "acf": acf,
     "json": json_fmt,
     "toon": toon_fmt,
+    "champion": champion,
 }
 
 _documents: dict | None = None
