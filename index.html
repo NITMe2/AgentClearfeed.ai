@@ -616,7 +616,7 @@
 ══════════════════════════════════════════════════════════════ -->
 <section id="results">
   <div class="wrap">
-    <div class="eyebrow">Benchmarks - Phases 1-6 + GA</div>
+    <div class="eyebrow">Benchmarks - Phases 1-7 + GA</div>
     <h2>The numbers.</h2>
     <div class="counter-grid">
 
@@ -671,7 +671,7 @@
       <div class="ccard" data-type="static">
         <span class="cnum">-31.8%</span>
         <div class="clabel">Champion Token Saving</div>
-        <p class="cdesc">Phase 5-GA - cross-species evolution found a <span class="hi">3-field champion</span>. <span class="hi">636 tokens</span> vs <span class="lo">932 JSON</span>. Perfect accuracy in A2A — beats ACF and JSON on every metric.</p>
+        <p class="cdesc">Phase 5-GA + Phase 7. <span class="hi">636 tokens</span> vs <span class="lo">932 JSON</span>. <span class="hi">1.00 accuracy</span> on real A2A infrastructure (a2a-sdk v1.0.3). Advantage holds on the official protocol stack.</p>
       </div>
 
     </div>
@@ -1090,7 +1090,57 @@
       </table>
     </div>
 
-    <p style="font-family:var(--mono);font-size:0.9rem;color:var(--accent);">+18.77% fitness over ACF seed. Champion: title + author + source only. The body carries the answer — header metadata is noise. -31.8% tokens vs JSON in A2A with higher accuracy than both ACF and JSON.</p>
+    <p style="font-family:var(--mono);font-size:0.9rem;color:var(--accent);">+18.77% fitness over ACF seed. Champion: title + author + source only. The body carries the answer. Header metadata is noise. -31.8% tokens vs JSON in A2A with higher accuracy than both ACF and JSON.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
+     PHASE 7 RESULTS
+══════════════════════════════════════════════════════════════ -->
+<section id="data-p7">
+  <div class="wrap">
+    <div class="eyebrow">Phase 7 - Real A2A Protocol Stack</div>
+    <h2>A2A results.</h2>
+
+    <p style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">a2a-sdk v1.0.3 - Agent Card + JSON-RPC 2.0 + real HTTP transport - 3 queries x 3 formats x 3 runs averaged</p>
+    <div class="tbl-wrap" style="margin-bottom:2rem">
+      <table>
+        <thead>
+          <tr>
+            <th>Format</th>
+            <th>Total Tokens</th>
+            <th>Accuracy</th>
+            <th>Data Loss</th>
+            <th>Cost/query</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="acf-row">
+            <td>Champion</td>
+            <td class="improv">636</td>
+            <td class="improv">1.00</td>
+            <td class="improv">0.00</td>
+            <td>$0.000509</td>
+          </tr>
+          <tr>
+            <td>ACF</td>
+            <td>828</td>
+            <td>0.96</td>
+            <td>0.04</td>
+            <td>$0.000663</td>
+          </tr>
+          <tr>
+            <td>JSON</td>
+            <td>932</td>
+            <td>0.96</td>
+            <td>0.04</td>
+            <td>$0.000746</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:0.9rem;color:var(--accent);">The format advantage holds on the official A2A protocol stack. Champion is the only format with zero data loss across all runs. 31.8% fewer tokens than JSON with higher accuracy.</p>
   </div>
 </section>
 
@@ -1153,10 +1203,10 @@
       </div>
 
       <div class="ph-item">
-        <div class="ph-dot soon">07</div>
-        <div class="ph-status soon">Planned</div>
+        <div class="ph-dot done">07</div>
+        <div class="ph-status done">Complete</div>
         <div class="ph-title">A2A Protocol Integration</div>
-        <p class="ph-desc">Champion format tested within a real A2A protocol stack. ACF reduces payload token cost by 12-28% in production agent pipelines.</p>
+        <p class="ph-desc">Champion format tested on real a2a-sdk v1.0.3 infrastructure. Agent Card, JSON-RPC 2.0, real HTTP transport. 31.8% fewer tokens than JSON. 1.00 accuracy over 3 runs.</p>
       </div>
 
     </div>
