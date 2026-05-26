@@ -6,6 +6,29 @@
 
 ---
 
+## Phase 7  - Real A2A Protocol Stack
+
+Tests whether the champion format's token and accuracy advantage survives the official A2A protocol stack. Two agents communicating over `a2a-sdk` v1.0.3 via real HTTP transport, real Agent Cards, and real JSON-RPC 2.0 message envelopes.
+
+**What changes:** only the text `Part` content inside the A2A `Message`. The protocol envelope is identical across all three formats.
+
+**3 queries x 3 formats x 3 runs averaged (Claude Haiku 4.5)**
+
+| Format | Total Tokens | Accuracy | Data Loss | Cost/query |
+|--------|:------------:|:--------:|:---------:|:----------:|
+| **Champion** | **636** | **1.00** | **0.00** | $0.000509 |
+| ACF | 828 | 0.96 | 0.04 | $0.000663 |
+| JSON | 932 | 0.96 | 0.04 | $0.000746 |
+
+Champion is the only format with zero data loss across all 3 runs. 31.8% fewer tokens than JSON with higher accuracy on the official A2A standard.
+
+```bash
+python -m phase7.orchestrator          # single run
+python -m phase7.orchestrator --runs 3 # averaged over 3 runs
+```
+
+---
+
 ## Phase 5-GA  - Cross-Species Evolution & Champion Validation
 
 Two genetic algorithm lineages seeded from opposite ends of the schema space (ACF and JSON). Their best genes were cross-bred into a hybrid, then a combined GA was seeded from both  - finding a new champion that neither lineage reached alone.
