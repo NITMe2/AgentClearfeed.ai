@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AgentClearfeed — a parallel content layer built for AI inference. 97.6% token reduction, zero accuracy loss.">
-  <title>AgentClearfeed — Content Layer for AI Agents</title>
+  <meta name="description" content="AgentClearfeed - a parallel content layer built for AI inference. 97.6% token reduction, zero accuracy loss.">
+  <title>AgentClearfeed - Content Layer for AI Agents</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
@@ -396,7 +396,7 @@
     /* ── Timeline ── */
     .timeline {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(7, 1fr);
       position: relative;
       padding-top: 3.5rem;
     }
@@ -599,7 +599,7 @@
       <div class="prob-card">
         <span class="prob-icon">{}</span>
         <h3>MCPs</h3>
-        <p>Powerful but hand-built. Every publisher needs to implement their own. Doesn't scale to the open web. Great for controlled internal tools — not viable for general-purpose agent content retrieval across the web.</p>
+        <p>Powerful but hand-built. Every publisher needs to implement their own. Doesn't scale to the open web. Great for controlled internal tools  - not viable for general-purpose agent content retrieval across the web.</p>
       </div>
       <div class="prob-card">
         <span class="prob-icon">~&gt;</span>
@@ -622,19 +622,19 @@
       <div class="ccard" data-counter="97.6" data-suffix="%">
         <span class="cnum">0%</span>
         <div class="clabel">Token Reduction</div>
-        <p class="cdesc">Phase 1 — single document retrieval. HTML averaged <span class="lo">16,388 tokens</span>. ACF averaged <span class="hi">394</span>.</p>
+        <p class="cdesc">Phase 1  - single document retrieval. HTML averaged <span class="lo">16,388 tokens</span>. ACF averaged <span class="hi">394</span>.</p>
       </div>
 
       <div class="ccard" data-counter="93.5" data-suffix="%">
         <span class="cnum">0%</span>
         <div class="clabel">Token Reduction</div>
-        <p class="cdesc">Phase 2 — 10-document multi-topic retrieval. <span class="lo">84,022 tokens</span> of HTML vs <span class="hi">5,429</span> of ACF. Consistent across all 4 models.</p>
+        <p class="cdesc">Phase 2  - 10-document multi-topic retrieval. <span class="lo">84,022 tokens</span> of HTML vs <span class="hi">5,429</span> of ACF. Consistent across all 4 models.</p>
       </div>
 
       <div class="ccard" data-counter="98.7" data-suffix="%">
         <span class="cnum">0%</span>
         <div class="clabel">Token Reduction</div>
-        <p class="cdesc">Phase 3 — live dynamic data. <span class="lo">13,287 tokens</span> of bloated crypto tracker vs <span class="hi">173 tokens</span> of ACF action format.</p>
+        <p class="cdesc">Phase 3  - live dynamic data. <span class="lo">13,287 tokens</span> of bloated crypto tracker vs <span class="hi">173 tokens</span> of ACF action format.</p>
       </div>
 
       <div class="ccard" data-type="accuracy">
@@ -697,7 +697,7 @@
     <div class="why-grid">
       <div class="why-card">
         <div class="label">Every field is explicit</div>
-        <p>Structured labels, not prose. An agent always knows exactly what it's reading — no inference, no guessing, no tokens wasted on layout chrome or promotional copy.</p>
+        <p>Structured labels, not prose. An agent always knows exactly what it's reading  - no inference, no guessing, no tokens wasted on layout chrome or promotional copy.</p>
       </div>
       <div class="why-card">
         <div class="label">Ungameable by design</div>
@@ -705,7 +705,7 @@
       </div>
       <div class="why-card">
         <div class="label">Model-agnostic</div>
-        <p>Every model tested — 14B local, frontier API, Chinese cloud providers — performs better with ACF. The format wins at every layer of the stack regardless of model capability.</p>
+        <p>Every model tested  - 14B local, frontier API, Chinese cloud providers  - performs better with ACF. The format wins at every layer of the stack regardless of model capability.</p>
       </div>
     </div>
   </div>
@@ -716,7 +716,7 @@
 ══════════════════════════════════════════════════════════════ -->
 <section id="data">
   <div class="wrap">
-    <div class="eyebrow">Full Results — Phases 1–3</div>
+    <div class="eyebrow">Full Results - Phases 1-3</div>
     <h2>The data.</h2>
     <div class="tbl-wrap">
       <table>
@@ -754,13 +754,13 @@
             <td class="improv">5.2× faster</td>
           </tr>
           <tr>
-            <td class="metric">Multi-doc accuracy — avg 4 models<span class="phase-tag">Phase 2</span></td>
+            <td class="metric">Multi-doc accuracy  - avg 4 models<span class="phase-tag">Phase 2</span></td>
             <td class="html-v">0.42</td>
             <td>0.93</td>
             <td class="improv">+0.51 absolute</td>
           </tr>
           <tr>
-            <td class="metric">Data staleness — local model<span class="phase-tag">Phase 3</span></td>
+            <td class="metric">Data staleness  - local model<span class="phase-tag">Phase 3</span></td>
             <td class="html-v">113.5s</td>
             <td>9.8s</td>
             <td class="improv">11.5× fresher</td>
@@ -897,7 +897,21 @@
       </div>
 
       <div class="ph-item">
-        <div class="ph-dot soon">05</div>
+        <div class="ph-dot done">05</div>
+        <div class="ph-status done">Complete</div>
+        <div class="ph-title">Format Evolution via GA</div>
+        <p class="ph-desc">Genetic algorithm evolved ACF encoding. +13.99% fitness. Positional header, no key names, single-line wins.</p>
+      </div>
+
+      <div class="ph-item">
+        <div class="ph-dot done">06</div>
+        <div class="ph-status done">Complete</div>
+        <div class="ph-title">Multi-Agent Swarm</div>
+        <p class="ph-desc">3 parallel fetchers to coordinator with live Wikipedia. Evolved-ACF wins on capable models. Format compression has a capability floor.</p>
+      </div>
+
+      <div class="ph-item">
+        <div class="ph-dot soon">07</div>
         <div class="ph-status soon">Planned</div>
         <div class="ph-title">Index and Publisher Tools</div>
         <p class="ph-desc">Discovery layer and tooling for publishers to serve ACF natively at scale.</p>
