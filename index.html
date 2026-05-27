@@ -16,8 +16,8 @@
       --surface:    #0d0d0d;
       --border:     #1c1c1c;
       --text:       #d0d0d0;
-      --muted:      #555;
-      --dim:        #333;
+      --muted:      #888;
+      --dim:        #555;
       --accent:     #00ffd1;
       --accent-dim: rgba(0,255,209,0.1);
       --red:        #ff4545;
@@ -1326,6 +1326,56 @@
 </section>
 
 <!-- ══════════════════════════════════════════════════════════════
+     PHASE 7 RESULTS
+══════════════════════════════════════════════════════════════ -->
+<section id="data-p7">
+  <div class="wrap">
+    <div class="eyebrow">Phase 7 - Real A2A Protocol</div>
+    <h2>A2A results.</h2>
+
+    <p style="font-family:var(--mono);font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">a2a-sdk v1.0.3 - real HTTP transport - Claude Haiku 4.5 - 3 queries x 3 runs averaged</p>
+    <div class="tbl-wrap" style="margin-bottom:2rem">
+      <table>
+        <thead>
+          <tr>
+            <th>Format</th>
+            <th>Total Tokens</th>
+            <th>Accuracy</th>
+            <th>Data Loss</th>
+            <th>Cost/query</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="acf-row">
+            <td>Champion</td>
+            <td class="improv">636</td>
+            <td class="improv">1.00</td>
+            <td class="improv">0.00</td>
+            <td>$0.000509</td>
+          </tr>
+          <tr>
+            <td>ACF</td>
+            <td>828</td>
+            <td>0.96</td>
+            <td>0.04</td>
+            <td>$0.000663</td>
+          </tr>
+          <tr>
+            <td>JSON</td>
+            <td>932</td>
+            <td>0.96</td>
+            <td>0.04</td>
+            <td>$0.000746</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-family:var(--mono);font-size:0.9rem;color:var(--accent);">Real JSON-RPC 2.0 envelopes. Real Agent Cards. Real HTTP. Champion is the only format with zero data loss across all 3 runs. The in-process advantage from Phase 4 holds on the official A2A stack.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════════
      PHASES
 ══════════════════════════════════════════════════════════════ -->
 <section id="phases">
@@ -1384,10 +1434,10 @@
       </div>
 
       <div class="ph-item">
-        <div class="ph-dot soon">07</div>
-        <div class="ph-status soon">Planned</div>
+        <div class="ph-dot done">07</div>
+        <div class="ph-status done">Complete</div>
         <div class="ph-title">A2A Protocol Integration</div>
-        <p class="ph-desc">Champion format tested within a real A2A protocol stack. ACF reduces payload token cost by 12-28% in production agent pipelines.</p>
+        <p class="ph-desc">Champion on real a2a-sdk v1.0.3. JSON-RPC 2.0, HTTP transport, Agent Cards. 1.00 accuracy, zero data loss. -31.8% tokens vs JSON.</p>
       </div>
 
     </div>
