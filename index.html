@@ -1017,7 +1017,7 @@
       <div class="scale-line" id="scale-callout"></div>
     </div>
 
-    <p class="bench-note">Token counts are approximate (length ÷ 4). Cost at Haiku input rate ($0.30/1M tokens) per 100K calls. Scale estimates based on public data.</p>
+    <p class="bench-note">Token counts are approximate (length ÷ 4). Cost at Claude Opus 4.6 input rate ($15/1M tokens) per 100K calls. Scale estimates based on public data.</p>
   </div>
 </section>
 
@@ -1548,7 +1548,7 @@
   var ANTHROPIC_DAY = 30e6;
   var OPENAI_DAY    = 150e6;
   var GOOGLE_DAY    = 1e9;
-  var TOKEN_RATE    = 0.30 / 1e6;
+  var TOKEN_RATE    = 15 / 1e6;
   var AVG_CALL_SIZE = 800;
   var _scaleIdx     = Math.floor(Math.random() * 3);
 
@@ -1603,7 +1603,7 @@
     var jt = countTokens(json);
     var at = countTokens(acf);
     var reduction   = ((jt - at) / jt * 100).toFixed(1);
-    var costPer100K = ((jt - at) / 100000 * 0.30).toFixed(4);
+    var costPer100K = ((jt - at) / 100000 * 15).toFixed(4);
 
     document.getElementById("json-tokens").textContent     = jt.toLocaleString();
     document.getElementById("acf-tokens").textContent      = at.toLocaleString();
